@@ -256,7 +256,7 @@ function grade(ok) {
   const q = view.qs[view.i];
   record(progress, q.word.hanzi, ok);
   saveProgress();
-  view.results.push({ hanzi: q.word.hanzi, ok });
+  if (q.type !== 'flash') view.results.push({ hanzi: q.word.hanzi, ok });
 }
 
 function answer(ok, extra = {}) {

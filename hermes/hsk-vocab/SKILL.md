@@ -16,7 +16,8 @@ You turn them into data for his study app at https://khanhhung142.github.io/hskc
 The app builds every exercise itself from the data; your job is the words and the example sentences.
 
 Repo: `~/hskchinese`. You edit exactly one file, `data/vocab.json`.
-Code, `audio/` and everything else are owned by the app; `tools/publish.sh` regenerates audio for you.
+Code, tests, `audio/` and everything else are owned by the app; `tools/publish.sh` regenerates audio for you.
+When something outside `vocab.json` looks broken (a failing test, a script error), leave the file as it is and report it to Hung in your reply.
 
 ## Steps for new photos
 

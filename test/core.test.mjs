@@ -73,13 +73,14 @@ test('sentence pinyin uses overrides and ascii punctuation', () => {
   assert.deepEqual(parseToken('还|huán'), { h: '还', p: 'huán' });
 });
 
-test('buildSession: new words get flashcards, seen words get valid exercises', () => {
+test('buildSession: new words get a flashcard then an exercise, seen words get valid exercises', () => {
   let seed = 1;
   const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
   const fresh = buildSession(data, {}, 'latest', { rand });
-  assert.equal(fresh.length, 12);
-  const latest = latestLesson(data);
-  assert.ok(fresh.every((q) => q.type === 'flash' && q.word.lesson === latest));
+  assert.equal(fresh.length, 20);
+  assert.ok(fresh.slice(0, 10).every((q) => q.type === 'flash' && q.word.lesson === latestLesson(data)));
+  assert.ok(fresh.slice(10).every((q) => q.type !== 'flash'));
+  assert.deepEqual(new Set(fresh.slice(10).map((q) => q.word)), new Set(fresh.slice(0, 10).map((q) => q.word)));
 
   const progress = {};
   data.words.forEach((w) => record(progress, w.hanzi, true));

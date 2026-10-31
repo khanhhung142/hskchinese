@@ -49,7 +49,7 @@ function weight(stat) {
  * mode: 'latest' = words of the newest lesson, 'all' = everything, weighted to weak words.
  * progress: { [hanzi]: { r, w } }
  */
-export function buildSession(data, progress, mode, { rand = Math.random, size = 12 } = {}) {
+export function buildSession(data, progress, mode, { rand = Math.random, size = 10 } = {}) {
   const latest = latestLesson(data);
   const pool = mode === 'latest' ? data.words.filter((w) => w.lesson === latest) : data.words;
   const chosen = pool
@@ -64,9 +64,10 @@ export function buildSession(data, progress, mode, { rand = Math.random, size = 
     byFocus.get(s.focus).push(s);
   }
 
+  // New words: flashcards first, then every chosen word gets one exercise in the same session.
+  const isNew = (w) => !progress[w.hanzi] || progress[w.hanzi].r + progress[w.hanzi].w === 0;
+  const flashes = chosen.filter(isNew).map((word) => ({ type: 'flash', word }));
   const questions = chosen.map((word) => {
-    const stat = progress[word.hanzi];
-    if (!stat || stat.r + stat.w === 0) return { type: 'flash', word };
     const sents = byFocus.get(word.hanzi) ?? [];
     const kinds = ['listen', 'pinyin'];
     if (sents.length) kinds.push('cloze', 'meaning');
@@ -75,7 +76,7 @@ export function buildSession(data, progress, mode, { rand = Math.random, size = 
     const type = pickOne(kinds, rand);
     return makeQuestion(type, word, type === 'order' ? orderable : sents, data, rand);
   });
-  return shuffle(questions, rand);
+  return [...shuffle(flashes, rand), ...shuffle(questions, rand)];
 }
 
 function makeQuestion(type, word, sents, data, rand) {
