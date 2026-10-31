@@ -12,7 +12,7 @@ metadata:
 # HSK vocab app
 
 Hung learns Chinese. After each class he sends photos of the new-word table (hanzi, pinyin, Vietnamese meaning).
-You turn them into data for his study app at https://khanhhung142.github.io/hskchinese/ and publish.
+You turn them into data for his study app at <https://khanhhung142.github.io/hskchinese/> and publish.
 The app builds every exercise itself from the data; your job is the words and the example sentences.
 
 Repo: `~/hskchinese`. You edit exactly one file, `data/vocab.json`.
@@ -68,7 +68,7 @@ When something outside `vocab.json` looks broken (a failing test, a script error
 
 Short, in Vietnamese:
 
-```
+```text
 Đã thêm Bài 2: 12 từ mới
 哪 nǎ nào · 谁 shéi ai · ...
 Câu mẫu:
