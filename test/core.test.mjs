@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { toMarks, normalize } from '../js/pinyin.js';
-import { buildSession, sentencePinyin, sentenceText, parseToken, record } from '../js/quiz.js';
+import { buildSession, sentencePinyin, sentenceText, parseToken, record, latestLesson } from '../js/quiz.js';
 import { parseCedict, validate, format } from '../tools/check.mjs';
 
 const data = JSON.parse(readFileSync(new URL('../data/vocab.json', import.meta.url), 'utf8'));
@@ -78,7 +78,8 @@ test('buildSession: new words get flashcards, seen words get valid exercises', (
   const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
   const fresh = buildSession(data, {}, 'latest', { rand });
   assert.equal(fresh.length, 12);
-  assert.ok(fresh.every((q) => q.type === 'flash' && q.word.lesson === 1));
+  const latest = latestLesson(data);
+  assert.ok(fresh.every((q) => q.type === 'flash' && q.word.lesson === latest));
 
   const progress = {};
   data.words.forEach((w) => record(progress, w.hanzi, true));
