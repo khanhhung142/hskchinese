@@ -43,18 +43,18 @@ When something outside `vocab.json` looks broken (a failing test, a script error
 ```json
 {"id": 2, "date": "2026-11-03", "title": "Bài 2"}
 {"hanzi": "想", "pinyin": ["xiǎng"], "meanings": ["nhớ", "muốn"], "en": "to miss; to want", "lesson": 2}
-{"id": "2-07", "tokens": ["我", "想", "去", "中国", "。"], "vi": "Tôi muốn đi Trung Quốc.", "focus": "想", "sense": 1, "lesson": 2}
+{"id": "2-07", "tokens": ["我", "想", "去", "中国", "。"], "vi": "Tôi muốn đi Trung Quốc.", "en": "I want to go to China.", "focus": "想", "sense": 1, "lesson": 2}
 ```
 
 - **Word.** `pinyin`: tone marks, first entry is the main reading, extra readings after it (`["shéi", "shuí"]`).
   `meanings`: one string per distinct sense; synonyms of the same sense share a string (`"quá, lắm"`), different senses are separate strings (`"nhớ"`, `"muốn"`).
-  `en`: a short English gloss.
+  `en`: a short English gloss (required).
 - **Sentence.** `id`: `"<lesson>-<nn>"`, unique. `lesson`: the lesson being added.
   `tokens`: the sentence cut into word entries, in order, punctuation (full-width `，。？！`) as its own token.
   A multi-character word is one token (`"中国"`); a phrase the list lacks is several tokens (`"哪", "国", "人"`).
   For a polyphone read differently from its main reading, write `"还|huán"`.
   `focus`: the word the sentence practises. `sense`: index into that word's `meanings` the sentence uses.
-  `vi`: natural Vietnamese translation.
+  `vi` and `en`: natural Vietnamese and English translations.
 
 ## Sentence rules
 
@@ -72,8 +72,8 @@ Short, in Vietnamese:
 Đã thêm Bài 2: 12 từ mới
 哪 nǎ nào · 谁 shéi ai · ...
 Câu mẫu:
-我想去中国。 Tôi muốn đi Trung Quốc.
-你是哪国人？ Bạn là người nước nào?
+我想去中国。 Tôi muốn đi Trung Quốc. / I want to go to China.
+你是哪国人？ Bạn là người nước nào? / Which country are you from?
 App: https://khanhhung142.github.io/hskchinese/
 ```
 

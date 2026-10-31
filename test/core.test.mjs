@@ -30,18 +30,18 @@ const CEDICT = parseCedict([
 const mini = () => ({
   lessons: [{ id: 0, date: '', title: 'core' }, { id: 1, date: '2026-10-31', title: 'Bài 1' }],
   words: [
-    { hanzi: '我', pinyin: ['wǒ'], meanings: ['tôi'], lesson: 0 },
-    { hanzi: '是', pinyin: ['shì'], meanings: ['là'], lesson: 0 },
-    { hanzi: '谁', pinyin: ['shéi', 'shuí'], meanings: ['ai'], lesson: 1 },
+    { hanzi: '我', pinyin: ['wǒ'], meanings: ['tôi'], en: 'I', lesson: 0 },
+    { hanzi: '是', pinyin: ['shì'], meanings: ['là'], en: 'to be', lesson: 0 },
+    { hanzi: '谁', pinyin: ['shéi', 'shuí'], meanings: ['ai'], en: 'who', lesson: 1 },
   ],
   sentences: ['我 是 谁 ？', '谁 是 我 ？', '是 谁|shuí ？'].map((t, i) => ({
-    id: `1-${i}`, tokens: t.split(' '), vi: 'x' + i, focus: '谁', sense: 0, lesson: 1,
+    id: `1-${i}`, tokens: t.split(' '), vi: 'x' + i, en: 'e' + i, focus: '谁', sense: 0, lesson: 1,
   })),
 });
 
 test('validate accepts clean data, incl. also-pr readings and per-char compounds', () => {
   const d = mini();
-  d.words.push({ hanzi: '朋友', pinyin: ['péngyǒu'], meanings: ['bạn'], lesson: 0 });
+  d.words.push({ hanzi: '朋友', pinyin: ['péngyǒu'], meanings: ['bạn'], en: 'friend', lesson: 0 });
   assert.deepEqual(validate(d, CEDICT), []);
 });
 
@@ -85,7 +85,9 @@ test('buildSession: new words get a flashcard then an exercise, seen words get v
   const progress = {};
   data.words.forEach((w) => record(progress, w.hanzi, true));
   for (let i = 0; i < 50; i++) {
-    for (const q of buildSession(data, progress, 'all', { rand })) {
+    const session = buildSession(data, progress, 'all', { rand });
+    assert.equal(new Set(session.map((q) => q.type)).size, 5, 'every session mixes all five exercise types');
+    for (const q of session) {
       if (q.options && q.type !== 'meaning') assert.ok(q.options.includes(q.word) && new Set(q.options).size === q.options.length);
       if (q.type === 'meaning') assert.ok(q.options.includes(q.sentence));
       if (q.type === 'cloze') assert.equal(parseToken(q.sentence.tokens[q.blank]).h, q.word.hanzi);

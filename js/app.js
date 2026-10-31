@@ -80,13 +80,16 @@ function wordList() {
 function wordRow(w) {
   const sents = data.sentences.filter((s) => s.focus === w.hanzi);
   return `<details class="word">
-    <summary><span class="han">${esc(w.hanzi)}</span><span><p class="py">${esc(w.pinyin.join(' / '))}</p><p>${esc(w.meanings.join('; '))}</p></span>${icon('caret-right')}</summary>
-    <div class="body">${speakSentence(w.hanzi, w.pinyin.join(' / '), w.en ?? '')}${sents.map((s) => speakSentence(sentenceText(s), sentencePinyin(s, wordMap), s.vi)).join('')}</div>
+    <summary><span class="han">${esc(w.hanzi)}</span><span><p class="py">${esc(w.pinyin.join(' / '))}</p><p>${esc(w.meanings.join('; '))}</p><p class="en">${esc(w.en)}</p></span>${icon('caret-right')}</summary>
+    <div class="body">${speakSentence(w.hanzi, w.pinyin.join(' / '), w.meanings.join('; '), w.en)}${sents.map((s) => speakSentence(sentenceText(s), sentencePinyin(s, wordMap), s.vi, s.en)).join('')}</div>
   </details>`;
 }
 
-const speakSentence = (han, py, vi) =>
-  `<div class="sent">${speakBtn(han, true)}<p class="han">${esc(han)}</p><p class="py">${esc(py)}</p><p class="vi muted">${esc(vi)}</p></div>`;
+const speakSentence = (han, py, vi, en) =>
+  `<div class="sent">${speakBtn(han, true)}<p class="han">${esc(han)}</p><p class="py">${esc(py)}</p>${gloss(vi, en)}</div>`;
+
+/** Vietnamese first, English under it. */
+const gloss = (vi, en) => `<p class="vi">${esc(vi)}</p><p class="en">${esc(en ?? '')}</p>`;
 
 const PROMPTS = {
   flash: 'Từ mới',
@@ -126,8 +129,8 @@ const QUESTION = {
       <div class="card center">
         <p class="big-han han">${esc(w.hanzi)}</p>
         ${speakBtn(w.hanzi)}
-        ${state.flipped ? `<p class="py-big">${esc(w.pinyin.join(' / '))}</p><p class="meaning">${esc(w.meanings.join('; '))}</p>
-          ${ex ? `<div class="example">${speakBtn(sentenceText(ex), true)}<p class="han">${esc(sentenceText(ex))}</p><p class="py">${esc(sentencePinyin(ex, wordMap))}</p><p class="muted">${esc(ex.vi)}</p></div>` : ''}` : ''}
+        ${state.flipped ? `<p class="py-big">${esc(w.pinyin.join(' / '))}</p><p class="meaning">${esc(w.meanings.join('; '))}</p><p class="en">${esc(w.en)}</p>
+          ${ex ? `<div class="example">${speakBtn(sentenceText(ex), true)}<p class="han">${esc(sentenceText(ex))}</p><p class="py">${esc(sentencePinyin(ex, wordMap))}</p>${gloss(ex.vi, ex.en)}</div>` : ''}` : ''}
       </div>
     </div>
     <div class="footer${state.flipped ? ' two' : ''}">
@@ -161,7 +164,7 @@ const QUESTION = {
     });
     return `<div class="stage">
       <p class="sentence han">${parts.join('')}</p>
-      <p class="hint">${esc(q.sentence.vi)}</p>
+      <div class="hint">${gloss(q.sentence.vi, q.sentence.en)}</div>
       <div class="options">${q.options.map((w) => wordOption(w, q, state)).join('')}</div>
     </div>`;
   },
@@ -169,7 +172,7 @@ const QUESTION = {
     const picked = state.picked ?? [];
     const chip = (idx, act) => `<button class="chip han" data-action="${act}" data-idx="${idx}" ${state.done ? 'disabled' : ''}>${esc(q.pieces[idx])}</button>`;
     return `<div class="stage">
-      <p class="hint">${esc(q.sentence.vi)}</p>
+      <div class="hint">${gloss(q.sentence.vi, q.sentence.en)}</div>
       <div class="answer-line">${picked.map((idx) => chip(idx, 'unplace')).join('')}</div>
       <div class="pieces">${q.pieces.map((_, idx) => (picked.includes(idx) ? `<span class="chip ghost">${esc(q.pieces[idx])}</span>` : chip(idx, 'place'))).join('')}</div>
     </div>
@@ -181,7 +184,7 @@ const QUESTION = {
       <div class="center"><p class="sentence han">${esc(text)}</p>${speakBtn(text)}</div>
       <div class="options list">${q.options.map((s) => {
         const cls = !state.done ? '' : s === q.sentence ? 'right' : s === state.pick ? 'wrong' : '';
-        return `<button class="opt ${cls}" data-pick="${esc(s.id)}" ${state.done ? 'disabled' : ''}>${esc(s.vi)}</button>`;
+        return `<button class="opt ${cls}" data-pick="${esc(s.id)}" ${state.done ? 'disabled' : ''}>${gloss(s.vi, s.en)}</button>`;
       }).join('')}</div>
     </div>`;
   },
@@ -193,9 +196,10 @@ function sheet(q, state) {
   const han = sentence ? sentenceText(sentence) : w.hanzi;
   const py = sentence ? sentencePinyin(sentence, wordMap) : w.pinyin.join(' / ');
   const vi = sentence ? sentence.vi : w.meanings.join('; ');
+  const en = sentence ? sentence.en : w.en;
   return `<aside class="sheet ${state.correct ? 'ok' : 'bad'}"><div>
     <h3>${state.correct ? `${icon('check-circle', true)} Đúng rồi` : `${icon('x-circle', true)} Chưa đúng`}</h3>
-    <div class="solution">${speakBtn(han, true)}<p class="han">${esc(han)}</p><p class="py">${esc(py)}</p><p class="muted">${esc(vi)}</p></div>
+    <div class="solution">${speakBtn(han, true)}<p class="han">${esc(han)}</p><p class="py">${esc(py)}</p>${gloss(vi, en)}</div>
     <button class="btn primary block" data-action="next" autofocus>Tiếp tục</button>
   </div></aside>`;
 }

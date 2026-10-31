@@ -66,6 +66,7 @@ export function validate(data, cedict) {
     words.set(w.hanzi, w);
     if (!lessonIds.has(w.lesson)) err(at, `lesson ${w.lesson} does not exist`);
     if (!Array.isArray(w.meanings) || !w.meanings.length || w.meanings.some((m) => typeof m !== 'string' || !m)) err(at, 'meanings must be a non-empty array of strings');
+    if (typeof w.en !== 'string' || !w.en) err(at, 'en gloss required');
     if (!Array.isArray(w.pinyin) || !w.pinyin.length) { err(at, 'pinyin must be a non-empty array'); continue; }
     const known = readingsFor(w.hanzi, cedict);
     for (const p of w.pinyin) {
@@ -84,6 +85,7 @@ export function validate(data, cedict) {
     ids.add(s.id);
     if (!lessonIds.has(s.lesson)) err(at, `lesson ${s.lesson} does not exist`);
     if (typeof s.vi !== 'string' || !s.vi) err(at, 'vi translation required');
+    if (typeof s.en !== 'string' || !s.en) err(at, 'en translation required');
     if (!Array.isArray(s.tokens) || !s.tokens.some((t) => !isPunct(t))) { err(at, 'tokens must contain words'); continue; }
     const text = sentenceText(s);
     if (texts.has(text)) err(at, `duplicate sentence ${text}`);

@@ -34,6 +34,8 @@ export function shuffle(arr, rand = Math.random) {
 const pickN = (arr, n, rand) => shuffle(arr, rand).slice(0, n);
 const pickOne = (arr, rand) => arr[Math.floor(rand() * arr.length)];
 
+const TYPES = ['listen', 'pinyin', 'cloze', 'order', 'meaning'];
+
 export function latestLesson(data) {
   return Math.max(0, ...data.lessons.map((l) => l.id));
 }
@@ -58,22 +60,25 @@ export function buildSession(data, progress, mode, { rand = Math.random, size = 
     .slice(0, size)
     .map((x) => x.w);
 
-  const byFocus = new Map();
+  // Sentences that practise a word: its focus sentences, else any sentence using it.
+  const focusOf = new Map();
+  const usedIn = new Map();
   for (const s of data.sentences) {
-    if (!byFocus.has(s.focus)) byFocus.set(s.focus, []);
-    byFocus.get(s.focus).push(s);
+    (focusOf.get(s.focus) ?? focusOf.set(s.focus, []).get(s.focus)).push(s);
+    for (const h of new Set(s.tokens.map((t) => parseToken(t).h))) (usedIn.get(h) ?? usedIn.set(h, []).get(h)).push(s);
   }
 
   // New words: flashcards first, then every chosen word gets one exercise in the same session.
   const isNew = (w) => !progress[w.hanzi] || progress[w.hanzi].r + progress[w.hanzi].w === 0;
   const flashes = chosen.filter(isNew).map((word) => ({ type: 'flash', word }));
+  // Deal exercise types from a shuffled deck so one session covers every type, not a random clump.
+  let deck = [];
   const questions = chosen.map((word) => {
-    const sents = byFocus.get(word.hanzi) ?? [];
-    const kinds = ['listen', 'pinyin'];
-    if (sents.length) kinds.push('cloze', 'meaning');
+    const sents = focusOf.get(word.hanzi) ?? usedIn.get(word.hanzi) ?? [];
     const orderable = sents.filter((s) => s.tokens.filter((t) => !isPunct(t)).length >= 3);
-    if (orderable.length) kinds.push('order');
-    const type = pickOne(kinds, rand);
+    const fits = (type) => ['listen', 'pinyin'].includes(type) || (type === 'order' ? orderable.length : sents.length);
+    if (!deck.some(fits)) deck = [...deck, ...shuffle(TYPES, rand)];
+    const type = deck.splice(deck.findIndex(fits), 1)[0];
     return makeQuestion(type, word, type === 'order' ? orderable : sents, data, rand);
   });
   return [...shuffle(flashes, rand), ...shuffle(questions, rand)];
