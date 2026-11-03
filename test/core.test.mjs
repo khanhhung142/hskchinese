@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { toMarks, normalize } from '../js/pinyin.js';
-import { buildSession, sentencePinyin, sentenceText, parseToken, record, latestLesson } from '../js/quiz.js';
+import { buildSession, tokenPinyin, parseToken, record, latestLesson, isPunct } from '../js/quiz.js';
 import { parseCedict, validate, format } from '../tools/check.mjs';
 
 const data = JSON.parse(readFileSync(new URL('../data/vocab.json', import.meta.url), 'utf8'));
@@ -67,9 +67,9 @@ test('seed data formats canonically', () => {
   assert.equal(format(data), readFileSync(new URL('../data/vocab.json', import.meta.url), 'utf8'));
 });
 
-test('sentence pinyin uses overrides and ascii punctuation', () => {
+test('token pinyin uses the explicit reading, else the main one', () => {
   const words = new Map(mini().words.map((w) => [w.hanzi, w]));
-  assert.equal(sentencePinyin({ tokens: ['我', '是', '谁|shuí', '？'] }, words), 'wǒ shì shuí?');
+  assert.deepEqual(['我', '谁', '谁|shuí'].map((t) => tokenPinyin(t, words)), ['wǒ', 'shéi', 'shuí']);
   assert.deepEqual(parseToken('还|huán'), { h: '还', p: 'huán' });
 });
 
@@ -94,7 +94,7 @@ test('buildSession: new words get a flashcard then an exercise, seen words get v
       if (q.type === 'order') {
         assert.notEqual(q.pieces.join(''), q.answer.join(''));
         assert.equal([...q.pieces].sort().join(), [...q.answer].sort().join());
-        assert.ok(sentenceText(q.sentence).startsWith(q.answer[0]));
+        assert.deepEqual(q.answer, q.sentence.tokens.filter((t) => !isPunct(parseToken(t).h)));
       }
     }
   }

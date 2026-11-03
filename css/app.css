@@ -60,6 +60,15 @@ button { cursor: pointer; }
 .vi { margin: 0; }
 .en { margin: 0; font-size: .875em; color: var(--muted); }
 
+/* Chinese with pinyin underneath: .hz is one word, .hzs a sentence. Size the container; pinyin follows. */
+.hz { display: inline-flex; flex-direction: column; align-items: center; vertical-align: top; }
+.hz .han { line-height: 1.2; }
+.hz .py { font-size: max(12px, .5em); line-height: 1.3; white-space: nowrap; }
+.hzs { display: inline-flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 4px .25em; }
+.hz.blank .han { min-width: 2em; border-bottom: 3px solid var(--accent); }
+.zh { margin: 0; }
+.zh .hzs { justify-content: flex-start; }
+
 .page {
   max-width: 520px;
   margin: 0 auto;
@@ -102,7 +111,7 @@ button { cursor: pointer; }
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-box); box-shadow: var(--shadow);
 }
 .lesson h2 { margin: 0; font-size: 15px; font-weight: 600; color: var(--muted); }
-.lesson .strip { margin: 14px 0 8px; display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 30px; line-height: 1.3; }
+.lesson .strip { margin: 14px 0 8px; display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 30px; }
 .lesson .count { margin: 0 0 20px; color: var(--muted); }
 .menu { margin-top: 12px; display: grid; gap: 12px; }
 .menu-item {
@@ -129,11 +138,7 @@ button { cursor: pointer; }
 .stage { flex: 1; display: flex; flex-direction: column; gap: 20px; padding-top: 16px; }
 .big-han { font-size: 72px; line-height: 1.15; text-align: center; margin: 12px 0 0; }
 .center { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
-.sentence { font-size: 28px; line-height: 1.5; text-align: center; margin: 0; }
-.sentence .blank {
-  display: inline-block; min-width: 2.2em; margin: 0 .1em;
-  border-bottom: 3px solid var(--accent); vertical-align: -.1em; line-height: 1;
-}
+.sentence { font-size: 28px; text-align: center; margin: 0; }
 .hint { text-align: center; margin: 0; color: var(--muted); }
 .hint p { margin: 0; }
 
@@ -146,7 +151,7 @@ button { cursor: pointer; }
   transition: transform .15s var(--ease), border-color .2s, background-color .2s;
 }
 .options.list .opt { min-height: 56px; align-items: flex-start; text-align: left; padding: 12px 16px; }
-.opt .han { font-size: 30px; line-height: 1.2; }
+.opt .hz { font-size: 30px; }
 .opt:active:not(:disabled) { transform: scale(.98); }
 .opt.right { border-color: var(--ok); background: var(--ok-soft); }
 .opt.wrong { border-color: var(--bad); background: var(--bad-soft); }
@@ -168,7 +173,7 @@ button { cursor: pointer; }
 }
 .pieces { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
 .chip {
-  min-height: 48px; min-width: 48px; padding: 0 14px; font-size: 24px;
+  min-height: 48px; min-width: 48px; padding: 6px 12px; font-size: 24px;
   border-radius: var(--r-chip); border: 1.5px solid var(--line); background: var(--surface);
   transition: transform .15s var(--ease);
 }
@@ -185,10 +190,8 @@ button { cursor: pointer; }
 }
 .card .meaning { font-size: 20px; font-weight: 600; margin: 0; }
 .card .py-big { font-size: 22px; color: var(--muted); margin: 0; }
-.example { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; align-items: center; text-align: left; }
-.example p { margin: 0; }
-.example .han { font-size: 20px; }
-.example .speak { grid-row: span 4; }
+.example { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); text-align: left; }
+.example .zh { font-size: 20px; }
 
 /* Feedback sheet */
 .sheet {
@@ -202,10 +205,7 @@ button { cursor: pointer; }
 .sheet h3 { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 20px; }
 .sheet.ok h3 { color: var(--ok); }
 .sheet.bad h3 { color: var(--bad); }
-.sheet .solution { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; align-items: center; }
-.sheet .solution p { margin: 0; }
-.sheet .solution .han { font-size: 24px; }
-.sheet .solution .speak { grid-row: span 4; }
+.sheet .solution .zh { font-size: 24px; }
 .sheet-pad { height: 220px; flex: none; }
 @keyframes rise { from { transform: translateY(100%); } }
 
@@ -213,8 +213,8 @@ button { cursor: pointer; }
 .summary { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
 .score { font-size: 64px; font-weight: 700; letter-spacing: -.03em; line-height: 1; margin: 0; font-variant-numeric: tabular-nums; }
 .summary h1 { margin: 0; font-size: 24px; }
-.missed { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 8px; }
-.missed span { padding: 6px 12px; border-radius: var(--r-chip); background: var(--bad-soft); }
+.missed { display: flex; flex-wrap: wrap; gap: 8px; }
+.missed .hz { padding: 6px 12px; border-radius: var(--r-chip); background: var(--bad-soft); font-size: 22px; }
 
 /* Word list */
 .list-head { display: flex; align-items: center; gap: 4px; margin: -8px 0 8px -10px; }
@@ -227,17 +227,16 @@ button { cursor: pointer; }
   padding: 12px 16px; cursor: pointer;
 }
 .word summary::-webkit-details-marker { display: none; }
-.word summary .han { font-size: 26px; line-height: 1.2; }
+.word summary .hz { font-size: 26px; }
 .word summary p { margin: 0; }
 .word summary > i { color: var(--muted); transition: transform .2s var(--ease); }
 .word[open] summary > i { transform: rotate(90deg); }
 .word .body { padding: 0 16px 16px; display: grid; gap: 12px; }
 .sent { display: grid; grid-template-columns: auto 1fr; gap: 0 12px; align-items: center; }
-.sent .speak { grid-row: span 4; }
-.sent p { margin: 0; }
-.sent .han { font-size: 18px; }
-.sent .py, .sent .vi { font-size: 14px; }
-.sent .en { font-size: 13px; }
+.sent .zh { font-size: 20px; margin-bottom: 4px; }
+.body .sent .zh { font-size: 18px; }
+.body .sent .vi { font-size: 14px; }
+.body .sent .en { font-size: 13px; }
 
 /* States */
 .empty { flex: 1; display: grid; place-content: center; text-align: center; gap: 8px; color: var(--muted); }

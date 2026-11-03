@@ -10,16 +10,10 @@ export function parseToken(t) {
 
 export const sentenceText = (s) => s.tokens.map((t) => parseToken(t).h).join('');
 
-const ASCII_PUNCT = { '，': ',', '。': '.', '？': '?', '！': '!', '：': ':', '；': ';', '、': ',' };
-
-export function sentencePinyin(s, wordMap) {
-  let out = '';
-  for (const t of s.tokens) {
-    const { h, p } = parseToken(t);
-    if (isPunct(h)) out += [...h].map((c) => ASCII_PUNCT[c] ?? c).join('');
-    else out += (out ? ' ' : '') + (p ?? wordMap.get(h)?.pinyin[0] ?? h);
-  }
-  return out;
+/** Pinyin shown under a token: its explicit reading, else the word's main reading. */
+export function tokenPinyin(t, wordMap) {
+  const { h, p } = parseToken(t);
+  return p ?? wordMap.get(h)?.pinyin[0] ?? '';
 }
 
 export function shuffle(arr, rand = Math.random) {
@@ -98,10 +92,11 @@ function makeQuestion(type, word, sents, data, rand) {
     const wrong = pickN(data.sentences.filter((s) => s.vi !== sentence.vi), 3, rand);
     return { type, word, sentence, options: shuffle([sentence, ...wrong], rand) };
   }
-  // order: tokens without punctuation, shuffled so it never starts solved.
-  const pieces = sentence.tokens.map((t) => parseToken(t).h).filter((h) => !isPunct(h));
+  // order: tokens (readings kept for display) without punctuation, shuffled so it never starts solved.
+  const pieces = sentence.tokens.filter((t) => !isPunct(parseToken(t).h));
+  const text = (ts) => ts.map((t) => parseToken(t).h).join('');
   let shuffled = shuffle(pieces, rand);
-  for (let i = 0; i < 10 && shuffled.join('') === pieces.join(''); i++) shuffled = shuffle(pieces, rand);
+  for (let i = 0; i < 10 && text(shuffled) === text(pieces); i++) shuffled = shuffle(pieces, rand);
   return { type, word, sentence, answer: pieces, pieces: shuffled };
 }
 

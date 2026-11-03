@@ -1,5 +1,5 @@
 import { toMarks, normalize } from './pinyin.js';
-import { buildSession, sentencePinyin, sentenceText, parseToken, latestLesson, record } from './quiz.js';
+import { buildSession, sentenceText, parseToken, tokenPinyin, isPunct, latestLesson, record } from './quiz.js';
 
 const root = document.getElementById('app');
 const PROGRESS_KEY = 'hsk-progress';
@@ -33,6 +33,16 @@ function speak(text) {
   u.rate = 0.85;
   speechSynthesis.speak(u);
 }
+/** Chinese is always shown with its pinyin underneath, word by word. */
+const hz = (h, p) => `<span class="hz"><span class="han">${esc(h)}</span><span class="py">${esc(p)}</span></span>`;
+const wordHz = (w, all) => hz(w.hanzi, all ? w.pinyin.join(' / ') : w.pinyin[0]);
+const tokenHz = (t) => hz(parseToken(t).h, tokenPinyin(t, wordMap));
+/** A sentence as a row of words with pinyin; `blank` hides one token (cloze). */
+const sentenceHz = (s, blank = -1) => `<span class="hzs">${s.tokens.map((t, i) => {
+  if (i === blank) return '<span class="hz blank"><span class="han">&nbsp;</span><span class="py">&nbsp;</span></span>';
+  return isPunct(parseToken(t).h) ? `<span class="hz punct"><span class="han">${esc(t)}</span></span>` : tokenHz(t);
+}).join('')}</span>`;
+
 const speakBtn = (text, sm) => `<button class="speak${sm ? ' sm' : ''}" data-say="${esc(text)}" aria-label="Nghe">${icon('speaker-high', true)}</button>`;
 
 // ---------- Views ----------
@@ -49,7 +59,7 @@ function home() {
     <header class="home-head"><h1>Học từ</h1><span class="muted">${learned}/${data.words.length} từ đã thuộc</span></header>
     <section class="lesson">
       <h2>${esc(lesson.title)}${lesson.date ? `, ${esc(formatDate(lesson.date))}` : ''}</h2>
-      <p class="strip han">${fresh.map((w) => `<span>${esc(w.hanzi)}</span>`).join('')}</p>
+      <p class="strip">${fresh.map((w) => wordHz(w)).join('')}</p>
       <p class="count">${fresh.length} từ mới</p>
       <button class="btn primary block" data-action="start" data-mode="latest">Học bài mới</button>
     </section>
@@ -80,13 +90,14 @@ function wordList() {
 function wordRow(w) {
   const sents = data.sentences.filter((s) => s.focus === w.hanzi);
   return `<details class="word">
-    <summary><span class="han">${esc(w.hanzi)}</span><span><p class="py">${esc(w.pinyin.join(' / '))}</p><p>${esc(w.meanings.join('; '))}</p><p class="en">${esc(w.en)}</p></span>${icon('caret-right')}</summary>
-    <div class="body">${speakSentence(w.hanzi, w.pinyin.join(' / '), w.meanings.join('; '), w.en)}${sents.map((s) => speakSentence(sentenceText(s), sentencePinyin(s, wordMap), s.vi, s.en)).join('')}</div>
+    <summary>${wordHz(w, true)}<span><p>${esc(w.meanings.join('; '))}</p><p class="en">${esc(w.en)}</p></span>${icon('caret-right')}</summary>
+    <div class="body">${sents.map((s) => speakSentence(sentenceText(s), sentenceHz(s), s.vi, s.en)).join('')}</div>
   </details>`;
 }
 
-const speakSentence = (han, py, vi, en) =>
-  `<div class="sent">${speakBtn(han, true)}<p class="han">${esc(han)}</p><p class="py">${esc(py)}</p>${gloss(vi, en)}</div>`;
+/** Play button + Chinese (already rendered with pinyin) + translations. */
+const speakSentence = (text, chinese, vi, en) =>
+  `<div class="sent">${speakBtn(text, true)}<div><p class="zh">${chinese}</p>${gloss(vi, en)}</div></div>`;
 
 /** Vietnamese first, English under it. */
 const gloss = (vi, en) => `<p class="vi">${esc(vi)}</p><p class="en">${esc(en ?? '')}</p>`;
@@ -118,7 +129,7 @@ function quiz() {
 
 const wordOption = (w, q, state) => {
   const cls = !state.done ? '' : w === q.word ? 'right' : w === state.pick ? 'wrong' : '';
-  return `<button class="opt ${cls}" data-pick="${esc(w.hanzi)}" ${state.done ? 'disabled' : ''}><span class="han">${esc(w.hanzi)}</span>${q.type === 'cloze' && state.done ? `<span class="py">${esc(w.pinyin[0])}</span>` : ''}</button>`;
+  return `<button class="opt ${cls}" data-pick="${esc(w.hanzi)}" ${state.done ? 'disabled' : ''}>${wordHz(w)}</button>`;
 };
 
 const QUESTION = {
@@ -128,9 +139,10 @@ const QUESTION = {
     return `<div class="stage">
       <div class="card center">
         <p class="big-han han">${esc(w.hanzi)}</p>
+        <p class="py-big">${esc(w.pinyin.join(' / '))}</p>
         ${speakBtn(w.hanzi)}
-        ${state.flipped ? `<p class="py-big">${esc(w.pinyin.join(' / '))}</p><p class="meaning">${esc(w.meanings.join('; '))}</p><p class="en">${esc(w.en)}</p>
-          ${ex ? `<div class="example">${speakBtn(sentenceText(ex), true)}<p class="han">${esc(sentenceText(ex))}</p><p class="py">${esc(sentencePinyin(ex, wordMap))}</p>${gloss(ex.vi, ex.en)}</div>` : ''}` : ''}
+        ${state.flipped ? `<p class="meaning">${esc(w.meanings.join('; '))}</p><p class="en">${esc(w.en)}</p>
+          ${ex ? `<div class="example">${speakSentence(sentenceText(ex), sentenceHz(ex), ex.vi, ex.en)}</div>` : ''}` : ''}
       </div>
     </div>
     <div class="footer${state.flipped ? ' two' : ''}">
@@ -157,31 +169,26 @@ const QUESTION = {
     </form>`;
   },
   cloze(q, state) {
-    const parts = q.sentence.tokens.map((t, idx) => {
-      const h = parseToken(t).h;
-      if (idx !== q.blank) return esc(h);
-      return state.done ? `<span class="blank">${esc(h)}</span>` : '<span class="blank">&nbsp;</span>';
-    });
     return `<div class="stage">
-      <p class="sentence han">${parts.join('')}</p>
+      <p class="sentence">${sentenceHz(q.sentence, state.done ? -1 : q.blank)}</p>
       <div class="hint">${gloss(q.sentence.vi, q.sentence.en)}</div>
       <div class="options">${q.options.map((w) => wordOption(w, q, state)).join('')}</div>
     </div>`;
   },
   order(q, state) {
     const picked = state.picked ?? [];
-    const chip = (idx, act) => `<button class="chip han" data-action="${act}" data-idx="${idx}" ${state.done ? 'disabled' : ''}>${esc(q.pieces[idx])}</button>`;
+    const chip = (idx, act) => `<button class="chip" data-action="${act}" data-idx="${idx}" ${state.done ? 'disabled' : ''}>${tokenHz(q.pieces[idx])}</button>`;
     return `<div class="stage">
       <div class="hint">${gloss(q.sentence.vi, q.sentence.en)}</div>
       <div class="answer-line">${picked.map((idx) => chip(idx, 'unplace')).join('')}</div>
-      <div class="pieces">${q.pieces.map((_, idx) => (picked.includes(idx) ? `<span class="chip ghost">${esc(q.pieces[idx])}</span>` : chip(idx, 'place'))).join('')}</div>
+      <div class="pieces">${q.pieces.map((_, idx) => (picked.includes(idx) ? `<span class="chip ghost">${tokenHz(q.pieces[idx])}</span>` : chip(idx, 'place'))).join('')}</div>
     </div>
     ${state.done ? '' : `<div class="footer"><button class="btn primary block" data-action="check-order" ${picked.length === q.pieces.length ? '' : 'disabled'}>Kiểm tra</button></div>`}`;
   },
   meaning(q, state) {
     const text = sentenceText(q.sentence);
     return `<div class="stage">
-      <div class="center"><p class="sentence han">${esc(text)}</p>${speakBtn(text)}</div>
+      <div class="center"><p class="sentence">${sentenceHz(q.sentence)}</p>${speakBtn(text)}</div>
       <div class="options list">${q.options.map((s) => {
         const cls = !state.done ? '' : s === q.sentence ? 'right' : s === state.pick ? 'wrong' : '';
         return `<button class="opt ${cls}" data-pick="${esc(s.id)}" ${state.done ? 'disabled' : ''}>${gloss(s.vi, s.en)}</button>`;
@@ -193,13 +200,13 @@ const QUESTION = {
 function sheet(q, state) {
   const w = q.word;
   const sentence = q.sentence;
-  const han = sentence ? sentenceText(sentence) : w.hanzi;
-  const py = sentence ? sentencePinyin(sentence, wordMap) : w.pinyin.join(' / ');
+  const text = sentence ? sentenceText(sentence) : w.hanzi;
+  const chinese = sentence ? sentenceHz(sentence) : wordHz(w, true);
   const vi = sentence ? sentence.vi : w.meanings.join('; ');
   const en = sentence ? sentence.en : w.en;
   return `<aside class="sheet ${state.correct ? 'ok' : 'bad'}"><div>
     <h3>${state.correct ? `${icon('check-circle', true)} Đúng rồi` : `${icon('x-circle', true)} Chưa đúng`}</h3>
-    <div class="solution">${speakBtn(han, true)}<p class="han">${esc(han)}</p><p class="py">${esc(py)}</p>${gloss(vi, en)}</div>
+    <div class="solution">${speakSentence(text, chinese, vi, en)}</div>
     <button class="btn primary block" data-action="next" autofocus>Tiếp tục</button>
   </div></aside>`;
 }
@@ -207,12 +214,12 @@ function sheet(q, state) {
 function summary() {
   const { results, mode } = view;
   const right = results.filter((r) => r.ok).length;
-  const missed = [...new Set(results.filter((r) => !r.ok).map((r) => r.hanzi))];
+  const missed = [...new Set(results.filter((r) => !r.ok).map((r) => r.hanzi))].map((h) => wordMap.get(h));
   return `<main class="page">
     <div class="summary">
       <p class="score">${right}/${results.length}</p>
       <h1>${right === results.length ? 'Không sai câu nào' : 'Xong buổi học'}</h1>
-      ${missed.length ? `<p class="muted">Cần ôn thêm:</p><div class="missed han">${missed.map((h) => `<span>${esc(h)}</span>`).join('')}</div>` : ''}
+      ${missed.length ? `<p class="muted">Cần ôn thêm:</p><div class="missed">${missed.map((w) => wordHz(w)).join('')}</div>` : ''}
     </div>
     <div class="footer two">
       <button class="btn" data-action="home">Trang chủ</button>
@@ -308,7 +315,8 @@ root.addEventListener('click', (e) => {
   else if (act === 'check-order') {
     const q = view.qs[view.i];
     // ponytail: only the source word order counts; add alternates to the data if a lesson needs them.
-    answer(view.state.picked.map((i) => q.pieces[i]).join('') === q.answer.join(''));
+    const text = (ts) => ts.map((t) => parseToken(t).h).join('');
+    answer(text(view.state.picked.map((i) => q.pieces[i])) === text(q.answer));
   }
 });
 
