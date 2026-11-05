@@ -21,8 +21,9 @@ The older quizzes (**Học bài mới**, **Ôn tất cả**) are hidden there an
 
 - **Luyện viết chữ** is typing practice, separate from the quizzes and not counted in progress.
   It shows one random word (hanzi, pinyin, English, Vietnamese) and on open plays it in Chinese, then in English.
-  Type the word with a Chinese keyboard; the answer must match the hanzi exactly (spaces ignored).
+  Type the word with a Chinese keyboard; the answer must match the hanzi exactly (spaces and punctuation ignored).
   The pencil button opens a handwriting pad; strokes are recognized by Google Input Tools (needs network) and tapping a candidate appends it to the input.
+- **Luyện viết câu** is the same, with a whole example sentence (pinyin, English, Vietnamese) instead of one word.
 - **Luyện từ vựng** is the same input, but shows only the English and Vietnamese meaning and plays the English.
   **Xem đáp án** reveals the hanzi and plays it.
 - **Học bài mới** (`/full/` only) studies the newest lesson.
@@ -66,7 +67,7 @@ Icons load from the Phosphor CDN on unpkg, so the local app needs internet for i
 1. Rewrites `data/vocab.json` in canonical form (one record per line, so diffs stay readable).
 2. Validates it; on problems it prints `FAIL: <n> problem(s) in data/vocab.json` with one line per problem and exits 1.
    On success it prints `OK: <words> words, <sentences> sentences`.
-3. Syncs `audio/`: generates one mp3 per word and per sentence that lacks one (plus one English mp3 per word gloss in `audio/en/`), and deletes mp3s nothing refers to.
+3. Syncs `audio/`: generates one mp3 per word and per sentence that lacks one (plus one English mp3 per word gloss and sentence translation in `audio/en/`), and deletes mp3s nothing refers to.
 
 The first run downloads the CC-CEDICT dictionary into `tools/.cache/` (git-ignored) to check pinyin.
 

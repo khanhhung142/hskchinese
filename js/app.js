@@ -79,6 +79,7 @@ function home() {
     <nav class="menu">
       ${FULL ? `<button class="menu-item" data-action="start" data-mode="all">${icon('shuffle')}<span><b>Ôn tất cả</b><small>Ưu tiên từ hay sai</small></span>${icon('caret-right')}</button>` : ''}
       <button class="menu-item" data-action="write" data-mode="write">${icon('pencil-simple-line')}<span><b>Luyện viết chữ</b><small>Nghe, xem và gõ lại chữ Hán</small></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="write" data-mode="sentence">${icon('text-align-left')}<span><b>Luyện viết câu</b><small>Nghe, xem và gõ lại cả câu</small></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="write" data-mode="vocab">${icon('translate')}<span><b>Luyện từ vựng</b><small>Xem nghĩa, nhập chữ Hán</small></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Danh sách từ</b><small>${data.words.length} từ, bấm để nghe</small></span>${icon('caret-right')}</button>
     </nav>
@@ -247,29 +248,37 @@ function summary() {
 }
 
 // Typing practice: separate from quizzes, records no progress.
-// ponytail: plain random pick over taught words (lesson 0 glue words have no examples); weight it if needed.
-function pickWriteWord(prev) {
-  const pool = data.words.filter((w) => w.lesson > 0 && w !== prev);
+// Modes: 'write' (copy the word), 'vocab' (meaning only), 'sentence' (copy a whole sentence).
+// ponytail: plain random pick over taught words (lesson 0 glue words have no examples) or all sentences; weight it if needed.
+function pickWriteItem(mode, prev) {
+  const pool = mode === 'sentence' ? data.sentences.filter((s) => s !== prev) : data.words.filter((w) => w.lesson > 0 && w !== prev);
   return pool[Math.floor(Math.random() * pool.length)];
 }
 
+/** What the practice card shows and checks, for a word or a sentence. */
+const writeCard = (mode, x) => (mode === 'sentence'
+  ? { text: sentenceText(x), zh: `<p class="sentence">${sentenceHz(x)}</p>`, en: x.en, vi: x.vi }
+  : { text: x.hanzi, zh: `<p class="big-han han">${esc(x.hanzi)}</p><p class="py-big">${esc(x.pinyin.join(' / '))}</p>`, en: x.en, vi: x.meanings.join('; ') });
+const WRITE_TITLES = { write: 'Luyện viết chữ', vocab: 'Luyện từ vựng', sentence: 'Luyện viết câu' };
+
 function write() {
-  const { word: w, state, mode } = view;
+  const { state, mode } = view;
+  const c = writeCard(mode, view.item);
   // Vocab mode hides the hanzi until answered or revealed.
-  const shown = mode === 'write' || state.done || state.revealed;
+  const shown = mode !== 'vocab' || state.done || state.revealed;
   const status = state.done ? `<p class="write-status ok">${icon('check-circle', true)} Đúng rồi</p>`
     : state.wrong ? `<p class="write-status bad">${icon('x-circle', true)} Chưa đúng, thử lại</p>` : '';
   return `<main class="page">
-    <header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>${mode === 'write' ? 'Luyện viết chữ' : 'Luyện từ vựng'}</h1></header>
+    <header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>${WRITE_TITLES[mode]}</h1></header>
     <div class="stage">
       <div class="card center">
-        ${shown ? `<p class="big-han han">${esc(w.hanzi)}</p><p class="py-big">${esc(w.pinyin.join(' / '))}</p>` : ''}
-        <p class="meaning${shown ? '' : ' big-meaning'}">${esc(w.en)}</p>
-        <p class="vi muted">${esc(w.meanings.join('; '))}</p>
-        ${shown ? speakBtn(w.hanzi) : `<button class="speak" data-say-en="${esc(w.en)}" aria-label="Nghe tiếng Anh">${icon('speaker-high', true)}</button>`}
+        ${shown ? c.zh : ''}
+        <p class="meaning${shown ? '' : ' big-meaning'}">${esc(c.en)}</p>
+        <p class="vi muted">${esc(c.vi)}</p>
+        ${shown ? speakBtn(c.text) : `<button class="speak" data-say-en="${esc(c.en)}" aria-label="Nghe tiếng Anh">${icon('speaker-high', true)}</button>`}
       </div>
       <form class="field" data-action="submit-write">
-        <label for="hz-in">${mode === 'write' ? 'Gõ hoặc viết lại chữ Hán ở trên' : 'Gõ hoặc viết chữ Hán của từ này'}</label>
+        <label for="hz-in">${{ write: 'Gõ hoặc viết lại chữ Hán ở trên', vocab: 'Gõ hoặc viết chữ Hán của từ này', sentence: 'Gõ hoặc viết lại cả câu ở trên' }[mode]}</label>
         <div class="input-row">
           <input id="hz-in" name="hz" lang="zh-CN" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" value="${esc(state.typed ?? '')}" ${state.done ? 'disabled' : ''}>
           ${state.done ? '' : `<button type="button" class="icon-btn${state.hand ? ' on' : ''}" data-action="hand-toggle" aria-label="Viết tay" aria-pressed="${!!state.hand}">${icon('pencil-simple-line')}</button>`}
@@ -287,24 +296,26 @@ function write() {
       </div>` : ''}
     </div>
     <div class="footer${state.done ? '' : ' two'}">${state.done
-      ? '<button class="btn primary block" data-action="write-next">Từ tiếp</button>'
+      ? `<button class="btn primary block" data-action="write-next">${mode === 'sentence' ? 'Câu tiếp' : 'Từ tiếp'}</button>`
       : `${mode === 'vocab' && !state.revealed ? '<button class="btn" data-action="reveal">Xem đáp án</button>' : '<button class="btn" data-action="write-next">Bỏ qua</button>'}<button class="btn primary" data-action="check-write">Kiểm tra</button>`}</div>
   </main>`;
 }
 
 function startWrite(mode) {
-  view = { name: 'write', mode, word: pickWriteWord(view.word), state: {} };
+  view = { name: 'write', mode, item: pickWriteItem(mode, view.item), state: {} };
   render();
-  mode === 'write' ? sayWord(view.word) : sayEn(view.word.en);
+  const c = writeCard(mode, view.item);
+  mode === 'vocab' ? sayEn(c.en) : say(c.text, () => sayEn(c.en));
 }
 
 function checkWrite() {
   const typed = root.querySelector('#hz-in').value;
   if (!typed.trim()) return;
-  const ok = sameHanzi(typed, view.word.hanzi);
+  const { text } = writeCard(view.mode, view.item);
+  const ok = sameHanzi(typed, text);
   view.state = { ...view.state, typed, done: ok, wrong: !ok };
   render();
-  if (view.state.done) say(view.word.hanzi);
+  if (ok) say(text);
 }
 
 // Handwriting pad. Recognition: Google Input Tools (no key, CORS open); strokes go to Google.
@@ -478,7 +489,7 @@ root.addEventListener('click', (e) => {
   else if (act === 'words') { view = { name: 'words' }; render(); }
   else if (act === 'write') startWrite(el.dataset.mode);
   else if (act === 'write-next') startWrite(view.mode);
-  else if (act === 'reveal') { view.state = { ...view.state, typed: root.querySelector('#hz-in').value, revealed: true }; render(); say(view.word.hanzi); }
+  else if (act === 'reveal') { view.state = { ...view.state, typed: root.querySelector('#hz-in').value, revealed: true }; render(); say(view.item.hanzi); }
   else if (act === 'check-write') checkWrite();
   else if (act === 'hand-toggle') { view.state = { ...view.state, typed: root.querySelector('#hz-in').value, hand: !view.state.hand }; render(); root.querySelector('.hand')?.scrollIntoView({ block: 'end', behavior: 'smooth' }); }
   else if (act === 'hand-undo') { ink.pop(); redrawInk(); recognize(); }

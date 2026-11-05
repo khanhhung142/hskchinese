@@ -100,11 +100,14 @@ test('buildSession: new words get a flashcard then an exercise, seen words get v
   }
 });
 
-test('sameHanzi matches typed Chinese exactly, ignoring spaces', () => {
+test('sameHanzi matches typed Chinese exactly, ignoring spaces and punctuation', () => {
   assert.ok(sameHanzi(' 你好 ', '你好'));
   assert.ok(sameHanzi('你 好', '你好'));
   assert.ok(!sameHanzi('你', '你好'));
   assert.ok(!sameHanzi('nihao', '你好'));
+  assert.ok(sameHanzi('我是学生', '我是学生。'));
+  assert.ok(sameHanzi('你好吗?', '你好吗？'));
+  assert.ok(!sameHanzi('我是', '我是学生。'));
 });
 
 test('full/index.html is index.html plus a base tag', () => {

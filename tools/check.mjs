@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Formats data/vocab.json, validates it, then syncs audio/ (one mp3 per word and sentence, plus audio/en/ per word gloss).
+// Formats data/vocab.json, validates it, then syncs audio/ (one mp3 per word and sentence, plus audio/en/ per English gloss and translation).
 // Usage: node tools/check.mjs [--no-audio]
 import { readFile, writeFile, readdir, unlink, mkdir, access } from 'node:fs/promises';
 import { execFile } from 'node:child_process';
@@ -88,6 +88,7 @@ export function validate(data, cedict) {
     if (!lessonIds.has(s.lesson)) err(at, `lesson ${s.lesson} does not exist`);
     if (typeof s.vi !== 'string' || !s.vi) err(at, 'vi translation required');
     if (typeof s.en !== 'string' || !s.en) err(at, 'en translation required');
+    else if (s.en.includes('/')) err(at, 'en translation must not contain "/" (it names an audio file)');
     if (!Array.isArray(s.tokens) || !s.tokens.some((t) => !isPunct(t))) { err(at, 'tokens must contain words'); continue; }
     const text = sentenceText(s);
     if (texts.has(text)) err(at, `duplicate sentence ${text}`);
@@ -135,7 +136,7 @@ async function loadCedict() {
 
 async function syncAudio(data) {
   return await syncDir(AUDIO, [...data.words.map((w) => w.hanzi), ...data.sentences.map(sentenceText)], VOICE)
-    + await syncDir(path.join(AUDIO, 'en'), data.words.map((w) => w.en), VOICE_EN);
+    + await syncDir(path.join(AUDIO, 'en'), [...data.words.map((w) => w.en), ...data.sentences.map((s) => s.en)], VOICE_EN);
 }
 
 /** Make `dir` hold exactly one `<text>.mp3` per text. */

@@ -20,7 +20,7 @@ For setup and commands, see the [README](../README.md).
 | `js/quiz.js` | Pure functions: token parsing, sentence pinyin, session building, progress recording |
 | `js/pinyin.js` | Tone numbers to tone marks (`ni3` to `nǐ`) and answer normalization |
 | `data/vocab.json` | Lessons, words, sentences |
-| `audio/` | One mp3 per word and per sentence, named by its Chinese text; `audio/en/` one per word `en` gloss |
+| `audio/` | One mp3 per word and per sentence, named by its Chinese text; `audio/en/` one per word and sentence `en` |
 | `full/index.html` | Copy of `index.html` with `<base href="../">`; serves `/full/`, where the home screen also shows the old quizzes |
 | `tools/check.mjs` | Format, validate, sync audio |
 | `tools/publish.sh` | Check, commit, push; what Hermes runs |
@@ -60,7 +60,7 @@ It checks:
 
 ## Audio
 
-`syncAudio()` wants one file per word `hanzi` and per sentence text, at `audio/<text>.mp3`, and one per word `en` at `audio/en/<en>.mp3` (voice `en-US-AriaNeural`; validation forbids `/` in `en` for this reason).
+`syncAudio()` wants one file per word `hanzi` and per sentence text, at `audio/<text>.mp3`, and one per word and sentence `en` at `audio/en/<en>.mp3` (voice `en-US-AriaNeural`; validation forbids `/` in `en` for this reason).
 It generates missing files with edge-tts (voice `zh-CN-XiaoxiaoNeural`, rate -10%, 4 in parallel) and deletes files no word or sentence refers to.
 Override the binary with `EDGE_TTS=/path/to/edge-tts`.
 
@@ -99,7 +99,7 @@ There is no sync between devices and no server.
 ## UI
 
 `js/app.js` keeps a single `view` object (`home`, `words`, `quiz`, `summary`, `write`) and re-renders the whole `#app` element from template strings on every change.
-`write` is the typing practice, in mode `write` (word shown) or `vocab` (only the meaning shown): a random word from lessons 1 and up, checked with `sameHanzi` (`js/quiz.js`), with no effect on `progress`.
+`write` is the typing practice, in mode `write` (word shown), `vocab` (only the meaning shown) or `sentence` (a whole sentence shown): a random word from lessons 1 and up or a random sentence, checked with `sameHanzi` (`js/quiz.js`), with no effect on `progress`.
 `FULL` (path ends in `/full/`) decides whether the home screen shows the old quizzes; `test/core.test.mjs` keeps `full/index.html` in sync with `index.html`.
 Its handwriting pad (`setupHand`) posts strokes to the unofficial Google Input Tools handwriting endpoint (`inputtools.google.com`, no key, CORS open); it is the app's only call to a third-party service.
 One delegated `click` listener dispatches on `data-action`, `data-pick` and `data-say` attributes; one `submit` listener handles the pinyin form.

@@ -54,7 +54,7 @@ When something outside `vocab.json` looks broken (a failing test, a script error
   A multi-character word is one token (`"中国"`); a phrase the list lacks is several tokens (`"哪", "国", "人"`).
   For a polyphone read differently from its main reading, write `"还|huán"`.
   `focus`: the word the sentence practises. `sense`: index into that word's `meanings` the sentence uses.
-  `vi` and `en`: natural Vietnamese and English translations.
+  `vi` and `en`: natural Vietnamese and English translations (no `/` in `en`; it names the English audio file).
 
 ## Sentence rules
 
