@@ -247,3 +247,20 @@ button { cursor: pointer; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* Typing practice */
+.write-status { margin: 0; display: flex; align-items: center; gap: 6px; font-weight: 600; }
+.write-status.ok { color: var(--ok); }
+.write-status.bad { color: var(--bad); }
+.write-ex { display: grid; gap: 16px; }
+.input-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; }
+.input-row .icon-btn { width: 56px; height: 56px; border: 1.5px solid var(--line); background: var(--surface); }
+.input-row .icon-btn.on { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.hand { display: grid; gap: 10px; scroll-margin-bottom: 96px; }
+#hand-pad {
+  width: 100%; aspect-ratio: 3 / 2; touch-action: none; color: var(--text);
+  border: 1.5px solid var(--line); border-radius: var(--r-box); background: var(--surface);
+}
+.cands { min-height: 48px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.hand-tools { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; }
+.hand-tools .btn { min-height: 44px; padding: 0 14px; font-weight: 500; }

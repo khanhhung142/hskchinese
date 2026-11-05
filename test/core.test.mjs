@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { toMarks, normalize } from '../js/pinyin.js';
-import { buildSession, tokenPinyin, parseToken, record, latestLesson, isPunct } from '../js/quiz.js';
+import { buildSession, tokenPinyin, parseToken, record, latestLesson, isPunct, sameHanzi } from '../js/quiz.js';
 import { parseCedict, validate, format } from '../tools/check.mjs';
 
 const data = JSON.parse(readFileSync(new URL('../data/vocab.json', import.meta.url), 'utf8'));
@@ -98,4 +98,11 @@ test('buildSession: new words get a flashcard then an exercise, seen words get v
       }
     }
   }
+});
+
+test('sameHanzi matches typed Chinese exactly, ignoring spaces', () => {
+  assert.ok(sameHanzi(' 你好 ', '你好'));
+  assert.ok(sameHanzi('你 好', '你好'));
+  assert.ok(!sameHanzi('你', '你好'));
+  assert.ok(!sameHanzi('nihao', '你好'));
 });

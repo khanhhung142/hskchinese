@@ -1,5 +1,5 @@
 import { toMarks, normalize } from './pinyin.js';
-import { buildSession, sentenceText, parseToken, tokenPinyin, isPunct, latestLesson, record } from './quiz.js';
+import { buildSession, sentenceText, parseToken, tokenPinyin, isPunct, latestLesson, record, sameHanzi } from './quiz.js';
 
 const root = document.getElementById('app');
 const PROGRESS_KEY = 'hsk-progress';
@@ -65,6 +65,7 @@ function home() {
     </section>
     <nav class="menu">
       <button class="menu-item" data-action="start" data-mode="all">${icon('shuffle')}<span><b>Ôn tất cả</b><small>Ưu tiên từ hay sai</small></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="write">${icon('pencil-simple-line')}<span><b>Luyện viết chữ</b><small>Nghe, xem và gõ lại chữ Hán</small></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Danh sách từ</b><small>${data.words.length} từ, bấm để nghe</small></span>${icon('caret-right')}</button>
     </nav>
   </main>`;
@@ -88,7 +89,7 @@ function wordList() {
 }
 
 function wordRow(w) {
-  const sents = data.sentences.filter((s) => s.focus === w.hanzi);
+  const sents = data.sentences.filter((s) => s.focus === w.hanzi).slice(0, 3);
   return `<details class="word">
     <summary>${wordHz(w, true)}<span><p>${esc(w.meanings.join('; '))}</p><p class="en">${esc(w.en)}</p></span>${icon('caret-right')}</summary>
     <div class="body">${sents.map((s) => speakSentence(sentenceText(s), sentenceHz(s), s.vi, s.en)).join('')}</div>
@@ -231,12 +232,163 @@ function summary() {
   </main>`;
 }
 
+// Typing practice: separate from quizzes, records no progress.
+// ponytail: plain random pick over taught words (lesson 0 glue words have no examples); weight it if needed.
+function pickWriteWord(prev) {
+  const pool = data.words.filter((w) => w.lesson > 0 && w !== prev);
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+function write() {
+  const { word: w, state } = view;
+  const sents = data.sentences.filter((s) => s.focus === w.hanzi).slice(0, 3);
+  const status = state.done ? `<p class="write-status ok">${icon('check-circle', true)} Đúng rồi</p>`
+    : state.wrong ? `<p class="write-status bad">${icon('x-circle', true)} Chưa đúng, thử lại</p>` : '';
+  return `<main class="page">
+    <header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Luyện viết chữ</h1></header>
+    <div class="stage">
+      <div class="card center">
+        <p class="big-han han">${esc(w.hanzi)}</p>
+        <p class="py-big">${esc(w.pinyin.join(' / '))}</p>
+        <p class="meaning">${esc(w.en)}</p>
+        <p class="vi muted">${esc(w.meanings.join('; '))}</p>
+        ${speakBtn(w.hanzi)}
+      </div>
+      <form class="field" data-action="submit-write">
+        <label for="hz-in">Gõ hoặc viết lại chữ Hán ở trên</label>
+        <div class="input-row">
+          <input id="hz-in" name="hz" lang="zh-CN" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" value="${esc(state.typed ?? '')}" ${state.done ? 'disabled' : ''}>
+          ${state.done ? '' : `<button type="button" class="icon-btn${state.hand ? ' on' : ''}" data-action="hand-toggle" aria-label="Viết tay" aria-pressed="${!!state.hand}">${icon('pencil-simple-line')}</button>`}
+        </div>
+        ${status}
+      </form>
+      ${state.hand && !state.done ? `<div class="hand">
+        <canvas id="hand-pad" aria-label="Ô viết tay"></canvas>
+        <div class="cands" id="hand-cands"><span class="muted">Viết chữ vào ô trên</span></div>
+        <div class="hand-tools">
+          <button type="button" class="btn" data-action="hand-undo">${icon('arrow-counter-clockwise')} Lùi nét</button>
+          <button type="button" class="btn" data-action="hand-clear">${icon('eraser')} Xoá ô</button>
+          <button type="button" class="btn" data-action="hand-back" aria-label="Xoá chữ cuối">${icon('backspace')}</button>
+        </div>
+      </div>` : ''}
+      ${sents.length ? `<section class="write-ex">${sents.map((s) => speakSentence(sentenceText(s), sentenceHz(s), s.vi, s.en)).join('')}</section>` : ''}
+    </div>
+    <div class="footer${state.done ? '' : ' two'}">${state.done
+      ? '<button class="btn primary block" data-action="write-next">Từ tiếp</button>'
+      : '<button class="btn" data-action="write-next">Bỏ qua</button><button class="btn primary" data-action="check-write">Kiểm tra</button>'}</div>
+  </main>`;
+}
+
+function startWrite() {
+  view = { name: 'write', word: pickWriteWord(view.word), state: {} };
+  render();
+  say(view.word.hanzi);
+}
+
+function checkWrite() {
+  const typed = root.querySelector('#hz-in').value;
+  if (!typed.trim()) return;
+  const ok = sameHanzi(typed, view.word.hanzi);
+  view.state = { typed, hand: view.state.hand, done: ok, wrong: !ok };
+  render();
+  if (view.state.done) say(view.word.hanzi);
+}
+
+// Handwriting pad. Recognition: Google Input Tools (no key, CORS open); strokes go to Google.
+// ponytail: unofficial endpoint, swap for an offline recognizer (HanziLookupJS) if it ever breaks.
+let ink = [];
+let inkReq = 0;
+function setupHand() {
+  const pad = root.querySelector('#hand-pad');
+  if (!pad) return;
+  ink = [];
+  const dpr = devicePixelRatio || 1;
+  const { width, height } = pad.getBoundingClientRect();
+  pad.width = width * dpr;
+  pad.height = height * dpr;
+  const ctx = pad.getContext('2d');
+  ctx.scale(dpr, dpr);
+  ctx.lineWidth = 6;
+  ctx.lineCap = ctx.lineJoin = 'round';
+  ctx.strokeStyle = getComputedStyle(pad).color;
+  let stroke = null;
+  const t0 = Date.now();
+  const at = (e) => { const r = pad.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  pad.addEventListener('pointerdown', (e) => {
+    pad.setPointerCapture(e.pointerId);
+    const [x, y] = at(e);
+    stroke = [[x], [y], [Date.now() - t0]];
+    ink.push(stroke);
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+  });
+  pad.addEventListener('pointermove', (e) => {
+    if (!stroke) return;
+    const [x, y] = at(e);
+    stroke[0].push(x); stroke[1].push(y); stroke[2].push(Date.now() - t0);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+  });
+  const end = () => { if (stroke) { stroke = null; recognize(); } };
+  pad.addEventListener('pointerup', end);
+  pad.addEventListener('pointercancel', end);
+}
+
+function redrawInk() {
+  const pad = root.querySelector('#hand-pad');
+  const ctx = pad.getContext('2d');
+  ctx.clearRect(0, 0, pad.width, pad.height);
+  for (const [xs, ys] of ink) {
+    ctx.beginPath();
+    ctx.moveTo(xs[0], ys[0]);
+    xs.forEach((x, i) => ctx.lineTo(x, ys[i]));
+    ctx.stroke();
+  }
+}
+
+async function recognize() {
+  const box = root.querySelector('#hand-cands');
+  if (!ink.length) { box.innerHTML = '<span class="muted">Viết chữ vào ô trên</span>'; return; }
+  const id = ++inkReq;
+  const pad = root.querySelector('#hand-pad').getBoundingClientRect();
+  try {
+    const res = await fetch('https://inputtools.google.com/request?ime=handwriting&app=mobilesearch&cs=1&oe=UTF-8', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ requests: [{ writing_guide: { writing_area_width: pad.width, writing_area_height: pad.height }, ink, language: 'zh_CN' }] }),
+    });
+    const json = await res.json();
+    if (id !== inkReq || !root.contains(box)) return;
+    const cands = (json[1]?.[0]?.[1] ?? []).filter((c) => /^\p{Script=Han}+$/u.test(c)).slice(0, 8);
+    box.innerHTML = cands.length
+      ? cands.map((c) => `<button type="button" class="chip han" data-action="hand-pick" data-c="${esc(c)}">${esc(c)}</button>`).join('')
+      : '<span class="muted">Chưa nhận ra chữ, viết tiếp hoặc viết lại</span>';
+  } catch {
+    if (id === inkReq && root.contains(box)) box.innerHTML = '<span class="muted">Không nhận dạng được (cần mạng)</span>';
+  }
+}
+
+function clearInk() {
+  ink = [];
+  inkReq++;
+  redrawInk();
+  recognize();
+}
+
 // ---------- Controller ----------
 
 function render() {
-  const views = { home, words: wordList, quiz, summary };
+  const views = { home, words: wordList, quiz, summary, write };
   root.innerHTML = views[view.name]();
   if (view.name === 'quiz') onQuestionShown();
+  if (view.name === 'write') {
+    setupHand();
+    // With the pad open, keep the on-screen keyboard down.
+    const target = view.state.done ? '[data-action="write-next"]' : view.state.hand ? null : '#hz-in';
+    if (target) root.querySelector(target).focus();
+  }
 }
 
 function onQuestionShown() {
@@ -309,6 +461,13 @@ root.addEventListener('click', (e) => {
   const act = el.dataset.action;
   if (act === 'home') { view = { name: 'home' }; render(); }
   else if (act === 'words') { view = { name: 'words' }; render(); }
+  else if (act === 'write' || act === 'write-next') startWrite();
+  else if (act === 'check-write') checkWrite();
+  else if (act === 'hand-toggle') { view.state = { ...view.state, typed: root.querySelector('#hz-in').value, hand: !view.state.hand }; render(); root.querySelector('.hand')?.scrollIntoView({ block: 'end', behavior: 'smooth' }); }
+  else if (act === 'hand-undo') { ink.pop(); redrawInk(); recognize(); }
+  else if (act === 'hand-clear') clearInk();
+  else if (act === 'hand-back') { const input = root.querySelector('#hz-in'); input.value = [...input.value].slice(0, -1).join(''); }
+  else if (act === 'hand-pick') { root.querySelector('#hz-in').value += el.dataset.c; clearInk(); }
   else if (act === 'start') startSession(el.dataset.mode);
   else if (act === 'flip') { view.state.flipped = true; render(); }
   else if (act === 'grade') { grade(el.dataset.ok === '1'); next(); }
@@ -325,6 +484,7 @@ root.addEventListener('click', (e) => {
 
 root.addEventListener('submit', (e) => {
   e.preventDefault();
+  if (view.name === 'write') return checkWrite();
   const q = view.qs[view.i];
   const typed = view.state.typed ?? '';
   if (!typed.trim()) return;

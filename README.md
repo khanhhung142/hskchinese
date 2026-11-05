@@ -19,6 +19,10 @@ The UI is in Vietnamese; every word and sentence shows a Vietnamese and an Engli
 - **Học bài mới** studies the newest lesson.
   Words never seen before get a flashcard first, then every word in the session gets one exercise.
 - **Ôn tất cả** reviews all words, favouring words you miss often.
+- **Luyện viết chữ** is typing practice, separate from the quizzes and not counted in progress.
+  It shows one random word (hanzi, pinyin, English, Vietnamese), plays it on open, and lists up to 3 example sentences.
+  Type the word with a Chinese keyboard; the answer must match the hanzi exactly (spaces ignored).
+  The pencil button opens a handwriting pad; strokes are recognized by Google Input Tools (needs network) and tapping a candidate appends it to the input.
 - **Danh sách từ** lists every word by lesson; tap a row to see its example sentences, tap the speaker to hear it.
 
 A session has up to 5 words.
@@ -43,7 +47,7 @@ To edit by hand instead, change `data/vocab.json`, then run `tools/publish.sh "c
 Prerequisites: Node 22 or newer (tests use `node:test`; developed on Node 24), Python 3 for a local server, and [edge-tts](https://github.com/rany2/edge-tts) only if you need to generate audio.
 
 ```sh
-npm test                          # unit tests, expect "pass 7" and "fail 0"
+npm test                          # unit tests, expect "pass 8" and "fail 0"
 npm run check -- --no-audio       # format + validate data/vocab.json, skip audio
 npm run check                     # same, then generate missing mp3s in audio/
 python3 -m http.server            # serve the app at http://localhost:8000

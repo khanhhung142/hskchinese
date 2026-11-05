@@ -96,7 +96,9 @@ There is no sync between devices and no server.
 
 ## UI
 
-`js/app.js` keeps a single `view` object (`home`, `words`, `quiz`, `summary`) and re-renders the whole `#app` element from template strings on every change.
+`js/app.js` keeps a single `view` object (`home`, `words`, `quiz`, `summary`, `write`) and re-renders the whole `#app` element from template strings on every change.
+`write` is the typing practice: a random word from lessons 1 and up, checked with `sameHanzi` (`js/quiz.js`), with no effect on `progress`.
+Its handwriting pad (`setupHand`) posts strokes to the unofficial Google Input Tools handwriting endpoint (`inputtools.google.com`, no key, CORS open); it is the app's only call to a third-party service.
 One delegated `click` listener dispatches on `data-action`, `data-pick` and `data-say` attributes; one `submit` listener handles the pinyin form.
 All data goes through `esc()` before it reaches HTML.
 

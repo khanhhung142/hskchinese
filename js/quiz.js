@@ -105,3 +105,6 @@ export function record(progress, hanzi, correct) {
   correct ? s.r++ : s.w++;
   return progress;
 }
+
+/** Typed Chinese (IME output) matches the word, ignoring whitespace. */
+export const sameHanzi = (typed, hanzi) => typed.replace(/\s+/g, '') === hanzi;
