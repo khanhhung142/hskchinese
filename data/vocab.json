@@ -163,7 +163,9 @@
   {"hanzi":"喝","pinyin":["hē"],"meanings":["uống"],"en":"to drink","lesson":4},
   {"hanzi":"非常","pinyin":["fēicháng"],"meanings":["vô cùng, rất"],"en":"extremely","lesson":4},
   {"hanzi":"小","pinyin":["xiǎo"],"meanings":["nhỏ, bé"],"en":"small","lesson":4},
-  {"hanzi":"买","pinyin":["mǎi"],"meanings":["mua"],"en":"to buy","lesson":4}
+  {"hanzi":"买","pinyin":["mǎi"],"meanings":["mua"],"en":"to buy","lesson":4},
+  {"hanzi":"王老师","pinyin":["Wáng lǎoshī"],"meanings":["thầy/cô giáo họ Vương"],"en":"Teacher Wang","lesson":2},
+  {"hanzi":"们","pinyin":["men"],"meanings":["hậu tố số nhiều (chúng, các)"],"en":"plural suffix","lesson":2}
 ],
 "sentences": [
   {"id":"1-01","tokens":["你","是","哪","国","人","？"],"vi":"Bạn là người nước nào?","en":"Which country are you from?","focus":"哪","sense":0,"lesson":1},
@@ -785,6 +787,17 @@
   {"id":"4-237","tokens":["他","有","两","本","中文","书","。"],"vi":"Anh ấy có hai quyển sách tiếng Trung.","en":"He has two Chinese books.","focus":"本","sense":0,"lesson":4},
   {"id":"4-238","tokens":["妈妈","要","买","鱼","。"],"vi":"Mẹ muốn mua cá.","en":"Mom wants to buy fish.","focus":"要","sense":0,"lesson":4},
   {"id":"4-239","tokens":["我","女朋友","今年","毕业","。"],"vi":"Bạn gái tôi tốt nghiệp năm nay.","en":"My girlfriend graduates this year.","focus":"毕业","sense":0,"lesson":4},
-  {"id":"4-240","tokens":["你","的","衣服","很","漂亮","。"],"vi":"Quần áo của bạn rất đẹp.","en":"Your clothes are very pretty.","focus":"漂亮","sense":0,"lesson":4}
+  {"id":"4-240","tokens":["你","的","衣服","很","漂亮","。"],"vi":"Quần áo của bạn rất đẹp.","en":"Your clothes are very pretty.","focus":"漂亮","sense":0,"lesson":4},
+  {"id":"2-111","tokens":["王老师","，","您","好","！"],"vi":"Chào cô Vương ạ!","en":"Hello, Teacher Wang!","focus":"王老师","sense":0,"lesson":2},
+  {"id":"2-112","tokens":["王老师","，","谢谢","您","。"],"vi":"Cô Vương, cảm ơn cô.","en":"Thank you, Teacher Wang.","focus":"王老师","sense":0,"lesson":2},
+  {"id":"2-113","tokens":["王老师","是","我们","的","老师","。"],"vi":"Cô Vương là giáo viên của chúng tôi.","en":"Teacher Wang is our teacher.","focus":"王老师","sense":0,"lesson":2},
+  {"id":"2-114","tokens":["同学","们","好","！"],"vi":"Chào các bạn học!","en":"Hello, classmates!","focus":"们","sense":0,"lesson":2},
+  {"id":"2-115","tokens":["老师","们","好","！"],"vi":"Chào các thầy cô!","en":"Hello, teachers!","focus":"们","sense":0,"lesson":2},
+  {"id":"2-116","tokens":["同学","们","都","是","我","的","朋友","。"],"vi":"Các bạn học đều là bạn của tôi.","en":"My classmates are all my friends.","focus":"们","sense":0,"lesson":2},
+  {"id":"2-117","tokens":["请问","，","王老师","在","家","吗","？"],"vi":"Xin hỏi, cô Vương có nhà không ạ?","en":"Excuse me, is Teacher Wang at home?","focus":"请问","sense":0,"lesson":2},
+  {"id":"2-118","tokens":["同学","们","，","再见","！"],"vi":"Các bạn học, tạm biệt!","en":"Goodbye, classmates!","focus":"再见","sense":0,"lesson":2},
+  {"id":"2-119","tokens":["王老师","，","请","坐","！"],"vi":"Cô Vương, mời cô ngồi!","en":"Teacher Wang, please sit down.","focus":"坐","sense":0,"lesson":2},
+  {"id":"2-120","tokens":["大家","好","，","我","是","王老师","。"],"vi":"Chào mọi người, tôi là cô Vương.","en":"Hello everyone, I am Teacher Wang.","focus":"大家","sense":0,"lesson":2},
+  {"id":"2-121","tokens":["我","不","认识","王老师","。"],"vi":"Tôi không quen cô Vương.","en":"I do not know Teacher Wang.","focus":"认识","sense":0,"lesson":2}
 ]
 }
