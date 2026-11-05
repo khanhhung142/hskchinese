@@ -165,7 +165,10 @@
   {"hanzi":"小","pinyin":["xiǎo"],"meanings":["nhỏ, bé"],"en":"small","lesson":4},
   {"hanzi":"买","pinyin":["mǎi"],"meanings":["mua"],"en":"to buy","lesson":4},
   {"hanzi":"王老师","pinyin":["Wáng lǎoshī"],"meanings":["thầy/cô giáo họ Vương"],"en":"Teacher Wang","lesson":2},
-  {"hanzi":"们","pinyin":["men"],"meanings":["hậu tố số nhiều (chúng, các)"],"en":"plural suffix","lesson":2}
+  {"hanzi":"们","pinyin":["men"],"meanings":["hậu tố số nhiều (chúng, các)"],"en":"plural suffix","lesson":2},
+  {"hanzi":"对","pinyin":["duì"],"meanings":["đúng, phải"],"en":"right, correct","lesson":1},
+  {"hanzi":"没有","pinyin":["méiyǒu"],"meanings":["không có"],"en":"to not have","lesson":3},
+  {"hanzi":"六十岁","pinyin":["liùshí suì"],"meanings":["sáu mươi tuổi"],"en":"sixty years old","lesson":3}
 ],
 "sentences": [
   {"id":"1-01","tokens":["你","是","哪","国","人","？"],"vi":"Bạn là người nước nào?","en":"Which country are you from?","focus":"哪","sense":0,"lesson":1},
@@ -798,6 +801,20 @@
   {"id":"2-118","tokens":["同学","们","，","再见","！"],"vi":"Các bạn học, tạm biệt!","en":"Goodbye, classmates!","focus":"再见","sense":0,"lesson":2},
   {"id":"2-119","tokens":["王老师","，","请","坐","！"],"vi":"Cô Vương, mời cô ngồi!","en":"Teacher Wang, please sit down.","focus":"坐","sense":0,"lesson":2},
   {"id":"2-120","tokens":["大家","好","，","我","是","王老师","。"],"vi":"Chào mọi người, tôi là cô Vương.","en":"Hello everyone, I am Teacher Wang.","focus":"大家","sense":0,"lesson":2},
-  {"id":"2-121","tokens":["我","不","认识","王老师","。"],"vi":"Tôi không quen cô Vương.","en":"I do not know Teacher Wang.","focus":"认识","sense":0,"lesson":2}
+  {"id":"2-121","tokens":["我","不","认识","王老师","。"],"vi":"Tôi không quen cô Vương.","en":"I do not know Teacher Wang.","focus":"认识","sense":0,"lesson":2},
+  {"id":"1-66","tokens":["对","，","这","是","我","的","电脑","。"],"vi":"Đúng, đây là máy tính của tôi.","en":"Right, this is my computer.","focus":"对","sense":0,"lesson":1},
+  {"id":"1-67","tokens":["对","，","他","是","我","哥哥","。"],"vi":"Đúng, anh ấy là anh trai tôi.","en":"Right, he is my older brother.","focus":"对","sense":0,"lesson":1},
+  {"id":"1-68","tokens":["对","，","我们","都","是","学生","。"],"vi":"Đúng, chúng tôi đều là học sinh.","en":"Right, we are all students.","focus":"对","sense":0,"lesson":1},
+  {"id":"1-69","tokens":["喂","，","你好","，","我","是","王老师","。"],"vi":"A lô, chào bạn, tôi là cô Vương.","en":"Hello, this is Teacher Wang.","focus":"喂","sense":0,"lesson":1},
+  {"id":"1-70","tokens":["谁","的","电脑","？"],"vi":"Máy tính của ai?","en":"Whose computer is it?","focus":"谁","sense":0,"lesson":1},
+  {"id":"1-71","tokens":["你","的","工作","很","忙","吗","？"],"vi":"Công việc của bạn rất bận à?","en":"Is your job very busy?","focus":"工作","sense":0,"lesson":1},
+  {"id":"3-206","tokens":["我","爸爸","今年","六十岁","。"],"vi":"Bố tôi năm nay sáu mươi tuổi.","en":"My dad is sixty this year.","focus":"六十岁","sense":0,"lesson":3},
+  {"id":"3-207","tokens":["他","妈妈","六十岁","。"],"vi":"Mẹ anh ấy sáu mươi tuổi.","en":"His mom is sixty.","focus":"六十岁","sense":0,"lesson":3},
+  {"id":"3-208","tokens":["王老师","六十岁","。"],"vi":"Cô Vương sáu mươi tuổi.","en":"Teacher Wang is sixty.","focus":"六十岁","sense":0,"lesson":3},
+  {"id":"3-209","tokens":["我","没有","孩子","。"],"vi":"Tôi không có con.","en":"I don't have children.","focus":"没有","sense":0,"lesson":3},
+  {"id":"3-210","tokens":["他","没有","钱","。"],"vi":"Anh ấy không có tiền.","en":"He has no money.","focus":"没有","sense":0,"lesson":3},
+  {"id":"3-211","tokens":["你","家","有","没有","狗","？"],"vi":"Nhà bạn có con chó không?","en":"Do you have a dog at home?","focus":"没有","sense":0,"lesson":3},
+  {"id":"3-212","tokens":["我","没有","哥哥","，","也","没有","姐姐","。"],"vi":"Tôi không có anh trai, cũng không có chị gái.","en":"I have no older brother and no older sister either.","focus":"也","sense":0,"lesson":3},
+  {"id":"3-213","tokens":["我","家","有","四","口","人","，","没有","孩子","。"],"vi":"Nhà tôi có bốn người, không có trẻ con.","en":"My family has four people, no children.","focus":"有","sense":0,"lesson":3}
 ]
 }
