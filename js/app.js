@@ -115,11 +115,14 @@ function quiz() {
   const { qs, i, state } = view;
   const q = qs[i];
   const pct = Math.round((i / qs.length) * 100);
+  // Count flashcards and exercises separately: 10 words read as "1/10", not "1/20".
+  const nFlash = qs.filter((x) => x.type === 'flash').length;
+  const counter = q.type === 'flash' ? `${i + 1}/${nFlash}` : `${i - nFlash + 1}/${qs.length - nFlash}`;
   return `<main class="page">
     <header class="quiz-top">
       <button class="icon-btn" data-action="home" aria-label="Thoát">${icon('x')}</button>
       <div class="bar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><span style="width:${pct}%"></span></div>
-      <span class="counter">${i + 1}/${qs.length}</span>
+      <span class="counter">${counter}</span>
     </header>
     <p class="prompt">${PROMPTS[q.type]}</p>
     ${QUESTION[q.type](q, state)}
