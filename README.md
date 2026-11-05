@@ -21,7 +21,7 @@ The UI is in Vietnamese; every word and sentence shows a Vietnamese and an Engli
 - **Ôn tất cả** reviews all words, favouring words you miss often.
 - **Danh sách từ** lists every word by lesson; tap a row to see its example sentences, tap the speaker to hear it.
 
-A session has up to 10 words.
+A session has up to 5 words.
 Exercise types: listen and pick the hanzi, type the pinyin (tone numbers like `ni3` are fine), fill the blank, put words in order, pick the sentence meaning.
 Every Chinese word is shown with its pinyin underneath, except in the type-the-pinyin exercise.
 

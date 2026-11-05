@@ -45,7 +45,7 @@ function weight(stat) {
  * mode: 'latest' = words of the newest lesson, 'all' = everything, weighted to weak words.
  * progress: { [hanzi]: { r, w } }
  */
-export function buildSession(data, progress, mode, { rand = Math.random, size = 10 } = {}) {
+export function buildSession(data, progress, mode, { rand = Math.random, size = 5 } = {}) {
   const latest = latestLesson(data);
   const pool = mode === 'latest' ? data.words.filter((w) => w.lesson === latest) : data.words;
   const chosen = pool

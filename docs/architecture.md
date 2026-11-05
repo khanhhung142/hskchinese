@@ -68,7 +68,7 @@ In the app, `say(text)` plays `audio/<encoded text>.mp3` and falls back to the b
 ## Study session (`buildSession` in `js/quiz.js`)
 
 1. **Pool.** Mode `latest` takes words of the highest lesson id; mode `all` takes every word.
-2. **Pick up to 10 words**, sorted by `weight(stat) * random`.
+2. **Pick up to 5 words**, sorted by `weight(stat) * random`.
    Unseen words weigh 3; seen words weigh `1 + 3 * wrong / (right + wrong)`, so a word always missed weighs 4 and one always right weighs 1.
 3. **Flashcards** for picked words with no recorded answers, shown first.
    Flashcard grades are recorded in progress but do not count in the end-of-session score.

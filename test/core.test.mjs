@@ -77,10 +77,10 @@ test('buildSession: new words get a flashcard then an exercise, seen words get v
   let seed = 1;
   const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
   const fresh = buildSession(data, {}, 'latest', { rand });
-  assert.equal(fresh.length, 20);
-  assert.ok(fresh.slice(0, 10).every((q) => q.type === 'flash' && q.word.lesson === latestLesson(data)));
-  assert.ok(fresh.slice(10).every((q) => q.type !== 'flash'));
-  assert.deepEqual(new Set(fresh.slice(10).map((q) => q.word)), new Set(fresh.slice(0, 10).map((q) => q.word)));
+  assert.equal(fresh.length, 10);
+  assert.ok(fresh.slice(0, 5).every((q) => q.type === 'flash' && q.word.lesson === latestLesson(data)));
+  assert.ok(fresh.slice(5).every((q) => q.type !== 'flash'));
+  assert.deepEqual(new Set(fresh.slice(5).map((q) => q.word)), new Set(fresh.slice(0, 5).map((q) => q.word)));
 
   const progress = {};
   data.words.forEach((w) => record(progress, w.hanzi, true));

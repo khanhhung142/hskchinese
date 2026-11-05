@@ -115,7 +115,7 @@ function quiz() {
   const { qs, i, state } = view;
   const q = qs[i];
   const pct = Math.round((i / qs.length) * 100);
-  // Count flashcards and exercises separately: 10 words read as "1/10", not "1/20".
+  // Count flashcards and exercises separately: 5 words read as "1/5", not "1/10".
   const nFlash = qs.filter((x) => x.type === 'flash').length;
   const counter = q.type === 'flash' ? `${i + 1}/${nFlash}` : `${i - nFlash + 1}/${qs.length - nFlash}`;
   return `<main class="page">
