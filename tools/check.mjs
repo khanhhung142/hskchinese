@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Formats data/vocab.json, validates it, then syncs audio/ (one mp3 per word and sentence).
+// Formats data/vocab.json, validates it, then syncs audio/ (one mp3 per word and sentence, plus audio/en/ per word gloss).
 // Usage: node tools/check.mjs [--no-audio]
 import { readFile, writeFile, readdir, unlink, mkdir, access } from 'node:fs/promises';
 import { execFile } from 'node:child_process';
@@ -16,6 +16,7 @@ const AUDIO = path.join(ROOT, 'audio');
 const CEDICT_GZ = path.join(ROOT, 'tools/.cache/cedict.txt.gz');
 const CEDICT_URL = 'https://www.mdbg.net/chinese/export/cedict/cedict_1_0_ts_utf-8_mdbg.txt.gz';
 const VOICE = 'zh-CN-XiaoxiaoNeural';
+const VOICE_EN = 'en-US-AriaNeural';
 export const SENTENCES_PER_WORD = 3;
 
 /** CC-CEDICT text -> Map(simplified -> Set(normalized pinyin)). */
@@ -67,6 +68,7 @@ export function validate(data, cedict) {
     if (!lessonIds.has(w.lesson)) err(at, `lesson ${w.lesson} does not exist`);
     if (!Array.isArray(w.meanings) || !w.meanings.length || w.meanings.some((m) => typeof m !== 'string' || !m)) err(at, 'meanings must be a non-empty array of strings');
     if (typeof w.en !== 'string' || !w.en) err(at, 'en gloss required');
+    else if (w.en.includes('/')) err(at, 'en gloss must not contain "/" (it names an audio file); use a comma');
     if (!Array.isArray(w.pinyin) || !w.pinyin.length) { err(at, 'pinyin must be a non-empty array'); continue; }
     const known = readingsFor(w.hanzi, cedict);
     for (const p of w.pinyin) {
@@ -132,17 +134,23 @@ async function loadCedict() {
 }
 
 async function syncAudio(data) {
-  await mkdir(AUDIO, { recursive: true });
-  const wanted = new Set([...data.words.map((w) => w.hanzi), ...data.sentences.map(sentenceText)]);
-  const existing = new Set((await readdir(AUDIO)).filter((f) => f.endsWith('.mp3')).map((f) => f.slice(0, -4)));
-  for (const f of existing) if (!wanted.has(f)) await unlink(path.join(AUDIO, f + '.mp3'));
+  return await syncDir(AUDIO, [...data.words.map((w) => w.hanzi), ...data.sentences.map(sentenceText)], VOICE)
+    + await syncDir(path.join(AUDIO, 'en'), data.words.map((w) => w.en), VOICE_EN);
+}
+
+/** Make `dir` hold exactly one `<text>.mp3` per text. */
+async function syncDir(dir, texts, voice) {
+  await mkdir(dir, { recursive: true });
+  const wanted = new Set(texts);
+  const existing = new Set((await readdir(dir)).filter((f) => f.endsWith('.mp3')).map((f) => f.slice(0, -4)));
+  for (const f of existing) if (!wanted.has(f)) await unlink(path.join(dir, f + '.mp3'));
   const missing = [...wanted].filter((t) => !existing.has(t));
   const run = promisify(execFile);
   const bin = process.env.EDGE_TTS ?? 'edge-tts';
   // ponytail: 4 parallel edge-tts processes; fine for a few dozen files per lesson.
   for (let i = 0; i < missing.length; i += 4) {
     await Promise.all(missing.slice(i, i + 4).map((text) =>
-      run(bin, ['--voice', VOICE, '--rate=-10%', '--text', text, '--write-media', path.join(AUDIO, text + '.mp3')])));
+      run(bin, ['--voice', voice, '--rate=-10%', '--text', text, '--write-media', path.join(dir, text + '.mp3')])));
   }
   return missing.length;
 }

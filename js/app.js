@@ -18,21 +18,34 @@ function saveProgress() {
 }
 
 // Audio: pre-generated neural mp3, Web Speech as fallback.
-let current;
-function say(text) {
-  current?.pause();
-  current = new Audio(`audio/${encodeURIComponent(text)}.mp3`);
-  current.play().catch(() => speak(text));
-  current.onerror = () => speak(text);
+// One reused element: iOS lets it play again from `ended` (the zh -> en chain) without a new tap.
+const player = new Audio();
+/** Play Chinese `text`, then optionally `next()` when it finishes. */
+function say(text, next) {
+  if ('speechSynthesis' in window) speechSynthesis.cancel();
+  play(`audio/${encodeURIComponent(text)}.mp3`, text, 'zh-CN', next);
 }
-function speak(text) {
-  if (!('speechSynthesis' in window)) return;
-  speechSynthesis.cancel();
+const sayEn = (text) => play(`audio/en/${encodeURIComponent(text)}.mp3`, text, 'en-US');
+/** Word in Chinese, then its English. */
+const sayWord = (w) => say(w.hanzi, () => sayEn(w.en));
+function play(src, text, lang, next) {
+  let fell = false;
+  const fallback = () => { if (!fell) { fell = true; speak(text, lang, next); } };
+  player.onended = () => next?.();
+  player.onerror = fallback;
+  player.src = src;
+  player.play().catch((e) => { if (e.name !== 'AbortError') fallback(); });
+}
+function speak(text, lang, next) {
+  if (!('speechSynthesis' in window)) return next?.();
   const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'zh-CN';
+  u.lang = lang;
   u.rate = 0.85;
+  u.onend = () => next?.();
   speechSynthesis.speak(u);
 }
+/** Home hides the old quizzes; /full/ shows everything. */
+const FULL = /\/full\/?$/.test(location.pathname);
 /** Chinese is always shown with its pinyin underneath, word by word. */
 const hz = (h, p) => `<span class="hz"><span class="han">${esc(h)}</span><span class="py">${esc(p)}</span></span>`;
 const wordHz = (w, all) => hz(w.hanzi, all ? w.pinyin.join(' / ') : w.pinyin[0]);
@@ -56,16 +69,17 @@ function home() {
     return `<main class="page"><div class="empty">${icon('camera')}<p>Chưa có từ nào.<br>Gửi ảnh từ mới cho Hermes trên Telegram.</p></div></main>`;
   }
   return `<main class="page">
-    <header class="home-head"><h1>Học từ</h1><span class="muted">${learned}/${data.words.length} từ đã thuộc</span></header>
-    <section class="lesson">
+    <header class="home-head"><h1>Học từ</h1>${FULL ? `<span class="muted">${learned}/${data.words.length} từ đã thuộc</span>` : ''}</header>
+    ${FULL ? `<section class="lesson">
       <h2>${esc(lesson.title)}${lesson.date ? `, ${esc(formatDate(lesson.date))}` : ''}</h2>
       <p class="strip">${fresh.map((w) => wordHz(w)).join('')}</p>
       <p class="count">${fresh.length} từ mới</p>
       <button class="btn primary block" data-action="start" data-mode="latest">Học bài mới</button>
-    </section>
+    </section>` : ''}
     <nav class="menu">
-      <button class="menu-item" data-action="start" data-mode="all">${icon('shuffle')}<span><b>Ôn tất cả</b><small>Ưu tiên từ hay sai</small></span>${icon('caret-right')}</button>
-      <button class="menu-item" data-action="write">${icon('pencil-simple-line')}<span><b>Luyện viết chữ</b><small>Nghe, xem và gõ lại chữ Hán</small></span>${icon('caret-right')}</button>
+      ${FULL ? `<button class="menu-item" data-action="start" data-mode="all">${icon('shuffle')}<span><b>Ôn tất cả</b><small>Ưu tiên từ hay sai</small></span>${icon('caret-right')}</button>` : ''}
+      <button class="menu-item" data-action="write" data-mode="write">${icon('pencil-simple-line')}<span><b>Luyện viết chữ</b><small>Nghe, xem và gõ lại chữ Hán</small></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="write" data-mode="vocab">${icon('translate')}<span><b>Luyện từ vựng</b><small>Xem nghĩa, nhập chữ Hán</small></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Danh sách từ</b><small>${data.words.length} từ, bấm để nghe</small></span>${icon('caret-right')}</button>
     </nav>
   </main>`;
@@ -240,22 +254,22 @@ function pickWriteWord(prev) {
 }
 
 function write() {
-  const { word: w, state } = view;
-  const sents = data.sentences.filter((s) => s.focus === w.hanzi).slice(0, 3);
+  const { word: w, state, mode } = view;
+  // Vocab mode hides the hanzi until answered or revealed.
+  const shown = mode === 'write' || state.done || state.revealed;
   const status = state.done ? `<p class="write-status ok">${icon('check-circle', true)} Đúng rồi</p>`
     : state.wrong ? `<p class="write-status bad">${icon('x-circle', true)} Chưa đúng, thử lại</p>` : '';
   return `<main class="page">
-    <header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Luyện viết chữ</h1></header>
+    <header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>${mode === 'write' ? 'Luyện viết chữ' : 'Luyện từ vựng'}</h1></header>
     <div class="stage">
       <div class="card center">
-        <p class="big-han han">${esc(w.hanzi)}</p>
-        <p class="py-big">${esc(w.pinyin.join(' / '))}</p>
-        <p class="meaning">${esc(w.en)}</p>
+        ${shown ? `<p class="big-han han">${esc(w.hanzi)}</p><p class="py-big">${esc(w.pinyin.join(' / '))}</p>` : ''}
+        <p class="meaning${shown ? '' : ' big-meaning'}">${esc(w.en)}</p>
         <p class="vi muted">${esc(w.meanings.join('; '))}</p>
-        ${speakBtn(w.hanzi)}
+        ${shown ? speakBtn(w.hanzi) : `<button class="speak" data-say-en="${esc(w.en)}" aria-label="Nghe tiếng Anh">${icon('speaker-high', true)}</button>`}
       </div>
       <form class="field" data-action="submit-write">
-        <label for="hz-in">Gõ hoặc viết lại chữ Hán ở trên</label>
+        <label for="hz-in">${mode === 'write' ? 'Gõ hoặc viết lại chữ Hán ở trên' : 'Gõ hoặc viết chữ Hán của từ này'}</label>
         <div class="input-row">
           <input id="hz-in" name="hz" lang="zh-CN" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" value="${esc(state.typed ?? '')}" ${state.done ? 'disabled' : ''}>
           ${state.done ? '' : `<button type="button" class="icon-btn${state.hand ? ' on' : ''}" data-action="hand-toggle" aria-label="Viết tay" aria-pressed="${!!state.hand}">${icon('pencil-simple-line')}</button>`}
@@ -271,25 +285,24 @@ function write() {
           <button type="button" class="btn" data-action="hand-back" aria-label="Xoá chữ cuối">${icon('backspace')}</button>
         </div>
       </div>` : ''}
-      ${sents.length ? `<section class="write-ex">${sents.map((s) => speakSentence(sentenceText(s), sentenceHz(s), s.vi, s.en)).join('')}</section>` : ''}
     </div>
     <div class="footer${state.done ? '' : ' two'}">${state.done
       ? '<button class="btn primary block" data-action="write-next">Từ tiếp</button>'
-      : '<button class="btn" data-action="write-next">Bỏ qua</button><button class="btn primary" data-action="check-write">Kiểm tra</button>'}</div>
+      : `${mode === 'vocab' && !state.revealed ? '<button class="btn" data-action="reveal">Xem đáp án</button>' : '<button class="btn" data-action="write-next">Bỏ qua</button>'}<button class="btn primary" data-action="check-write">Kiểm tra</button>`}</div>
   </main>`;
 }
 
-function startWrite() {
-  view = { name: 'write', word: pickWriteWord(view.word), state: {} };
+function startWrite(mode) {
+  view = { name: 'write', mode, word: pickWriteWord(view.word), state: {} };
   render();
-  say(view.word.hanzi);
+  mode === 'write' ? sayWord(view.word) : sayEn(view.word.en);
 }
 
 function checkWrite() {
   const typed = root.querySelector('#hz-in').value;
   if (!typed.trim()) return;
   const ok = sameHanzi(typed, view.word.hanzi);
-  view.state = { typed, hand: view.state.hand, done: ok, wrong: !ok };
+  view.state = { ...view.state, typed, done: ok, wrong: !ok };
   render();
   if (view.state.done) say(view.word.hanzi);
 }
@@ -445,6 +458,8 @@ function next() {
 }
 
 root.addEventListener('click', (e) => {
+  const enBtn = e.target.closest('[data-say-en]');
+  if (enBtn) return sayEn(enBtn.dataset.sayEn);
   const sayBtn = e.target.closest('[data-say]');
   if (sayBtn) {
     e.preventDefault(); // keep <details> from toggling when tapping its play button
@@ -461,7 +476,9 @@ root.addEventListener('click', (e) => {
   const act = el.dataset.action;
   if (act === 'home') { view = { name: 'home' }; render(); }
   else if (act === 'words') { view = { name: 'words' }; render(); }
-  else if (act === 'write' || act === 'write-next') startWrite();
+  else if (act === 'write') startWrite(el.dataset.mode);
+  else if (act === 'write-next') startWrite(view.mode);
+  else if (act === 'reveal') { view.state = { ...view.state, typed: root.querySelector('#hz-in').value, revealed: true }; render(); say(view.word.hanzi); }
   else if (act === 'check-write') checkWrite();
   else if (act === 'hand-toggle') { view.state = { ...view.state, typed: root.querySelector('#hz-in').value, hand: !view.state.hand }; render(); root.querySelector('.hand')?.scrollIntoView({ block: 'end', behavior: 'smooth' }); }
   else if (act === 'hand-undo') { ink.pop(); redrawInk(); recognize(); }

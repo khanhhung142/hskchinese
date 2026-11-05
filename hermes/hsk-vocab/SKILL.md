@@ -48,7 +48,7 @@ When something outside `vocab.json` looks broken (a failing test, a script error
 
 - **Word.** `pinyin`: tone marks, first entry is the main reading, extra readings after it (`["shéi", "shuí"]`).
   `meanings`: one string per distinct sense; synonyms of the same sense share a string (`"quá, lắm"`), different senses are separate strings (`"nhớ"`, `"muốn"`).
-  `en`: a short English gloss (required).
+  `en`: a short English gloss (required, no `/`; it also names the English audio file).
 - **Sentence.** `id`: `"<lesson>-<nn>"`, unique. `lesson`: the lesson being added.
   `tokens`: the sentence cut into word entries, in order, punctuation (full-width `，。？！`) as its own token.
   A multi-character word is one token (`"中国"`); a phrase the list lacks is several tokens (`"哪", "国", "人"`).

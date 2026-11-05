@@ -16,13 +16,18 @@ How the app and data pipeline work inside: [docs/architecture.md](docs/architect
 Open the URL on a phone and add it to the home screen.
 The UI is in Vietnamese; every word and sentence shows a Vietnamese and an English translation.
 
-- **Học bài mới** studies the newest lesson.
-  Words never seen before get a flashcard first, then every word in the session gets one exercise.
-- **Ôn tất cả** reviews all words, favouring words you miss often.
+The home screen shows the practice modes below.
+The older quizzes (**Học bài mới**, **Ôn tất cả**) are hidden there and appear only at <https://khanhhung142.github.io/hskchinese/full/>.
+
 - **Luyện viết chữ** is typing practice, separate from the quizzes and not counted in progress.
-  It shows one random word (hanzi, pinyin, English, Vietnamese), plays it on open, and lists up to 3 example sentences.
+  It shows one random word (hanzi, pinyin, English, Vietnamese) and on open plays it in Chinese, then in English.
   Type the word with a Chinese keyboard; the answer must match the hanzi exactly (spaces ignored).
   The pencil button opens a handwriting pad; strokes are recognized by Google Input Tools (needs network) and tapping a candidate appends it to the input.
+- **Luyện từ vựng** is the same input, but shows only the English and Vietnamese meaning and plays the English.
+  **Xem đáp án** reveals the hanzi and plays it.
+- **Học bài mới** (`/full/` only) studies the newest lesson.
+  Words never seen before get a flashcard first, then every word in the session gets one exercise.
+- **Ôn tất cả** (`/full/` only) reviews all words, favouring words you miss often.
 - **Danh sách từ** lists every word by lesson; tap a row to see its example sentences, tap the speaker to hear it.
 
 A session has up to 5 words.
@@ -47,7 +52,7 @@ To edit by hand instead, change `data/vocab.json`, then run `tools/publish.sh "c
 Prerequisites: Node 22 or newer (tests use `node:test`; developed on Node 24), Python 3 for a local server, and [edge-tts](https://github.com/rany2/edge-tts) only if you need to generate audio.
 
 ```sh
-npm test                          # unit tests, expect "pass 8" and "fail 0"
+npm test                          # unit tests, expect "pass 9" and "fail 0"
 npm run check -- --no-audio       # format + validate data/vocab.json, skip audio
 npm run check                     # same, then generate missing mp3s in audio/
 python3 -m http.server            # serve the app at http://localhost:8000
@@ -61,7 +66,7 @@ Icons load from the Phosphor CDN on unpkg, so the local app needs internet for i
 1. Rewrites `data/vocab.json` in canonical form (one record per line, so diffs stay readable).
 2. Validates it; on problems it prints `FAIL: <n> problem(s) in data/vocab.json` with one line per problem and exits 1.
    On success it prints `OK: <words> words, <sentences> sentences`.
-3. Syncs `audio/`: generates one mp3 per word and per sentence that lacks one, and deletes mp3s nothing refers to.
+3. Syncs `audio/`: generates one mp3 per word and per sentence that lacks one (plus one English mp3 per word gloss in `audio/en/`), and deletes mp3s nothing refers to.
 
 The first run downloads the CC-CEDICT dictionary into `tools/.cache/` (git-ignored) to check pinyin.
 

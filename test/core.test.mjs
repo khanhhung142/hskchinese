@@ -106,3 +106,9 @@ test('sameHanzi matches typed Chinese exactly, ignoring spaces', () => {
   assert.ok(!sameHanzi('你', '你好'));
   assert.ok(!sameHanzi('nihao', '你好'));
 });
+
+test('full/index.html is index.html plus a base tag', () => {
+  const page = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  const full = readFileSync(new URL('../full/index.html', import.meta.url), 'utf8');
+  assert.equal(full, page.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n  <base href="../">'));
+});
