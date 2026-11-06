@@ -249,7 +249,13 @@
   {"hanzi":"季节","pinyin":["jìjié"],"meanings":["mùa"],"en":"season","lesson":6},
   {"hanzi":"暖和","pinyin":["nuǎnhuo"],"meanings":["ấm áp"],"en":"warm","lesson":6},
   {"hanzi":"问题","pinyin":["wèntí"],"meanings":["vấn đề","câu hỏi"],"en":"problem, question","lesson":6},
-  {"hanzi":"辛苦","pinyin":["xīnkǔ"],"meanings":["vất vả"],"en":"hard, tiring","lesson":6}
+  {"hanzi":"辛苦","pinyin":["xīnkǔ"],"meanings":["vất vả"],"en":"hard, tiring","lesson":6},
+  {"hanzi":"小语","pinyin":["Xiǎoyǔ"],"meanings":["Tiểu Ngữ (tên trợ lý AI)"],"en":"Xiaoyu, the AI assistant","lesson":2},
+  {"hanzi":"王一飞","pinyin":["Wáng Yīfēi"],"meanings":["Vương Nhất Phi (tên người)"],"en":"Wang Yifei, a person's name","lesson":2},
+  {"hanzi":"陈天中","pinyin":["Chén Tiānzhōng"],"meanings":["Trần Thiên Trung (tên người)"],"en":"Chen Tianzhong, a person's name","lesson":2},
+  {"hanzi":"安妮","pinyin":["Ānnī"],"meanings":["An Ni (tên người)"],"en":"Anni, a person's name","lesson":2},
+  {"hanzi":"白家月","pinyin":["Bái Jiāyuè"],"meanings":["Bạch Gia Nguyệt (tên người)"],"en":"Bai Jiayue, a person's name","lesson":2},
+  {"hanzi":"李文","pinyin":["Lǐ Wén"],"meanings":["Lý Văn (tên người)"],"en":"Li Wen, a person's name","lesson":2}
 ],
 "sentences": [
   {"id":"1-01","tokens":["你","是","哪","国","人","？"],"vi":"Bạn là người nước nào?","en":"Which country are you from?","focus":"哪","sense":0,"lesson":1},
@@ -1143,6 +1149,29 @@
   {"id":"6-125","tokens":["你","知道","他","在","哪儿","吗","？"],"vi":"Bạn biết anh ấy ở đâu không?","en":"Do you know where he is?","focus":"知道","sense":0,"lesson":6},
   {"id":"6-126","tokens":["王老师","很","忙","。"],"vi":"Thầy Vương rất bận.","en":"Teacher Wang is busy.","focus":"忙","sense":0,"lesson":6},
   {"id":"6-127","tokens":["我们","的","学校","很","大","。"],"vi":"Trường của chúng tôi rất lớn.","en":"Our school is big.","focus":"学校","sense":0,"lesson":6},
-  {"id":"6-128","tokens":["今天","下午","我","休息","。"],"vi":"Chiều nay tôi nghỉ.","en":"I rest this afternoon.","focus":"休息","sense":0,"lesson":6}
+  {"id":"6-128","tokens":["今天","下午","我","休息","。"],"vi":"Chiều nay tôi nghỉ.","en":"I rest this afternoon.","focus":"休息","sense":0,"lesson":6},
+  {"id":"2-122","tokens":["小语","，","你","好","！"],"vi":"Tiểu Ngữ, chào bạn!","en":"Hello, Xiaoyu!","focus":"小语","sense":0,"lesson":2},
+  {"id":"2-123","tokens":["你","好","！","我","是","小语","。"],"vi":"Chào bạn! Tôi là Tiểu Ngữ.","en":"Hello! I am Xiaoyu.","focus":"小语","sense":0,"lesson":2},
+  {"id":"2-124","tokens":["小语","，","谢谢","你","！"],"vi":"Tiểu Ngữ, cảm ơn bạn!","en":"Thank you, Xiaoyu!","focus":"小语","sense":0,"lesson":2},
+  {"id":"2-125","tokens":["我","叫","陈天中","。"],"vi":"Tôi tên là Trần Thiên Trung.","en":"My name is Chen Tianzhong.","focus":"陈天中","sense":0,"lesson":2},
+  {"id":"2-126","tokens":["请问","，","你","是","陈天中","吗","？"],"vi":"Xin hỏi, bạn là Trần Thiên Trung phải không?","en":"Excuse me, are you Chen Tianzhong?","focus":"陈天中","sense":0,"lesson":2},
+  {"id":"2-127","tokens":["陈天中","是","学生","。"],"vi":"Trần Thiên Trung là học sinh.","en":"Chen Tianzhong is a student.","focus":"陈天中","sense":0,"lesson":2},
+  {"id":"2-128","tokens":["你","好","，","安妮","！"],"vi":"Chào An Ni!","en":"Hello, Anni!","focus":"安妮","sense":0,"lesson":2},
+  {"id":"2-129","tokens":["我","不","是","安妮","，","我","是","白家月","。"],"vi":"Tôi không phải An Ni, tôi là Bạch Gia Nguyệt.","en":"I am not Anni, I am Bai Jiayue.","focus":"安妮","sense":0,"lesson":2},
+  {"id":"2-130","tokens":["安妮","是","我","的","同学","。"],"vi":"An Ni là bạn học của tôi.","en":"Anni is my classmate.","focus":"安妮","sense":0,"lesson":2},
+  {"id":"2-131","tokens":["你","好","！","我","叫","白家月","。"],"vi":"Chào bạn! Tôi tên là Bạch Gia Nguyệt.","en":"Hello! My name is Bai Jiayue.","focus":"白家月","sense":0,"lesson":2},
+  {"id":"2-132","tokens":["我","是","白家月","，","你","呢","？"],"vi":"Tôi là Bạch Gia Nguyệt, còn bạn?","en":"I am Bai Jiayue, and you?","focus":"白家月","sense":0,"lesson":2},
+  {"id":"2-133","tokens":["王老师","，","白家月","是","我","的","同学","。"],"vi":"Cô Vương, Bạch Gia Nguyệt là bạn học của em.","en":"Teacher Wang, Bai Jiayue is my classmate.","focus":"白家月","sense":0,"lesson":2},
+  {"id":"2-134","tokens":["你","好","！","我","叫","李文","。"],"vi":"Chào bạn! Tôi tên là Lý Văn.","en":"Hello! My name is Li Wen.","focus":"李文","sense":0,"lesson":2},
+  {"id":"2-135","tokens":["李文","不","是","老师","，","他","是","学生","。"],"vi":"Lý Văn không phải giáo viên, anh ấy là học sinh.","en":"Li Wen is not a teacher, he is a student.","focus":"李文","sense":0,"lesson":2},
+  {"id":"2-136","tokens":["请问","，","李文","在","吗","？"],"vi":"Xin hỏi, Lý Văn có ở đây không?","en":"Excuse me, is Li Wen here?","focus":"李文","sense":0,"lesson":2},
+  {"id":"2-137","tokens":["王一飞","，","你","好","！"],"vi":"Vương Nhất Phi, chào bạn!","en":"Hello, Wang Yifei!","focus":"王一飞","sense":0,"lesson":2},
+  {"id":"2-138","tokens":["王一飞","是","学生","。"],"vi":"Vương Nhất Phi là học sinh.","en":"Wang Yifei is a student.","focus":"王一飞","sense":0,"lesson":2},
+  {"id":"2-139","tokens":["你","认识","王一飞","吗","？"],"vi":"Bạn có quen Vương Nhất Phi không?","en":"Do you know Wang Yifei?","focus":"王一飞","sense":0,"lesson":2},
+  {"id":"2-140","tokens":["你们","好","！"],"vi":"Chào các bạn!","en":"Hello, everyone!","focus":"你们","sense":0,"lesson":2},
+  {"id":"2-141","tokens":["认识","你","我","也","很","高兴","。"],"vi":"Tôi cũng rất vui được biết bạn.","en":"I am also very glad to meet you.","focus":"认识","sense":0,"lesson":2},
+  {"id":"2-142","tokens":["我们","是","同学","。"],"vi":"Chúng tôi là bạn học.","en":"We are classmates.","focus":"同学","sense":0,"lesson":2},
+  {"id":"2-143","tokens":["你","好","，","很","高兴","认识","你们","！"],"vi":"Chào các bạn, rất vui được biết các bạn!","en":"Hello, very glad to meet you all!","focus":"高兴","sense":0,"lesson":2},
+  {"id":"2-144","tokens":["请问","，","你们","是","学生","吗","？"],"vi":"Xin hỏi, các bạn là học sinh phải không?","en":"Excuse me, are you students?","focus":"学生","sense":0,"lesson":2}
 ]
 }
