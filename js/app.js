@@ -625,7 +625,7 @@ function addView() {
         <textarea name="zh" lang="${EN ? 'en' : 'zh-CN'}" rows="4" required autocomplete="off" spellcheck="false"></textarea>
       </label>
       <button class="btn primary block" ${busy ? 'disabled' : ''}>${busy ? 'Đang thêm…' : 'Thêm'}</button>
-      ${log.length ? `<ul class="add-log">${log.map((l) => `<li class="${l.ok ? 'ok' : 'bad'}">${esc(l.text)}</li>`).join('')}</ul>` : ''}
+      ${log.length ? `<ul class="add-log">${log.map((l, i) => `<li class="${l.ok ? 'ok' : 'bad'}">${esc(l.text)}${l.dup ? `<span class="dup-pick"><button type="button" class="btn" data-action="dup-keep" data-i="${i}">Giữ ở ${esc(lessonTitle(l.dup.from))}</button><button type="button" class="btn primary" data-action="dup-move" data-i="${i}">Chuyển sang ${esc(lessonTitle(+lesson))}</button></span>` : ''}</li>`).join('')}</ul>` : ''}
     </form>
     ${mine.length ? `<section class="group"><h2>Đã thêm trong app (${mine.length})</h2><div class="words">${mine.map((m) => `<div class="mine">
       <span class="muted">${esc(lessonTitle(m.lesson))}</span><span>${m.html}<p class="vi">${esc(m.vi)}</p></span>
@@ -648,13 +648,21 @@ async function translate(text, lang) {
 const segmenter = 'Segmenter' in Intl ? new Intl.Segmenter('zh', { granularity: 'word' }) : null;
 const segment = (s) => (segmenter ? [...segmenter.segment(s)].map((x) => x.segment) : [...s]);
 
+/** Already in the app: in another lesson the log offers keep-or-move (a move goes to `hsk-moves`, like the word list). */
+function dup(k, key, from, to) {
+  const err = new Error(`${k === 'w' ? 'đã có' : 'câu đã có'} (${lessonTitle(from)})`);
+  if (from !== to) err.dup = { k, key, from };
+  return err;
+}
+
 async function addOne(kind, line, lesson) {
   if (EN) return addOneEn(kind, line, lesson);
   const [zh, viGiven] = line.split('=').map((s) => s.trim());
   const han = zh.replace(/[\s\p{P}]/gu, '');
   if (!/^\p{Script=Han}+$/u.test(han)) throw new Error('chỉ nhận chữ Hán');
-  if (kind === 'word' && wordMap.has(han)) throw new Error(`đã có (${lessonTitle(wordMap.get(han).lesson)})`);
-  if (kind !== 'word' && data.sentences.some((s) => sameHanzi(sentenceText(s), zh))) throw new Error('câu đã có');
+  if (kind === 'word' && wordMap.has(han)) throw dup('w', han, wordMap.get(han).lesson, lesson);
+  const old = kind !== 'word' && data.sentences.find((s) => sameHanzi(sentenceText(s), zh));
+  if (old) throw dup('s', old.id, old.lesson, lesson);
   const [vi, en] = await Promise.all([viGiven || translate(zh, 'vi'), translate(zh, 'en')]);
   if (kind === 'word') {
     const w = { hanzi: han, pinyin: [await toPinyin(han)], meanings: [vi], en, lesson };
@@ -678,11 +686,13 @@ async function addOneEn(kind, line, lesson) {
   const vi = viGiven || await translate(text, 'vi');
   if (kind === 'word') {
     const word = text.replace(/[,.?!]/g, '').replace(/\s+/g, ' ');
-    if ([...wordMap.keys()].some((k) => sameWord(k, word))) throw new Error('đã có');
+    const had = [...wordMap.keys()].find((k) => sameWord(k, word));
+    if (had) throw dup('w', had, wordMap.get(had).lesson, lesson);
     custom.words.push({ hanzi: word, pinyin: [], meanings: [vi], en: '', lesson });
     return `${word} ${vi}`;
   }
-  if (data.sentences.some((s) => sameHanzi(sentenceText(s), text))) throw new Error('câu đã có');
+  const old = data.sentences.find((s) => sameHanzi(sentenceText(s), text));
+  if (old) throw dup('s', old.id, old.lesson, lesson);
   const full = /[.?!]$/.test(text) ? text : `${text}.`;
   const tokens = enTokens(full, new Set([...wordMap.keys()].map((k) => k.toLowerCase())));
   const known = [...wordMap.values()].filter((w) => tokens.some((t) => sameWord(t, w.hanzi))).sort((x, y) => y.hanzi.length - x.hanzi.length);
@@ -701,7 +711,7 @@ async function submitAdd(form) {
   const log = [];
   for (const line of lines) {
     try { log.push({ ok: true, text: `Đã thêm: ${await addOne(kind, line, lesson)}` }); }
-    catch (err) { log.push({ ok: false, text: `${line}: ${err.message}` }); }
+    catch (err) { log.push({ ok: false, text: `${line}: ${err.message}`, dup: err.dup }); }
     saveCustom();
     mergeData(); // a word added on line 1 is known to the sentence on line 2
   }
@@ -838,6 +848,18 @@ root.addEventListener('click', (e) => {
   const act = el.dataset.action;
   if (act === 'home') { view = { name: 'home' }; render(); }
   else if (act === 'words') { view = { name: 'words' }; render(); }
+  else if (act === 'dup-keep' || act === 'dup-move') {
+    const l = view.state.log[+el.dataset.i];
+    if (act === 'dup-move') {
+      moves[l.dup.k][l.dup.key] = view.state.lesson;
+      saveMoves();
+      mergeData();
+      l.ok = true;
+      l.text = `Đã chuyển: ${l.text.split(':')[0]} → ${lessonTitle(view.state.lesson)}`;
+    } else l.text += ', giữ nguyên';
+    delete l.dup;
+    render();
+  }
   else if (act === 'tab') { view = { name: 'words', tab: el.dataset.tab }; render(); }
   else if (act === 'lang') { try { localStorage.setItem('hsk-lang', el.dataset.lang); } catch { /* private mode */ } location.reload(); }
   else if (act === 'rename') renameLesson(+el.dataset.id);
