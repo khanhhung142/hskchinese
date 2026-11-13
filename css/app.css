@@ -1,22 +1,22 @@
 /* Tokens. Radius rule: interactive controls 12px, containers 16px, chips 10px. */
 :root {
-  --bg: #f4f4f5;
-  --surface: #fcfcfd;
-  --surface-2: #ececef;
-  --text: #18181b;
-  --muted: #5b5b66;
-  --line: #e1e1e6;
-  --accent: #2343c4;
-  --accent-text: #fbfbff;
-  --accent-soft: #e6ebfb;
+  --bg: #fff0f5;
+  --surface: #fffafc;
+  --surface-2: #ffe1ec;
+  --text: #3a1d2b;
+  --muted: #8a5a70;
+  --line: #eeb3c9;
+  --accent: #c2255c;
+  --accent-text: #ffffff;
+  --accent-soft: #ffe0ec;
   --ok: #157a3c;
   --ok-soft: #e3f5e9;
-  --bad: #b42323;
+  --bad: #c92a2a;
   --bad-soft: #fbe7e7;
-  --shadow: 0 1px 2px rgb(24 24 40 / .05), 0 8px 24px -12px rgb(24 24 40 / .18);
-  --r-ctl: 12px;
-  --r-box: 16px;
-  --r-chip: 10px;
+  --shadow: 0 1px 2px rgb(214 51 108 / .06), 0 8px 24px -12px rgb(214 51 108 / .25);
+  --r-ctl: 16px;
+  --r-box: 22px;
+  --r-chip: 14px;
   --ease: cubic-bezier(.16, 1, .3, 1);
   --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   --han: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
@@ -24,15 +24,15 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #111113;
-    --surface: #1a1a1d;
-    --surface-2: #26262b;
-    --text: #f2f2f4;
-    --muted: #a3a3ad;
-    --line: #2c2c32;
-    --accent: #8ea2ff;
-    --accent-text: #0f1330;
-    --accent-soft: #1e2546;
+    --bg: #1f1018;
+    --surface: #2a1621;
+    --surface-2: #3a1f2e;
+    --text: #fff0f6;
+    --muted: #d9a5bd;
+    --line: #4a2839;
+    --accent: #ff8cc0;
+    --accent-text: #3a0f22;
+    --accent-soft: #4a1e33;
     --ok: #5fd08b;
     --ok-soft: #12301f;
     --bad: #ff8a8a;
@@ -127,7 +127,9 @@ button { cursor: pointer; }
 }
 .menu-item b { display: block; font-weight: 600; }
 .menu-item small { color: var(--muted); font-size: 14px; }
-.menu-item > i:last-child { color: var(--muted); }
+.menu-item > i:first-child { color: var(--accent); }
+.menu-item > i:last-child { color: var(--accent); }
+html { scrollbar-color: var(--line) transparent; }
 
 /* Quiz */
 .quiz-top { display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 8px; margin: -8px 0 12px; }
@@ -300,4 +302,4 @@ body.typing .footer { padding-top: 8px; }
 .cands { min-height: 48px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .hand-tools { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; }
 .hand-tools .btn { min-height: 44px; padding: 0 14px; font-weight: 500; }
-.tomie { margin: 16px 0 0; text-align: center; font-size: 13px; font-style: italic; color: #d6336c; }
+.tomie { margin: 16px 0 0; text-align: center; font-size: 13px; font-style: italic; color: var(--accent); }
