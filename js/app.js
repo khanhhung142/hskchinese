@@ -447,6 +447,7 @@ function startWrite(mode) {
   const item = pickWriteItem(mode, view.item);
   if (!item) return alert(`${lessonTitle(+pickedLesson)} chưa có ${mode === 'sentence' ? 'mẫu câu' : 'từ'} nào.`);
   view = { name: 'write', mode, item, state: {} };
+  document.activeElement?.blur(); // new item: let the word show before the keyboard
   render();
   const c = writeCard(mode, view.item);
   if (EN) { if (mode !== 'vocab') say(c.text); } else mode === 'vocab' ? sayEn(c.en) : say(c.text, () => sayEn(c.en));
@@ -671,15 +672,20 @@ function mergeData() {
 
 // ---------- Controller ----------
 
+/** Touch screens: no auto-focus into inputs, the keyboard would cover the word. Keep it only while already typing. */
+const KEYBOARD_ON_OPEN = matchMedia('(pointer: fine)').matches;
+let wasTyping = false;
+
 function render() {
   const views = { home, words: wordList, quiz, summary, write, add: addView };
+  wasTyping = document.activeElement?.matches?.('#hz-in, #py') ?? false;
   root.innerHTML = views[view.name]();
   if (view.name === 'quiz') onQuestionShown();
   if (view.name === 'write') {
     setupHand();
     // With the pad open, keep the on-screen keyboard down.
-    const target = view.state.done ? '[data-action="write-next"]' : view.state.hand ? null : '#hz-in';
-    if (target) root.querySelector(target).focus();
+    const target = view.state.done ? '[data-action="write-next"]' : view.state.hand || !(KEYBOARD_ON_OPEN || wasTyping) ? null : '#hz-in';
+    if (target) root.querySelector(target).focus({ preventScroll: !KEYBOARD_ON_OPEN });
   }
 }
 
@@ -688,7 +694,7 @@ function onQuestionShown() {
   if (view.state.done) return root.querySelector('[data-action="next"]')?.focus();
   if (q.type === 'pinyin') {
     const input = root.querySelector('#py');
-    input.focus();
+    if (KEYBOARD_ON_OPEN || wasTyping) input.focus();
     input.addEventListener('input', () => {
       view.state.typed = input.value;
       const pv = root.querySelector('#py-preview');
@@ -733,6 +739,7 @@ function next() {
   }
   view.i++;
   view.state = {};
+  document.activeElement?.blur();
   render();
   autoplay();
 }
