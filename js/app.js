@@ -734,6 +734,7 @@ function fitKeyboard() {
   if (on && vv) {
     document.documentElement.style.setProperty('--vvh', `${vv.height}px`);
     document.documentElement.style.setProperty('--vvt', `${vv.offsetTop}px`);
+    requestAnimationFrame(() => document.activeElement?.scrollIntoView?.({ block: 'nearest' }));
   }
 }
 document.addEventListener('focusin', fitKeyboard);
