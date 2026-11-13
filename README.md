@@ -30,6 +30,10 @@ The older quizzes (**Học bài mới**, **Ôn tất cả**) are hidden there an
   Words never seen before get a flashcard first, then every word in the session gets one exercise.
 - **Ôn tất cả** (`/full/` only) reviews all words, favouring words you miss often.
 - **Danh sách từ** lists every word by lesson; tap a row to see its example sentences, tap the speaker to hear it.
+- **Học theo bài** (picker on the home screen) limits every practice mode and **Ôn** to one lesson, or all lessons.
+- **Thêm từ, mẫu câu** adds words or sentences by typing only the Chinese, one per line, under a lesson number you choose (a new number creates the lesson).
+  Pinyin comes from pinyin-pro (jsDelivr), Vietnamese and English from the MyMemory translation API; write `老师 = giáo viên` to set the Vietnamese yourself.
+  Added items work in every exercise like Hermes' data, but are saved only in this browser (`localStorage` key `hsk-custom`), not in `data/vocab.json`; delete them from the same screen.
 
 A session has up to 5 words.
 Exercise types: listen and pick the hanzi, type the pinyin (tone numbers like `ni3` are fine), fill the blank, put words in order, pick the sentence meaning.
@@ -53,7 +57,7 @@ To edit by hand instead, change `data/vocab.json`, then run `tools/publish.sh "c
 Prerequisites: Node 22 or newer (tests use `node:test`; developed on Node 24), Python 3 for a local server, and [edge-tts](https://github.com/rany2/edge-tts) only if you need to generate audio.
 
 ```sh
-npm test                          # unit tests, expect "pass 9" and "fail 0"
+npm test                          # unit tests, expect "pass 11" and "fail 0"
 npm run check -- --no-audio       # format + validate data/vocab.json, skip audio
 npm run check                     # same, then generate missing mp3s in audio/
 python3 -m http.server            # serve the app at http://localhost:8000

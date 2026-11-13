@@ -45,9 +45,11 @@ function weight(stat) {
  * mode: 'latest' = words of the newest lesson, 'all' = everything, weighted to weak words.
  * progress: { [hanzi]: { r, w } }
  */
-export function buildSession(data, progress, mode, { rand = Math.random, size = 5 } = {}) {
+export function buildSession(data, progress, mode, { rand = Math.random, size = 5, lesson = null } = {}) {
   const latest = latestLesson(data);
-  const pool = mode === 'latest' ? data.words.filter((w) => w.lesson === latest) : data.words;
+  // `lesson` narrows mode 'all' to one lesson; distractors still come from every word.
+  const only = mode === 'latest' ? latest : lesson;
+  const pool = only == null ? data.words : data.words.filter((w) => w.lesson === only);
   const chosen = pool
     .map((w) => ({ w, k: weight(progress[w.hanzi]) * rand() }))
     .sort((a, b) => b.k - a.k)
@@ -98,6 +100,26 @@ function makeQuestion(type, word, sents, data, rand) {
   let shuffled = shuffle(pieces, rand);
   for (let i = 0; i < 10 && text(shuffled) === text(pieces); i++) shuffled = shuffle(pieces, rand);
   return { type, word, sentence, answer: pieces, pieces: shuffled };
+}
+
+/**
+ * Cut typed Chinese into sentence tokens: longest known word first (`known` has hanzi),
+ * runs of unknown characters go through `segment` (the app passes Intl.Segmenter).
+ */
+export function tokenize(text, known, segment = (s) => [s]) {
+  const out = [];
+  let unk = '';
+  const flush = () => { if (unk) out.push(...segment(unk)); unk = ''; };
+  const chars = [...text.replace(/\s+/g, '')];
+  for (let i = 0; i < chars.length;) {
+    let n = Math.min(8, chars.length - i);
+    while (n > 0 && !known.has(chars.slice(i, i + n).join(''))) n--;
+    if (n) { flush(); out.push(chars.slice(i, i + n).join('')); i += n; }
+    else if (isPunct(chars[i])) { flush(); out.push(chars[i++]); }
+    else unk += chars[i++];
+  }
+  flush();
+  return out;
 }
 
 export function record(progress, hanzi, correct) {

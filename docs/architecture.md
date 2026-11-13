@@ -90,6 +90,13 @@ All playback goes through one reused `Audio` element, so `sayWord` can chain Chi
 Chinese text is always rendered with the pinyin of each word underneath (`hz`/`sentenceHz` in `js/app.js`, reading from `tokenPinyin`), including flashcard fronts, options, order chips and the feedback sheet.
 The one exception is the `pinyin` exercise, where it would give the answer away.
 
+## Items added in the app
+
+`addView` in `js/app.js` stores words, sentences and new lessons in `localStorage["hsk-custom"]`; `mergeData()` appends them to `vocab.json` at boot (a `vocab.json` word wins over a custom duplicate).
+Sentences are cut by `tokenize` (`js/quiz.js`): longest known word first, unknown runs via `Intl.Segmenter`, and unknown tokens carry their reading (`北京|běijīng`), so the exercise code needs no change.
+Custom sentences use the lesson's word as `focus` if present, else the longest known word. No audio file exists for them, so playback falls back to speech synthesis.
+The lesson picker (`localStorage["hsk-lesson"]`) filters the typing practice pools and passes `lesson` to `buildSession`.
+
 ## Progress
 
 `progress` is `{ [hanzi]: { r, w } }` (right and wrong counts), saved to `localStorage["hsk-progress"]` after every answer.

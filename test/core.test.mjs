@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { toMarks, normalize } from '../js/pinyin.js';
-import { buildSession, tokenPinyin, parseToken, record, latestLesson, isPunct, sameHanzi } from '../js/quiz.js';
+import { buildSession, tokenPinyin, parseToken, record, latestLesson, isPunct, sameHanzi, tokenize } from '../js/quiz.js';
 import { parseCedict, validate, format } from '../tools/check.mjs';
 
 const data = JSON.parse(readFileSync(new URL('../data/vocab.json', import.meta.url), 'utf8'));
@@ -98,6 +98,17 @@ test('buildSession: new words get a flashcard then an exercise, seen words get v
       }
     }
   }
+});
+
+test('tokenize: longest known word first, unknown runs segmented, punctuation split', () => {
+  const known = new Set(['我', '老师', '老', '是', '中国']);
+  assert.deepEqual(tokenize('我是 老师，北京人', known), ['我', '是', '老师', '，', '北京人']);
+  assert.deepEqual(tokenize('中国北京', known, (s) => [...s]), ['中国', '北', '京']);
+});
+
+test('buildSession: lesson option limits picked words to that lesson', () => {
+  const id = data.lessons.find((l) => l.id > 0).id;
+  for (let i = 0; i < 20; i++) assert.ok(buildSession(data, {}, 'all', { lesson: id }).every((q) => q.word.lesson === id));
 });
 
 test('sameHanzi matches typed Chinese exactly, ignoring spaces and punctuation', () => {
