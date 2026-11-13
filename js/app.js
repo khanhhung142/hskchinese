@@ -176,10 +176,9 @@ function moveSelect(k, key, current, label) {
 function moveItem(sel) {
   let id = sel.value;
   if (id === 'new') {
-    id = prompt('Số bài:');
-    if (!(Math.trunc(+id) >= 1)) return render();
-    id = Math.trunc(+id);
-    if (!data.lessons.some((l) => l.id === id)) { custom.lessons.push({ id, date: new Date().toISOString().slice(0, 10), title: `Bài ${id}` }); saveCustom(); }
+    id = lessonByName(prompt('Tên bài:') ?? '');
+    if (id == null) return render();
+    saveCustom();
   }
   moves[sel.dataset.move][sel.dataset.key] = +id;
   saveMoves();
@@ -188,6 +187,21 @@ function moveItem(sel) {
   render();
   // Keep the word that was edited open.
   [...root.querySelectorAll('details.word')].find((d) => d.querySelector('summary .han')?.textContent === open)?.setAttribute('open', '');
+}
+
+/**
+ * Lesson typed as free text: an existing title (case ignored) or number picks that lesson,
+ * anything else creates a lesson with that title under the next free id. Ids stay integers inside.
+ */
+function lessonByName(name) {
+  const t = name.trim();
+  if (!t) return null;
+  const hit = data.lessons.find((l) => l.id > 0 && (l.title.toLowerCase() === t.toLowerCase() || String(l.id) === t));
+  if (hit) return hit.id;
+  const id = Math.max(0, ...data.lessons.map((l) => l.id)) + 1;
+  custom.lessons.push({ id, date: new Date().toISOString().slice(0, 10), title: t });
+  data.lessons.push(custom.lessons.at(-1)); // visible before the next mergeData
+  return id;
 }
 
 function saveMoves() {
@@ -546,9 +560,9 @@ function addView() {
         <label><input type="radio" name="kind" value="word"${kind === 'word' ? ' checked' : ''}> Từ vựng</label>
         <label><input type="radio" name="kind" value="sentence"${kind === 'sentence' ? ' checked' : ''}> Mẫu câu</label>
       </div>
-      <label class="field"><span>Thuộc bài số</span>
-        <input name="lesson" type="number" min="1" step="1" inputmode="numeric" required value="${esc(lesson)}" list="lesson-ids">
-        <datalist id="lesson-ids">${ids.map((id) => `<option value="${id}">${esc(lessonTitle(id))}</option>`).join('')}</datalist>
+      <label class="field"><span>Thuộc bài (chọn bài có sẵn hoặc gõ tên bài mới)</span>
+        <input name="lesson" required autocomplete="off" value="${esc(lessonTitle(+lesson))}" list="lesson-ids">
+        <datalist id="lesson-ids">${ids.map((id) => `<option value="${esc(lessonTitle(id))}"></option>`).join('')}</datalist>
       </label>
       <label class="field"><span>${T.addField}</span>
         <textarea name="zh" lang="${EN ? 'en' : 'zh-CN'}" rows="4" required autocomplete="off" spellcheck="false"></textarea>
@@ -557,7 +571,7 @@ function addView() {
       ${log.length ? `<ul class="add-log">${log.map((l) => `<li class="${l.ok ? 'ok' : 'bad'}">${esc(l.text)}</li>`).join('')}</ul>` : ''}
     </form>
     ${mine.length ? `<section class="group"><h2>Đã thêm trong app (${mine.length})</h2><div class="words">${mine.map((m) => `<div class="mine">
-      <span class="muted">B${m.lesson}</span><span>${m.html}<p class="vi">${esc(m.vi)}</p></span>
+      <span class="muted">${esc(lessonTitle(m.lesson))}</span><span>${m.html}<p class="vi">${esc(m.vi)}</p></span>
       <button class="icon-btn" data-action="del-custom" data-k="${m.k}" data-key="${esc(m.key)}" aria-label="Xoá">${icon('trash')}</button></div>`).join('')}</div></section>` : ''}
   </main>`;
 }
@@ -622,12 +636,11 @@ async function addOneEn(kind, line, lesson) {
 
 async function submitAdd(form) {
   const kind = form.kind.value;
-  const lesson = Math.trunc(+form.lesson.value);
   const lines = form.zh.value.split('\n').map((l) => l.trim()).filter(Boolean);
-  if (!(lesson >= 1) || !lines.length) return;
+  if (!form.lesson.value.trim() || !lines.length) return;
+  const lesson = lessonByName(form.lesson.value);
   view.state = { kind, lesson, busy: true };
   render();
-  if (!data.lessons.some((l) => l.id === lesson)) custom.lessons.push({ id: lesson, date: new Date().toISOString().slice(0, 10), title: `Bài ${lesson}` });
   const log = [];
   for (const line of lines) {
     try { log.push({ ok: true, text: `Đã thêm: ${await addOne(kind, line, lesson)}` }); }
