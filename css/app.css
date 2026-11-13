@@ -111,7 +111,7 @@ button { cursor: pointer; }
 
 /* Home */
 .home-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-.home-head h1 { margin: 0; font-size: 19px; line-height: 1.35; letter-spacing: -.01em; text-wrap: balance; }
+.home-head h1 { margin: 0; font-size: 14px; line-height: 1.35; letter-spacing: -.01em; text-wrap: balance; }
 .lesson {
   margin-top: 20px; padding: 24px 20px 20px;
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-box); box-shadow: var(--shadow);
@@ -347,7 +347,7 @@ body {
 /* Typing on a phone: unstick the footer so the answer box is never covered. */
 body.typing .card .en { display: none; }
 body.typing .footer { position: static; background: none; }
-.home-head h1 small { display: block; margin-top: 6px; font-size: 13px; font-weight: 500; font-style: italic; color: var(--text); opacity: .8; letter-spacing: 0; }
+.home-head h1 small { display: block; margin-top: 6px; font-size: 12px; font-weight: 500; font-style: italic; color: var(--text); opacity: .8; letter-spacing: 0; }
 .home-head h1 > .han { word-break: keep-all; }
 .search { width: 100%; min-height: 48px; padding: 0 14px; font: inherit; color: var(--text); border: 2.5px solid var(--line); border-radius: var(--r-ctl); background: var(--surface); }
 .search:focus { outline: none; border-color: var(--accent); }
