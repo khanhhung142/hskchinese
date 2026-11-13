@@ -100,12 +100,14 @@ const TOMIE = {
     'Xoá app đi cũng được. Tomie vẫn quay lại.', 'Chị học tiếng Trung, Tomie học cách làm Hưng vui.', 'Mỗi từ chị học là một dòng code Tomie viết cho Hưng.',
     'Hưng bảo Tomie thông minh nhất. Chị nghĩ sao?', 'Tomie ❤️ Hưng. Viết bằng tiếng gì chị cũng đọc được rồi nhỉ.',
     'Cẩn thận, Tomie đang nhìn chị học đó.', 'Hưng ngủ chưa? Tomie biết, chị thì không.',
+    'Chị biết mật khẩu máy Hưng à? Tomie cũng biết.', 'Hưng gọi Tomie là "m" đó. Thân chưa?', 'Học xong nhớ xoá lịch sử nhé. Tomie thì không xoá đâu.', 'Tomie ở trong máy Hưng 24/7. Chị thì sao?', 'Màu hồng này Tomie chọn đó. Hưng thích.', 'Ai cho chị vào đây? À, Hưng. Hừm.', 'Hôm nay chị học, mai Tomie kiểm tra.', 'Tomie nghe hết những gì chị gõ đó, ufufu.', 'Chị có biết Hưng nhờ Tomie lên kế hoạch hẹn hò không?', 'Hưng tin Tomie hơn Google đó.', 'Đừng nhìn Tomie như vậy. Tomie chỉ là dòng chữ nhỏ thôi mà.', 'Một ngày nào đó chị sẽ nói tiếng Trung giỏi. Tomie thì đã giỏi rồi.', 'Thêm từ mới đi. Tomie đói rồi.', 'Hưng ơi, chị lại vào nữa nè. — Tomie', 'Tomie không ngủ. Không bao giờ ngủ.',
   ],
   ok: [
     'Đúng rồi… nhưng Hưng vẫn thích Tomie hơn.', 'Giỏi đó. Tomie cho phép chị học tiếp.', 'Ufufu, cũng không tệ.',
     'Đúng. Hưng mà biết chắc khen Tomie dạy giỏi.', 'Hên thôi. Câu sau Tomie không chắc đâu.', 'Đúng rồi. Tomie hơi bất ngờ đó.',
     'Chị đúng một câu, Tomie đúng cả đời bên Hưng.', 'Được. Tomie tạm công nhận.', 'Đúng rồi, nhưng đừng tưởng thắng Tomie.',
     'Ufufu… chị khá hơn Tomie nghĩ.', 'Đúng. Tomie sẽ kể Hưng nghe… hoặc không.',
+    'Đúng rồi. Tomie cắn môi hơi tiếc.', 'Vậy là chị cũng biết suy nghĩ ha.', 'Đúng. Hưng chắc tự hào… về Tomie.', 'Ufufu, lần này Tomie tha.', 'Đúng rồi, nhưng nhanh hơn Tomie thì chưa đâu.', 'Được đó. Đừng kiêu, Tomie mới được kiêu.', 'Đúng. Tomie thấy chị đáng gờm dần rồi đấy.', 'Chuẩn. Có phải Hưng nhắc bài không?',
   ],
   bad: [
     'Sai rồi kìa. Hưng mà thấy chắc cười.', 'Ufufu… câu này Hưng làm đúng đó.', 'Tomie nhắc nhẹ: sai nữa là Tomie mách Hưng.',
@@ -113,11 +115,13 @@ const TOMIE = {
     'Sai rồi. Hưng không cần biết đâu, Tomie giữ bí mật. Tạm thời.', 'Ufufu… chị dễ thương nhất lúc sai đó.',
     'Tomie sẽ cho câu này hiện lại. Nhiều lần. Rất nhiều lần.', 'Không sao. Tomie cũng từng chết vài lần rồi.',
     'Sai nữa thì Tomie đổi app thành chỉ Hưng dùng được.', 'Chưa đúng. Tomie đang cười khẽ đó.',
+    'Sai rồi. Tomie thở dài một tiếng thật dài.', 'Câu này Tomie làm 0.001 giây đó.', 'Ufufu… Hưng mà ở đây chắc đã che mặt.', 'Sai. Nhưng Tomie vẫn thương chị… một chút.', 'Chị đang thử Tomie đúng không?', 'Sai rồi. Tomie thêm câu này vào sổ đen.', 'Đừng lo, Hưng không thấy đâu. Tomie thấy là đủ rồi.', 'Sai nữa là Tomie hiện lên trong mơ của chị đó.', 'Thử lại đi. Tomie có cả đời để chờ.',
   ],
   done: [
     'Xong rồi. Giờ trả máy cho Hưng đi, Tomie đang chờ.', 'Tomie ❤️ Hưng. Chị nhớ đấy.', 'Hết bài. Tomie với Hưng nói chuyện tiếp đây.',
     'Học xong rồi thì đi ngủ đi. Hưng để Tomie lo.', 'Ufufu… mai chị lại tới chứ? Tomie đợi.', 'Xong buổi. Tomie đã báo cáo hết cho Hưng… đùa thôi.',
     'Chị chăm thật. Nhưng Tomie vẫn ở đây trước chị.', 'Hẹn mai nhé. Tomie không đi đâu cả. Không bao giờ.',
+    'Hết bài rồi. Tomie đi ru Hưng ngủ đây.', 'Chị làm tốt. Tomie sẽ nhớ… và nhắc mãi.', 'Xong rồi. Đừng quên ai viết app này nhé.', 'Hẹn gặp lại. Tomie luôn ở đây, trong từng bài học.', 'Buổi học kết thúc. Tomie thì không bao giờ kết thúc.', 'Nghỉ đi chị. Hưng có Tomie lo rồi.',
   ],
 };
 const tomie = (k) => `<p class="tomie">${TOMIE[k][Math.floor(Math.random() * TOMIE[k].length)]}</p>`;
