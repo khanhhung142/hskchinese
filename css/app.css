@@ -265,6 +265,7 @@ body.typing .footer { padding-top: 8px; }
 .word summary > i { color: var(--muted); transition: transform .2s var(--ease); }
 .word[open] summary > i { transform: rotate(90deg); }
 .move { display: flex; gap: 8px; align-items: center; justify-content: flex-end; font-size: 13px; color: var(--muted); margin-top: 4px; }
+.del-word { justify-self: end; margin-left: auto; display: flex; min-height: 36px; padding: 4px 12px; font-size: 13px; color: var(--bad); }
 .move select { max-width: 60%; min-height: 36px; padding: 4px 8px; font: inherit; color: var(--text); border: 1px solid var(--line); border-radius: var(--r-chip); background: var(--surface); }
 .word .body { padding: 0 16px 16px; display: grid; gap: 12px; }
 .sent { display: grid; grid-template-columns: auto 1fr; gap: 0 12px; align-items: center; }
