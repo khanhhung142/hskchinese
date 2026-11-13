@@ -86,7 +86,7 @@ const T = EN ? {
 };
 const langSwitch = () => `<div class="seg lang" role="group" aria-label="Môn học">${[['zh', 'Tiếng Trung'], ['en', 'Tiếng Anh']].map(([v, t]) =>
   `<button class="${(v === 'en') === EN ? 'on' : ''}" data-action="lang" data-lang="${v}" aria-pressed="${(v === 'en') === EN}">${t}</button>`).join('')}</div>`;
-const addItem = () => `<button class="menu-item" data-action="add">${icon('plus')}<span><b>Thêm từ, mẫu câu</b><small>${T.add}</small></span>${icon('caret-right')}</button>`;
+const addItem = () => `<button class="menu-item" data-action="add">${icon('plus')}<span><b>Thêm từ, mẫu câu</b></span>${icon('caret-right')}</button>`;
 
 // ---------- Views ----------
 
@@ -145,11 +145,11 @@ function home() {
     </section>` : ''}
     ${lessonPicker()}
     <nav class="menu">
-      ${FULL ? `<button class="menu-item" data-action="start" data-mode="all">${icon('shuffle')}<span><b>${pickedLesson ? `Ôn ${esc(lessonTitle(+pickedLesson))}` : 'Ôn tất cả'}</b><small>Ưu tiên từ hay sai</small></span>${icon('caret-right')}</button>` : ''}
-      <button class="menu-item" data-action="write" data-mode="write">${icon('pencil-simple-line')}<span><b>${T.write[0]}</b><small>${T.write[1]}</small></span>${icon('caret-right')}</button>
-      <button class="menu-item" data-action="write" data-mode="sentence">${icon('text-align-left')}<span><b>Luyện viết câu</b><small>Nghe, xem và gõ lại cả câu</small></span>${icon('caret-right')}</button>
-      <button class="menu-item" data-action="write" data-mode="vocab">${icon('translate')}<span><b>${T.vocab[0]}</b><small>${T.vocab[1]}</small></span>${icon('caret-right')}</button>
-      <button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Danh sách từ</b><small>${data.words.length} từ, bấm để nghe</small></span>${icon('caret-right')}</button>
+      ${FULL ? `<button class="menu-item" data-action="start" data-mode="all">${icon('shuffle')}<span><b>${pickedLesson ? `Ôn ${esc(lessonTitle(+pickedLesson))}` : 'Ôn tất cả'}</b></span>${icon('caret-right')}</button>` : ''}
+      <button class="menu-item" data-action="write" data-mode="write">${icon('pencil-simple-line')}<span><b>${T.write[0]}</b></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="write" data-mode="sentence">${icon('text-align-left')}<span><b>Luyện viết câu</b></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="write" data-mode="vocab">${icon('translate')}<span><b>${T.vocab[0]}</b></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Danh sách từ</b></span>${icon('caret-right')}</button>
       ${addItem()}
     </nav>
     ${tomie('home')}
