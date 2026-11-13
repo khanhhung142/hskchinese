@@ -4,6 +4,7 @@ import { buildSession, sentenceText, parseToken, tokenPinyin, isPunct, latestLes
 const root = document.getElementById('app');
 // Two subjects share every screen: Chinese (vocab.json) and English (english.json). Each keeps its own storage keys.
 const EN = localStorage.getItem('hsk-lang') === 'en';
+document.documentElement.classList.toggle('lang-en', EN);
 const key = (k) => (EN ? k.replace('hsk-', 'eng-') : k);
 const PROGRESS_KEY = key('hsk-progress');
 const CUSTOM_KEY = key('hsk-custom'); // words, sentences and lessons added in the app (this device only)

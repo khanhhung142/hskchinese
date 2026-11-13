@@ -352,3 +352,8 @@ body.typing .footer { position: static; background: none; }
 .search { width: 100%; min-height: 48px; padding: 0 14px; font: inherit; color: var(--text); border: 2.5px solid var(--line); border-radius: var(--r-ctl); background: var(--surface); }
 .search:focus { outline: none; border-color: var(--accent); }
 .empty-search { text-align: center; margin: 24px 0; }
+/* English word list: words are long, so smaller text and a wider, wrapping first column. */
+.lang-en .word summary { grid-template-columns: minmax(96px, 40%) 1fr 20px; }
+.lang-en .word summary .hz { font-size: 16px; font-weight: 600; align-items: flex-start; min-width: 0; }
+.lang-en .word summary .hz .han { overflow-wrap: break-word; hyphens: auto; }
+.lang-en .word summary .hz .py { font-size: 12px; white-space: normal; }
