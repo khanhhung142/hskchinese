@@ -175,6 +175,10 @@ button { cursor: pointer; }
 .pick { margin-top: 16px; }
 .seg { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .seg label { display: flex; gap: 8px; align-items: center; justify-content: center; min-height: 48px; border: 1.5px solid var(--line); border-radius: var(--r-ctl); background: var(--surface); }
+.seg.lang { margin-bottom: 16px; }
+.seg.lang button { min-height: 40px; font: inherit; color: var(--text); border: 1.5px solid var(--line); border-radius: var(--r-ctl); background: var(--surface); }
+.seg.lang button.on { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.ens .blank { color: var(--accent); font-weight: 600; }
 .seg label:has(:checked) { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); font-weight: 600; }
 .add-log { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
 .add-log .ok { color: var(--ok); }

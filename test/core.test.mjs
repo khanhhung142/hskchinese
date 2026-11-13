@@ -2,8 +2,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { toMarks, normalize } from '../js/pinyin.js';
-import { buildSession, tokenPinyin, parseToken, record, latestLesson, isPunct, sameHanzi, tokenize } from '../js/quiz.js';
-import { parseCedict, validate, format } from '../tools/check.mjs';
+import { buildSession, tokenPinyin, parseToken, record, latestLesson, isPunct, sameHanzi, tokenize, enTokens, fromEnglish } from '../js/quiz.js';
+import { parseCedict, validate, validateEnglish, format } from '../tools/check.mjs';
 
 const data = JSON.parse(readFileSync(new URL('../data/vocab.json', import.meta.url), 'utf8'));
 
@@ -119,6 +119,19 @@ test('sameHanzi matches typed Chinese exactly, ignoring spaces and punctuation',
   assert.ok(sameHanzi('我是学生', '我是学生。'));
   assert.ok(sameHanzi('你好吗?', '你好吗？'));
   assert.ok(!sameHanzi('我是', '我是学生。'));
+});
+
+test('english: tokens keep multi-word entries, validation catches bad focus', () => {
+  assert.deepEqual(enTokens('Thank you, teacher!', new Set(['thank you'])), ['Thank you', ',', 'teacher', '!']);
+  assert.deepEqual(enTokens("I'm a student."), ["I'm", 'a', 'student', '.']);
+  const raw = { lessons: [{ id: 1, date: '2026-11-13', title: 'Bài 1' }], words: [{ word: 'hello', meanings: ['xin chào'], lesson: 1 }],
+    sentences: [{ id: '1-01', text: 'Hello, Lan!', vi: 'Chào Lan!', focus: 'hello', lesson: 1 }, { id: '1-02', text: 'Hi.', vi: 'Chào.', focus: 'hello', lesson: 1 }] };
+  const errs = validateEnglish(raw);
+  assert.equal(errs.length, 1);
+  assert.match(errs[0], /1-02: focus "hello" must appear/);
+  const d = fromEnglish(raw);
+  assert.equal(d.sentences[0].tokens[0], 'Hello');
+  assert.ok(sameHanzi('hello lan', 'Hello, Lan!'));
 });
 
 test('full/index.html is index.html plus a base tag', () => {

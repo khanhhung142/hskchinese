@@ -8,7 +8,35 @@ export function parseToken(t) {
   return { h, p };
 }
 
-export const sentenceText = (s) => s.tokens.map((t) => parseToken(t).h).join('');
+/** English sentences keep their `text`; Chinese ones are their tokens joined. */
+export const sentenceText = (s) => s.text ?? s.tokens.map((t) => parseToken(t).h).join('');
+
+/**
+ * Cut an English sentence into tokens: words, punctuation runs; known multi-word entries
+ * ("thank you", lowercase in `known`) stay one token, longest first.
+ */
+export function enTokens(text, known = new Set()) {
+  const raw = text.match(/[\p{L}\p{N}'’-]+|[^\s\p{L}\p{N}'’-]+/gu) ?? [];
+  const out = [];
+  for (let i = 0; i < raw.length;) {
+    let n = Math.min(4, raw.length - i);
+    while (n > 1 && !known.has(raw.slice(i, i + n).join(' ').toLowerCase())) n--;
+    out.push(raw.slice(i, i + n).join(' '));
+    i += n;
+  }
+  return out;
+}
+/** english.json ({word, ipa, meanings, lesson} / {id, text, vi, focus, lesson}) -> the shape the exercises use. */
+export function fromEnglish(raw) {
+  const multi = new Set(raw.words.map((w) => w.word.toLowerCase()).filter((w) => w.includes(' ')));
+  return {
+    lessons: raw.lessons,
+    words: raw.words.map((w) => ({ hanzi: w.word, pinyin: w.ipa ? [w.ipa] : [], meanings: w.meanings, en: '', lesson: w.lesson })),
+    sentences: raw.sentences.map((s) => ({ ...s, tokens: enTokens(s.text, multi), en: '', sense: 0 })),
+  };
+}
+/** Token equals word, ignoring case (English "Hello" at sentence start). */
+export const sameWord = (t, w) => parseToken(t).h.toLowerCase() === w.toLowerCase();
 
 /** Pinyin shown under a token: its explicit reading, else the word's main reading. */
 export function tokenPinyin(t, wordMap) {
@@ -62,7 +90,7 @@ export function buildSession(data, progress, mode, { rand = Math.random, size = 
   const usedIn = new Map();
   for (const s of data.sentences) {
     (focusOf.get(s.focus) ?? focusOf.set(s.focus, []).get(s.focus)).push(s);
-    for (const h of new Set(s.tokens.map((t) => parseToken(t).h))) (usedIn.get(h) ?? usedIn.set(h, []).get(h)).push(s);
+    for (const h of new Set(s.tokens.map((t) => parseToken(t).h.toLowerCase()))) (usedIn.get(h) ?? usedIn.set(h, []).get(h)).push(s);
   }
 
   // New words: flashcards first, then every chosen word gets one exercise in the same session.
@@ -71,7 +99,7 @@ export function buildSession(data, progress, mode, { rand = Math.random, size = 
   // Deal exercise types from a shuffled deck so one session covers every type, not a random clump.
   let deck = [];
   const questions = chosen.map((word) => {
-    const sents = focusOf.get(word.hanzi) ?? usedIn.get(word.hanzi) ?? [];
+    const sents = focusOf.get(word.hanzi) ?? usedIn.get(word.hanzi.toLowerCase()) ?? [];
     const orderable = sents.filter((s) => s.tokens.filter((t) => !isPunct(t)).length >= 3);
     const fits = (type) => ['listen', 'pinyin'].includes(type) || (type === 'order' ? orderable.length : sents.length);
     if (!deck.some(fits)) deck = [...deck, ...shuffle(TYPES, rand)];
@@ -88,7 +116,7 @@ function makeQuestion(type, word, sents, data, rand) {
   if (type === 'listen') return { type, word, options: wordOptions() };
   const sentence = pickOne(sents, rand);
   if (type === 'cloze') {
-    const blank = sentence.tokens.findIndex((t) => parseToken(t).h === word.hanzi);
+    const blank = sentence.tokens.findIndex((t) => sameWord(t, word.hanzi));
     return { type, word, sentence, blank, options: wordOptions() };
   }
   if (type === 'meaning') {
@@ -130,5 +158,5 @@ export function record(progress, hanzi, correct) {
 }
 
 /** Typed Chinese (IME output) matches the word or sentence, ignoring whitespace and punctuation. */
-const bare = (t) => t.replace(/[\p{P}\s]/gu, '');
+const bare = (t) => t.replace(/[\p{P}\s]/gu, '').toLowerCase();
 export const sameHanzi = (typed, target) => bare(typed) === bare(target);

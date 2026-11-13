@@ -1,0 +1,41 @@
+{
+"lessons": [
+  {"id":1,"date":"2026-11-13","title":"Bài 1: Chào hỏi"}
+],
+"words": [
+  {"word":"hello","ipa":"/həˈloʊ/","meanings":["xin chào"],"lesson":1},
+  {"word":"goodbye","ipa":"/ɡʊdˈbaɪ/","meanings":["tạm biệt"],"lesson":1},
+  {"word":"thank you","ipa":"/ˈθæŋk juː/","meanings":["cảm ơn"],"lesson":1},
+  {"word":"teacher","ipa":"/ˈtiːtʃər/","meanings":["giáo viên"],"lesson":1},
+  {"word":"student","ipa":"/ˈstuːdənt/","meanings":["học sinh, sinh viên"],"lesson":1},
+  {"word":"friend","ipa":"/frɛnd/","meanings":["bạn"],"lesson":1},
+  {"word":"name","ipa":"/neɪm/","meanings":["tên"],"lesson":1},
+  {"word":"morning","ipa":"/ˈmɔːrnɪŋ/","meanings":["buổi sáng"],"lesson":1}
+],
+"sentences": [
+  {"id":"1-01","text":"Hello, Lan!","vi":"Chào Lan!","focus":"hello","lesson":1},
+  {"id":"1-02","text":"Hello, my name is Hung.","vi":"Xin chào, tên tôi là Hùng.","focus":"hello","lesson":1},
+  {"id":"1-03","text":"Say hello to your teacher.","vi":"Hãy chào giáo viên của bạn.","focus":"hello","lesson":1},
+  {"id":"1-04","text":"Goodbye, see you tomorrow.","vi":"Tạm biệt, hẹn gặp lại ngày mai.","focus":"goodbye","lesson":1},
+  {"id":"1-05","text":"She said goodbye to her friend.","vi":"Cô ấy chào tạm biệt bạn mình.","focus":"goodbye","lesson":1},
+  {"id":"1-06","text":"Goodbye, teacher!","vi":"Chào tạm biệt cô giáo!","focus":"goodbye","lesson":1},
+  {"id":"1-07","text":"Thank you very much.","vi":"Cảm ơn bạn rất nhiều.","focus":"thank you","lesson":1},
+  {"id":"1-08","text":"Thank you, teacher!","vi":"Em cảm ơn cô ạ!","focus":"thank you","lesson":1},
+  {"id":"1-09","text":"Thank you for your help.","vi":"Cảm ơn bạn đã giúp đỡ.","focus":"thank you","lesson":1},
+  {"id":"1-10","text":"My teacher is very kind.","vi":"Giáo viên của tôi rất tốt bụng.","focus":"teacher","lesson":1},
+  {"id":"1-11","text":"She is an English teacher.","vi":"Cô ấy là giáo viên tiếng Anh.","focus":"teacher","lesson":1},
+  {"id":"1-12","text":"Where is the teacher?","vi":"Giáo viên đâu rồi?","focus":"teacher","lesson":1},
+  {"id":"1-13","text":"I am a student.","vi":"Tôi là sinh viên.","focus":"student","lesson":1},
+  {"id":"1-14","text":"He is a good student.","vi":"Cậu ấy là một học sinh giỏi.","focus":"student","lesson":1},
+  {"id":"1-15","text":"Every student has a book.","vi":"Học sinh nào cũng có một quyển sách.","focus":"student","lesson":1},
+  {"id":"1-16","text":"This is my friend Lan.","vi":"Đây là bạn tôi, Lan.","focus":"friend","lesson":1},
+  {"id":"1-17","text":"He is my best friend.","vi":"Cậu ấy là bạn thân nhất của tôi.","focus":"friend","lesson":1},
+  {"id":"1-18","text":"I go to school with my friend.","vi":"Tôi đi học cùng bạn.","focus":"friend","lesson":1},
+  {"id":"1-19","text":"What is your name?","vi":"Bạn tên là gì?","focus":"name","lesson":1},
+  {"id":"1-20","text":"My name is Hung.","vi":"Tên tôi là Hùng.","focus":"name","lesson":1},
+  {"id":"1-21","text":"I forgot his name.","vi":"Tôi quên tên anh ấy rồi.","focus":"name","lesson":1},
+  {"id":"1-22","text":"Good morning, teacher!","vi":"Chào buổi sáng cô giáo!","focus":"morning","lesson":1},
+  {"id":"1-23","text":"I drink coffee every morning.","vi":"Sáng nào tôi cũng uống cà phê.","focus":"morning","lesson":1},
+  {"id":"1-24","text":"See you tomorrow morning.","vi":"Hẹn gặp bạn sáng mai.","focus":"morning","lesson":1}
+]
+}

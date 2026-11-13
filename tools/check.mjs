@@ -8,10 +8,11 @@ import { gunzipSync } from 'node:zlib';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import path from 'node:path';
 import { normalize } from '../js/pinyin.js';
-import { parseToken, isPunct, sentenceText } from '../js/quiz.js';
+import { parseToken, isPunct, sentenceText, fromEnglish, sameWord } from '../js/quiz.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DATA = path.join(ROOT, 'data/vocab.json');
+const ENGLISH = path.join(ROOT, 'data/english.json');
 const AUDIO = path.join(ROOT, 'audio');
 const CEDICT_GZ = path.join(ROOT, 'tools/.cache/cedict.txt.gz');
 const CEDICT_URL = 'https://www.mdbg.net/chinese/export/cedict/cedict_1_0_ts_utf-8_mdbg.txt.gz';
@@ -115,6 +116,44 @@ export function validate(data, cedict) {
   return errors;
 }
 
+/** data/english.json: lessons {id, date, title}, words {word, ipa?, meanings, lesson}, sentences {id, text, vi, focus, lesson}. */
+export function validateEnglish(raw) {
+  const errors = [];
+  const err = (where, msg) => errors.push(`english ${where}: ${msg}`);
+  const lessonIds = new Set();
+  for (const l of raw.lessons ?? []) {
+    if (!Number.isInteger(l.id) || lessonIds.has(l.id)) err(`lesson ${l.id}`, 'id must be a unique integer');
+    if (typeof l.title !== 'string' || !l.title) err(`lesson ${l.id}`, 'title required');
+    lessonIds.add(l.id);
+  }
+  const seen = new Set();
+  for (const w of raw.words ?? []) {
+    const at = `word ${w.word}`;
+    if (typeof w.word !== 'string' || !/^[A-Za-z][A-Za-z '’-]*$/.test(w.word)) { err(at, 'word must be English letters (spaces, apostrophes, hyphens allowed)'); continue; }
+    if (seen.has(w.word.toLowerCase())) err(at, 'duplicate word');
+    seen.add(w.word.toLowerCase());
+    if (!lessonIds.has(w.lesson)) err(at, `lesson ${w.lesson} does not exist`);
+    if (!Array.isArray(w.meanings) || !w.meanings.length || w.meanings.some((m) => typeof m !== 'string' || !m)) err(at, 'meanings must be a non-empty array of strings');
+    if (w.word.includes('/')) err(at, 'no "/" (it names an audio file)');
+  }
+  const ids = new Set();
+  const texts = new Set();
+  const { sentences } = fromEnglish({ lessons: [], words: raw.words ?? [], sentences: raw.sentences ?? [] });
+  for (const s of sentences) {
+    const at = `sentence ${s.id}`;
+    if (typeof s.id !== 'string' || ids.has(s.id)) err(at, 'id must be a unique string');
+    ids.add(s.id);
+    if (!lessonIds.has(s.lesson)) err(at, `lesson ${s.lesson} does not exist`);
+    if (typeof s.text !== 'string' || !s.text || s.text.includes('/')) { err(at, 'text required, no "/"'); continue; }
+    if (texts.has(s.text)) err(at, `duplicate sentence ${s.text}`);
+    texts.add(s.text);
+    if (typeof s.vi !== 'string' || !s.vi) err(at, 'vi translation required');
+    if (!seen.has(String(s.focus).toLowerCase())) err(at, `focus "${s.focus}" is not a word`);
+    else if (!s.tokens.some((t) => sameWord(t, s.focus))) err(at, `focus "${s.focus}" must appear in the text as a whole word`);
+  }
+  return errors;
+}
+
 /** Canonical layout: one record per line, so git diffs stay readable. */
 export function format(data) {
   const arr = (xs) => '[\n' + xs.map((x) => '  ' + JSON.stringify(x)).join(',\n') + '\n]';
@@ -134,9 +173,10 @@ async function loadCedict() {
   return parseCedict(gunzipSync(await readFile(CEDICT_GZ)).toString('utf8'));
 }
 
-async function syncAudio(data) {
+async function syncAudio(data, english) {
   return await syncDir(AUDIO, [...data.words.map((w) => w.hanzi), ...data.sentences.map(sentenceText)], VOICE)
-    + await syncDir(path.join(AUDIO, 'en'), [...data.words.map((w) => w.en), ...data.sentences.map((s) => s.en)], VOICE_EN);
+    + await syncDir(path.join(AUDIO, 'en'), [...data.words.map((w) => w.en), ...data.sentences.map((s) => s.en),
+      ...english.words.map((w) => w.word), ...english.sentences.map((s) => s.text)], VOICE_EN);
 }
 
 /** Make `dir` hold exactly one `<text>.mp3` per text. */
@@ -159,13 +199,15 @@ async function syncDir(dir, texts, voice) {
 async function main() {
   const data = JSON.parse(await readFile(DATA, 'utf8'));
   await writeFile(DATA, format(data));
-  const errors = validate(data, await loadCedict());
+  const english = JSON.parse(await readFile(ENGLISH, 'utf8'));
+  await writeFile(ENGLISH, format(english));
+  const errors = [...validate(data, await loadCedict()), ...validateEnglish(english)];
   if (errors.length) {
-    console.error(`FAIL: ${errors.length} problem(s) in data/vocab.json\n- ` + errors.join('\n- '));
+    console.error(`FAIL: ${errors.length} problem(s) in data/vocab.json, data/english.json\n- ` + errors.join('\n- '));
     process.exit(1);
   }
-  console.log(`OK: ${data.words.length} words, ${data.sentences.length} sentences`);
-  if (!process.argv.includes('--no-audio')) console.log(`Audio: ${await syncAudio(data)} file(s) generated`);
+  console.log(`OK: ${data.words.length} words, ${data.sentences.length} sentences; English ${english.words.length} words, ${english.sentences.length} sentences`);
+  if (!process.argv.includes('--no-audio')) console.log(`Audio: ${await syncAudio(data, english)} file(s) generated`);
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) await main();
