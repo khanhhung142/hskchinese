@@ -115,7 +115,7 @@ function wordList() {
   const groups = [...data.lessons].sort((a, b) => b.id - a.id).map((l) => {
     const words = data.words.filter((w) => w.lesson === l.id);
     if (!words.length) return '';
-    return `<section class="group"><h2>${esc(l.title)}<button class="icon-btn" data-action="rename" data-id="${l.id}" aria-label="Đổi tên bài">${icon('pencil-simple-line')}</button></h2><div class="words">${words.map(wordRow).join('')}</div></section>`;
+    return `<section class="group"><h2>${esc(l.title)}<button class="icon-btn" data-action="rename" data-id="${l.id}" aria-label="Đổi tên bài">${icon('pencil-simple-line')}</button><button class="icon-btn" data-action="export" data-id="${l.id}" aria-label="Tải bài này">${icon('download-simple')}</button></h2><div class="words">${words.map(wordRow).join('')}</div></section>`;
   });
   return `<main class="page">
     <header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Danh sách từ</h1><button class="icon-btn" data-action="export" aria-label="Xuất dữ liệu">${icon('download-simple')}</button></header>
@@ -162,10 +162,16 @@ function saveMoves() {
 }
 
 /** Everything as shown (vocab.json format) plus the raw in-app edits, as a file to send to Hermes. */
-async function exportData() {
-  const { lessons, words, sentences } = data;
-  const body = JSON.stringify({ exported: new Date().toISOString(), lessons, words, sentences, edits: { custom, moves } }, null, 1);
-  const file = new File([body], `hsk-export-${new Date().toISOString().slice(0, 10)}.json`, { type: 'application/json' });
+/** One lesson (id) or all (no id); edits are cut to items that now sit in the exported lessons. */
+async function exportData(id) {
+  const keep = (x) => id === undefined || x.lesson === id;
+  const pick = (o) => Object.fromEntries(Object.entries(o).filter(([, v]) => id === undefined || v === id));
+  const edits = {
+    custom: { lessons: custom.lessons.filter((l) => id === undefined || l.id === id), words: custom.words.filter(keep), sentences: custom.sentences.filter(keep) },
+    moves: { w: pick(moves.w), s: pick(moves.s), t: Object.fromEntries(Object.entries(moves.t).filter(([k]) => id === undefined || +k === id)) },
+  };
+  const body = JSON.stringify({ exported: new Date().toISOString(), lessons: data.lessons.filter((l) => id === undefined || l.id === id), words: data.words.filter(keep), sentences: data.sentences.filter(keep), edits }, null, 1);
+  const file = new File([body], `hsk-export-${id === undefined ? 'all' : `bai-${id}`}-${new Date().toISOString().slice(0, 10)}.json`, { type: 'application/json' });
   // Phones (home-screen app) share straight to Telegram; desktop browsers download.
   if (navigator.canShare?.({ files: [file] })) {
     try { return await navigator.share({ files: [file] }); } catch (e) { if (e.name === 'AbortError') return; }
@@ -668,7 +674,7 @@ root.addEventListener('click', (e) => {
   if (act === 'home') { view = { name: 'home' }; render(); }
   else if (act === 'words') { view = { name: 'words' }; render(); }
   else if (act === 'rename') renameLesson(+el.dataset.id);
-  else if (act === 'export') exportData();
+  else if (act === 'export') exportData(el.dataset.id === undefined ? undefined : +el.dataset.id);
   else if (act === 'add') { view = { name: 'add', state: {} }; render(); }
   else if (act === 'del-custom') {
     if (!confirm('Xoá mục này?')) return;
