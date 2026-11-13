@@ -186,8 +186,8 @@ function wordList() {
   });
   return `<main class="page">
     <header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Danh sách từ</h1><button class="icon-btn" data-action="export" aria-label="Xuất dữ liệu">${icon('download-simple')}</button></header>
-    <input id="word-search" class="search" type="search" placeholder="Tra từ: chữ, phiên âm hoặc nghĩa" aria-label="Tra từ đã lưu" autocomplete="off">
-    <p class="empty-search muted" hidden>Không tìm thấy từ nào.</p>
+    <input id="word-search" class="search" type="search" placeholder="Tra từ hoặc câu: chữ, phiên âm, nghĩa" aria-label="Tra từ và câu đã lưu" autocomplete="off">
+    <p class="empty-search muted" hidden>Không tìm thấy từ hoặc câu nào.</p>
     ${groups.join('')}
   </main>`;
 }
@@ -197,14 +197,18 @@ const fold = (t) => String(t).normalize('NFD').replace(/[\u0300-\u036f\s]/g, '')
 function searchWords(q) {
   const f = fold(q);
   let hits = 0;
-  root.querySelectorAll('.word').forEach((el) => { const on = el.dataset.q.includes(f); el.hidden = !on; hits += on; });
+  root.querySelectorAll('.word').forEach((el) => {
+    const inWord = el.dataset.q.includes(f), inSent = !inWord && el.dataset.s.includes(f);
+    el.hidden = !(inWord || inSent); hits += inWord || inSent;
+    el.open = Boolean(f) && inSent; // match only in an example sentence: open the row so it shows
+  });
   root.querySelectorAll('.group').forEach((g) => { g.hidden = !g.querySelector('.word:not([hidden])'); });
   root.querySelector('.empty-search').hidden = hits > 0;
 }
 
 function wordRow(w) {
   const sents = data.sentences.filter((s) => s.focus === w.hanzi);
-  return `<details class="word" data-q="${esc(fold([w.hanzi, ...w.pinyin, ...w.meanings, w.en].join(' ')))}">
+  return `<details class="word" data-q="${esc(fold([w.hanzi, ...w.pinyin, ...w.meanings, w.en].join(' ')))}" data-s="${esc(fold(sents.map((s) => [sentenceText(s), s.vi, s.en].join(' ')).join('|')))}">
     <summary>${wordHz(w, true)}<span><p>${esc(w.meanings.join('; '))}</p><p class="en">${esc(w.en)}</p></span>${icon('caret-right')}</summary>
     <div class="body">
       ${moveSelect('w', w.hanzi, w.lesson, 'Từ thuộc')}
