@@ -373,3 +373,12 @@ body.typing .card .py-big { font-size: 16px; }
 body.typing .card .meaning { font-size: 17px; margin: 0; }
 body.typing .card .vi { margin: 0; font-size: 14px; }
 body.typing .card .speak { position: absolute; top: 8px; right: 8px; }
+.pick summary { min-height: 48px; padding: 0 14px; display: flex; align-items: center; font-weight: 600; cursor: pointer; border: 2.5px solid var(--line); border-radius: var(--r-ctl); background: var(--surface); }
+.pick-list { display: grid; gap: 2px; margin-top: 6px; padding: 6px 10px; border: 2.5px solid var(--line); border-radius: var(--r-ctl); background: var(--surface); }
+.pick-list label { display: flex; gap: 10px; align-items: center; min-height: 40px; padding: 6px 0; font-size: 15px; font-weight: 500; color: var(--text); font-family: inherit; letter-spacing: normal; text-transform: none; }
+.pick-list label:first-child { border-bottom: 1.5px solid var(--line); }
+.pick summary::after { content: '▾'; margin-left: auto; }
+.pick[open] summary::after { content: '▴'; }
+.pick summary::-webkit-details-marker { display: none; }
+.pick summary { list-style: none; }
+.pick-list input { flex: none; width: 20px; height: 20px; min-height: 0; margin: 0; padding: 0; accent-color: var(--accent); }

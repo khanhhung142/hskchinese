@@ -12,7 +12,9 @@ const LESSON_KEY = key('hsk-lesson'); // lesson picked for practice, '' = all
 let data, wordMap;
 let progress = loadProgress();
 let custom = loadJSON(CUSTOM_KEY) ?? { lessons: [], words: [], sentences: [] };
-let pickedLesson = localStorage.getItem(LESSON_KEY) ?? '';
+let pickedLesson = localStorage.getItem(LESSON_KEY) ?? ''; // comma-separated lesson ids, '' = all
+const picked = () => pickedLesson.split(',').filter(Boolean).map(Number);
+const pickedName = () => { const p = picked(); return p.length === 1 ? lessonTitle(p[0]) : `${p.length} bài`; };
 const MOVES_KEY = key('hsk-moves'); // edits made in the word list: { w: {hanzi: id}, s: {sentenceId: id}, t: {lessonId: title} }
 let moves = loadJSON(MOVES_KEY) ?? { w: {}, s: {} };
 moves.t ??= {};
@@ -153,7 +155,7 @@ function home() {
     </section>` : ''}
     ${lessonPicker()}
     <nav class="menu">
-      ${FULL ? `<button class="menu-item" data-action="start" data-mode="all">${icon('shuffle')}<span><b>${pickedLesson ? `Ôn ${esc(lessonTitle(+pickedLesson))}` : 'Ôn tất cả'}</b></span>${icon('caret-right')}</button>` : ''}
+      ${FULL ? `<button class="menu-item" data-action="start" data-mode="all">${icon('shuffle')}<span><b>${pickedLesson ? `Ôn ${esc(pickedName())}` : 'Ôn tất cả'}</b></span>${icon('caret-right')}</button>` : ''}
       <button class="menu-item" data-action="write" data-mode="write">${icon('pencil-simple-line')}<span><b>${T.write[0]}</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="write" data-mode="sentence">${icon('text-align-left')}<span><b>Luyện viết câu</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="write" data-mode="vocab">${icon('translate')}<span><b>${T.vocab[0]}</b></span>${icon('caret-right')}</button>
@@ -165,13 +167,14 @@ function home() {
 }
 
 const lessonTitle = (id) => data.lessons.find((l) => l.id === id)?.title ?? `Bài ${id}`;
-/** Practice applies to one lesson or all; lessons listed are the ones that have words. */
-const inLesson = (x) => pickedLesson === '' || x.lesson === +pickedLesson;
+/** Practice applies to the ticked lessons, or all when none is ticked; lessons listed are the ones that have words. */
+const inLesson = (x) => pickedLesson === '' || picked().includes(x.lesson);
+let lessonPickerOpen = false;
 function lessonPicker() {
   const ids = [...new Set([...data.words, ...data.sentences].map((x) => x.lesson).filter((id) => id > 0))].sort((a, b) => a - b);
-  if (pickedLesson && !ids.includes(+pickedLesson)) pickedLesson = '';
-  const opt = (v, t) => `<option value="${v}"${String(v) === pickedLesson ? ' selected' : ''}>${esc(t)}</option>`;
-  return `<label class="field pick"><select id="lesson-pick" aria-label="Học theo bài">${opt('', 'Tất cả các bài')}${ids.map((id) => opt(id, lessonTitle(id))).join('')}</select></label>`;
+  pickedLesson = picked().filter((id) => ids.includes(id)).join(',');
+  const box = (v, t, on) => `<label><input type="checkbox" class="lesson-pick" value="${v}"${on ? ' checked' : ''}> ${esc(t)}</label>`;
+  return `<details class="field pick"${lessonPickerOpen ? ' open' : ''}><summary>${esc(pickedLesson ? pickedName() : 'Tất cả các bài')}</summary><div class="pick-list">${box('', 'Tất cả các bài', !pickedLesson)}${ids.map((id) => box(id, lessonTitle(id), picked().includes(id))).join('')}</div></details>`;
 }
 
 function formatDate(iso) {
@@ -499,7 +502,7 @@ function write() {
 
 function startWrite(mode) {
   const item = pickWriteItem(mode, view.item);
-  if (!item) return alert(`${lessonTitle(+pickedLesson)} chưa có ${mode === 'sentence' ? 'mẫu câu' : 'từ'} nào.`);
+  if (!item) return alert(`${pickedName()} chưa có ${mode === 'sentence' ? 'mẫu câu' : 'từ'} nào.`);
   view = { name: 'write', mode, item, state: {} };
   document.activeElement?.blur(); // new item: let the word show before the keyboard
   render();
@@ -605,7 +608,7 @@ function clearInk() {
 // ponytail: this device only, not pushed to vocab.json; export or sync when it needs to reach other devices.
 function addView() {
   const ids = [...new Set(data.lessons.map((l) => l.id))].filter((id) => id > 0).sort((a, b) => a - b);
-  const { busy, log = [], kind = 'word', lesson = pickedLesson || latestLesson(data) } = view.state;
+  const { busy, log = [], kind = 'word', lesson = picked()[0] || latestLesson(data) } = view.state;
   const mine = [...custom.words.map((w) => ({ k: 'w', key: w.hanzi, lesson: w.lesson, html: wordHz(w), vi: w.meanings.join('; ') })),
     ...custom.sentences.map((s) => ({ k: 's', key: s.id, lesson: s.lesson, html: sentenceHz(s), vi: s.vi }))].reverse();
   return `<main class="page">
@@ -747,6 +750,7 @@ let wasTyping = false;
 function render() {
   const views = { home, words: wordList, quiz, summary, write, add: addView };
   wasTyping = document.activeElement?.matches?.('#hz-in, #py') ?? false;
+  if (view.name !== 'home') lessonPickerOpen = false; // picker reopens closed next time
   root.innerHTML = views[view.name]();
   if (view.name === 'quiz') onQuestionShown();
   if (view.name === 'write') {
@@ -791,7 +795,7 @@ function onQuestionShown() {
 }
 
 function startSession(mode) {
-  const qs = buildSession(data, progress, mode, { lesson: pickedLesson === '' ? null : +pickedLesson });
+  const qs = buildSession(data, progress, mode, { lesson: pickedLesson === '' ? null : picked() });
   view = { name: 'quiz', mode, qs, i: 0, state: {}, results: [] };
   render();
   autoplay();
@@ -913,8 +917,10 @@ root.addEventListener('click', (e) => {
 root.addEventListener('input', (e) => { if (e.target.id === 'word-search') searchWords(e.target.value); });
 root.addEventListener('change', (e) => {
   if (e.target.dataset.move) return moveItem(e.target);
-  if (e.target.id !== 'lesson-pick') return;
-  pickedLesson = e.target.value;
+  if (!e.target.classList.contains('lesson-pick')) return;
+  // "Tất cả" clears the ticks; ticking a lesson unticks "Tất cả".
+  pickedLesson = e.target.value === '' ? '' : [...root.querySelectorAll('.lesson-pick:checked')].map((b) => b.value).filter(Boolean).join(',');
+  lessonPickerOpen = true;
   try { localStorage.setItem(LESSON_KEY, pickedLesson); } catch { /* private mode */ }
   render();
 });

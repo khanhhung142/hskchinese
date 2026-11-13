@@ -76,9 +76,9 @@ function weight(stat) {
  */
 export function buildSession(data, progress, mode, { rand = Math.random, size = 5, lesson = null } = {}) {
   const latest = latestLesson(data);
-  // `lesson` narrows mode 'all' to one lesson; distractors still come from every word.
-  const only = mode === 'latest' ? latest : lesson;
-  const pool = only == null ? data.words : data.words.filter((w) => w.lesson === only);
+  // `lesson` (id or array of ids) narrows mode 'all'; distractors still come from every word.
+  const only = mode === 'latest' ? [latest] : lesson == null ? null : [].concat(lesson);
+  const pool = only == null ? data.words : data.words.filter((w) => only.includes(w.lesson));
   const chosen = pool
     .map((w) => ({ w, k: weight(progress[w.hanzi]) * rand() }))
     .sort((a, b) => b.k - a.k)

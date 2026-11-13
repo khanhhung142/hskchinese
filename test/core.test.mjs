@@ -109,6 +109,9 @@ test('tokenize: longest known word first, unknown runs segmented, punctuation sp
 test('buildSession: lesson option limits picked words to that lesson', () => {
   const id = data.lessons.find((l) => l.id > 0).id;
   for (let i = 0; i < 20; i++) assert.ok(buildSession(data, {}, 'all', { lesson: id }).every((q) => q.word.lesson === id));
+  // several lessons at once
+  const two = [...new Set(data.words.map((w) => w.lesson))].slice(0, 2);
+  for (let i = 0; i < 20; i++) assert.ok(buildSession(data, {}, 'all', { lesson: two }).every((q) => two.includes(q.word.lesson)));
 });
 
 test('sameHanzi matches typed Chinese exactly, ignoring spaces and punctuation', () => {

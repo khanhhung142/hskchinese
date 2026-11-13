@@ -30,7 +30,7 @@ The older quizzes (**Học bài mới**, **Ôn tất cả**) are hidden there an
   Words never seen before get a flashcard first, then every word in the session gets one exercise.
 - **Ôn tất cả** (`/full/` only) reviews all words, favouring words you miss often.
 - **Tra cứu** has two tabs. **Tra cứu từ** lists every word by lesson; tap a row to move it to another lesson. **Tra cứu câu** lists every example sentence by lesson. The search box filters the open tab by hanzi, pinyin (tones and spaces optional: `nihao`), Vietnamese (accents optional) or English.
-- **Học theo bài** (picker on the home screen) limits every practice mode and **Ôn** to one lesson, or all lessons.
+- **Học theo bài** (picker on the home screen) limits every practice mode and **Ôn** to the ticked lessons (one or several), or all lessons; saved as comma-separated ids in `localStorage` key `hsk-lesson`.
 - **Thêm từ, mẫu câu** adds words or sentences by typing only the Chinese, one per line, under a lesson you pick by name (typing a new name creates a lesson with that title; ids stay integers internally).
   Pinyin comes from pinyin-pro (jsDelivr), Vietnamese and English from the MyMemory translation API; write `老师 = giáo viên` to set the Vietnamese yourself.
   Adding a word or sentence that already exists in another lesson shows two buttons: keep it in its lesson, or move it to the lesson picked above (saved as a move, like below). In **Tra cứu**, the pencil next to a lesson name renames it (empty name restores the original); open a word to move it, or any of its sentences, to another lesson ("Bài mới…" asks for a name); the trash next to a lesson name deletes the whole lesson (all its words and sentences); saved in `localStorage` key `hsk-moves`, also this browser only.
