@@ -187,7 +187,7 @@ function wordList() {
   const groups = [...data.lessons].sort((a, b) => b.id - a.id).map((l) => {
     const items = sentTab ? data.sentences.filter((s) => s.lesson === l.id) : data.words.filter((w) => w.lesson === l.id);
     if (!items.length) return '';
-    return `<section class="group"><h2>${esc(l.title)}<button class="icon-btn" data-action="rename" data-id="${l.id}" aria-label="Đổi tên bài">${icon('pencil-simple-line')}</button><button class="icon-btn" data-action="export" data-id="${l.id}" aria-label="Tải bài này">${icon('download-simple')}</button><button class="icon-btn" data-action="del-lesson" data-id="${l.id}" aria-label="Xoá bài này">${icon('trash')}</button></h2><div class="words">${items.map(sentTab ? sentRow : wordRow).join('')}</div></section>`;
+    return `<section class="group"><h2>${esc(l.title)}<button class="icon-btn" data-action="rename" data-id="${l.id}" aria-label="Đổi tên bài">${icon('pencil-simple-line')}</button><button class="icon-btn" data-action="export" data-id="${l.id}" aria-label="Tải bài này">${icon('download-simple')}</button></h2><div class="words">${items.map(sentTab ? sentRow : wordRow).join('')}</div></section>`;
   });
   const tab = (v, t) => `<button class="${(v === 's') === sentTab ? 'on' : ''}" data-action="tab" data-tab="${v}" aria-pressed="${(v === 's') === sentTab}">${t}</button>`;
   return `<main class="page">
@@ -870,19 +870,6 @@ root.addEventListener('click', (e) => {
   else if (act === 'rename') renameLesson(+el.dataset.id);
   else if (act === 'export') exportData(el.dataset.id === undefined ? undefined : +el.dataset.id);
   else if (act === 'add') { view = { name: 'add', state: {} }; render(); }
-  else if (act === 'del-lesson') {
-    // Whole lesson = every word and sentence in it, recorded the same way as single deletes.
-    const id = +el.dataset.id;
-    const words = data.words.filter((w) => w.lesson === id), sents = data.sentences.filter((s) => s.lesson === id);
-    if (!confirm(`Xoá ${lessonTitle(id)}: ${words.length} từ, ${sents.length} câu?`)) return;
-    const hz = new Set(words.map((w) => w.hanzi)), ids = new Set(sents.map((s) => s.id));
-    custom.words = custom.words.filter((w) => !hz.has(w.hanzi));
-    custom.sentences = custom.sentences.filter((s) => !ids.has(s.id) && !hz.has(s.focus));
-    saveCustom();
-    words.forEach((w) => { if (base.words.some((x) => x.hanzi === w.hanzi)) moves.d[w.hanzi] = id; });
-    sents.forEach((s) => { if (base.sentences.some((x) => x.id === s.id)) moves.x[s.id] = id; });
-    saveMoves(); mergeData(); render();
-  }
   else if (act === 'del-custom') {
     if (!confirm('Xoá mục này?')) return;
     const key = el.dataset.key;
