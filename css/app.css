@@ -336,17 +336,6 @@ body {
 .tomie::before { content: "\2661  "; }
 .sheet { border: 2.5px solid var(--line); border-bottom: 0; box-shadow: none; }
 
-/* Window chrome: periwinkle title bar with  [] _ x */
-.lesson, .card { position: relative; padding-top: 52px; overflow: hidden; }
-.lesson::before, .card::before {
-  content: ""; position: absolute; inset: 0 0 auto; height: 30px;
-  background: var(--peri); border-bottom: 2.5px solid var(--line);
-}
-.lesson::after, .card::after {
-  content: "_  \25A1  \2715"; position: absolute; top: 4px; right: 12px;
-  font: 700 14px/22px ui-monospace, Menlo, monospace; color: #2e2b5f; white-space: pre;
-}
-body.typing .card { padding-top: 40px; }
 .input-row { grid-template-columns: minmax(0, 1fr) auto; }
 .input-row input { width: 100%; min-width: 0; }
 .footer { background: none; }
@@ -355,12 +344,7 @@ body.typing .card { padding-top: 40px; }
 .field select { width: 100%; }
 .tomie { color: #8f1d55; font-weight: 600; }
 @media (prefers-color-scheme: dark) { .tomie { color: #ffc2dc; } }
-.menu { padding: 42px 12px 12px; position: relative; border: 2.5px solid var(--line); border-radius: var(--r-box); background: rgb(255 255 255 / .4); overflow: hidden; }
-.menu::before { content: ""; position: absolute; inset: 0 0 auto; height: 30px; padding: 0 12px; background: var(--peri); border-bottom: 2.5px solid var(--line); font: 700 13px/28px ui-monospace, Menlo, monospace; color: #2e2b5f; }
-.menu::after { content: "_  \25A1  \2715"; position: absolute; top: 4px; right: 12px; font: 700 14px/22px ui-monospace, Menlo, monospace; color: #2e2b5f; white-space: pre; }
-/* Typing on a phone: drop window chrome and the sticky footer so the answer box is never covered. */
-body.typing .card { padding-top: 12px; }
-body.typing .card::before, body.typing .card::after { display: none; }
+/* Typing on a phone: unstick the footer so the answer box is never covered. */
 body.typing .card .en { display: none; }
 body.typing .footer { position: static; background: none; }
 .home-head h1 small { display: block; margin-top: 6px; font-size: 14px; font-weight: 500; font-style: italic; color: var(--text); opacity: .8; letter-spacing: 0; }
