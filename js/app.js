@@ -17,6 +17,7 @@ const MOVES_KEY = key('hsk-moves'); // edits made in the word list: { w: {hanzi:
 let moves = loadJSON(MOVES_KEY) ?? { w: {}, s: {} };
 moves.t ??= {};
 moves.d ??= {}; // deleted words: {hanzi: lesson it was in}
+moves.x ??= {}; // deleted sentences: {sentenceId: lesson it was in}
 let view = { name: 'home' };
 
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
@@ -198,7 +199,7 @@ function wordList() {
 /** One example sentence in "Tra cứu câu"; searchable by text, pinyin, Vietnamese, English. */
 function sentRow(s) {
   const q = fold([sentenceText(s), EN ? '' : s.tokens.map((t) => tokenPinyin(t, wordMap)).join(''), s.vi, s.en].join(' '));
-  return `<div class="sent-row" data-q="${esc(q)}">${speakSentence(sentenceText(s), sentenceHz(s), s.vi, s.en)}${moveSelect('s', s.id, s.lesson, 'Câu thuộc')}</div>`;
+  return `<div class="sent-row" data-q="${esc(q)}">${speakSentence(sentenceText(s), sentenceHz(s), s.vi, s.en)}${moveSelect('s', s.id, s.lesson, 'Câu thuộc')}<button class="btn del-word" data-action="del-sent" data-key="${esc(s.id)}">${icon('trash')} Xoá câu</button></div>`;
 }
 
 /** Lowercase, no accents/tones, đ→d, no spaces: "Nǐ hǎo" and "nihao" both match "ni hao". */
@@ -269,7 +270,7 @@ async function exportData(id) {
   const pick = (o) => Object.fromEntries(Object.entries(o).filter(([, v]) => id === undefined || v === id));
   const edits = {
     custom: { lessons: custom.lessons.filter((l) => id === undefined || l.id === id), words: custom.words.filter(keep), sentences: custom.sentences.filter(keep) },
-    moves: { w: pick(moves.w), s: pick(moves.s), t: Object.fromEntries(Object.entries(moves.t).filter(([k]) => id === undefined || +k === id)), d: pick(moves.d) },
+    moves: { w: pick(moves.w), s: pick(moves.s), t: Object.fromEntries(Object.entries(moves.t).filter(([k]) => id === undefined || +k === id)), d: pick(moves.d), x: pick(moves.x) },
   };
   const body = JSON.stringify({ exported: new Date().toISOString(), lessons: data.lessons.filter((l) => id === undefined || l.id === id), words: data.words.filter(keep), sentences: data.sentences.filter(keep), edits }, null, 1);
   const file = new File([body], `${T.file}-export-${id === undefined ? 'all' : `bai-${id}`}-${new Date().toISOString().slice(0, 10)}.json`, { type: 'application/json' });
@@ -730,7 +731,7 @@ function mergeData() {
     lessons: [...base.lessons, ...custom.lessons.filter((l) => !lessonIds.has(l.id))].map((l) => (l.id in moves.t ? { ...l, title: moves.t[l.id] } : l)).sort((a, b) => a.id - b.id),
     words: [...base.words, ...custom.words.filter((w) => !has.has(w.hanzi))].filter((w) => !(w.hanzi in moves.d)).map((w) => (w.hanzi in moves.w ? { ...w, lesson: moves.w[w.hanzi] } : w)),
     // A deleted word takes its example sentences with it.
-    sentences: [...base.sentences, ...custom.sentences].filter((s) => !(s.focus in moves.d)).map((s) => (s.id in moves.s ? { ...s, lesson: moves.s[s.id] } : s)),
+    sentences: [...base.sentences, ...custom.sentences].filter((s) => !(s.focus in moves.d) && !(s.id in moves.x)).map((s) => (s.id in moves.s ? { ...s, lesson: moves.s[s.id] } : s)),
   };
   wordMap = new Map(data.words.map((w) => [w.hanzi, w]));
 }
@@ -871,6 +872,16 @@ root.addEventListener('click', (e) => {
     saveCustom();
     if (base.words.some((x) => x.hanzi === w.hanzi)) moves.d[w.hanzi] = w.lesson;
     saveMoves(); mergeData(); render();
+  }
+  else if (act === 'del-sent') {
+    const s = data.sentences.find((x) => x.id === el.dataset.key);
+    if (!s || !confirm(`Xoá câu ${sentenceText(s)}?`)) return;
+    custom.sentences = custom.sentences.filter((x) => x.id !== s.id);
+    saveCustom();
+    if (base.sentences.some((x) => x.id === s.id)) moves.x[s.id] = s.lesson;
+    saveMoves();
+    const y = scrollY;
+    mergeData(); render(); scrollTo(0, y);
   }
   else if (act === 'del-custom') {
     if (!confirm('Xoá mục này?')) return;
