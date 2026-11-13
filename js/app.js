@@ -212,13 +212,11 @@ function searchWords(q) {
 }
 
 function wordRow(w) {
-  const sents = data.sentences.filter((s) => s.focus === w.hanzi);
   return `<details class="word" data-q="${esc(fold([w.hanzi, ...w.pinyin, ...w.meanings, w.en].join(' ')))}">
     <summary>${wordHz(w, true)}<span><p>${esc(w.meanings.join('; '))}</p><p class="en">${esc(w.en)}</p></span>${icon('caret-right')}</summary>
     <div class="body">
       ${moveSelect('w', w.hanzi, w.lesson, 'Từ thuộc')}
       <button class="btn del-word" data-action="del-word" data-key="${esc(w.hanzi)}">${icon('trash')} Xoá từ</button>
-      ${sents.map((s) => `<div>${speakSentence(sentenceText(s), sentenceHz(s), s.vi, s.en)}${moveSelect('s', s.id, s.lesson, 'Câu thuộc')}</div>`).join('')}
     </div>
   </details>`;
 }

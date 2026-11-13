@@ -29,7 +29,7 @@ The older quizzes (**Học bài mới**, **Ôn tất cả**) are hidden there an
 - **Học bài mới** (`/full/` only) studies the newest lesson.
   Words never seen before get a flashcard first, then every word in the session gets one exercise.
 - **Ôn tất cả** (`/full/` only) reviews all words, favouring words you miss often.
-- **Tra cứu** has two tabs. **Tra cứu từ** lists every word by lesson; tap a row to see its example sentences, tap the speaker to hear it. **Tra cứu câu** lists every example sentence by lesson. The search box filters the open tab by hanzi, pinyin (tones and spaces optional: `nihao`), Vietnamese (accents optional) or English.
+- **Tra cứu** has two tabs. **Tra cứu từ** lists every word by lesson; tap a row to move it to another lesson or delete it. **Tra cứu câu** lists every example sentence by lesson. The search box filters the open tab by hanzi, pinyin (tones and spaces optional: `nihao`), Vietnamese (accents optional) or English.
 - **Học theo bài** (picker on the home screen) limits every practice mode and **Ôn** to one lesson, or all lessons.
 - **Thêm từ, mẫu câu** adds words or sentences by typing only the Chinese, one per line, under a lesson you pick by name (typing a new name creates a lesson with that title; ids stay integers internally).
   Pinyin comes from pinyin-pro (jsDelivr), Vietnamese and English from the MyMemory translation API; write `老师 = giáo viên` to set the Vietnamese yourself.
