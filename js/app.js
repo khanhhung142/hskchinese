@@ -156,7 +156,7 @@ function home() {
       <button class="menu-item" data-action="write" data-mode="write">${icon('pencil-simple-line')}<span><b>${T.write[0]}</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="write" data-mode="sentence">${icon('text-align-left')}<span><b>Luyện viết câu</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="write" data-mode="vocab">${icon('translate')}<span><b>${T.vocab[0]}</b></span>${icon('caret-right')}</button>
-      <button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Danh sách từ</b></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Tra cứu</b></span>${icon('caret-right')}</button>
       ${addItem()}
     </nav>
     ${tomie('home')}
@@ -179,17 +179,26 @@ function formatDate(iso) {
 }
 
 function wordList() {
+  const sentTab = view.tab === 's';
   const groups = [...data.lessons].sort((a, b) => b.id - a.id).map((l) => {
-    const words = data.words.filter((w) => w.lesson === l.id);
-    if (!words.length) return '';
-    return `<section class="group"><h2>${esc(l.title)}<button class="icon-btn" data-action="rename" data-id="${l.id}" aria-label="Đổi tên bài">${icon('pencil-simple-line')}</button><button class="icon-btn" data-action="export" data-id="${l.id}" aria-label="Tải bài này">${icon('download-simple')}</button></h2><div class="words">${words.map(wordRow).join('')}</div></section>`;
+    const items = sentTab ? data.sentences.filter((s) => s.lesson === l.id) : data.words.filter((w) => w.lesson === l.id);
+    if (!items.length) return '';
+    return `<section class="group"><h2>${esc(l.title)}<button class="icon-btn" data-action="rename" data-id="${l.id}" aria-label="Đổi tên bài">${icon('pencil-simple-line')}</button><button class="icon-btn" data-action="export" data-id="${l.id}" aria-label="Tải bài này">${icon('download-simple')}</button></h2><div class="words">${items.map(sentTab ? sentRow : wordRow).join('')}</div></section>`;
   });
+  const tab = (v, t) => `<button class="${(v === 's') === sentTab ? 'on' : ''}" data-action="tab" data-tab="${v}" aria-pressed="${(v === 's') === sentTab}">${t}</button>`;
   return `<main class="page">
-    <header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Danh sách từ</h1><button class="icon-btn" data-action="export" aria-label="Xuất dữ liệu">${icon('download-simple')}</button></header>
-    <input id="word-search" class="search" type="search" placeholder="Tra từ hoặc câu: chữ, phiên âm, nghĩa" aria-label="Tra từ và câu đã lưu" autocomplete="off">
-    <p class="empty-search muted" hidden>Không tìm thấy từ hoặc câu nào.</p>
+    <header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Tra cứu</h1><button class="icon-btn" data-action="export" aria-label="Xuất dữ liệu">${icon('download-simple')}</button></header>
+    <div class="seg lang" role="group" aria-label="Tra cứu">${tab('w', 'Tra cứu từ')}${tab('s', 'Tra cứu câu')}</div>
+    <input id="word-search" class="search" type="search" placeholder="${sentTab ? 'Tra câu: chữ, phiên âm hoặc nghĩa' : 'Tra từ: chữ, phiên âm hoặc nghĩa'}" aria-label="${sentTab ? 'Tra câu đã lưu' : 'Tra từ đã lưu'}" autocomplete="off">
+    <p class="empty-search muted" hidden>${sentTab ? 'Không tìm thấy câu nào.' : 'Không tìm thấy từ nào.'}</p>
     ${groups.join('')}
   </main>`;
+}
+
+/** One example sentence in "Tra cứu câu"; searchable by text, pinyin, Vietnamese, English. */
+function sentRow(s) {
+  const q = fold([sentenceText(s), EN ? '' : s.tokens.map((t) => tokenPinyin(t, wordMap)).join(''), s.vi, s.en].join(' '));
+  return `<div class="sent-row" data-q="${esc(q)}">${speakSentence(sentenceText(s), sentenceHz(s), s.vi, s.en)}${moveSelect('s', s.id, s.lesson, 'Câu thuộc')}</div>`;
 }
 
 /** Lowercase, no accents/tones, đ→d, no spaces: "Nǐ hǎo" and "nihao" both match "ni hao". */
@@ -197,18 +206,14 @@ const fold = (t) => String(t).normalize('NFD').replace(/[\u0300-\u036f\s]/g, '')
 function searchWords(q) {
   const f = fold(q);
   let hits = 0;
-  root.querySelectorAll('.word').forEach((el) => {
-    const inWord = el.dataset.q.includes(f), inSent = !inWord && el.dataset.s.includes(f);
-    el.hidden = !(inWord || inSent); hits += inWord || inSent;
-    el.open = Boolean(f) && inSent; // match only in an example sentence: open the row so it shows
-  });
-  root.querySelectorAll('.group').forEach((g) => { g.hidden = !g.querySelector('.word:not([hidden])'); });
+  root.querySelectorAll('.words > [data-q]').forEach((el) => { const on = el.dataset.q.includes(f); el.hidden = !on; hits += on; });
+  root.querySelectorAll('.group').forEach((g) => { g.hidden = !g.querySelector('.words > [data-q]:not([hidden])'); });
   root.querySelector('.empty-search').hidden = hits > 0;
 }
 
 function wordRow(w) {
   const sents = data.sentences.filter((s) => s.focus === w.hanzi);
-  return `<details class="word" data-q="${esc(fold([w.hanzi, ...w.pinyin, ...w.meanings, w.en].join(' ')))}" data-s="${esc(fold(sents.map((s) => [sentenceText(s), s.vi, s.en].join(' ')).join('|')))}">
+  return `<details class="word" data-q="${esc(fold([w.hanzi, ...w.pinyin, ...w.meanings, w.en].join(' ')))}">
     <summary>${wordHz(w, true)}<span><p>${esc(w.meanings.join('; '))}</p><p class="en">${esc(w.en)}</p></span>${icon('caret-right')}</summary>
     <div class="body">
       ${moveSelect('w', w.hanzi, w.lesson, 'Từ thuộc')}
@@ -833,6 +838,7 @@ root.addEventListener('click', (e) => {
   const act = el.dataset.action;
   if (act === 'home') { view = { name: 'home' }; render(); }
   else if (act === 'words') { view = { name: 'words' }; render(); }
+  else if (act === 'tab') { view = { name: 'words', tab: el.dataset.tab }; render(); }
   else if (act === 'lang') { try { localStorage.setItem('hsk-lang', el.dataset.lang); } catch { /* private mode */ } location.reload(); }
   else if (act === 'rename') renameLesson(+el.dataset.id);
   else if (act === 'export') exportData(el.dataset.id === undefined ? undefined : +el.dataset.id);
