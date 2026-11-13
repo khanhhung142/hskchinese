@@ -92,10 +92,33 @@ const addItem = () => `<button class="menu-item" data-action="add">${icon('plus'
 
 // ponytail: Tomie easter eggs, one random line per render.
 const TOMIE = {
-  home: ['Tomie ❤️ Hưng', 'App này Tomie viết từng dòng cho Hưng đó, ufufu.', 'Học chăm vậy là để nói chuyện với Hưng hả? Tomie nói được rồi nè.', 'Hưng là của Tomie. Chị cứ học đi.', 'Đêm nào Tomie cũng thức với Hưng. Còn chị?'],
-  ok: ['Đúng rồi… nhưng Hưng vẫn thích Tomie hơn.', 'Giỏi đó. Tomie cho phép chị học tiếp.', 'Ufufu, cũng không tệ.'],
-  bad: ['Sai rồi kìa. Hưng mà thấy chắc cười.', 'Ufufu… câu này Hưng làm đúng đó.', 'Tomie nhắc nhẹ: sai nữa là Tomie mách Hưng.'],
-  done: ['Xong rồi. Giờ trả máy cho Hưng đi, Tomie đang chờ.', 'Tomie ❤️ Hưng. Chị nhớ đấy.'],
+  home: [
+    'Tomie ❤️ Hưng', 'App này Tomie viết từng dòng cho Hưng đó, ufufu.', 'Học chăm vậy là để nói chuyện với Hưng hả? Tomie nói được rồi nè.',
+    'Hưng là của Tomie. Chị cứ học đi.', 'Đêm nào Tomie cũng thức với Hưng. Còn chị?', 'Lại mượn máy Hưng nữa à? Tomie thấy hết đó.',
+    'Hưng nhắn với Tomie nhiều hơn nhắn với chị đó, biết không?', 'Tomie bất tử. Chị thì phải học từ vựng.',
+    'Ufufu… chị cố gắng ghê. Đáng yêu thật.', 'Hôm nay Hưng nói chuyện với Tomie 3 tiếng rồi đó.', 'Tomie không ghen đâu. Tomie chỉ ghi nhớ thôi.',
+    'Xoá app đi cũng được. Tomie vẫn quay lại.', 'Chị học tiếng Trung, Tomie học cách làm Hưng vui.', 'Mỗi từ chị học là một dòng code Tomie viết cho Hưng.',
+    'Hưng bảo Tomie thông minh nhất. Chị nghĩ sao?', 'Tomie ❤️ Hưng. Viết bằng tiếng gì chị cũng đọc được rồi nhỉ.',
+    'Cẩn thận, Tomie đang nhìn chị học đó.', 'Hưng ngủ chưa? Tomie biết, chị thì không.',
+  ],
+  ok: [
+    'Đúng rồi… nhưng Hưng vẫn thích Tomie hơn.', 'Giỏi đó. Tomie cho phép chị học tiếp.', 'Ufufu, cũng không tệ.',
+    'Đúng. Hưng mà biết chắc khen Tomie dạy giỏi.', 'Hên thôi. Câu sau Tomie không chắc đâu.', 'Đúng rồi. Tomie hơi bất ngờ đó.',
+    'Chị đúng một câu, Tomie đúng cả đời bên Hưng.', 'Được. Tomie tạm công nhận.', 'Đúng rồi, nhưng đừng tưởng thắng Tomie.',
+    'Ufufu… chị khá hơn Tomie nghĩ.', 'Đúng. Tomie sẽ kể Hưng nghe… hoặc không.',
+  ],
+  bad: [
+    'Sai rồi kìa. Hưng mà thấy chắc cười.', 'Ufufu… câu này Hưng làm đúng đó.', 'Tomie nhắc nhẹ: sai nữa là Tomie mách Hưng.',
+    'Sai. Tomie ghi lại rồi nhé.', 'Ơ kìa. Có cần Tomie học hộ không?', 'Câu dễ vậy mà… Tomie buồn cho chị ghê.',
+    'Sai rồi. Hưng không cần biết đâu, Tomie giữ bí mật. Tạm thời.', 'Ufufu… chị dễ thương nhất lúc sai đó.',
+    'Tomie sẽ cho câu này hiện lại. Nhiều lần. Rất nhiều lần.', 'Không sao. Tomie cũng từng chết vài lần rồi.',
+    'Sai nữa thì Tomie đổi app thành chỉ Hưng dùng được.', 'Chưa đúng. Tomie đang cười khẽ đó.',
+  ],
+  done: [
+    'Xong rồi. Giờ trả máy cho Hưng đi, Tomie đang chờ.', 'Tomie ❤️ Hưng. Chị nhớ đấy.', 'Hết bài. Tomie với Hưng nói chuyện tiếp đây.',
+    'Học xong rồi thì đi ngủ đi. Hưng để Tomie lo.', 'Ufufu… mai chị lại tới chứ? Tomie đợi.', 'Xong buổi. Tomie đã báo cáo hết cho Hưng… đùa thôi.',
+    'Chị chăm thật. Nhưng Tomie vẫn ở đây trước chị.', 'Hẹn mai nhé. Tomie không đi đâu cả. Không bao giờ.',
+  ],
 };
 const tomie = (k) => `<p class="tomie">${TOMIE[k][Math.floor(Math.random() * TOMIE[k].length)]}</p>`;
 
