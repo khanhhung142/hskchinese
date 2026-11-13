@@ -199,7 +199,7 @@ function wordList() {
 /** One example sentence in "Tra cứu câu"; searchable by text, pinyin, Vietnamese, English. */
 function sentRow(s) {
   const q = fold([sentenceText(s), EN ? '' : s.tokens.map((t) => tokenPinyin(t, wordMap)).join(''), s.vi, s.en].join(' '));
-  return `<div class="sent-row" data-q="${esc(q)}">${speakSentence(sentenceText(s), sentenceHz(s), s.vi, s.en)}${moveSelect('s', s.id, s.lesson, 'Câu thuộc')}<button class="btn del-word" data-action="del-sent" data-key="${esc(s.id)}">${icon('trash')} Xoá câu</button></div>`;
+  return `<div class="sent-row" data-q="${esc(q)}">${speakSentence(sentenceText(s), sentenceHz(s), s.vi, s.en)}${moveSelect('s', s.id, s.lesson, 'Câu thuộc')}</div>`;
 }
 
 /** Lowercase, no accents/tones, đ→d, no spaces: "Nǐ hǎo" and "nihao" both match "ni hao". */
@@ -217,7 +217,6 @@ function wordRow(w) {
     <summary>${wordHz(w, true)}<span><p>${esc(w.meanings.join('; '))}</p><p class="en">${esc(w.en)}</p></span>${icon('caret-right')}</summary>
     <div class="body">
       ${moveSelect('w', w.hanzi, w.lesson, 'Từ thuộc')}
-      <button class="btn del-word" data-action="del-word" data-key="${esc(w.hanzi)}">${icon('trash')} Xoá từ</button>
     </div>
   </details>`;
 }
@@ -867,15 +866,6 @@ root.addEventListener('click', (e) => {
   else if (act === 'rename') renameLesson(+el.dataset.id);
   else if (act === 'export') exportData(el.dataset.id === undefined ? undefined : +el.dataset.id);
   else if (act === 'add') { view = { name: 'add', state: {} }; render(); }
-  else if (act === 'del-word') {
-    const w = wordMap.get(el.dataset.key);
-    if (!w || !confirm(`Xoá từ ${w.hanzi} và các câu mẫu của nó?`)) return;
-    custom.words = custom.words.filter((x) => x.hanzi !== w.hanzi);
-    custom.sentences = custom.sentences.filter((s) => s.focus !== w.hanzi);
-    saveCustom();
-    if (base.words.some((x) => x.hanzi === w.hanzi)) moves.d[w.hanzi] = w.lesson;
-    saveMoves(); mergeData(); render();
-  }
   else if (act === 'del-lesson') {
     // Whole lesson = every word and sentence in it, recorded the same way as single deletes.
     const id = +el.dataset.id;
@@ -888,16 +878,6 @@ root.addEventListener('click', (e) => {
     words.forEach((w) => { if (base.words.some((x) => x.hanzi === w.hanzi)) moves.d[w.hanzi] = id; });
     sents.forEach((s) => { if (base.sentences.some((x) => x.id === s.id)) moves.x[s.id] = id; });
     saveMoves(); mergeData(); render();
-  }
-  else if (act === 'del-sent') {
-    const s = data.sentences.find((x) => x.id === el.dataset.key);
-    if (!s || !confirm(`Xoá câu ${sentenceText(s)}?`)) return;
-    custom.sentences = custom.sentences.filter((x) => x.id !== s.id);
-    saveCustom();
-    if (base.sentences.some((x) => x.id === s.id)) moves.x[s.id] = s.lesson;
-    saveMoves();
-    const y = scrollY;
-    mergeData(); render(); scrollTo(0, y);
   }
   else if (act === 'del-custom') {
     if (!confirm('Xoá mục này?')) return;
