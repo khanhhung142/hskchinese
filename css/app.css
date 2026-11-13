@@ -287,3 +287,4 @@ button { cursor: pointer; }
 .cands { min-height: 48px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .hand-tools { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; }
 .hand-tools .btn { min-height: 44px; padding: 0 14px; font-weight: 500; }
+.tomie { margin: 16px 0 0; text-align: center; font-size: 13px; font-style: italic; color: #d6336c; }

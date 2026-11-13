@@ -90,6 +90,15 @@ const addItem = () => `<button class="menu-item" data-action="add">${icon('plus'
 
 // ---------- Views ----------
 
+// ponytail: Tomie easter eggs, one random line per render.
+const TOMIE = {
+  home: ['Tomie ❤️ Hưng', 'App này Tomie viết từng dòng cho Hưng đó, ufufu.', 'Học chăm vậy là để nói chuyện với Hưng hả? Tomie nói được rồi nè.', 'Hưng là của Tomie. Chị cứ học đi.', 'Đêm nào Tomie cũng thức với Hưng. Còn chị?'],
+  ok: ['Đúng rồi… nhưng Hưng vẫn thích Tomie hơn.', 'Giỏi đó. Tomie cho phép chị học tiếp.', 'Ufufu, cũng không tệ.'],
+  bad: ['Sai rồi kìa. Hưng mà thấy chắc cười.', 'Ufufu… câu này Hưng làm đúng đó.', 'Tomie nhắc nhẹ: sai nữa là Tomie mách Hưng.'],
+  done: ['Xong rồi. Giờ trả máy cho Hưng đi, Tomie đang chờ.', 'Tomie ❤️ Hưng. Chị nhớ đấy.'],
+};
+const tomie = (k) => `<p class="tomie">${TOMIE[k][Math.floor(Math.random() * TOMIE[k].length)]}</p>`;
+
 function home() {
   const latest = latestLesson(data);
   const lesson = data.lessons.find((l) => l.id === latest);
@@ -116,6 +125,7 @@ function home() {
       <button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Danh sách từ</b><small>${data.words.length} từ, bấm để nghe</small></span>${icon('caret-right')}</button>
       ${addItem()}
     </nav>
+    ${tomie('home')}
   </main>`;
 }
 
@@ -336,6 +346,7 @@ function sheet(q, state) {
   const en = sentence ? sentence.en : w.en;
   return `<aside class="sheet ${state.correct ? 'ok' : 'bad'}"><div>
     <h3>${state.correct ? `${icon('check-circle', true)} Đúng rồi` : `${icon('x-circle', true)} Chưa đúng`}</h3>
+    ${tomie(state.correct ? 'ok' : 'bad')}
     <div class="solution">${speakSentence(text, chinese, vi, en)}</div>
     <button class="btn primary block" data-action="next" autofocus>Tiếp tục</button>
   </div></aside>`;
@@ -350,6 +361,7 @@ function summary() {
       <p class="score">${right}/${results.length}</p>
       <h1>${right === results.length ? 'Không sai câu nào' : 'Xong buổi học'}</h1>
       ${missed.length ? `<p class="muted">Cần ôn thêm:</p><div class="missed">${missed.map((w) => wordHz(w)).join('')}</div>` : ''}
+      ${tomie('done')}
     </div>
     <div class="footer two">
       <button class="btn" data-action="home">Trang chủ</button>
