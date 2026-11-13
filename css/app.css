@@ -333,7 +333,6 @@ body {
 .seg.lang button.on, .seg label:has(:checked) { background: var(--pink); color: #2e2b5f; border-color: var(--line); }
 .bar { height: 10px; border: 2px solid var(--line); border-radius: 6px; background: var(--surface); }
 .bar > span { background: linear-gradient(90deg, var(--pink), var(--peri)); border-radius: 0; }
-.home-head h1 > span::after { content: " \2726\263E"; color: #f5c84c; -webkit-text-stroke: 1px var(--line); }
 .tomie::before { content: "\2661  "; }
 .sheet { border: 2.5px solid var(--line); border-bottom: 0; box-shadow: none; }
 
@@ -357,7 +356,7 @@ body.typing .card { padding-top: 40px; }
 .tomie { color: #8f1d55; font-weight: 600; }
 @media (prefers-color-scheme: dark) { .tomie { color: #ffc2dc; } }
 .menu { padding: 42px 12px 12px; position: relative; border: 2.5px solid var(--line); border-radius: var(--r-box); background: rgb(255 255 255 / .4); overflow: hidden; }
-.menu::before { content: "study.exe"; position: absolute; inset: 0 0 auto; height: 30px; padding: 0 12px; background: var(--peri); border-bottom: 2.5px solid var(--line); font: 700 13px/28px ui-monospace, Menlo, monospace; color: #2e2b5f; }
+.menu::before { content: ""; position: absolute; inset: 0 0 auto; height: 30px; padding: 0 12px; background: var(--peri); border-bottom: 2.5px solid var(--line); font: 700 13px/28px ui-monospace, Menlo, monospace; color: #2e2b5f; }
 .menu::after { content: "_  \25A1  \2715"; position: absolute; top: 4px; right: 12px; font: 700 14px/22px ui-monospace, Menlo, monospace; color: #2e2b5f; white-space: pre; }
 /* Typing on a phone: drop window chrome and the sticky footer so the answer box is never covered. */
 body.typing .card { padding-top: 12px; }

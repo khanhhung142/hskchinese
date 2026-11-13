@@ -169,7 +169,7 @@ function lessonPicker() {
   const ids = [...new Set([...data.words, ...data.sentences].map((x) => x.lesson).filter((id) => id > 0))].sort((a, b) => a - b);
   if (pickedLesson && !ids.includes(+pickedLesson)) pickedLesson = '';
   const opt = (v, t) => `<option value="${v}"${String(v) === pickedLesson ? ' selected' : ''}>${esc(t)}</option>`;
-  return `<label class="field pick"><span>Học theo bài</span><select id="lesson-pick">${opt('', 'Tất cả các bài')}${ids.map((id) => opt(id, lessonTitle(id))).join('')}</select></label>`;
+  return `<label class="field pick"><select id="lesson-pick" aria-label="Học theo bài">${opt('', 'Tất cả các bài')}${ids.map((id) => opt(id, lessonTitle(id))).join('')}</select></label>`;
 }
 
 function formatDate(iso) {
