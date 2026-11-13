@@ -366,3 +366,6 @@ body.typing .card .en { display: none; }
 body.typing .footer { position: static; background: none; }
 .home-head h1 small { display: block; margin-top: 6px; font-size: 14px; font-weight: 500; font-style: italic; color: var(--text); opacity: .8; letter-spacing: 0; }
 .home-head h1 > .han { word-break: keep-all; }
+.search { width: 100%; min-height: 48px; padding: 0 14px; font: inherit; color: var(--text); border: 2.5px solid var(--line); border-radius: var(--r-ctl); background: var(--surface); }
+.search:focus { outline: none; border-color: var(--accent); }
+.empty-search { text-align: center; margin: 24px 0; }

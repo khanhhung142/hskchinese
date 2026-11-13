@@ -185,13 +185,25 @@ function wordList() {
   });
   return `<main class="page">
     <header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Danh sách từ</h1><button class="icon-btn" data-action="export" aria-label="Xuất dữ liệu">${icon('download-simple')}</button></header>
+    <input id="word-search" class="search" type="search" placeholder="Tra từ: chữ, phiên âm hoặc nghĩa" aria-label="Tra từ đã lưu" autocomplete="off">
+    <p class="empty-search muted" hidden>Không tìm thấy từ nào.</p>
     ${groups.join('')}
   </main>`;
 }
 
+/** Lowercase, no accents/tones, đ→d, no spaces: "Nǐ hǎo" and "nihao" both match "ni hao". */
+const fold = (t) => String(t).normalize('NFD').replace(/[\u0300-\u036f\s]/g, '').replace(/đ/gi, 'd').toLowerCase();
+function searchWords(q) {
+  const f = fold(q);
+  let hits = 0;
+  root.querySelectorAll('.word').forEach((el) => { const on = el.dataset.q.includes(f); el.hidden = !on; hits += on; });
+  root.querySelectorAll('.group').forEach((g) => { g.hidden = !g.querySelector('.word:not([hidden])'); });
+  root.querySelector('.empty-search').hidden = hits > 0;
+}
+
 function wordRow(w) {
   const sents = data.sentences.filter((s) => s.focus === w.hanzi);
-  return `<details class="word">
+  return `<details class="word" data-q="${esc(fold([w.hanzi, ...w.pinyin, ...w.meanings, w.en].join(' ')))}">
     <summary>${wordHz(w, true)}<span><p>${esc(w.meanings.join('; '))}</p><p class="en">${esc(w.en)}</p></span>${icon('caret-right')}</summary>
     <div class="body">
       ${moveSelect('w', w.hanzi, w.lesson, 'Từ thuộc')}
@@ -860,6 +872,7 @@ root.addEventListener('click', (e) => {
   }
 });
 
+root.addEventListener('input', (e) => { if (e.target.id === 'word-search') searchWords(e.target.value); });
 root.addEventListener('change', (e) => {
   if (e.target.dataset.move) return moveItem(e.target);
   if (e.target.id !== 'lesson-pick') return;
