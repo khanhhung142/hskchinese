@@ -166,7 +166,7 @@ function home() {
   </main>`;
 }
 
-const lessonTitle = (id) => data.lessons.find((l) => l.id === id)?.title ?? `Bài ${id}`;
+const lessonTitle = (id) => (data.lessons.find((l) => l.id === id) ?? custom.lessons.find((l) => l.id === id))?.title ?? `Bài ${id}`;
 /** Practice applies to the ticked lessons, or all when none is ticked; lessons listed are the ones that have words. */
 const inLesson = (x) => pickedLesson === '' || picked().includes(x.lesson);
 let lessonPickerOpen = false;
@@ -255,7 +255,7 @@ function lessonByName(name) {
   if (!t) return null;
   const hit = data.lessons.find((l) => l.id > 0 && (l.title.toLowerCase() === t.toLowerCase() || String(l.id) === t));
   if (hit) return hit.id;
-  const id = Math.max(0, ...data.lessons.map((l) => l.id)) + 1;
+  const id = Math.max(0, ...data.lessons.map((l) => l.id), ...custom.lessons.map((l) => l.id)) + 1;
   custom.lessons.push({ id, date: new Date().toISOString().slice(0, 10), title: t });
   data.lessons.push(custom.lessons.at(-1)); // visible before the next mergeData
   return id;
@@ -271,7 +271,7 @@ async function exportData(id) {
   const keep = (x) => id === undefined || x.lesson === id;
   const pick = (o) => Object.fromEntries(Object.entries(o).filter(([, v]) => id === undefined || v === id));
   const edits = {
-    custom: { lessons: custom.lessons.filter((l) => id === undefined || l.id === id), words: custom.words.filter(keep), sentences: custom.sentences.filter(keep) },
+    custom: { lessons: custom.lessons.filter((l) => (id === undefined || l.id === id) && data.lessons.some((x) => x.id === l.id)), words: custom.words.filter(keep), sentences: custom.sentences.filter(keep) },
     moves: { w: pick(moves.w), s: pick(moves.s), t: Object.fromEntries(Object.entries(moves.t).filter(([k]) => id === undefined || +k === id)), d: pick(moves.d), x: pick(moves.x) },
   };
   const body = JSON.stringify({ exported: new Date().toISOString(), lessons: data.lessons.filter((l) => id === undefined || l.id === id), words: data.words.filter(keep), sentences: data.sentences.filter(keep), edits }, null, 1);
@@ -738,6 +738,10 @@ function mergeData() {
     // Once Hermes applies an export, the same sentence is in vocab.json under a new id: base wins, like words.
     sentences: [...base.sentences, ...custom.sentences.filter((c) => !baseTexts.has(norm(c)))].filter((s) => !(s.focus in moves.d) && !(s.id in moves.x)).map((s) => (s.id in moves.s ? { ...s, lesson: moves.s[s.id] } : s)),
   };
+  // A lesson left with no words and no sentences is hidden everywhere (and left out of exports).
+  // ponytail: an empty custom lesson stays in hsk-custom (submitAdd needs it between lines); harmless, ids skip it.
+  const used = new Set([...data.words, ...data.sentences].map((x) => x.lesson));
+  data.lessons = data.lessons.filter((l) => used.has(l.id));
   wordMap = new Map(data.words.map((w) => [w.hanzi, w]));
 }
 
