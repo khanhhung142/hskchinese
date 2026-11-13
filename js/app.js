@@ -687,7 +687,24 @@ function render() {
     const target = view.state.done ? '[data-action="write-next"]' : view.state.hand || !(KEYBOARD_ON_OPEN || wasTyping) ? null : '#hz-in';
     if (target) root.querySelector(target).focus({ preventScroll: !KEYBOARD_ON_OPEN });
   }
+  fitKeyboard();
 }
+
+// Phone keyboard: while an answer box is focused, pin the page to the visible area above the keyboard
+// and compact it (CSS `body.typing`), so the word stays readable while typing.
+const vv = window.visualViewport;
+function fitKeyboard() {
+  const on = !KEYBOARD_ON_OPEN && !!document.activeElement?.matches?.('#hz-in, #py');
+  document.body.classList.toggle('typing', on);
+  if (on && vv) {
+    document.documentElement.style.setProperty('--vvh', `${vv.height}px`);
+    document.documentElement.style.setProperty('--vvt', `${vv.offsetTop}px`);
+  }
+}
+document.addEventListener('focusin', fitKeyboard);
+document.addEventListener('focusout', () => setTimeout(fitKeyboard));
+vv?.addEventListener('resize', fitKeyboard);
+vv?.addEventListener('scroll', fitKeyboard);
 
 function onQuestionShown() {
   const q = view.qs[view.i];

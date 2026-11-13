@@ -203,6 +203,18 @@ button { cursor: pointer; }
 .footer { position: sticky; bottom: 0; padding-top: 16px; display: grid; gap: 12px; background: linear-gradient(transparent, var(--bg) 16px); }
 .footer.two { grid-template-columns: 1fr 1fr; }
 
+/* Typing on a phone: page pinned to the area above the keyboard, chrome hidden, card compacted. */
+body.typing .page { position: fixed; top: var(--vvt, 0); left: 0; right: 0; height: var(--vvh, 100dvh); min-height: 0; overflow-y: auto; padding-top: 8px; padding-bottom: 8px; }
+body.typing .list-head, body.typing .quiz-top, body.typing .prompt, body.typing .field label { display: none; }
+body.typing .stage { gap: 10px; padding-top: 0; }
+body.typing .card { padding: 12px 14px; }
+body.typing .big-han { font-size: 48px; margin: 0; }
+body.typing .card .py-big { font-size: 18px; }
+body.typing .card .big-meaning { font-size: 22px; }
+body.typing .sentence { font-size: 22px; }
+body.typing .card .speak { width: 40px; height: 40px; font-size: 20px; }
+body.typing .footer { padding-top: 8px; }
+
 /* Flashcard */
 .card {
   padding: 28px 20px; border-radius: var(--r-box); background: var(--surface);
