@@ -9,8 +9,9 @@ let data, wordMap;
 let progress = loadProgress();
 let custom = loadJSON(CUSTOM_KEY) ?? { lessons: [], words: [], sentences: [] };
 let pickedLesson = localStorage.getItem(LESSON_KEY) ?? '';
-const MOVES_KEY = 'hsk-moves'; // lesson reassignments made in the app: { w: {hanzi: id}, s: {sentenceId: id} }
+const MOVES_KEY = 'hsk-moves'; // edits made in the word list: { w: {hanzi: id}, s: {sentenceId: id}, t: {lessonId: title} }
 let moves = loadJSON(MOVES_KEY) ?? { w: {}, s: {} };
+moves.t ??= {};
 let view = { name: 'home' };
 
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
@@ -114,7 +115,7 @@ function wordList() {
   const groups = [...data.lessons].sort((a, b) => b.id - a.id).map((l) => {
     const words = data.words.filter((w) => w.lesson === l.id);
     if (!words.length) return '';
-    return `<section class="group"><h2>${esc(l.title)}</h2><div class="words">${words.map(wordRow).join('')}</div></section>`;
+    return `<section class="group"><h2>${esc(l.title)}<button class="icon-btn" data-action="rename" data-id="${l.id}" aria-label="Đổi tên bài">${icon('pencil-simple-line')}</button></h2><div class="words">${words.map(wordRow).join('')}</div></section>`;
   });
   return `<main class="page">
     <header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Danh sách từ</h1></header>
@@ -148,12 +149,24 @@ function moveItem(sel) {
     if (!data.lessons.some((l) => l.id === id)) { custom.lessons.push({ id, date: new Date().toISOString().slice(0, 10), title: `Bài ${id}` }); saveCustom(); }
   }
   moves[sel.dataset.move][sel.dataset.key] = +id;
-  try { localStorage.setItem(MOVES_KEY, JSON.stringify(moves)); } catch { alert('Không lưu được (bộ nhớ trình duyệt bị chặn).'); }
+  saveMoves();
   const open = sel.closest('details')?.querySelector('summary .han')?.textContent;
   mergeData();
   render();
   // Keep the word that was edited open.
   [...root.querySelectorAll('details.word')].find((d) => d.querySelector('summary .han')?.textContent === open)?.setAttribute('open', '');
+}
+
+function saveMoves() {
+  try { localStorage.setItem(MOVES_KEY, JSON.stringify(moves)); } catch { alert('Không lưu được (bộ nhớ trình duyệt bị chặn).'); }
+}
+
+/** Empty name restores the original title. */
+function renameLesson(id) {
+  const name = prompt('Tên bài:', lessonTitle(id));
+  if (name === null) return;
+  if (name.trim()) moves.t[id] = name.trim(); else delete moves.t[id];
+  saveMoves(); mergeData(); render();
 }
 
 /** Play button + Chinese (already rendered with pinyin) + translations. */
@@ -547,7 +560,7 @@ function mergeData() {
   const has = new Set(base.words.map((w) => w.hanzi));
   const lessonIds = new Set(base.lessons.map((l) => l.id));
   data = {
-    lessons: [...base.lessons, ...custom.lessons.filter((l) => !lessonIds.has(l.id))].sort((a, b) => a.id - b.id),
+    lessons: [...base.lessons, ...custom.lessons.filter((l) => !lessonIds.has(l.id))].map((l) => (l.id in moves.t ? { ...l, title: moves.t[l.id] } : l)).sort((a, b) => a.id - b.id),
     words: [...base.words, ...custom.words.filter((w) => !has.has(w.hanzi))].map((w) => (w.hanzi in moves.w ? { ...w, lesson: moves.w[w.hanzi] } : w)),
     sentences: [...base.sentences, ...custom.sentences].map((s) => (s.id in moves.s ? { ...s, lesson: moves.s[s.id] } : s)),
   };
@@ -640,6 +653,7 @@ root.addEventListener('click', (e) => {
   const act = el.dataset.action;
   if (act === 'home') { view = { name: 'home' }; render(); }
   else if (act === 'words') { view = { name: 'words' }; render(); }
+  else if (act === 'rename') renameLesson(+el.dataset.id);
   else if (act === 'add') { view = { name: 'add', state: {} }; render(); }
   else if (act === 'del-custom') {
     if (!confirm('Xoá mục này?')) return;

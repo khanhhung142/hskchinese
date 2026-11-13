@@ -33,7 +33,7 @@ The older quizzes (**Học bài mới**, **Ôn tất cả**) are hidden there an
 - **Học theo bài** (picker on the home screen) limits every practice mode and **Ôn** to one lesson, or all lessons.
 - **Thêm từ, mẫu câu** adds words or sentences by typing only the Chinese, one per line, under a lesson number you choose (a new number creates the lesson).
   Pinyin comes from pinyin-pro (jsDelivr), Vietnamese and English from the MyMemory translation API; write `老师 = giáo viên` to set the Vietnamese yourself.
-  In **Danh sách từ**, open a word to move it, or any of its sentences, to another lesson ("Bài mới…" takes a new number); saved in `localStorage` key `hsk-moves`, also this browser only.
+  In **Danh sách từ**, the pencil next to a lesson name renames it (empty name restores the original); open a word to move it, or any of its sentences, to another lesson ("Bài mới…" takes a new number); saved in `localStorage` key `hsk-moves`, also this browser only.
   Added items work in every exercise like Hermes' data, but are saved only in this browser (`localStorage` key `hsk-custom`), not in `data/vocab.json`; delete them from the same screen.
 
 A session has up to 5 words.
