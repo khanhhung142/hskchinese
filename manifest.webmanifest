@@ -3,8 +3,8 @@
   "short_name": "Học từ",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#fff0f5",
-  "theme_color": "#c2255c",
+  "background_color": "#f7b3d0",
+  "theme_color": "#a2a9f0",
   "icons": [
     { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" },
     { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }

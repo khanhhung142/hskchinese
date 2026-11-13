@@ -1,22 +1,26 @@
-/* Tokens. Radius rule: interactive controls 12px, containers 16px, chips 10px. */
+/* Tokens. Y2K pastel desktop theme: navy outlines, periwinkle title bars, pink buttons. */
 :root {
-  --bg: #fff0f5;
-  --surface: #fffafc;
-  --surface-2: #ffe1ec;
-  --text: #3a1d2b;
-  --muted: #8a5a70;
-  --line: #eeb3c9;
-  --accent: #c2255c;
-  --accent-text: #ffffff;
-  --accent-soft: #ffe0ec;
+  --bg: #f7b3d0;
+  --surface: #ffffff;
+  --surface-2: #ecebfb;
+  --text: #2e2b5f;
+  --muted: #5d5890;
+  --line: #2e2b5f;
+  --accent: #c2357a;
+  --accent-text: #2e2b5f;
+  --accent-soft: #fce2f0;
   --ok: #157a3c;
   --ok-soft: #e3f5e9;
   --bad: #c92a2a;
   --bad-soft: #fbe7e7;
-  --shadow: 0 1px 2px rgb(214 51 108 / .06), 0 8px 24px -12px rgb(214 51 108 / .25);
-  --r-ctl: 16px;
-  --r-box: 22px;
-  --r-chip: 14px;
+  --shadow: none;
+  --pink: #f7a8ca;
+  --peri: #a2a9f0;
+  --sky: linear-gradient(180deg, #f7b3d0, #d8bce8 50%, #a9baf2);
+  --grid: rgb(255 255 255 / .45);
+  --r-ctl: 8px;
+  --r-box: 10px;
+  --r-chip: 6px;
   --ease: cubic-bezier(.16, 1, .3, 1);
   --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   --han: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
@@ -24,20 +28,22 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #1f1018;
-    --surface: #2a1621;
-    --surface-2: #3a1f2e;
-    --text: #fff0f6;
-    --muted: #d9a5bd;
-    --line: #4a2839;
-    --accent: #ff8cc0;
-    --accent-text: #3a0f22;
-    --accent-soft: #4a1e33;
+    --bg: #2e2b5f;
+    --surface: #3a3670;
+    --surface-2: #48437f;
+    --text: #fdf2fa;
+    --muted: #c9c6f2;
+    --line: #a2a9f0;
+    --accent: #f7a8ca;
+    --accent-text: #2e2b5f;
+    --accent-soft: #5a3f7a;
     --ok: #5fd08b;
     --ok-soft: #12301f;
     --bad: #ff8a8a;
     --bad-soft: #3a1618;
-    --shadow: 0 1px 2px rgb(0 0 0 / .3), 0 8px 24px -12px rgb(0 0 0 / .6);
+    --shadow: none;
+    --sky: linear-gradient(180deg, #2e2b5f, #4b3a78 55%, #6b4f8f);
+    --grid: rgb(162 169 240 / .18);
   }
 }
 
@@ -303,3 +309,53 @@ body.typing .footer { padding-top: 8px; }
 .hand-tools { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; }
 .hand-tools .btn { min-height: 44px; padding: 0 14px; font-weight: 500; }
 .tomie { margin: 16px 0 0; text-align: center; font-size: 13px; font-style: italic; color: var(--accent); }
+
+/* Y2K pastel desktop skin */
+body {
+  background:
+    linear-gradient(var(--grid) 1px, transparent 1px) 0 0 / 32px 32px,
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0 / 32px 32px,
+    var(--sky);
+  background-attachment: fixed;
+}
+.btn, .menu-item, .lesson, .card, .opt, .chip, .field input, .field select, .field textarea,
+.seg label, .seg.lang button, .words, .input-row .icon-btn, #hand-pad, .speak { border-width: 2.5px; border-style: solid; border-color: var(--line); }
+.answer-line { border-width: 2.5px; border-color: var(--line); background: rgb(255 255 255 / .35); }
+.btn.primary { background: var(--pink); border-color: var(--line); color: #2e2b5f; }
+.btn:not(.primary) { background: var(--peri); color: #2e2b5f; }
+.btn, .prompt, .lesson h2, .field label, .field > span, .group h2, .counter {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; letter-spacing: .02em;
+}
+.btn { text-transform: uppercase; font-size: 15px; }
+.speak { background: var(--peri); color: #2e2b5f; }
+.menu-item > i:first-child { background: var(--pink); color: #2e2b5f; border: 2px solid var(--line); }
+.menu-item > i:last-child { color: var(--line); }
+.seg.lang button.on, .seg label:has(:checked) { background: var(--pink); color: #2e2b5f; border-color: var(--line); }
+.bar { height: 10px; border: 2px solid var(--line); border-radius: 6px; background: var(--surface); }
+.bar > span { background: linear-gradient(90deg, var(--pink), var(--peri)); border-radius: 0; }
+.home-head h1::after { content: " \2726\263E"; color: #f5c84c; -webkit-text-stroke: 1px var(--line); }
+.tomie::before { content: "\2661  "; }
+.sheet { border: 2.5px solid var(--line); border-bottom: 0; box-shadow: none; }
+
+/* Window chrome: periwinkle title bar with  [] _ x */
+.lesson, .card { position: relative; padding-top: 52px; overflow: hidden; }
+.lesson::before, .card::before {
+  content: ""; position: absolute; inset: 0 0 auto; height: 30px;
+  background: var(--peri); border-bottom: 2.5px solid var(--line);
+}
+.lesson::after, .card::after {
+  content: "_  \25A1  \2715"; position: absolute; top: 4px; right: 12px;
+  font: 700 14px/22px ui-monospace, Menlo, monospace; color: #2e2b5f; white-space: pre;
+}
+body.typing .card { padding-top: 40px; }
+.input-row { grid-template-columns: minmax(0, 1fr) auto; }
+.input-row input { width: 100%; min-width: 0; }
+.footer { background: none; }
+.prompt, .field label, .field > span, .lesson h2, .group h2 { color: var(--text); }
+.field { grid-template-columns: minmax(0, 1fr); }
+.field select { width: 100%; }
+.tomie { color: #8f1d55; font-weight: 600; }
+@media (prefers-color-scheme: dark) { .tomie { color: #ffc2dc; } }
+.menu { padding: 42px 12px 12px; position: relative; border: 2.5px solid var(--line); border-radius: var(--r-box); background: rgb(255 255 255 / .4); overflow: hidden; }
+.menu::before { content: "study.exe"; position: absolute; inset: 0 0 auto; height: 30px; padding: 0 12px; background: var(--peri); border-bottom: 2.5px solid var(--line); font: 700 13px/28px ui-monospace, Menlo, monospace; color: #2e2b5f; }
+.menu::after { content: "_  \25A1  \2715"; position: absolute; top: 4px; right: 12px; font: 700 14px/22px ui-monospace, Menlo, monospace; color: #2e2b5f; white-space: pre; }
