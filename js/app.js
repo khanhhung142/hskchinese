@@ -75,16 +75,17 @@ const speakBtn = (text, sm) => `<button class="speak${sm ? ' sm' : ''}" data-say
 
 /** Labels that differ between the two subjects. */
 const T = EN ? {
-  title: 'Học tiếng Anh', empty: 'Chưa có từ nào.<br>Gửi từ mới cho Hermes, hoặc tự thêm.',
+  titles: ['Hôm nay nói tiếng Anh như người bản xứ nhé!', 'Mỗi ngày một từ, một năm nghìn từ.', 'Học một chút thôi, giỏi lên một chút rồi.', 'English hôm nay, du lịch thế giới ngày mai.', 'Five minutes a day keeps the dictionary away.', 'Một câu mới hôm nay, tự tin hơn ngày mai.', 'Học xong nhớ khoe mình giỏi nha!', 'You can do it! Bắt đầu thôi.', 'Nói tiếng Anh trôi chảy chỉ còn vài bài nữa.', "Let's learn something cute today!", 'Từ vựng là siêu năng lực của bạn.', 'Học nhẹ nhàng thôi, không áp lực nha.'], empty: 'Chưa có từ nào.<br>Gửi từ mới cho Hermes, hoặc tự thêm.',
   write: ['Luyện viết từ', 'Nghe, xem và gõ lại từ'], vocab: ['Luyện từ vựng', 'Xem nghĩa, gõ từ tiếng Anh'], add: 'Chỉ cần gõ tiếng Anh',
   inWrite: 'Gõ lại từ ở trên', inVocab: 'Gõ từ tiếng Anh có nghĩa này', inSentence: 'Gõ lại cả câu ở trên',
   addField: 'Tiếng Anh, mỗi dòng một mục (nghĩa tự điền; muốn tự ghi nghĩa: teacher = giáo viên)', script: 'chỉ nhận chữ cái tiếng Anh', file: 'eng',
 } : {
-  title: 'Học từ', empty: 'Chưa có từ nào.<br>Gửi ảnh từ mới cho Hermes trên Telegram.',
+  titles: ['Hôm nay học thêm vài chữ Hán xinh xinh nha!', '加油! Cố lên, học chút thôi mà.', 'Mỗi chữ Hán là một bức tranh nhỏ.', 'Học hôm nay, nói tiếng Trung ngày mai.', '一天一点, mỗi ngày một chút là giỏi.', 'Chữ Hán đang đợi bạn đó!', 'Vài phút thôi, giỏi lên một chút rồi.', '你真棒! Bắt đầu học nào.', 'Một ngày nào đó đi Bắc Kinh tự gọi món nhé.', 'Học xong nhớ tự thưởng ly trà sữa nha.', 'Từ vựng là siêu năng lực của bạn.', '慢慢来, từ từ thôi mà vẫn tới.'], empty: 'Chưa có từ nào.<br>Gửi ảnh từ mới cho Hermes trên Telegram.',
   write: ['Luyện viết chữ', 'Nghe, xem và gõ lại chữ Hán'], vocab: ['Luyện từ vựng', 'Xem nghĩa, nhập chữ Hán'], add: 'Chỉ cần gõ tiếng Trung',
   inWrite: 'Gõ hoặc viết lại chữ Hán ở trên', inVocab: 'Gõ hoặc viết chữ Hán của từ này', inSentence: 'Gõ hoặc viết lại cả câu ở trên',
   addField: 'Tiếng Trung, mỗi dòng một mục (nghĩa tự điền; muốn tự ghi nghĩa: 老师 = giáo viên)', script: 'chỉ nhận chữ Hán', file: 'hsk',
 };
+const TITLE = T.titles[Math.floor(Math.random() * T.titles.length)]; // one per page load
 const langSwitch = () => `<div class="seg lang" role="group" aria-label="Môn học">${[['zh', 'Tiếng Trung'], ['en', 'Tiếng Anh']].map(([v, t]) =>
   `<button class="${(v === 'en') === EN ? 'on' : ''}" data-action="lang" data-lang="${v}" aria-pressed="${(v === 'en') === EN}">${t}</button>`).join('')}</div>`;
 const addItem = () => `<button class="menu-item" data-action="add">${icon('plus')}<span><b>Thêm từ, mẫu câu</b></span>${icon('caret-right')}</button>`;
@@ -141,7 +142,7 @@ function home() {
   }
   return `<main class="page">
     ${langSwitch()}
-    <header class="home-head"><h1>${T.title}</h1>${FULL ? `<span class="muted">${learned}/${data.words.length} từ đã thuộc</span>` : ''}</header>
+    <header class="home-head"><h1>${TITLE}</h1>${FULL ? `<span class="muted">${learned}/${data.words.length} từ đã thuộc</span>` : ''}</header>
     ${FULL ? `<section class="lesson">
       <h2>${esc(lesson.title)}${lesson.date ? `, ${esc(formatDate(lesson.date))}` : ''}</h2>
       <p class="strip">${fresh.map((w) => wordHz(w)).join('')}</p>
