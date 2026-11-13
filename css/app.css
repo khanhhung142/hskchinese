@@ -363,3 +363,14 @@ body.typing .footer { position: static; background: none; }
 .sent-row + .sent-row { border-top: 1px solid var(--line); }
 .dup-pick { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 4px; }
 .dup-pick .btn { min-height: 36px; padding: 4px 12px; font-size: 13px; }
+/* Keyboard open: keep Bỏ qua / Kiểm tra pinned at the bottom of the visible area; scroll-padding keeps the input above them. */
+body.typing .footer { position: sticky; bottom: 0; padding-bottom: 4px; background: none; }
+body.typing .page { scroll-padding-bottom: 76px; }
+body.typing .card .py-big { margin: 0; }
+/* ...and shrink the card so card + input + buttons fit above a phone keyboard (~320px). */
+body.typing .card { gap: 2px; padding: 8px 52px 8px 12px; position: relative; }
+body.typing .big-han { font-size: 40px; }
+body.typing .card .py-big { font-size: 16px; }
+body.typing .card .meaning { font-size: 17px; margin: 0; }
+body.typing .card .vi { margin: 0; font-size: 14px; }
+body.typing .card .speak { position: absolute; top: 8px; right: 8px; }
