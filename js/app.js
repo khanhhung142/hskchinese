@@ -834,6 +834,12 @@ function next() {
   autoplay();
 }
 
+// Phone: tapping Kiểm tra/Bỏ qua while typing would blur the input first; the keyboard closes, the layout jumps
+// and the tap's click lands nowhere. Keep focus on pointerdown so the click always reaches the button.
+root.addEventListener('pointerdown', (e) => {
+  if (document.activeElement?.matches?.('#hz-in, #py') && e.target.closest('.footer button, #py-check')) e.preventDefault();
+});
+
 root.addEventListener('click', (e) => {
   const enBtn = e.target.closest('[data-say-en]');
   if (enBtn) return sayEn(enBtn.dataset.sayEn);
