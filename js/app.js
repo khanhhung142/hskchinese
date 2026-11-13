@@ -727,11 +727,14 @@ let base;
 function mergeData() {
   const has = new Set(base.words.map((w) => w.hanzi));
   const lessonIds = new Set(base.lessons.map((l) => l.id));
+  const norm = (x) => sentenceText(x).replace(/[\p{P}\s]/gu, '').toLowerCase(); // same rule as sameHanzi
+  const baseTexts = new Set(base.sentences.map(norm));
   data = {
     lessons: [...base.lessons, ...custom.lessons.filter((l) => !lessonIds.has(l.id))].map((l) => (l.id in moves.t ? { ...l, title: moves.t[l.id] } : l)).sort((a, b) => a.id - b.id),
     words: [...base.words, ...custom.words.filter((w) => !has.has(w.hanzi))].filter((w) => !(w.hanzi in moves.d)).map((w) => (w.hanzi in moves.w ? { ...w, lesson: moves.w[w.hanzi] } : w)),
     // A deleted word takes its example sentences with it.
-    sentences: [...base.sentences, ...custom.sentences].filter((s) => !(s.focus in moves.d) && !(s.id in moves.x)).map((s) => (s.id in moves.s ? { ...s, lesson: moves.s[s.id] } : s)),
+    // Once Hermes applies an export, the same sentence is in vocab.json under a new id: base wins, like words.
+    sentences: [...base.sentences, ...custom.sentences.filter((c) => !baseTexts.has(norm(c)))].filter((s) => !(s.focus in moves.d) && !(s.id in moves.x)).map((s) => (s.id in moves.s ? { ...s, lesson: moves.s[s.id] } : s)),
   };
   wordMap = new Map(data.words.map((w) => [w.hanzi, w]));
 }
