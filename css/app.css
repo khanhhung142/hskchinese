@@ -382,3 +382,5 @@ body.typing .card .speak { position: absolute; top: 8px; right: 8px; }
 .pick summary::-webkit-details-marker { display: none; }
 .pick summary { list-style: none; }
 .pick-list input { flex: none; width: 20px; height: 20px; min-height: 0; margin: 0; padding: 0; accent-color: var(--accent); }
+.listen-ctl { grid-template-columns: 64px 1fr 64px; }
+.list-head .counter { margin-left: auto; }

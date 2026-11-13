@@ -159,6 +159,7 @@ function home() {
       <button class="menu-item" data-action="write" data-mode="write">${icon('pencil-simple-line')}<span><b>${T.write[0]}</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="write" data-mode="sentence">${icon('text-align-left')}<span><b>Luyện viết câu</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="write" data-mode="vocab">${icon('translate')}<span><b>${T.vocab[0]}</b></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="listen">${icon('headphones')}<span><b>Nghe cả bài</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Tra cứu</b></span>${icon('caret-right')}</button>
       ${addItem()}
     </nav>
@@ -171,7 +172,7 @@ const lessonTitle = (id) => (data.lessons.find((l) => l.id === id) ?? custom.les
 const inLesson = (x) => pickedLesson === '' || picked().includes(x.lesson);
 let lessonPickerOpen = false;
 function lessonPicker() {
-  const ids = [...new Set([...data.words, ...data.sentences].map((x) => x.lesson).filter((id) => id > 0))].sort((a, b) => a - b);
+  const ids = [...new Set([...data.words, ...data.sentences].map((x) => x.lesson))].sort((a, b) => a - b);
   pickedLesson = picked().filter((id) => ids.includes(id)).join(',');
   const box = (v, t, on) => `<label><input type="checkbox" class="lesson-pick" value="${v}"${on ? ' checked' : ''}> ${esc(t)}</label>`;
   return `<details class="field pick"${lessonPickerOpen ? ' open' : ''}><summary>${esc(pickedLesson ? pickedName() : 'Tất cả các bài')}</summary><div class="pick-list">${box('', 'Tất cả các bài', !pickedLesson)}${ids.map((id) => box(id, lessonTitle(id), picked().includes(id))).join('')}</div></details>`;
@@ -444,8 +445,11 @@ function summary() {
 // Typing practice: separate from quizzes, records no progress.
 // Modes: 'write' (copy the word), 'vocab' (meaning only), 'sentence' (copy a whole sentence).
 // ponytail: plain random pick over taught words (lesson 0 glue words have no examples) or all sentences; weight it if needed.
+/** Lesson 0 words (glue words, old lessons) only when lesson 0 is ticked. */
+const practiceWords = () => data.words.filter((w) => w.lesson > 0 || picked().includes(0));
+
 function pickWriteItem(mode, prev) {
-  const all = (mode === 'sentence' ? data.sentences : data.words.filter((w) => w.lesson > 0)).filter(inLesson);
+  const all = (mode === 'sentence' ? data.sentences : practiceWords()).filter(inLesson);
   const pool = all.length > 1 ? all.filter((x) => x !== prev) : all;
   return pool[Math.floor(Math.random() * pool.length)];
 }
@@ -494,10 +498,40 @@ function write() {
         </div>
       </div>` : ''}
     </div>
-    <div class="footer${state.done ? '' : ' two'}">${state.done
-      ? `<button class="btn primary block" data-action="write-next">${mode === 'sentence' ? 'Câu tiếp' : 'Từ tiếp'}</button>`
+    <div class="footer two">${state.done ? ''
       : `${mode === 'vocab' && !state.revealed ? '<button class="btn" data-action="reveal">Xem đáp án</button>' : '<button class="btn" data-action="write-next">Bỏ qua</button>'}<button class="btn primary" data-action="check-write">Kiểm tra</button>`}</div>
   </main>`;
+}
+
+/** "Nghe cả bài": every word, then every sentence, of the picked lessons, read one after another. */
+function listen() {
+  const { items, i, on } = view.state;
+  const x = items[i];
+  const c = writeCard(x.tokens ? 'sentence' : 'write', x);
+  return `<main class="page">
+    <header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Nghe ${esc(pickedLesson ? pickedName() : 'tất cả')}</h1><span class="counter">${i + 1}/${items.length}</span></header>
+    <div class="stage"><div class="card center">${c.zh}<p class="meaning">${esc(c.en)}</p><p class="vi muted">${esc(c.vi)}</p></div></div>
+    <div class="footer listen-ctl">
+      <button class="btn" data-action="listen-move" data-d="-1" aria-label="Trước">${icon('skip-back', true)}</button>
+      <button class="btn primary" data-action="listen-toggle">${on ? `${icon('pause', true)} Dừng` : `${icon('play', true)} Nghe`}</button>
+      <button class="btn" data-action="listen-move" data-d="1" aria-label="Sau">${icon('skip-forward', true)}</button>
+    </div>
+  </main>`;
+}
+
+function listenStep() {
+  const st = view.state;
+  const tok = st.tok = (st.tok ?? 0) + 1;
+  render();
+  const x = st.items[st.i];
+  const c = writeCard(x.tokens ? 'sentence' : 'write', x);
+  const live = () => view.name === 'listen' && view.state === st && st.on && st.tok === tok;
+  const after = () => setTimeout(() => {
+    if (!live()) return;
+    if (st.i < st.items.length - 1) { st.i++; listenStep(); } else { st.on = false; render(); }
+  }, 700);
+  if (EN) say(c.text, after);
+  else say(c.text, () => (live() ? play(`audio/en/${encodeURIComponent(c.en)}.mp3`, c.en, 'en-US', after) : null));
 }
 
 function startWrite(mode) {
@@ -517,7 +551,13 @@ function checkWrite() {
   const ok = sameHanzi(typed, text);
   view.state = { ...view.state, typed, done: ok, wrong: !ok };
   render();
-  if (ok) say(text);
+  if (!ok) return;
+  // Correct: play it, then go straight to the next item (no "Từ tiếp" button).
+  const item = view.item;
+  let gone = false;
+  const go = () => { if (!gone && view.name === 'write' && view.item === item) { gone = true; startWrite(view.mode); } };
+  say(text, go);
+  setTimeout(go, 4000); // audio never ends (blocked or failed): move on anyway
 }
 
 // Handwriting pad. Recognition: Google Input Tools (no key, CORS open); strokes go to Google.
@@ -752,7 +792,7 @@ const KEYBOARD_ON_OPEN = matchMedia('(pointer: fine)').matches;
 let wasTyping = false;
 
 function render() {
-  const views = { home, words: wordList, quiz, summary, write, add: addView };
+  const views = { home, words: wordList, quiz, summary, write, add: addView, listen };
   wasTyping = document.activeElement?.matches?.('#hz-in, #py') ?? false;
   if (view.name !== 'home') lessonPickerOpen = false; // picker reopens closed next time
   root.innerHTML = views[view.name]();
@@ -760,7 +800,7 @@ function render() {
   if (view.name === 'write') {
     setupHand();
     // With the pad open, keep the on-screen keyboard down.
-    const target = view.state.done ? '[data-action="write-next"]' : view.state.hand || !(KEYBOARD_ON_OPEN || wasTyping) ? null : '#hz-in';
+    const target = view.state.done ? null : view.state.hand || !(KEYBOARD_ON_OPEN || wasTyping) ? null : '#hz-in';
     if (target) root.querySelector(target).focus({ preventScroll: !KEYBOARD_ON_OPEN });
   }
   fitKeyboard();
@@ -861,7 +901,15 @@ root.addEventListener('click', (e) => {
   const el = e.target.closest('[data-action]');
   if (!el || el.tagName === 'FORM') return;
   const act = el.dataset.action;
-  if (act === 'home') { view = { name: 'home' }; render(); }
+  if (act === 'home') { player.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); view = { name: 'home' }; render(); }
+  else if (act === 'listen') {
+    const items = [...practiceWords().filter(inLesson), ...data.sentences.filter(inLesson)];
+    if (!items.length) return alert(`${pickedName()} chưa có từ nào.`);
+    view = { name: 'listen', state: { items, i: 0, on: true } };
+    listenStep();
+  }
+  else if (act === 'listen-toggle') { const st = view.state; st.on = !st.on; if (st.on) listenStep(); else { st.tok++; player.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); render(); } }
+  else if (act === 'listen-move') { const st = view.state; st.i = Math.min(st.items.length - 1, Math.max(0, st.i + +el.dataset.d)); if (st.on) listenStep(); else render(); }
   else if (act === 'words') { view = { name: 'words' }; render(); }
   else if (act === 'dup-keep' || act === 'dup-move') {
     const l = view.state.log[+el.dataset.i];

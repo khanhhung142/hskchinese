@@ -23,6 +23,8 @@ The older quizzes (**Học bài mới**, **Ôn tất cả**) are hidden there an
   It shows one random word (hanzi, pinyin, English, Vietnamese) and on open plays it in Chinese, then in English.
   Type the word with a Chinese keyboard; the answer must match the hanzi exactly (spaces and punctuation ignored).
   The pencil button opens a handwriting pad; strokes are recognized by Google Input Tools (needs network) and tapping a candidate appends it to the input.
+- A correct **Kiểm tra** plays the answer and moves to the next item by itself; **Bỏ qua** skips at once.
+- **Nghe cả bài** reads every word, then every sentence, of the picked lessons one after another (Chinese, then English), with pause and previous/next.
 - **Luyện viết câu** is the same, with a whole example sentence (pinyin, English, Vietnamese) instead of one word.
 - **Luyện từ vựng** is the same input, but shows only the English and Vietnamese meaning and plays the English.
   **Xem đáp án** reveals the hanzi and plays it.
