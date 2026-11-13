@@ -234,7 +234,7 @@ button { cursor: pointer; }
 
 /* Word list */
 .list-head { display: flex; align-items: center; gap: 4px; margin: -8px 0 8px -10px; }
-.list-head h1 { margin: 0; font-size: 22px; }
+.list-head h1 { margin: 0; font-size: 22px; flex: 1; }
 .group h2 { font-size: 14px; font-weight: 600; color: var(--muted); margin: 24px 0 8px; display: flex; align-items: center; gap: 4px; }
 .group h2 .icon-btn { width: 32px; height: 32px; }
 .words { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-box); overflow: hidden; }

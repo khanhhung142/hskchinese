@@ -118,7 +118,7 @@ function wordList() {
     return `<section class="group"><h2>${esc(l.title)}<button class="icon-btn" data-action="rename" data-id="${l.id}" aria-label="Đổi tên bài">${icon('pencil-simple-line')}</button></h2><div class="words">${words.map(wordRow).join('')}</div></section>`;
   });
   return `<main class="page">
-    <header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Danh sách từ</h1></header>
+    <header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Danh sách từ</h1><button class="icon-btn" data-action="export" aria-label="Xuất dữ liệu">${icon('download-simple')}</button></header>
     ${groups.join('')}
   </main>`;
 }
@@ -159,6 +159,20 @@ function moveItem(sel) {
 
 function saveMoves() {
   try { localStorage.setItem(MOVES_KEY, JSON.stringify(moves)); } catch { alert('Không lưu được (bộ nhớ trình duyệt bị chặn).'); }
+}
+
+/** Everything as shown (vocab.json format) plus the raw in-app edits, as a file to send to Hermes. */
+async function exportData() {
+  const { lessons, words, sentences } = data;
+  const body = JSON.stringify({ exported: new Date().toISOString(), lessons, words, sentences, edits: { custom, moves } }, null, 1);
+  const file = new File([body], `hsk-export-${new Date().toISOString().slice(0, 10)}.json`, { type: 'application/json' });
+  // Phones (home-screen app) share straight to Telegram; desktop browsers download.
+  if (navigator.canShare?.({ files: [file] })) {
+    try { return await navigator.share({ files: [file] }); } catch (e) { if (e.name === 'AbortError') return; }
+  }
+  const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(file), download: file.name });
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }
 
 /** Empty name restores the original title. */
@@ -654,6 +668,7 @@ root.addEventListener('click', (e) => {
   if (act === 'home') { view = { name: 'home' }; render(); }
   else if (act === 'words') { view = { name: 'words' }; render(); }
   else if (act === 'rename') renameLesson(+el.dataset.id);
+  else if (act === 'export') exportData();
   else if (act === 'add') { view = { name: 'add', state: {} }; render(); }
   else if (act === 'del-custom') {
     if (!confirm('Xoá mục này?')) return;
