@@ -30,8 +30,9 @@ const pickOne = (arr, rand) => arr[Math.floor(rand() * arr.length)];
 
 const TYPES = ['listen', 'pinyin', 'cloze', 'order', 'meaning'];
 
+/** Newest lesson that has words (a lesson can be emptied by moving its words elsewhere). */
 export function latestLesson(data) {
-  return Math.max(0, ...data.lessons.map((l) => l.id));
+  return Math.max(0, ...data.words.map((w) => w.lesson));
 }
 
 /** Weak words float up: never seen, or high miss ratio. */

@@ -9,6 +9,8 @@ let data, wordMap;
 let progress = loadProgress();
 let custom = loadJSON(CUSTOM_KEY) ?? { lessons: [], words: [], sentences: [] };
 let pickedLesson = localStorage.getItem(LESSON_KEY) ?? '';
+const MOVES_KEY = 'hsk-moves'; // lesson reassignments made in the app: { w: {hanzi: id}, s: {sentenceId: id} }
+let moves = loadJSON(MOVES_KEY) ?? { w: {}, s: {} };
 let view = { name: 'home' };
 
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
@@ -121,11 +123,37 @@ function wordList() {
 }
 
 function wordRow(w) {
-  const sents = data.sentences.filter((s) => s.focus === w.hanzi).slice(0, 3);
+  const sents = data.sentences.filter((s) => s.focus === w.hanzi);
   return `<details class="word">
     <summary>${wordHz(w, true)}<span><p>${esc(w.meanings.join('; '))}</p><p class="en">${esc(w.en)}</p></span>${icon('caret-right')}</summary>
-    <div class="body">${sents.map((s) => speakSentence(sentenceText(s), sentenceHz(s), s.vi, s.en)).join('')}</div>
+    <div class="body">
+      ${moveSelect('w', w.hanzi, w.lesson, 'Từ thuộc')}
+      ${sents.map((s) => `<div>${speakSentence(sentenceText(s), sentenceHz(s), s.vi, s.en)}${moveSelect('s', s.id, s.lesson, 'Câu thuộc')}</div>`).join('')}
+    </div>
   </details>`;
+}
+
+/** Lesson picker for one word or sentence; "Bài mới…" asks for a number. */
+function moveSelect(k, key, current, label) {
+  const opt = (l) => `<option value="${l.id}"${l.id === current ? ' selected' : ''}>${esc(l.title)}</option>`;
+  return `<label class="move"><span>${label}</span><select data-move="${k}" data-key="${esc(key)}">${data.lessons.map(opt).join('')}<option value="new">Bài mới…</option></select></label>`;
+}
+
+function moveItem(sel) {
+  let id = sel.value;
+  if (id === 'new') {
+    id = prompt('Số bài:');
+    if (!(Math.trunc(+id) >= 1)) return render();
+    id = Math.trunc(+id);
+    if (!data.lessons.some((l) => l.id === id)) { custom.lessons.push({ id, date: new Date().toISOString().slice(0, 10), title: `Bài ${id}` }); saveCustom(); }
+  }
+  moves[sel.dataset.move][sel.dataset.key] = +id;
+  try { localStorage.setItem(MOVES_KEY, JSON.stringify(moves)); } catch { alert('Không lưu được (bộ nhớ trình duyệt bị chặn).'); }
+  const open = sel.closest('details')?.querySelector('summary .han')?.textContent;
+  mergeData();
+  render();
+  // Keep the word that was edited open.
+  [...root.querySelectorAll('details.word')].find((d) => d.querySelector('summary .han')?.textContent === open)?.setAttribute('open', '');
 }
 
 /** Play button + Chinese (already rendered with pinyin) + translations. */
@@ -520,8 +548,8 @@ function mergeData() {
   const lessonIds = new Set(base.lessons.map((l) => l.id));
   data = {
     lessons: [...base.lessons, ...custom.lessons.filter((l) => !lessonIds.has(l.id))].sort((a, b) => a.id - b.id),
-    words: [...base.words, ...custom.words.filter((w) => !has.has(w.hanzi))],
-    sentences: [...base.sentences, ...custom.sentences],
+    words: [...base.words, ...custom.words.filter((w) => !has.has(w.hanzi))].map((w) => (w.hanzi in moves.w ? { ...w, lesson: moves.w[w.hanzi] } : w)),
+    sentences: [...base.sentences, ...custom.sentences].map((s) => (s.id in moves.s ? { ...s, lesson: moves.s[s.id] } : s)),
   };
   wordMap = new Map(data.words.map((w) => [w.hanzi, w]));
 }
@@ -618,7 +646,7 @@ root.addEventListener('click', (e) => {
     const key = el.dataset.key;
     if (el.dataset.k === 'w') custom.words = custom.words.filter((w) => w.hanzi !== key);
     else custom.sentences = custom.sentences.filter((s) => s.id !== key);
-    custom.lessons = custom.lessons.filter((l) => custom.words.some((w) => w.lesson === l.id) || custom.sentences.some((s) => s.lesson === l.id));
+    custom.lessons = custom.lessons.filter((l) => [...data.words, ...data.sentences].some((x) => x.lesson === l.id && x.hanzi !== key && x.id !== key));
     saveCustom(); mergeData(); render();
   }
   else if (act === 'write') startWrite(el.dataset.mode);
@@ -645,6 +673,7 @@ root.addEventListener('click', (e) => {
 });
 
 root.addEventListener('change', (e) => {
+  if (e.target.dataset.move) return moveItem(e.target);
   if (e.target.id !== 'lesson-pick') return;
   pickedLesson = e.target.value;
   try { localStorage.setItem(LESSON_KEY, pickedLesson); } catch { /* private mode */ }
