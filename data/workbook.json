@@ -1028,7 +1028,345 @@
   },
   {
    "id": 7,
-   "title": "Bài 7: 我晚上六点半下班"
+   "title": "Bài 7: 我晚上六点半下班",
+   "audio": "workbook/7.mp3",
+   "parts": [
+    {
+     "title": "Nghe · Phần 1",
+     "hint": "Câu 1–3: Nghe cụm từ, chọn hình đúng.",
+     "img": "workbook/7-1.jpg",
+     "letters": "ABC",
+     "qs": [
+      {
+       "n": 1,
+       "ans": "C",
+       "t": [
+        34,
+        58
+       ]
+      },
+      {
+       "n": 2,
+       "ans": "A",
+       "t": [
+        58,
+        77
+       ]
+      },
+      {
+       "n": 3,
+       "ans": "C",
+       "t": [
+        77,
+        92
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 2",
+     "hint": "Câu 4–5: Nghe câu hỏi, chọn câu trả lời đúng.",
+     "qs": [
+      {
+       "n": 4,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "10:00",
+         "py": "10:00"
+        },
+        {
+         "k": "B",
+         "zh": "12:00",
+         "py": "12:00"
+        },
+        {
+         "k": "C",
+         "zh": "12号",
+         "py": "12 hào"
+        }
+       ],
+       "t": [
+        140,
+        168
+       ]
+      },
+      {
+       "n": 5,
+       "ans": "C",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "8月",
+         "py": "8 yuè"
+        },
+        {
+         "k": "B",
+         "zh": "三分钟",
+         "py": "sān fēn zhōng"
+        },
+        {
+         "k": "C",
+         "zh": "7:10",
+         "py": "7:10"
+        }
+       ],
+       "t": [
+        168,
+        186
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 3",
+     "hint": "Câu 6–8: Nghe hội thoại, chọn hình phù hợp nhất (A là ví dụ).",
+     "img": "workbook/7-2.jpg",
+     "letters": "ABCD",
+     "qs": [
+      {
+       "n": 6,
+       "ans": "C",
+       "t": [
+        236,
+        280
+       ]
+      },
+      {
+       "n": 7,
+       "ans": "D",
+       "t": [
+        280,
+        310
+       ]
+      },
+      {
+       "n": 8,
+       "ans": "B",
+       "t": [
+        310,
+        340
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 4",
+     "hint": "Câu 9–10: Nghe câu và câu hỏi, chọn đáp án đúng.",
+     "qs": [
+      {
+       "n": 9,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "上课",
+         "py": "shàng kè"
+        },
+        {
+         "k": "B",
+         "zh": "上班",
+         "py": "shàng bān"
+        },
+        {
+         "k": "C",
+         "zh": "看电影",
+         "py": "kàn diàn yǐng"
+        }
+       ],
+       "t": [
+        399,
+        440
+       ]
+      },
+      {
+       "n": 10,
+       "ans": "C",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "饭店",
+         "py": "fàn diàn"
+        },
+        {
+         "k": "B",
+         "zh": "菜店",
+         "py": "cài diàn"
+        },
+        {
+         "k": "C",
+         "zh": "超市",
+         "py": "chāo shì"
+        }
+       ],
+       "t": [
+        440,
+        484
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 1",
+     "hint": "Câu 11–13: Chọn hình phù hợp nhất với câu (A là ví dụ).",
+     "img": "workbook/7-3.jpg",
+     "letters": "ABCD",
+     "qs": [
+      {
+       "n": 11,
+       "ans": "D",
+       "text": "我在上课呢。",
+       "py": "wǒ zài shàng kè ne"
+      },
+      {
+       "n": 12,
+       "ans": "C",
+       "text": "我下午有事，晚上7:00见吧。",
+       "py": "wǒ xià wǔ yǒu shì wǎn shàng 7:00 jiàn ba"
+      },
+      {
+       "n": 13,
+       "ans": "B",
+       "text": "今天不上班，我去超市买东西。",
+       "py": "jīn tiān bù shàng bān wǒ qù chāo shì mǎi dōng xī"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 2",
+     "hint": "Câu 14–16: Nối câu (D là ví dụ: 你喝水吗？ → 好的，谢谢！).",
+     "opts": [
+      {
+       "k": "A",
+       "zh": "早上七点半。",
+       "py": "zǎo shàng qī diǎn bàn"
+      },
+      {
+       "k": "B",
+       "zh": "对不起，我有课。",
+       "py": "duì bù qǐ wǒ yǒu kè"
+      },
+      {
+       "k": "C",
+       "zh": "电影院。",
+       "py": "diàn yǐng yuàn"
+      },
+      {
+       "k": "D",
+       "zh": "好的，谢谢！",
+       "py": "hǎo de xiè xiè"
+      }
+     ],
+     "qs": [
+      {
+       "n": 14,
+       "ans": "C",
+       "text": "我们在哪儿见？",
+       "py": "wǒ men zài nǎ ér jiàn"
+      },
+      {
+       "n": 15,
+       "ans": "A",
+       "text": "现在几点？",
+       "py": "xiàn zài jǐ diǎn"
+      },
+      {
+       "n": 16,
+       "ans": "B",
+       "text": "我们下午去超市吧。",
+       "py": "wǒ men xià wǔ qù chāo shì ba"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 3",
+     "hint": "Câu 17–18: Chọn từ điền vào chỗ trống (C là ví dụ).",
+     "opts": [
+      {
+       "k": "A",
+       "zh": "医院",
+       "py": "yī yuàn"
+      },
+      {
+       "k": "B",
+       "zh": "中午",
+       "py": "zhōng wǔ"
+      },
+      {
+       "k": "C",
+       "zh": "名字",
+       "py": "míng zì"
+      }
+     ],
+     "qs": [
+      {
+       "n": 17,
+       "ans": "B",
+       "text": "我们（ ）12:00下课。",
+       "py": "wǒ men （ ）12:00 xià kè"
+      },
+      {
+       "n": 18,
+       "ans": "A",
+       "text": "男：你现在在哪儿？ 女：我在（ ）呢。",
+       "py": "nán ： nǐ xiàn zài zài nǎ ér ？  nǚ ： wǒ zài （ ） ne"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 4",
+     "hint": "Câu 19–20: Đọc và chọn đáp án đúng.",
+     "qs": [
+      {
+       "n": 19,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "8:30",
+         "py": "8:30"
+        },
+        {
+         "k": "B",
+         "zh": "10:10",
+         "py": "10:10"
+        },
+        {
+         "k": "C",
+         "zh": "10:20",
+         "py": "10:20"
+        }
+       ],
+       "text": "我今天早上八点半上课，十点十分下课。 ★说话人今天几点下课？",
+       "py": "wǒ jīn tiān zǎo shàng bā diǎn bàn shàng kè shí diǎn shí fēn xià kè 。 ★ shuō huà rén jīn tiān jǐ diǎn xià kè"
+      },
+      {
+       "n": 20,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "菜",
+         "py": "cài"
+        },
+        {
+         "k": "B",
+         "zh": "饺子",
+         "py": "jiǎo zi"
+        },
+        {
+         "k": "C",
+         "zh": "牛奶",
+         "py": "niú nǎi"
+        }
+       ],
+       "text": "妈妈今天休息，下午想去菜店买些菜。 ★妈妈下午想去菜店买：",
+       "py": "mā mā jīn tiān xiū xī xià wǔ xiǎng qù cài diàn mǎi xiē cài 。 ★ mā mā xià wǔ xiǎng qù cài diàn mǎi ："
+      }
+     ]
+    }
+   ]
   },
   {
    "id": 8,
