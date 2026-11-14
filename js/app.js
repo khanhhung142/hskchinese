@@ -160,6 +160,7 @@ function home() {
       <button class="menu-item" data-action="write" data-mode="sentence">${icon('text-align-left')}<span><b>Luyện viết câu</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="write" data-mode="vocab">${icon('translate')}<span><b>${T.vocab[0]}</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="listen">${icon('headphones')}<span><b>Nghe cả bài</b></span>${icon('caret-right')}</button>
+      ${EN ? '' : `<button class="menu-item" data-action="wb">${icon('exam')}<span><b>Bài tập HSK1</b></span>${icon('caret-right')}</button>`}
       <button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Tra cứu</b></span>${icon('caret-right')}</button>
       ${addItem()}
     </nav>
@@ -785,6 +786,58 @@ function mergeData() {
   wordMap = new Map(data.words.map((w) => [w.hanzi, w]));
 }
 
+// ---------- Workbook (data/workbook.json: SBT HSK1 3.0 模拟测练, one 20-question test per lesson) ----------
+let wbData;
+const wbAudio = new Audio();
+let wbStop = 0;
+wbAudio.addEventListener('timeupdate', () => { if (wbStop && wbAudio.currentTime >= wbStop) wbAudio.pause(); });
+async function openWorkbook(id) {
+  try { wbData ??= await (await fetch('data/workbook.json', { cache: 'no-cache' })).json(); } catch { return alert('Không tải được bài tập.'); }
+  wbAudio.pause();
+  view = id ? { name: 'wb', id: +id, picks: {}, done: false } : { name: 'wb' };
+  render();
+  scrollTo(0, 0);
+}
+function wbPlay(n) {
+  const q = wbData.lessons.find((l) => l.id === view.id).parts.flatMap((p) => p.qs).find((x) => x.n === +n);
+  if (!wbAudio.src.endsWith(wbData.lessons.find((l) => l.id === view.id).audio)) wbAudio.src = wbData.lessons.find((l) => l.id === view.id).audio;
+  wbAudio.currentTime = q.t[0];
+  wbStop = q.t[1];
+  wbAudio.play();
+}
+const zhPy = (zh, py) => `<span class="wb-zh"><span class="han">${esc(zh)}</span>${py ? `<small>${esc(py)}</small>` : ''}</span>`;
+function workbook() {
+  const back = (to) => `<button class="icon-btn" data-action="${to}" aria-label="Quay lại">${icon('arrow-left')}</button>`;
+  if (!view.id) {
+    return `<main class="page"><header class="list-head">${back('home')}<h1>Bài tập HSK1</h1></header><nav class="menu">${wbData.lessons.map((l) =>
+      `<button class="menu-item" data-action="wb" data-id="${l.id}" ${l.parts ? '' : 'disabled'}>${icon(l.id === 16 ? 'exam' : 'notebook')}<span><b>${esc(l.title)}</b>${l.parts ? '' : '<small>Chưa có audio</small>'}</span>${icon('caret-right')}</button>`).join('')}</nav></main>`;
+  }
+  const l = wbData.lessons.find((x) => x.id === view.id);
+  const all = l.parts.flatMap((p) => p.qs);
+  const score = all.filter((q) => view.picks[q.n] === q.ans).length;
+  const parts = l.parts.map((p) => {
+    const shared = p.opts ? `<ul class="wb-bank">${p.opts.map((o) => `<li><b>${o.k}</b> ${zhPy(o.zh, o.py)}</li>`).join('')}</ul>` : '';
+    return `<section class="wb-part"><h2>${esc(p.title)}</h2><p class="muted">${esc(p.hint)}</p>
+      ${p.img ? `<img class="wb-img" src="${esc(p.img)}" alt="Hình ${esc(p.title)}" loading="lazy">` : ''}${shared}
+      ${p.qs.map((q) => {
+        const keys = q.opts ? q.opts.map((o) => o.k) : p.opts ? p.opts.map((o) => o.k) : [...p.letters];
+        const btn = (k) => {
+          const o = q.opts?.find((x) => x.k === k);
+          const cls = view.picks[q.n] === k ? (view.done ? (k === q.ans ? 'right' : 'wrong') : 'on') : view.done && k === q.ans ? 'right' : '';
+          return `<button class="opt wb-opt ${cls}" data-action="wb-pick" data-n="${q.n}" data-k="${k}" ${view.done ? 'disabled' : ''}><b>${k}</b>${o ? zhPy(o.zh, o.py) : ''}</button>`;
+        };
+        return `<div class="wb-q"><div class="wb-qhead"><b>${q.n}.</b>${q.t ? `<button class="speak sm" data-action="wb-play" data-n="${q.n}" aria-label="Nghe câu ${q.n}">${icon('speaker-high', true)}</button>` : ''}${q.text ? zhPy(q.text, q.py) : ''}</div>
+          <div class="wb-opts${q.opts ? ' list' : ''}">${keys.map(btn).join('')}</div></div>`;
+      }).join('')}</section>`;
+  }).join('');
+  const answered = Object.keys(view.picks).length;
+  return `<main class="page"><header class="list-head">${back('wb')}<h1>${esc(l.title)}</h1><span class="counter">${view.done ? `${score}/${all.length}` : `${answered}/${all.length}`}</span></header>
+    ${view.done ? `<p class="wb-score">Đúng ${score}/${all.length} câu</p>${tomie(score * 2 >= all.length ? 'done' : 'bad')}` : ''}
+    ${parts}
+    <div class="footer">${view.done ? '<button class="btn primary block" data-action="wb-retry">Làm lại</button>' : `<button class="btn primary block" data-action="wb-submit" ${answered ? '' : 'disabled'}>Nộp bài</button>`}</div>
+  </main>`;
+}
+
 // ---------- Controller ----------
 
 /** Touch screens: no auto-focus into inputs, the keyboard would cover the word. Keep it only while already typing. */
@@ -792,7 +845,7 @@ const KEYBOARD_ON_OPEN = matchMedia('(pointer: fine)').matches;
 let wasTyping = false;
 
 function render() {
-  const views = { home, words: wordList, quiz, summary, write, add: addView, listen };
+  const views = { home, words: wordList, quiz, summary, write, add: addView, listen, wb: workbook };
   wasTyping = document.activeElement?.matches?.('#hz-in, #py') ?? false;
   if (view.name !== 'home') lessonPickerOpen = false; // picker reopens closed next time
   root.innerHTML = views[view.name]();
@@ -901,7 +954,12 @@ root.addEventListener('click', (e) => {
   const el = e.target.closest('[data-action]');
   if (!el || el.tagName === 'FORM') return;
   const act = el.dataset.action;
-  if (act === 'home') { player.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); view = { name: 'home' }; render(); }
+  if (act === 'wb') openWorkbook(el.dataset.id);
+  else if (act === 'wb-play') wbPlay(el.dataset.n);
+  else if (act === 'wb-pick') { if (!view.done) { view.picks[el.dataset.n] = el.dataset.k; render(); } }
+  else if (act === 'wb-submit') { view.done = true; wbAudio.pause(); render(); scrollTo(0, 0); }
+  else if (act === 'wb-retry') openWorkbook(view.id);
+  else if (act === 'home') { player.pause(); wbAudio.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); view = { name: 'home' }; render(); }
   else if (act === 'listen') {
     const items = [...practiceWords().filter(inLesson), ...data.sentences.filter(inLesson)];
     if (!items.length) return alert(`${pickedName()} chưa có từ nào.`);

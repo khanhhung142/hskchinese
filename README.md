@@ -31,6 +31,7 @@ The older quizzes (**Học bài mới**, **Ôn tất cả**) are hidden there an
 - **Học bài mới** (`/full/` only) studies the newest lesson.
   Words never seen before get a flashcard first, then every word in the session gets one exercise.
 - **Ôn tất cả** (`/full/` only) reviews all words, favouring words you miss often.
+- **Bài tập HSK1** (Chinese only): the 模拟测练 test of each lesson of the SBT HSK1 (3.0) workbook, plus the mock exam. 20 questions per lesson: listening (speaker button plays that question's clip of the book audio) and reading; **Nộp bài** grades it. Data in `data/workbook.json`, scans and audio in `workbook/`. Lessons without audio yet are greyed out.
 - **Tra cứu** has two tabs. **Tra cứu từ** lists every word by lesson; tap a row to move it to another lesson. **Tra cứu câu** lists every example sentence by lesson. The search box filters the open tab by hanzi, pinyin (tones and spaces optional: `nihao`), Vietnamese (accents optional) or English.
 - **Học theo bài** (picker on the home screen) limits every practice mode and **Ôn** to the ticked lessons (one or several), or all lessons; saved as comma-separated ids in `localStorage` key `hsk-lesson`.
 - **Thêm từ, mẫu câu** adds words or sentences by typing only the Chinese, one per line, under a lesson you pick by name (typing a new name creates a lesson with that title; ids stay integers internally).

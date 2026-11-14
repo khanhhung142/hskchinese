@@ -384,3 +384,20 @@ body.typing .card .speak { position: absolute; top: 8px; right: 8px; }
 .pick-list input { flex: none; width: 20px; height: 20px; min-height: 0; margin: 0; padding: 0; accent-color: var(--accent); }
 .listen-ctl { grid-template-columns: 64px 1fr 64px; }
 .list-head .counter { margin-left: auto; }
+/* Workbook (Bài tập HSK1) */
+.wb-part h2 { font-size: 17px; margin: 24px 0 2px; }
+.wb-part > .muted { margin: 0 0 10px; font-size: 14px; }
+.wb-img { display: block; width: 100%; height: auto; border: 2.5px solid var(--line); border-radius: var(--r-ctl); background: #fff; margin-bottom: 10px; }
+.wb-bank { list-style: none; padding: 8px 12px; margin: 0 0 10px; display: grid; gap: 4px; border: 2.5px dashed var(--line); border-radius: var(--r-ctl); background: var(--surface); }
+.wb-q { margin: 0 0 14px; }
+.wb-qhead { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
+.wb-zh { display: inline-flex; flex-direction: column; align-items: flex-start; text-align: left; min-width: 0; }
+.wb-zh .han { font-size: 20px; overflow-wrap: anywhere; }
+.wb-zh small { color: var(--muted); font-size: 13px; }
+.wb-opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(56px, 1fr)); gap: 8px; }
+.wb-opts.list { grid-template-columns: 1fr; }
+.wb-opt { min-height: 48px; flex-direction: row; gap: 10px; }
+.wb-opts.list .wb-opt { justify-content: flex-start; padding: 8px 14px; }
+.wb-opt.on { background: var(--pink); }
+.wb-score { font-size: 22px; font-weight: 700; text-align: center; margin: 8px 0 0; }
+.menu-item:disabled { opacity: .55; }
