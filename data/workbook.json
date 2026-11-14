@@ -3080,7 +3080,345 @@
   },
   {
    "id": 13,
-   "title": "Bài 13: 请给我一杯茶"
+   "title": "Bài 13: 请给我一杯茶",
+   "audio": "workbook/13.mp3",
+   "parts": [
+    {
+     "title": "Nghe · Phần 1",
+     "hint": "Câu 1–3: Nghe cụm từ, chọn hình đúng.",
+     "img": "workbook/13-1.jpg",
+     "letters": "ABC",
+     "qs": [
+      {
+       "n": 1,
+       "ans": "C",
+       "t": [
+        37,
+        58
+       ]
+      },
+      {
+       "n": 2,
+       "ans": "A",
+       "t": [
+        58,
+        75
+       ]
+      },
+      {
+       "n": 3,
+       "ans": "C",
+       "t": [
+        75,
+        92
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 2",
+     "hint": "Câu 4–5: Nghe câu hỏi, chọn câu trả lời đúng.",
+     "qs": [
+      {
+       "n": 4,
+       "ans": "C",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "给你",
+         "py": "gěi nǐ"
+        },
+        {
+         "k": "B",
+         "zh": "吃早饭",
+         "py": "chī zǎo fàn"
+        },
+        {
+         "k": "C",
+         "zh": "要一杯茶",
+         "py": "yào yī bēi chá"
+        }
+       ],
+       "t": [
+        136,
+        162
+       ]
+      },
+      {
+       "n": 5,
+       "ans": "C",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "学习",
+         "py": "xué xí"
+        },
+        {
+         "k": "B",
+         "zh": "不对",
+         "py": "bú duì"
+        },
+        {
+         "k": "C",
+         "zh": "没问题",
+         "py": "méi wèn tí"
+        }
+       ],
+       "t": [
+        162,
+        187
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 3",
+     "hint": "Câu 6–8: Nghe hội thoại, chọn hình phù hợp nhất (A là ví dụ).",
+     "img": "workbook/13-2.jpg",
+     "letters": "ABCD",
+     "qs": [
+      {
+       "n": 6,
+       "ans": "C",
+       "t": [
+        235,
+        261
+       ]
+      },
+      {
+       "n": 7,
+       "ans": "D",
+       "t": [
+        261,
+        303
+       ]
+      },
+      {
+       "n": 8,
+       "ans": "B",
+       "t": [
+        303,
+        336
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 4",
+     "hint": "Câu 9–10: Nghe câu và câu hỏi, chọn đáp án đúng.",
+     "qs": [
+      {
+       "n": 9,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "问问题",
+         "py": "wèn wèn tí"
+        },
+        {
+         "k": "B",
+         "zh": "找人玩",
+         "py": "zhǎo rén wán"
+        },
+        {
+         "k": "C",
+         "zh": "看医生",
+         "py": "kàn yī shēng"
+        }
+       ],
+       "t": [
+        397,
+        439
+       ]
+      },
+      {
+       "n": 10,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "饭店",
+         "py": "fàn diàn"
+        },
+        {
+         "k": "B",
+         "zh": "学校",
+         "py": "xué xiào"
+        },
+        {
+         "k": "C",
+         "zh": "朋友家",
+         "py": "péng yǒu jiā"
+        }
+       ],
+       "t": [
+        439,
+        489
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 1",
+     "hint": "Câu 11–13: Chọn hình phù hợp nhất với câu (A là ví dụ).",
+     "img": "workbook/13-3.jpg",
+     "letters": "ABCD",
+     "qs": [
+      {
+       "n": 11,
+       "ans": "B",
+       "text": "她太小了，这个苹果给她一半吧。",
+       "py": "tā tài xiǎo le zhè ge píng guǒ gěi tā yí bàn ba"
+      },
+      {
+       "n": 12,
+       "ans": "D",
+       "text": "请给我一杯牛奶，谢谢。",
+       "py": "qǐng gěi wǒ yī bēi niú nǎi xiè xiè"
+      },
+      {
+       "n": 13,
+       "ans": "C",
+       "text": "我打电话问一下吧。",
+       "py": "wǒ dǎ diàn huà wèn yī xià ba"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 2",
+     "hint": "Câu 14–16: Nối câu (D là ví dụ: 你喝水吗？ → 好的，谢谢！).",
+     "opts": [
+      {
+       "k": "A",
+       "zh": "不客气。",
+       "py": "bú kè qì"
+      },
+      {
+       "k": "B",
+       "zh": "一个面包。",
+       "py": "yí gè miàn bāo"
+      },
+      {
+       "k": "C",
+       "zh": "不知道。",
+       "py": "bù zhī dào"
+      },
+      {
+       "k": "D",
+       "zh": "好的，谢谢！",
+       "py": "hǎo de xiè xiè"
+      }
+     ],
+     "qs": [
+      {
+       "n": 14,
+       "ans": "C",
+       "text": "那里卖不卖手机？",
+       "py": "nà lǐ mài bù mài shǒu jī"
+      },
+      {
+       "n": 15,
+       "ans": "A",
+       "text": "我会写了，谢谢老师。",
+       "py": "wǒ huì xiě le xiè xiè lǎo shī"
+      },
+      {
+       "n": 16,
+       "ans": "B",
+       "text": "你要什么？",
+       "py": "nǐ yào shén me"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 3",
+     "hint": "Câu 17–18: Chọn từ điền vào chỗ trống (C là ví dụ).",
+     "opts": [
+      {
+       "k": "A",
+       "zh": "给",
+       "py": "gěi"
+      },
+      {
+       "k": "B",
+       "zh": "一下",
+       "py": "yī xià"
+      },
+      {
+       "k": "C",
+       "zh": "名字",
+       "py": "míng zì"
+      }
+     ],
+     "qs": [
+      {
+       "n": 17,
+       "ans": "B",
+       "text": "你看（ ），你要什么？",
+       "py": "nǐ kàn （ ）， nǐ yào shén me"
+      },
+      {
+       "n": 18,
+       "ans": "A",
+       "text": "男：请坐，您要什么？ 女：请（ ）我一杯茶。",
+       "py": "nán ： qǐng zuò nín yào shén me ？  nǚ ： qǐng （ ） wǒ yī bēi chá"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 4",
+     "hint": "Câu 19–20: Đọc và chọn đáp án đúng.",
+     "qs": [
+      {
+       "n": 19,
+       "ans": "C",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "星期五",
+         "py": "xīng qī wǔ"
+        },
+        {
+         "k": "B",
+         "zh": "星期六",
+         "py": "xīng qī liù"
+        },
+        {
+         "k": "C",
+         "zh": "星期日",
+         "py": "xīng qī rì"
+        }
+       ],
+       "text": "明天星期天，我们可以去饭店吃饺子吗？ ★明天是：",
+       "py": "míng tiān xīng qī tiān wǒ men kě yǐ qù fàn diàn chī jiǎo zi ma ？ ★ míng tiān shì ："
+      },
+      {
+       "n": 20,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "在家里工作",
+         "py": "zài jiā lǐ gōng zuò"
+        },
+        {
+         "k": "B",
+         "zh": "做了面条儿",
+         "py": "zuò le miàn tiáo ér"
+        },
+        {
+         "k": "C",
+         "zh": "不能去公司",
+         "py": "bù néng qù gōng sī"
+        }
+       ],
+       "text": "爸爸今天在家里工作，我们不要去他的房间。 ★爸爸今天：",
+       "py": "bà bà jīn tiān zài jiā lǐ gōng zuò wǒ men bú yào qù tā de fáng jiān 。 ★ bà bà jīn tiān ："
+      }
+     ]
+    }
+   ]
   },
   {
    "id": 14,
