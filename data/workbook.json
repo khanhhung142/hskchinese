@@ -2054,7 +2054,345 @@
   },
   {
    "id": 10,
-   "title": "Bài 10: 这儿的苹果真便宜！"
+   "title": "Bài 10: 这儿的苹果真便宜！",
+   "audio": "workbook/10.mp3",
+   "parts": [
+    {
+     "title": "Nghe · Phần 1",
+     "hint": "Câu 1–3: Nghe cụm từ, chọn hình đúng.",
+     "img": "workbook/10-1.jpg",
+     "letters": "ABC",
+     "qs": [
+      {
+       "n": 1,
+       "ans": "B",
+       "t": [
+        34,
+        60
+       ]
+      },
+      {
+       "n": 2,
+       "ans": "C",
+       "t": [
+        60,
+        80
+       ]
+      },
+      {
+       "n": 3,
+       "ans": "C",
+       "t": [
+        80,
+        96
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 2",
+     "hint": "Câu 4–5: Nghe câu hỏi, chọn câu trả lời đúng.",
+     "qs": [
+      {
+       "n": 4,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "10:00",
+         "py": "10:00"
+        },
+        {
+         "k": "B",
+         "zh": "十块钱",
+         "py": "shí kuài qián"
+        },
+        {
+         "k": "C",
+         "zh": "十本书",
+         "py": "shí běn shū"
+        }
+       ],
+       "t": [
+        140,
+        164
+       ]
+      },
+      {
+       "n": 5,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "不贵",
+         "py": "bù guì"
+        },
+        {
+         "k": "B",
+         "zh": "很好看",
+         "py": "hěn hǎo kàn"
+        },
+        {
+         "k": "C",
+         "zh": "120元",
+         "py": "120 yuán"
+        }
+       ],
+       "t": [
+        164,
+        190
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 3",
+     "hint": "Câu 6–8: Nghe hội thoại, chọn hình phù hợp nhất (A là ví dụ).",
+     "img": "workbook/10-2.jpg",
+     "letters": "ABCD",
+     "qs": [
+      {
+       "n": 6,
+       "ans": "C",
+       "t": [
+        240,
+        253
+       ]
+      },
+      {
+       "n": 7,
+       "ans": "D",
+       "t": [
+        253,
+        306
+       ]
+      },
+      {
+       "n": 8,
+       "ans": "B",
+       "t": [
+        306,
+        338
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 4",
+     "hint": "Câu 9–10: Nghe câu và câu hỏi, chọn đáp án đúng.",
+     "qs": [
+      {
+       "n": 9,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "很多",
+         "py": "hěn duō"
+        },
+        {
+         "k": "B",
+         "zh": "真贵",
+         "py": "zhēn guì"
+        },
+        {
+         "k": "C",
+         "zh": "不好看",
+         "py": "bù hǎo kàn"
+        }
+       ],
+       "t": [
+        400,
+        442
+       ]
+      },
+      {
+       "n": 10,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "很少",
+         "py": "hěn shǎo"
+        },
+        {
+         "k": "B",
+         "zh": "很便宜",
+         "py": "hěn pián yi"
+        },
+        {
+         "k": "C",
+         "zh": "很漂亮",
+         "py": "hěn piào liàng"
+        }
+       ],
+       "t": [
+        442,
+        488
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 1",
+     "hint": "Câu 11–13: Chọn hình phù hợp nhất với câu (A là ví dụ).",
+     "img": "workbook/10-3.jpg",
+     "letters": "ABCD",
+     "qs": [
+      {
+       "n": 11,
+       "ans": "C",
+       "text": "请问，包子多少钱一个？",
+       "py": "qǐng wèn bāo zi duō shǎo qián yí gè"
+      },
+      {
+       "n": 12,
+       "ans": "B",
+       "text": "这边的苹果真便宜。",
+       "py": "zhè biān de píng guǒ zhēn pián yi"
+      },
+      {
+       "n": 13,
+       "ans": "D",
+       "text": "这些是男孩子穿的衣服。",
+       "py": "zhè xiē shì nán hái zi chuān de yī fú"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 2",
+     "hint": "Câu 14–16: Nối câu (D là ví dụ: 你喝水吗？ → 好的，谢谢！).",
+     "opts": [
+      {
+       "k": "A",
+       "zh": "十块钱。",
+       "py": "shí kuài qián"
+      },
+      {
+       "k": "B",
+       "zh": "对不起，没有。",
+       "py": "duì bù qǐ méi yǒu"
+      },
+      {
+       "k": "C",
+       "zh": "在那边。",
+       "py": "zài nà biān"
+      },
+      {
+       "k": "D",
+       "zh": "好的，谢谢！",
+       "py": "hǎo de xiè xiè"
+      }
+     ],
+     "qs": [
+      {
+       "n": 14,
+       "ans": "C",
+       "text": "女孩子的衣服在哪儿？",
+       "py": "nǚ hái zi de yī fú zài nǎ ér"
+      },
+      {
+       "n": 15,
+       "ans": "A",
+       "text": "杯子多少钱一个？",
+       "py": "bēi zi duō shǎo qián yí gè"
+      },
+      {
+       "n": 16,
+       "ans": "B",
+       "text": "请问这儿有牛奶吗？",
+       "py": "qǐng wèn zhè ér yǒu niú nǎi ma"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 3",
+     "hint": "Câu 17–18: Chọn từ điền vào chỗ trống (C là ví dụ).",
+     "opts": [
+      {
+       "k": "A",
+       "zh": "穿",
+       "py": "chuān"
+      },
+      {
+       "k": "B",
+       "zh": "块",
+       "py": "kuài"
+      },
+      {
+       "k": "C",
+       "zh": "名字",
+       "py": "míng zì"
+      }
+     ],
+     "qs": [
+      {
+       "n": 17,
+       "ans": "B",
+       "text": "那些苹果两（ ）钱一斤，很便宜。",
+       "py": "nà xiē píng guǒ liǎng （ ） qián yī jīn hěn pián yi"
+      },
+      {
+       "n": 18,
+       "ans": "A",
+       "text": "男：这件衣服怎么样？ 女：很好看，10岁的男孩子能（ ）。",
+       "py": "nán ： zhè jiàn yī fú zěn me yàng ？  nǚ ： hěn hǎo kàn ，10 suì de nán hái zi néng （ ）。"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 4",
+     "hint": "Câu 19–20: Đọc và chọn đáp án đúng.",
+     "qs": [
+      {
+       "n": 19,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "杯子",
+         "py": "bēi zi"
+        },
+        {
+         "k": "B",
+         "zh": "手机",
+         "py": "shǒu jī"
+        },
+        {
+         "k": "C",
+         "zh": "水果",
+         "py": "shuǐ guǒ"
+        }
+       ],
+       "text": "我没有手机，今天想去商店买一个。 ★说话人想买什么？",
+       "py": "wǒ méi yǒu shǒu jī jīn tiān xiǎng qù shāng diàn mǎi yí gè 。 ★ shuō huà rén xiǎng mǎi shén me"
+      },
+      {
+       "n": 20,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "好看",
+         "py": "hǎo kàn"
+        },
+        {
+         "k": "B",
+         "zh": "便宜",
+         "py": "pián yi"
+        },
+        {
+         "k": "C",
+         "zh": "很贵",
+         "py": "hěn guì"
+        }
+       ],
+       "text": "这件衣服很好看，你也能穿，买一件吧。 ★那件衣服：",
+       "py": "zhè jiàn yī fú hěn hǎo kàn nǐ yě néng chuān mǎi yī jiàn ba 。 ★ nà jiàn yī fú ："
+      }
+     ]
+    }
+   ]
   },
   {
    "id": 11,
