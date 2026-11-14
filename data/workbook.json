@@ -3422,7 +3422,345 @@
   },
   {
    "id": 14,
-   "title": "Bài 14: 我看了一个电影"
+   "title": "Bài 14: 我看了一个电影",
+   "audio": "workbook/14.mp3",
+   "parts": [
+    {
+     "title": "Nghe · Phần 1",
+     "hint": "Câu 1–3: Nghe cụm từ, chọn hình đúng.",
+     "img": "workbook/14-1.jpg",
+     "letters": "ABC",
+     "qs": [
+      {
+       "n": 1,
+       "ans": "C",
+       "t": [
+        34,
+        58
+       ]
+      },
+      {
+       "n": 2,
+       "ans": "C",
+       "t": [
+        58,
+        75
+       ]
+      },
+      {
+       "n": 3,
+       "ans": "B",
+       "t": [
+        75,
+        93
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 2",
+     "hint": "Câu 4–5: Nghe câu hỏi, chọn câu trả lời đúng.",
+     "qs": [
+      {
+       "n": 4,
+       "ans": "C",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "都写",
+         "py": "dōu xiě"
+        },
+        {
+         "k": "B",
+         "zh": "听见了",
+         "py": "tīng jiàn le"
+        },
+        {
+         "k": "C",
+         "zh": "都会写了",
+         "py": "dū huì xiě le"
+        }
+       ],
+       "t": [
+        134,
+        162
+       ]
+      },
+      {
+       "n": 5,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "学习",
+         "py": "xué xí"
+        },
+        {
+         "k": "B",
+         "zh": "超市",
+         "py": "chāo shì"
+        },
+        {
+         "k": "C",
+         "zh": "买面包",
+         "py": "mǎi miàn bāo"
+        }
+       ],
+       "t": [
+        162,
+        187
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 3",
+     "hint": "Câu 6–8: Nghe hội thoại, chọn hình phù hợp nhất (A là ví dụ).",
+     "img": "workbook/14-2.jpg",
+     "letters": "ABCD",
+     "qs": [
+      {
+       "n": 6,
+       "ans": "D",
+       "t": [
+        236,
+        275
+       ]
+      },
+      {
+       "n": 7,
+       "ans": "B",
+       "t": [
+        275,
+        310
+       ]
+      },
+      {
+       "n": 8,
+       "ans": "C",
+       "t": [
+        310,
+        345
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 4",
+     "hint": "Câu 9–10: Nghe câu và câu hỏi, chọn đáp án đúng.",
+     "qs": [
+      {
+       "n": 9,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "下课后",
+         "py": "xià kè hòu"
+        },
+        {
+         "k": "B",
+         "zh": "上课前",
+         "py": "shàng kè qián"
+        },
+        {
+         "k": "C",
+         "zh": "回家后",
+         "py": "huí jiā hòu"
+        }
+       ],
+       "t": [
+        404,
+        446
+       ]
+      },
+      {
+       "n": 10,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "小狗",
+         "py": "xiǎo gǒu"
+        },
+        {
+         "k": "B",
+         "zh": "小猫",
+         "py": "xiǎo māo"
+        },
+        {
+         "k": "C",
+         "zh": "小狗和小猫",
+         "py": "xiǎo gǒu hé xiǎo māo"
+        }
+       ],
+       "t": [
+        446,
+        494
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 1",
+     "hint": "Câu 11–13: Chọn hình phù hợp nhất với câu (A là ví dụ).",
+     "img": "workbook/14-3.jpg",
+     "letters": "ABCD",
+     "qs": [
+      {
+       "n": 11,
+       "ans": "C",
+       "text": "王先生今天生病了，没来上班。",
+       "py": "wáng xiān shēng jīn tiān shēng bìng le méi lái shàng bān"
+      },
+      {
+       "n": 12,
+       "ans": "B",
+       "text": "火车上，有的人在读书，有的人在睡觉。",
+       "py": "huǒ chē shàng yǒu de rén zài dú shū yǒu de rén zài shuì jiào"
+      },
+      {
+       "n": 13,
+       "ans": "D",
+       "text": "喂，他们都来我家了，你也来吧。",
+       "py": "wèi tā men dōu lái wǒ jiā le nǐ yě lái ba"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 2",
+     "hint": "Câu 14–16: Nối câu (D là ví dụ: 你喝水吗？ → 好的，谢谢！).",
+     "opts": [
+      {
+       "k": "A",
+       "zh": "是的，我睡了一觉。",
+       "py": "shì de wǒ shuì le yī jiào"
+      },
+      {
+       "k": "B",
+       "zh": "我们都去了。",
+       "py": "wǒ men dōu qù le"
+      },
+      {
+       "k": "C",
+       "zh": "写字、看书、吃饭。",
+       "py": "xiě zì kàn shū chī fàn"
+      },
+      {
+       "k": "D",
+       "zh": "好的，谢谢！",
+       "py": "hǎo de xiè xiè"
+      }
+     ],
+     "qs": [
+      {
+       "n": 14,
+       "ans": "B",
+       "text": "谁去学校了？",
+       "py": "shuí qù xué xiào le"
+      },
+      {
+       "n": 15,
+       "ans": "A",
+       "text": "你下午没去医院吗？",
+       "py": "nǐ xià wǔ méi qù yī yuàn ma"
+      },
+      {
+       "n": 16,
+       "ans": "C",
+       "text": "你今天上午都忙了些什么？",
+       "py": "nǐ jīn tiān shàng wǔ dōu máng le xiē shén me"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 3",
+     "hint": "Câu 17–18: Chọn từ điền vào chỗ trống (C là ví dụ).",
+     "opts": [
+      {
+       "k": "A",
+       "zh": "都",
+       "py": "dōu"
+      },
+      {
+       "k": "B",
+       "zh": "茶",
+       "py": "chá"
+      },
+      {
+       "k": "C",
+       "zh": "名字",
+       "py": "míng zì"
+      }
+     ],
+     "qs": [
+      {
+       "n": 17,
+       "ans": "B",
+       "text": "我喝了一杯（ ）。",
+       "py": "wǒ hē le yī bēi （ ）。"
+      },
+      {
+       "n": 18,
+       "ans": "A",
+       "text": "男：上课了，请大家不要说话。 女：好的，老师，我们（ ）不说话了。",
+       "py": "nán ： shàng kè le qǐng dà jiā bú yào shuō huà 。  nǚ ： hǎo de lǎo shī wǒ men （ ） bù shuō huà le"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 4",
+     "hint": "Câu 19–20: Đọc và chọn đáp án đúng.",
+     "qs": [
+      {
+       "n": 19,
+       "ans": "C",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "时间",
+         "py": "shí jiān"
+        },
+        {
+         "k": "B",
+         "zh": "电话号",
+         "py": "diàn huà hào"
+        },
+        {
+         "k": "C",
+         "zh": "房间号",
+         "py": "fáng jiān hào"
+        }
+       ],
+       "text": "服务员，我想问一下，我们的房间号是多少？ ★说话人想知道什么？",
+       "py": "fú wù yuán wǒ xiǎng wèn yī xià wǒ men de fáng jiān hào shì duō shǎo ？ ★ shuō huà rén xiǎng zhī dào shén me"
+      },
+      {
+       "n": 20,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "小学生",
+         "py": "xiǎo xué shēng"
+        },
+        {
+         "k": "B",
+         "zh": "中学生",
+         "py": "zhōng xué shēng"
+        },
+        {
+         "k": "C",
+         "zh": "大学生",
+         "py": "dà xué shēng"
+        }
+       ],
+       "text": "儿子和女儿都上小学了，他们会写很多字了。 ★说话人的两个孩子是：",
+       "py": "ér zi hé nǚ ér dōu shàng xiǎo xué le tā men huì xiě hěn duō zì le 。 ★ shuō huà rén de liǎng gè hái zi shì ："
+      }
+     ]
+    }
+   ]
   },
   {
    "id": 15,
