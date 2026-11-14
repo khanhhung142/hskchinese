@@ -2738,7 +2738,345 @@
   },
   {
    "id": 12,
-   "title": "Bài 12: 昨天下雪了"
+   "title": "Bài 12: 昨天下雪了",
+   "audio": "workbook/12.mp3",
+   "parts": [
+    {
+     "title": "Nghe · Phần 1",
+     "hint": "Câu 1–3: Nghe cụm từ, chọn hình đúng.",
+     "img": "workbook/12-1.jpg",
+     "letters": "ABC",
+     "qs": [
+      {
+       "n": 1,
+       "ans": "A",
+       "t": [
+        34,
+        58
+       ]
+      },
+      {
+       "n": 2,
+       "ans": "C",
+       "t": [
+        58,
+        76
+       ]
+      },
+      {
+       "n": 3,
+       "ans": "B",
+       "t": [
+        76,
+        92
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 2",
+     "hint": "Câu 4–5: Nghe câu hỏi, chọn câu trả lời đúng.",
+     "qs": [
+      {
+       "n": 4,
+       "ans": "C",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "在吃药",
+         "py": "zài chī yào"
+        },
+        {
+         "k": "B",
+         "zh": "有点儿",
+         "py": "yǒu diǎn ér"
+        },
+        {
+         "k": "C",
+         "zh": "不太好",
+         "py": "bù tài hǎo"
+        }
+       ],
+       "t": [
+        136,
+        161
+       ]
+      },
+      {
+       "n": 5,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "下雪了",
+         "py": "xià xuě le"
+        },
+        {
+         "k": "B",
+         "zh": "太热了",
+         "py": "tài rè le"
+        },
+        {
+         "k": "C",
+         "zh": "不喝水",
+         "py": "bù hē shuǐ"
+        }
+       ],
+       "t": [
+        161,
+        184
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 3",
+     "hint": "Câu 6–8: Nghe hội thoại, chọn hình phù hợp nhất (A là ví dụ).",
+     "img": "workbook/12-2.jpg",
+     "letters": "ABCD",
+     "qs": [
+      {
+       "n": 6,
+       "ans": "D",
+       "t": [
+        233,
+        270
+       ]
+      },
+      {
+       "n": 7,
+       "ans": "C",
+       "t": [
+        270,
+        281
+       ]
+      },
+      {
+       "n": 8,
+       "ans": "B",
+       "t": [
+        281,
+        334
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 4",
+     "hint": "Câu 9–10: Nghe câu và câu hỏi, chọn đáp án đúng.",
+     "qs": [
+      {
+       "n": 9,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "看医生",
+         "py": "kàn yī shēng"
+        },
+        {
+         "k": "B",
+         "zh": "看朋友",
+         "py": "kàn péng yǒu"
+        },
+        {
+         "k": "C",
+         "zh": "看病人",
+         "py": "kàn bìng rén"
+        }
+       ],
+       "t": [
+        396,
+        444
+       ]
+      },
+      {
+       "n": 10,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "工作",
+         "py": "gōng zuò"
+        },
+        {
+         "k": "B",
+         "zh": "休息",
+         "py": "xiū xī"
+        },
+        {
+         "k": "C",
+         "zh": "读书",
+         "py": "dú shū"
+        }
+       ],
+       "t": [
+        444,
+        497
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 1",
+     "hint": "Câu 11–13: Chọn hình phù hợp nhất với câu (A là ví dụ).",
+     "img": "workbook/12-3.jpg",
+     "letters": "ABCD",
+     "qs": [
+      {
+       "n": 11,
+       "ans": "D",
+       "text": "我女儿生病了。",
+       "py": "wǒ nǚ ér shēng bìng le"
+      },
+      {
+       "n": 12,
+       "ans": "B",
+       "text": "今天天不太好，下雪了。",
+       "py": "jīn tiān tiān bù tài hǎo xià xuě le"
+      },
+      {
+       "n": 13,
+       "ans": "C",
+       "text": "12:00了，你们怎么还在看电视？",
+       "py": "12:00 le nǐ men zěn me hái zài kàn diàn shì"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 2",
+     "hint": "Câu 14–16: Nối câu (D là ví dụ: 你喝水吗？ → 好的，谢谢！).",
+     "opts": [
+      {
+       "k": "A",
+       "zh": "热水。",
+       "py": "rè shuǐ"
+      },
+      {
+       "k": "B",
+       "zh": "我病了。",
+       "py": "wǒ bìng le"
+      },
+      {
+       "k": "C",
+       "zh": "对。",
+       "py": "duì"
+      },
+      {
+       "k": "D",
+       "zh": "好的，谢谢！",
+       "py": "hǎo de xiè xiè"
+      }
+     ],
+     "qs": [
+      {
+       "n": 14,
+       "ans": "B",
+       "text": "你怎么了？",
+       "py": "nǐ zěn me le"
+      },
+      {
+       "n": 15,
+       "ans": "A",
+       "text": "你想喝点儿什么？",
+       "py": "nǐ xiǎng hē diǎn ér shén me"
+      },
+      {
+       "n": 16,
+       "ans": "C",
+       "text": "你开车了？",
+       "py": "nǐ kāi chē le"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 3",
+     "hint": "Câu 17–18: Chọn từ điền vào chỗ trống (C là ví dụ).",
+     "opts": [
+      {
+       "k": "A",
+       "zh": "冷",
+       "py": "lěng"
+      },
+      {
+       "k": "B",
+       "zh": "生病",
+       "py": "shēng bìng"
+      },
+      {
+       "k": "C",
+       "zh": "名字",
+       "py": "míng zì"
+      }
+     ],
+     "qs": [
+      {
+       "n": 17,
+       "ans": "B",
+       "text": "他（ ）了，没来上班。",
+       "py": "tā （ ） le méi lái shàng bān"
+      },
+      {
+       "n": 18,
+       "ans": "A",
+       "text": "男：外边雨大吗？ 女：很大，我觉得有点儿（ ）。",
+       "py": "nán ： wài biān yǔ dà ma ？  nǚ ： hěn dà wǒ jué de yǒu diǎn ér （ ）。"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 4",
+     "hint": "Câu 19–20: Đọc và chọn đáp án đúng.",
+     "qs": [
+      {
+       "n": 19,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "天气好",
+         "py": "tiān qì hǎo"
+        },
+        {
+         "k": "B",
+         "zh": "雨不大",
+         "py": "yǔ bù dà"
+        },
+        {
+         "k": "C",
+         "zh": "有点儿冷",
+         "py": "yǒu diǎn ér lěng"
+        }
+       ],
+       "text": "昨天的天气很好，我和朋友们去外边玩了。 ★说话人觉得昨天：",
+       "py": "zuó tiān de tiān qì hěn hǎo wǒ hé péng yǒu men qù wài biān wán le 。 ★ shuō huà rén jué de zuó tiān ："
+      },
+      {
+       "n": 20,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "要吃药",
+         "py": "yào chī yào"
+        },
+        {
+         "k": "B",
+         "zh": "要多睡觉",
+         "py": "yào duō shuì jiào"
+        },
+        {
+         "k": "C",
+         "zh": "要多喝水",
+         "py": "yào duō hē shuǐ"
+        }
+       ],
+       "text": "老张去看病，医生说他要吃三天药。 ★医生说老张：",
+       "py": "lǎo zhāng qù kàn bìng yī shēng shuō tā yào chī sān tiān yào 。 ★ yī shēng shuō lǎo zhāng ："
+      }
+     ]
+    }
+   ]
   },
   {
    "id": 13,
