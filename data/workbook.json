@@ -344,7 +344,345 @@
   },
   {
    "id": 5,
-   "title": "Bài 5: 今天我休息"
+   "title": "Bài 5: 今天我休息",
+   "audio": "workbook/5.mp3",
+   "parts": [
+    {
+     "title": "Nghe · Phần 1",
+     "hint": "Câu 1–3: Nghe cụm từ, chọn hình đúng.",
+     "img": "workbook/5-1.jpg",
+     "letters": "ABC",
+     "qs": [
+      {
+       "n": 1,
+       "ans": "C",
+       "t": [
+        36,
+        50
+       ]
+      },
+      {
+       "n": 2,
+       "ans": "A",
+       "t": [
+        50,
+        60
+       ]
+      },
+      {
+       "n": 3,
+       "ans": "B",
+       "t": [
+        60,
+        70
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 2",
+     "hint": "Câu 4–5: Nghe câu hỏi, chọn câu trả lời đúng.",
+     "qs": [
+      {
+       "n": 4,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "我不会",
+         "py": "wǒ bú huì"
+        },
+        {
+         "k": "B",
+         "zh": "我吃饺子",
+         "py": "wǒ chī jiǎo zi"
+        },
+        {
+         "k": "C",
+         "zh": "做面条儿",
+         "py": "zuò miàn tiáo ér"
+        }
+       ],
+       "t": [
+        107,
+        122
+       ]
+      },
+      {
+       "n": 5,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "休息",
+         "py": "xiū xī"
+        },
+        {
+         "k": "B",
+         "zh": "星期四",
+         "py": "xīng qī sì"
+        },
+        {
+         "k": "C",
+         "zh": "五口人",
+         "py": "wǔ kǒu rén"
+        }
+       ],
+       "t": [
+        122,
+        146
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 3",
+     "hint": "Câu 6–8: Nghe hội thoại, chọn hình phù hợp nhất (A là ví dụ).",
+     "img": "workbook/5-2.jpg",
+     "letters": "ABCD",
+     "qs": [
+      {
+       "n": 6,
+       "ans": "C",
+       "t": [
+        207,
+        234
+       ]
+      },
+      {
+       "n": 7,
+       "ans": "B",
+       "t": [
+        234,
+        275
+       ]
+      },
+      {
+       "n": 8,
+       "ans": "D",
+       "t": [
+        275,
+        305
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 4",
+     "hint": "Câu 9–10: Nghe câu và câu hỏi, chọn đáp án đúng.",
+     "qs": [
+      {
+       "n": 9,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "菜",
+         "py": "cài"
+        },
+        {
+         "k": "B",
+         "zh": "饺子",
+         "py": "jiǎo zi"
+        },
+        {
+         "k": "C",
+         "zh": "面条儿",
+         "py": "miàn tiáo ér"
+        }
+       ],
+       "t": [
+        368,
+        406
+       ]
+      },
+      {
+       "n": 10,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "4号",
+         "py": "4 hào"
+        },
+        {
+         "k": "B",
+         "zh": "10号",
+         "py": "10 hào"
+        },
+        {
+         "k": "C",
+         "zh": "14号",
+         "py": "14 hào"
+        }
+       ],
+       "t": [
+        406,
+        447
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 1",
+     "hint": "Câu 11–13: Chọn hình phù hợp nhất với câu (A là ví dụ).",
+     "img": "workbook/5-3.jpg",
+     "letters": "ABCD",
+     "qs": [
+      {
+       "n": 11,
+       "ans": "D",
+       "text": "王老师，再见。",
+       "py": "wáng lǎo shī zài jiàn"
+      },
+      {
+       "n": 12,
+       "ans": "C",
+       "text": "今天我休息。",
+       "py": "jīn tiān wǒ xiū xī"
+      },
+      {
+       "n": 13,
+       "ans": "B",
+       "text": "我有一个儿子，他今年7岁。",
+       "py": "wǒ yǒu yí gè ér zi tā jīn nián 7 suì"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 2",
+     "hint": "Câu 14–16: Nối câu (A là ví dụ: 你喝水吗？ → 好的，谢谢！).",
+     "opts": [
+      {
+       "k": "A",
+       "zh": "好的，谢谢！",
+       "py": "hǎo de xiè xiè"
+      },
+      {
+       "k": "B",
+       "zh": "我不会。",
+       "py": "wǒ bú huì"
+      },
+      {
+       "k": "C",
+       "zh": "面条儿。",
+       "py": "miàn tiáo ér"
+      },
+      {
+       "k": "D",
+       "zh": "5月6号。",
+       "py": "5 yuè 6 hào"
+      }
+     ],
+     "qs": [
+      {
+       "n": 14,
+       "ans": "C",
+       "text": "你去超市买什么？",
+       "py": "nǐ qù chāo shì mǎi shén me"
+      },
+      {
+       "n": 15,
+       "ans": "B",
+       "text": "你会做饭吗？",
+       "py": "nǐ huì zuò fàn ma"
+      },
+      {
+       "n": 16,
+       "ans": "D",
+       "text": "今天几号？",
+       "py": "jīn tiān jǐ hào"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 3",
+     "hint": "Câu 17–18: Chọn từ điền vào chỗ trống (C là ví dụ).",
+     "opts": [
+      {
+       "k": "A",
+       "zh": "几",
+       "py": "jǐ"
+      },
+      {
+       "k": "B",
+       "zh": "好看",
+       "py": "hǎo kàn"
+      },
+      {
+       "k": "C",
+       "zh": "名字",
+       "py": "míng zì"
+      }
+     ],
+     "qs": [
+      {
+       "n": 17,
+       "ans": "A",
+       "text": "今天（ ）号？",
+       "py": "jīn tiān （ ） hào"
+      },
+      {
+       "n": 18,
+       "ans": "B",
+       "text": "男：你的新电脑真（ ）！ 女：谢谢，我也很喜欢。",
+       "py": "nán ： nǐ de xīn diàn nǎo zhēn （ ）！  nǚ ： xiè xiè wǒ yě hěn xǐ huān"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 4",
+     "hint": "Câu 19–20: Đọc và chọn đáp án đúng.",
+     "qs": [
+      {
+       "n": 19,
+       "ans": "C",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "新电脑",
+         "py": "xīn diàn nǎo"
+        },
+        {
+         "k": "B",
+         "zh": "中国菜",
+         "py": "zhōng guó cài"
+        },
+        {
+         "k": "C",
+         "zh": "中文名字",
+         "py": "zhōng wén míng zì"
+        }
+       ],
+       "text": "我非常喜欢我的中文名字。 ★说话人喜欢什么？",
+       "py": "wǒ fēi cháng xǐ huān wǒ de zhōng wén míng zì 。 ★ shuō huà rén xǐ huān shén me"
+      },
+      {
+       "n": 20,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "今天几号",
+         "py": "jīn tiān jǐ hào"
+        },
+        {
+         "k": "B",
+         "zh": "哪天休息",
+         "py": "nǎ tiān xiū xī"
+        },
+        {
+         "k": "C",
+         "zh": "星期几上班",
+         "py": "xīng qī jǐ shàng bān"
+        }
+       ],
+       "text": "今天8号，你几号休息？ ★说话人想知道什么？",
+       "py": "jīn tiān 8 hào nǐ jǐ hào xiū xī ？ ★ shuō huà rén xiǎng zhī dào shén me"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": 6,
