@@ -527,12 +527,39 @@ function listenStep() {
   const x = st.items[st.i];
   const c = writeCard(x.tokens ? 'sentence' : 'write', x);
   const live = () => view.name === 'listen' && view.state === st && st.on && st.tok === tok;
-  const after = () => setTimeout(() => {
+  // Gap = a silent mp3 on the same element, not setTimeout: timers stall with the screen off, audio keeps running.
+  const after = () => live() && play('silence.mp3', '', '', () => {
     if (!live()) return;
-    if (st.i < st.items.length - 1) { st.i++; listenStep(); } else { st.on = false; render(); }
-  }, 700);
+    if (st.i < st.items.length - 1) { st.i++; listenStep(); } else { st.on = false; render(); mediaState(); }
+  });
+  mediaState(c.text, c.en);
   if (EN) say(c.text, after);
   else say(c.text, () => (live() ? play(`audio/en/${encodeURIComponent(c.en)}.mp3`, c.en, 'en-US', after) : null));
+}
+
+/** Lock-screen / notification controls for "Nghe cả bài". */
+function mediaState(title, artist) {
+  const ms = navigator.mediaSession;
+  if (!ms) return;
+  const on = view.name === 'listen' && view.state.on;
+  ms.playbackState = on ? 'playing' : view.name === 'listen' ? 'paused' : 'none';
+  if (title) ms.metadata = new MediaMetadata({ title, artist, album: 'Nghe cả bài', artwork: [{ src: 'icon-512.png', sizes: '512x512', type: 'image/png' }] });
+}
+function listenToggle(want) {
+  const st = view.state;
+  if (view.name !== 'listen' || st.on === want) return;
+  st.on = !st.on;
+  if (st.on) listenStep(); else { st.tok++; player.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); render(); mediaState(); }
+}
+function listenMove(d) {
+  if (view.name !== 'listen') return;
+  const st = view.state;
+  st.i = Math.min(st.items.length - 1, Math.max(0, st.i + d));
+  if (st.on) listenStep(); else render();
+}
+if (navigator.mediaSession) {
+  const h = { play: () => listenToggle(true), pause: () => listenToggle(false), previoustrack: () => listenMove(-1), nexttrack: () => listenMove(1) };
+  for (const [a, f] of Object.entries(h)) try { navigator.mediaSession.setActionHandler(a, f); } catch { /* unsupported action */ }
 }
 
 function startWrite(mode) {
@@ -959,15 +986,15 @@ root.addEventListener('click', (e) => {
   else if (act === 'wb-pick') { if (!view.done) { view.picks[el.dataset.n] = el.dataset.k; render(); } }
   else if (act === 'wb-submit') { view.done = true; wbAudio.pause(); render(); scrollTo(0, 0); }
   else if (act === 'wb-retry') openWorkbook(view.id);
-  else if (act === 'home') { player.pause(); wbAudio.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); view = { name: 'home' }; render(); }
+  else if (act === 'home') { player.pause(); wbAudio.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); view = { name: 'home' }; render(); mediaState(); }
   else if (act === 'listen') {
     const items = [...practiceWords().filter(inLesson), ...data.sentences.filter(inLesson)];
     if (!items.length) return alert(`${pickedName()} chưa có từ nào.`);
     view = { name: 'listen', state: { items, i: 0, on: true } };
     listenStep();
   }
-  else if (act === 'listen-toggle') { const st = view.state; st.on = !st.on; if (st.on) listenStep(); else { st.tok++; player.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); render(); } }
-  else if (act === 'listen-move') { const st = view.state; st.i = Math.min(st.items.length - 1, Math.max(0, st.i + +el.dataset.d)); if (st.on) listenStep(); else render(); }
+  else if (act === 'listen-toggle') listenToggle();
+  else if (act === 'listen-move') listenMove(+el.dataset.d);
   else if (act === 'words') { view = { name: 'words' }; render(); }
   else if (act === 'dup-keep' || act === 'dup-move') {
     const l = view.state.log[+el.dataset.i];
