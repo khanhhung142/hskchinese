@@ -1370,7 +1370,345 @@
   },
   {
    "id": 8,
-   "title": "Bài 8: 我爸爸在医院工作"
+   "title": "Bài 8: 我爸爸在医院工作",
+   "audio": "workbook/8.mp3",
+   "parts": [
+    {
+     "title": "Nghe · Phần 1",
+     "hint": "Câu 1–3: Nghe cụm từ, chọn hình đúng.",
+     "img": "workbook/8-1.jpg",
+     "letters": "ABC",
+     "qs": [
+      {
+       "n": 1,
+       "ans": "C",
+       "t": [
+        34,
+        58
+       ]
+      },
+      {
+       "n": 2,
+       "ans": "B",
+       "t": [
+        58,
+        77
+       ]
+      },
+      {
+       "n": 3,
+       "ans": "A",
+       "t": [
+        77,
+        92
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 2",
+     "hint": "Câu 4–5: Nghe câu hỏi, chọn câu trả lời đúng.",
+     "qs": [
+      {
+       "n": 4,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "去学校",
+         "py": "qù xué xiào"
+        },
+        {
+         "k": "B",
+         "zh": "房间外",
+         "py": "fáng jiān wài"
+        },
+        {
+         "k": "C",
+         "zh": "在吃东西",
+         "py": "zài chī dōng xī"
+        }
+       ],
+       "t": [
+        138,
+        163
+       ]
+      },
+      {
+       "n": 5,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "我能到",
+         "py": "wǒ néng dào"
+        },
+        {
+         "k": "B",
+         "zh": "我吃午饭",
+         "py": "wǒ chī wǔ fàn"
+        },
+        {
+         "k": "C",
+         "zh": "我不能工作",
+         "py": "wǒ bù néng gōng zuò"
+        }
+       ],
+       "t": [
+        163,
+        188
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 3",
+     "hint": "Câu 6–8: Nghe hội thoại, chọn hình phù hợp nhất (A là ví dụ).",
+     "img": "workbook/8-2.jpg",
+     "letters": "ABCD",
+     "qs": [
+      {
+       "n": 6,
+       "ans": "D",
+       "t": [
+        239,
+        270
+       ]
+      },
+      {
+       "n": 7,
+       "ans": "C",
+       "t": [
+        270,
+        304
+       ]
+      },
+      {
+       "n": 8,
+       "ans": "B",
+       "t": [
+        304,
+        337
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 4",
+     "hint": "Câu 9–10: Nghe câu và câu hỏi, chọn đáp án đúng.",
+     "qs": [
+      {
+       "n": 9,
+       "ans": "C",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "超市",
+         "py": "chāo shì"
+        },
+        {
+         "k": "B",
+         "zh": "饭店",
+         "py": "fàn diàn"
+        },
+        {
+         "k": "C",
+         "zh": "学校书店",
+         "py": "xué xiào shū diàn"
+        }
+       ],
+       "t": [
+        397,
+        441
+       ]
+      },
+      {
+       "n": 10,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "去学校",
+         "py": "qù xué xiào"
+        },
+        {
+         "k": "B",
+         "zh": "看电影",
+         "py": "kàn diàn yǐng"
+        },
+        {
+         "k": "C",
+         "zh": "去上班",
+         "py": "qù shàng bān"
+        }
+       ],
+       "t": [
+        441,
+        488
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 1",
+     "hint": "Câu 11–13: Chọn hình phù hợp nhất với câu (A là ví dụ).",
+     "img": "workbook/8-3.jpg",
+     "letters": "ABCD",
+     "qs": [
+      {
+       "n": 11,
+       "ans": "B",
+       "text": "你的手机在桌子上呢。",
+       "py": "nǐ de shǒu jī zài zhuō zi shàng ne"
+      },
+      {
+       "n": 12,
+       "ans": "D",
+       "text": "我在学校吃午饭。",
+       "py": "wǒ zài xué xiào chī wǔ fàn"
+      },
+      {
+       "n": 13,
+       "ans": "C",
+       "text": "这个医院里病人多，医生工作很忙。",
+       "py": "zhè ge yī yuàn lǐ bìng rén duō yī shēng gōng zuò hěn máng"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 2",
+     "hint": "Câu 14–16: Nối câu (D là ví dụ: 你喝水吗？ → 好的，谢谢！).",
+     "opts": [
+      {
+       "k": "A",
+       "zh": "医院。",
+       "py": "yī yuàn"
+      },
+      {
+       "k": "B",
+       "zh": "我老师。",
+       "py": "wǒ lǎo shī"
+      },
+      {
+       "k": "C",
+       "zh": "饺子和面条儿。",
+       "py": "jiǎo zi huó miàn tiáo ér"
+      },
+      {
+       "k": "D",
+       "zh": "好的，谢谢！",
+       "py": "hǎo de xiè xiè"
+      }
+     ],
+     "qs": [
+      {
+       "n": 14,
+       "ans": "C",
+       "text": "桌子上有什么？",
+       "py": "zhuō zi shàng yǒu shén me"
+      },
+      {
+       "n": 15,
+       "ans": "B",
+       "text": "她是谁？",
+       "py": "tā shì shuí"
+      },
+      {
+       "n": 16,
+       "ans": "A",
+       "text": "你爸爸在哪儿工作？",
+       "py": "nǐ bà bà zài nǎ ér gōng zuò"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 3",
+     "hint": "Câu 17–18: Chọn từ điền vào chỗ trống (C là ví dụ).",
+     "opts": [
+      {
+       "k": "A",
+       "zh": "能",
+       "py": "néng"
+      },
+      {
+       "k": "B",
+       "zh": "有",
+       "py": "yǒu"
+      },
+      {
+       "k": "C",
+       "zh": "名字",
+       "py": "míng zì"
+      }
+     ],
+     "qs": [
+      {
+       "n": 17,
+       "ans": "B",
+       "text": "我的房间里（ ）一只小猫。",
+       "py": "wǒ de fáng jiān lǐ （ ） yī zhī xiǎo māo"
+      },
+      {
+       "n": 18,
+       "ans": "A",
+       "text": "男：我们下午在书店见吧。 女：好的，我7:00（ ）到。",
+       "py": "nán ： wǒ men xià wǔ zài shū diàn jiàn ba 。  nǚ ： hǎo de wǒ 7:00（ ） dào"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 4",
+     "hint": "Câu 19–20: Đọc và chọn đáp án đúng.",
+     "qs": [
+      {
+       "n": 19,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "在家里",
+         "py": "zài jiā lǐ"
+        },
+        {
+         "k": "B",
+         "zh": "在书店",
+         "py": "zài shū diàn"
+        },
+        {
+         "k": "C",
+         "zh": "在医院工作",
+         "py": "zài yī yuàn gōng zuò"
+        }
+       ],
+       "text": "昨天爸爸在医院工作，哥哥在家里休息，没去书店。 ★说话人的哥哥昨天：",
+       "py": "zuó tiān bà bà zài yī yuàn gōng zuò gē gē zài jiā lǐ xiū xī méi qù shū diàn 。 ★ shuō huà rén dī gē gē zuó tiān ："
+      },
+      {
+       "n": 20,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "米饭",
+         "py": "mǐ fàn"
+        },
+        {
+         "k": "B",
+         "zh": "包子",
+         "py": "bāo zi"
+        },
+        {
+         "k": "C",
+         "zh": "面条儿",
+         "py": "miàn tiáo ér"
+        }
+       ],
+       "text": "我喜欢吃米饭，我女朋友不喜欢。 ★说话人的女朋友不喜欢吃：",
+       "py": "wǒ xǐ huān chī mǐ fàn wǒ nǚ péng yǒu bù xǐ huān 。 ★ shuō huà rén de nǚ péng yǒu bù xǐ huān chī ："
+      }
+     ]
+    }
+   ]
   },
   {
    "id": 9,
