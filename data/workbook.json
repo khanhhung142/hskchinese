@@ -1712,7 +1712,345 @@
   },
   {
    "id": 9,
-   "title": "Bài 9: 我明天上午在学校学习"
+   "title": "Bài 9: 我明天上午在学校学习",
+   "audio": "workbook/9.mp3",
+   "parts": [
+    {
+     "title": "Nghe · Phần 1",
+     "hint": "Câu 1–3: Nghe cụm từ, chọn hình đúng.",
+     "img": "workbook/9-1.jpg",
+     "letters": "ABC",
+     "qs": [
+      {
+       "n": 1,
+       "ans": "B",
+       "t": [
+        33,
+        57
+       ]
+      },
+      {
+       "n": 2,
+       "ans": "C",
+       "t": [
+        57,
+        75
+       ]
+      },
+      {
+       "n": 3,
+       "ans": "A",
+       "t": [
+        75,
+        92
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 2",
+     "hint": "Câu 4–5: Nghe câu hỏi, chọn câu trả lời đúng.",
+     "qs": [
+      {
+       "n": 4,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "书",
+         "py": "shū"
+        },
+        {
+         "k": "B",
+         "zh": "我的",
+         "py": "wǒ de"
+        },
+        {
+         "k": "C",
+         "zh": "他的电脑",
+         "py": "tā de diàn nǎo"
+        }
+       ],
+       "t": [
+        136,
+        160
+       ]
+      },
+      {
+       "n": 5,
+       "ans": "C",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "星期天",
+         "py": "xīng qī tiān"
+        },
+        {
+         "k": "B",
+         "zh": "孩子们",
+         "py": "hái zi men"
+        },
+        {
+         "k": "C",
+         "zh": "去外边唱歌",
+         "py": "qù wài biān chàng gē"
+        }
+       ],
+       "t": [
+        160,
+        186
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 3",
+     "hint": "Câu 6–8: Nghe hội thoại, chọn hình phù hợp nhất (A là ví dụ).",
+     "img": "workbook/9-2.jpg",
+     "letters": "ABCD",
+     "qs": [
+      {
+       "n": 6,
+       "ans": "D",
+       "t": [
+        235,
+        265
+       ]
+      },
+      {
+       "n": 7,
+       "ans": "C",
+       "t": [
+        265,
+        299
+       ]
+      },
+      {
+       "n": 8,
+       "ans": "B",
+       "t": [
+        299,
+        334
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 4",
+     "hint": "Câu 9–10: Nghe câu và câu hỏi, chọn đáp án đúng.",
+     "qs": [
+      {
+       "n": 9,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "上午8:00",
+         "py": "shàng wǔ 8:00"
+        },
+        {
+         "k": "B",
+         "zh": "上午10:00",
+         "py": "shàng wǔ 10:00"
+        },
+        {
+         "k": "C",
+         "zh": "晚上8:00",
+         "py": "wǎn shàng 8:00"
+        }
+       ],
+       "t": [
+        392,
+        438
+       ]
+      },
+      {
+       "n": 10,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "菜店",
+         "py": "cài diàn"
+        },
+        {
+         "k": "B",
+         "zh": "书店",
+         "py": "shū diàn"
+        },
+        {
+         "k": "C",
+         "zh": "超市",
+         "py": "chāo shì"
+        }
+       ],
+       "t": [
+        438,
+        484
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 1",
+     "hint": "Câu 11–13: Chọn hình phù hợp nhất với câu (A là ví dụ).",
+     "img": "workbook/9-3.jpg",
+     "letters": "ABCD",
+     "qs": [
+      {
+       "n": 11,
+       "ans": "D",
+       "text": "妹妹和小狗今天在家里玩。",
+       "py": "mèi mèi hé xiǎo gǒu jīn tiān zài jiā lǐ wán"
+      },
+      {
+       "n": 12,
+       "ans": "C",
+       "text": "房间外有一只小猫。",
+       "py": "fáng jiān wài yǒu yī zhī xiǎo māo"
+      },
+      {
+       "n": 13,
+       "ans": "B",
+       "text": "这是我的第三个电脑。",
+       "py": "zhè shì wǒ de dì sān gè diàn nǎo"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 2",
+     "hint": "Câu 14–16: Nối câu (D là ví dụ: 你喝水吗？ → 好的，谢谢！).",
+     "opts": [
+      {
+       "k": "A",
+       "zh": "在家里。",
+       "py": "zài jiā lǐ"
+      },
+      {
+       "k": "B",
+       "zh": "我女朋友。",
+       "py": "wǒ nǚ péng yǒu"
+      },
+      {
+       "k": "C",
+       "zh": "一只小猫。",
+       "py": "yī zhī xiǎo māo"
+      },
+      {
+       "k": "D",
+       "zh": "好的，谢谢！",
+       "py": "hǎo de xiè xiè"
+      }
+     ],
+     "qs": [
+      {
+       "n": 14,
+       "ans": "C",
+       "text": "桌子上有什么？",
+       "py": "zhuō zi shàng yǒu shén me"
+      },
+      {
+       "n": 15,
+       "ans": "A",
+       "text": "你今天下午在哪儿？",
+       "py": "nǐ jīn tiān xià wǔ zài nǎ ér"
+      },
+      {
+       "n": 16,
+       "ans": "B",
+       "text": "你和谁在超市呢？",
+       "py": "nǐ hé shuí zài chāo shì ne"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 3",
+     "hint": "Câu 17–18: Chọn từ điền vào chỗ trống (C là ví dụ).",
+     "opts": [
+      {
+       "k": "A",
+       "zh": "2:00",
+       "py": "2:00"
+      },
+      {
+       "k": "B",
+       "zh": "上课",
+       "py": "shàng kè"
+      },
+      {
+       "k": "C",
+       "zh": "名字",
+       "py": "míng zì"
+      }
+     ],
+     "qs": [
+      {
+       "n": 17,
+       "ans": "B",
+       "text": "我上午在学校（ ），我们下午去看电影吧。",
+       "py": "wǒ shàng wǔ zài xué xiào （ ）， wǒ men xià wǔ qù kàn diàn yǐng ba"
+      },
+      {
+       "n": 18,
+       "ans": "A",
+       "text": "男：我们下午几点在学校见？ 女：下午（ ）吧。",
+       "py": "nán ： wǒ men xià wǔ jǐ diǎn zài xué xiào jiàn ？  nǚ ： xià wǔ （ ） ba"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 4",
+     "hint": "Câu 19–20: Đọc và chọn đáp án đúng.",
+     "qs": [
+      {
+       "n": 19,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "一",
+         "py": "yī"
+        },
+        {
+         "k": "B",
+         "zh": "四",
+         "py": "sì"
+        },
+        {
+         "k": "C",
+         "zh": "十一",
+         "py": "shí yī"
+        }
+       ],
+       "text": "我有一只小狗，很漂亮，它是我的好朋友。 ★说话人有几只小狗？",
+       "py": "wǒ yǒu yī zhī xiǎo gǒu hěn piào liàng tā shì wǒ de hǎo péng yǒu 。 ★ shuō huà rén yǒu jǐ zhī xiǎo gǒu"
+      },
+      {
+       "n": 20,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "外边",
+         "py": "wài biān"
+        },
+        {
+         "k": "B",
+         "zh": "房间里",
+         "py": "fáng jiān lǐ"
+        },
+        {
+         "k": "C",
+         "zh": "超市里",
+         "py": "chāo shì lǐ"
+        }
+       ],
+       "text": "星期天中午妈妈在做饭，我和妹妹在房间里玩。 ★说话人和妹妹在哪儿？",
+       "py": "xīng qī tiān zhōng wǔ mā mā zài zuò fàn wǒ hé mèi mèi zài fáng jiān lǐ wán 。 ★ shuō huà rén hé mèi mèi zài nǎ ér"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": 10,
