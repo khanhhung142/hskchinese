@@ -4106,7 +4106,663 @@
   },
   {
    "id": 16,
-   "title": "Đề thi mô phỏng HSK 1"
+   "title": "Đề thi mô phỏng HSK 1",
+   "audio": "workbook/16.mp3",
+   "parts": [
+    {
+     "title": "Nghe · Phần 1",
+     "hint": "Câu 1–5: Nghe cụm từ, chọn hình đúng.",
+     "img": "workbook/16-1.jpg",
+     "letters": "ABC",
+     "qs": [
+      {
+       "n": 1,
+       "ans": "C",
+       "t": [
+        120,
+        134
+       ]
+      },
+      {
+       "n": 2,
+       "ans": "A",
+       "t": [
+        134,
+        154
+       ]
+      },
+      {
+       "n": 3,
+       "ans": "C",
+       "t": [
+        154,
+        175
+       ]
+      },
+      {
+       "n": 4,
+       "ans": "B",
+       "t": [
+        175,
+        194
+       ]
+      },
+      {
+       "n": 5,
+       "ans": "C",
+       "t": [
+        194,
+        213
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 2",
+     "hint": "Câu 6–10: Nghe câu hỏi, chọn câu trả lời đúng.",
+     "qs": [
+      {
+       "n": 6,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "哪里",
+         "py": "nǎ lǐ"
+        },
+        {
+         "k": "B",
+         "zh": "打电话",
+         "py": "dǎ diàn huà"
+        },
+        {
+         "k": "C",
+         "zh": "做饭好吃",
+         "py": "zuò fàn hǎo chī"
+        }
+       ],
+       "t": [
+        257,
+        281
+       ]
+      },
+      {
+       "n": 7,
+       "ans": "C",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "白天",
+         "py": "bái tiān"
+        },
+        {
+         "k": "B",
+         "zh": "生病了",
+         "py": "shēng bìng le"
+        },
+        {
+         "k": "C",
+         "zh": "水果店",
+         "py": "shuǐ guǒ diàn"
+        }
+       ],
+       "t": [
+        281,
+        306
+       ]
+      },
+      {
+       "n": 8,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "八元",
+         "py": "bā yuán"
+        },
+        {
+         "k": "B",
+         "zh": "不是",
+         "py": "bú shì"
+        },
+        {
+         "k": "C",
+         "zh": "便宜",
+         "py": "pián yi"
+        }
+       ],
+       "t": [
+        306,
+        331
+       ]
+      },
+      {
+       "n": 9,
+       "ans": "C",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "去年",
+         "py": "qù nián"
+        },
+        {
+         "k": "B",
+         "zh": "很漂亮",
+         "py": "hěn piào liàng"
+        },
+        {
+         "k": "C",
+         "zh": "我弟弟",
+         "py": "wǒ dì di"
+        }
+       ],
+       "t": [
+        331,
+        356
+       ]
+      },
+      {
+       "n": 10,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "没有",
+         "py": "méi yǒu"
+        },
+        {
+         "k": "B",
+         "zh": "再见",
+         "py": "zài jiàn"
+        },
+        {
+         "k": "C",
+         "zh": "不要",
+         "py": "bú yào"
+        }
+       ],
+       "t": [
+        356,
+        366
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 3",
+     "hint": "Câu 11–15: Nghe hội thoại, chọn hình phù hợp nhất (C là ví dụ).",
+     "img": "workbook/16-2.jpg",
+     "letters": "ABCDEF",
+     "qs": [
+      {
+       "n": 11,
+       "ans": "B",
+       "t": [
+        420,
+        466
+       ]
+      },
+      {
+       "n": 12,
+       "ans": "D",
+       "t": [
+        466,
+        500
+       ]
+      },
+      {
+       "n": 13,
+       "ans": "E",
+       "t": [
+        500,
+        531
+       ]
+      },
+      {
+       "n": 14,
+       "ans": "A",
+       "t": [
+        531,
+        568
+       ]
+      },
+      {
+       "n": 15,
+       "ans": "F",
+       "t": [
+        568,
+        598
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 4",
+     "hint": "Câu 16–20: Nghe câu và câu hỏi, chọn đáp án đúng.",
+     "qs": [
+      {
+       "n": 16,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "60岁",
+         "py": "60 suì"
+        },
+        {
+         "k": "B",
+         "zh": "60多岁",
+         "py": "60 duō suì"
+        },
+        {
+         "k": "C",
+         "zh": "70岁",
+         "py": "70 suì"
+        }
+       ],
+       "t": [
+        660,
+        711
+       ]
+      },
+      {
+       "n": 17,
+       "ans": "C",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "电脑",
+         "py": "diàn nǎo"
+        },
+        {
+         "k": "B",
+         "zh": "杯子",
+         "py": "bēi zi"
+        },
+        {
+         "k": "C",
+         "zh": "手机",
+         "py": "shǒu jī"
+        }
+       ],
+       "t": [
+        711,
+        748
+       ]
+      },
+      {
+       "n": 18,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "女儿",
+         "py": "nǚ ér"
+        },
+        {
+         "k": "B",
+         "zh": "妹妹",
+         "py": "mèi mèi"
+        },
+        {
+         "k": "C",
+         "zh": "高女士",
+         "py": "gāo nǚ shì"
+        }
+       ],
+       "t": [
+        748,
+        787
+       ]
+      },
+      {
+       "n": 19,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "包子",
+         "py": "bāo zi"
+        },
+        {
+         "k": "B",
+         "zh": "面包",
+         "py": "miàn bāo"
+        },
+        {
+         "k": "C",
+         "zh": "面条儿",
+         "py": "miàn tiáo ér"
+        }
+       ],
+       "t": [
+        787,
+        821
+       ]
+      },
+      {
+       "n": 20,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "早上",
+         "py": "zǎo shàng"
+        },
+        {
+         "k": "B",
+         "zh": "中午",
+         "py": "zhōng wǔ"
+        },
+        {
+         "k": "C",
+         "zh": "星期天",
+         "py": "xīng qī tiān"
+        }
+       ],
+       "t": [
+        821,
+        863
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 1",
+     "hint": "Câu 21–25: Chọn hình phù hợp nhất với câu (E là ví dụ).",
+     "img": "workbook/16-3.jpg",
+     "letters": "ABCDEF",
+     "qs": [
+      {
+       "n": 21,
+       "ans": "B",
+       "text": "王先生是医生。",
+       "py": "wáng xiān shēng shì yī shēng"
+      },
+      {
+       "n": 22,
+       "ans": "D",
+       "text": "姐姐上午去超市买了菜。",
+       "py": "jiě jiě shàng wǔ qù chāo shì mǎi le cài"
+      },
+      {
+       "n": 23,
+       "ans": "A",
+       "text": "今天的早饭是牛奶和鸡蛋。",
+       "py": "jīn tiān de zǎo fàn shì niú nǎi hé jī dàn"
+      },
+      {
+       "n": 24,
+       "ans": "C",
+       "text": "我家有四口人，爸爸、妈妈、弟弟和我。",
+       "py": "wǒ jiā yǒu sì kǒu rén bà bà mā mā dì di hé wǒ"
+      },
+      {
+       "n": 25,
+       "ans": "F",
+       "text": "她和好朋友都爱唱歌。",
+       "py": "tā hé hǎo péng yǒu dōu ài chàng gē"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 2",
+     "hint": "Câu 26–30: Nối câu (F là ví dụ: 你喝水吗？ → 好的，谢谢！).",
+     "opts": [
+      {
+       "k": "A",
+       "zh": "商店。",
+       "py": "shāng diàn"
+      },
+      {
+       "k": "B",
+       "zh": "我学生。",
+       "py": "wǒ xué shēng"
+      },
+      {
+       "k": "C",
+       "zh": "在桌子上。",
+       "py": "zài zhuō zi shàng"
+      },
+      {
+       "k": "D",
+       "zh": "还没有。",
+       "py": "hái méi yǒu"
+      },
+      {
+       "k": "E",
+       "zh": "下雪了。",
+       "py": "xià xuě le"
+      },
+      {
+       "k": "F",
+       "zh": "好的，谢谢！",
+       "py": "hǎo de xiè xiè"
+      }
+     ],
+     "qs": [
+      {
+       "n": 26,
+       "ans": "C",
+       "text": "这是我的书，你的呢？",
+       "py": "zhè shì wǒ de shū nǐ de ne"
+      },
+      {
+       "n": 27,
+       "ans": "A",
+       "text": "你去哪儿买苹果？",
+       "py": "nǐ qù nǎ ér mǎi píng guǒ"
+      },
+      {
+       "n": 28,
+       "ans": "E",
+       "text": "昨天天气怎么样？",
+       "py": "zuó tiān tiān qì zěn me yàng"
+      },
+      {
+       "n": 29,
+       "ans": "B",
+       "text": "你和谁打电话呢？",
+       "py": "nǐ hé shuí dǎ diàn huà ne"
+      },
+      {
+       "n": 30,
+       "ans": "D",
+       "text": "你下班了吗？",
+       "py": "nǐ xià bān le ma"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 3",
+     "hint": "Câu 31–35: Chọn từ điền vào chỗ trống (D là ví dụ: 你叫什么名字？).",
+     "opts": [
+      {
+       "k": "A",
+       "zh": "认识",
+       "py": "rèn shí"
+      },
+      {
+       "k": "B",
+       "zh": "住",
+       "py": "zhù"
+      },
+      {
+       "k": "C",
+       "zh": "晚饭",
+       "py": "wǎn fàn"
+      },
+      {
+       "k": "D",
+       "zh": "叫",
+       "py": "jiào"
+      },
+      {
+       "k": "E",
+       "zh": "汉字",
+       "py": "hàn zì"
+      },
+      {
+       "k": "F",
+       "zh": "块",
+       "py": "kuài"
+      }
+     ],
+     "qs": [
+      {
+       "n": 31,
+       "ans": "C",
+       "text": "大家都没吃（ ）呢。",
+       "py": "dà jiā dōu méi chī （ ） ne"
+      },
+      {
+       "n": 32,
+       "ans": "E",
+       "text": "在今天的中文课上，我学了很多（ ）。",
+       "py": "zài jīn tiān de zhōng wén kè shàng wǒ xué le hěn duō （ ）。"
+      },
+      {
+       "n": 33,
+       "ans": "A",
+       "text": "对不起，我不（ ）这个人。",
+       "py": "duì bù qǐ wǒ bù （ ） zhè ge rén"
+      },
+      {
+       "n": 34,
+       "ans": "B",
+       "text": "我和家人（ ）在北京。",
+       "py": "wǒ hé jiā rén （ ） zài běi jīng"
+      },
+      {
+       "n": 35,
+       "ans": "F",
+       "text": "男：这些东西可以卖多少钱？ 女：80（ ）。",
+       "py": "nán ： zhè xiē dōng xī kě yǐ mài duō shǎo qián ？  nǚ ：80（ ）。"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 4",
+     "hint": "Câu 36–40: Đọc và chọn đáp án đúng.",
+     "qs": [
+      {
+       "n": 36,
+       "ans": "C",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "开车",
+         "py": "kāi chē"
+        },
+        {
+         "k": "B",
+         "zh": "坐飞机",
+         "py": "zuò fēi jī"
+        },
+        {
+         "k": "C",
+         "zh": "坐出租车",
+         "py": "zuò chū zū chē"
+        }
+       ],
+       "text": "下雨了，我们坐出租车回家吧。 ★说话人想怎么回家？",
+       "py": "xià yǔ le wǒ men zuò chū zū chē huí jiā ba 。 ★ shuō huà rén xiǎng zěn me huí jiā"
+      },
+      {
+       "n": 37,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "小学生",
+         "py": "xiǎo xué shēng"
+        },
+        {
+         "k": "B",
+         "zh": "中学生",
+         "py": "zhōng xué shēng"
+        },
+        {
+         "k": "C",
+         "zh": "大学生",
+         "py": "dà xué shēng"
+        }
+       ],
+       "text": "我儿子今年16岁了，正在上中学。 ★说话人的儿子是：",
+       "py": "wǒ ér zi jīn nián 16 suì le zhèng zài shàng zhōng xué 。 ★ shuō huà rén de ér zi shì ："
+      },
+      {
+       "n": 38,
+       "ans": "C",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "桌子下",
+         "py": "zhuō zi xià"
+        },
+        {
+         "k": "B",
+         "zh": "房间里",
+         "py": "fáng jiān lǐ"
+        },
+        {
+         "k": "C",
+         "zh": "房间外",
+         "py": "fáng jiān wài"
+        }
+       ],
+       "text": "小猫和小狗都在房间外睡觉呢。 ★小狗在：",
+       "py": "xiǎo māo hé xiǎo gǒu dōu zài fáng jiān wài shuì jiào ne 。 ★ xiǎo gǒu zài ："
+      },
+      {
+       "n": 39,
+       "ans": "C",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "饭店",
+         "py": "fàn diàn"
+        },
+        {
+         "k": "B",
+         "zh": "医院",
+         "py": "yī yuàn"
+        },
+        {
+         "k": "C",
+         "zh": "学校",
+         "py": "xué xiào"
+        }
+       ],
+       "text": "我同学在这个学校工作很多年了，你有问题可以问他。 ★说话人的同学在哪儿上班？",
+       "py": "wǒ tóng xué zài zhè ge xué xiào gōng zuò hěn duō nián le nǐ yǒu wèn tí kě yǐ wèn tā 。 ★ shuō huà rén de tóng xué zài nǎ ér shàng bān"
+      },
+      {
+       "n": 40,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "名字好听",
+         "py": "míng zì hǎo tīng"
+        },
+        {
+         "k": "B",
+         "zh": "写字好看",
+         "py": "xiě zì hǎo kàn"
+        },
+        {
+         "k": "C",
+         "zh": "正在读书",
+         "py": "zhèng zài dú shū"
+        }
+       ],
+       "text": "这个小朋友写字真好看。 ★那个小朋友：",
+       "py": "zhè ge xiǎo péng yǒu xiě zì zhēn hǎo kàn 。 ★ nà ge xiǎo péng yǒu ："
+      }
+     ]
+    }
+   ]
   }
  ]
 }
