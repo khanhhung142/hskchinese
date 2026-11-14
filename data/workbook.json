@@ -3764,7 +3764,345 @@
   },
   {
    "id": 15,
-   "title": "Bài 15: 大兴机场见！"
+   "title": "Bài 15: 大兴机场见！",
+   "audio": "workbook/15.mp3",
+   "parts": [
+    {
+     "title": "Nghe · Phần 1",
+     "hint": "Câu 1–3: Nghe cụm từ, chọn hình đúng.",
+     "img": "workbook/15-1.jpg",
+     "letters": "ABC",
+     "qs": [
+      {
+       "n": 1,
+       "ans": "A",
+       "t": [
+        34,
+        58
+       ]
+      },
+      {
+       "n": 2,
+       "ans": "B",
+       "t": [
+        58,
+        75
+       ]
+      },
+      {
+       "n": 3,
+       "ans": "C",
+       "t": [
+        75,
+        93
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 2",
+     "hint": "Câu 4–5: Nghe câu hỏi, chọn câu trả lời đúng.",
+     "qs": [
+      {
+       "n": 4,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "太早了",
+         "py": "tài zǎo le"
+        },
+        {
+         "k": "B",
+         "zh": "没睡觉",
+         "py": "méi shuì jiào"
+        },
+        {
+         "k": "C",
+         "zh": "不想去",
+         "py": "bù xiǎng qù"
+        }
+       ],
+       "t": [
+        135,
+        165
+       ]
+      },
+      {
+       "n": 5,
+       "ans": "C",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "很多",
+         "py": "hěn duō"
+        },
+        {
+         "k": "B",
+         "zh": "也不贵",
+         "py": "yě bù guì"
+        },
+        {
+         "k": "C",
+         "zh": "也很好看",
+         "py": "yě hěn hǎo kàn"
+        }
+       ],
+       "t": [
+        165,
+        193
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 3",
+     "hint": "Câu 6–8: Nghe hội thoại, chọn hình phù hợp nhất (A là ví dụ).",
+     "img": "workbook/15-2.jpg",
+     "letters": "ABCD",
+     "qs": [
+      {
+       "n": 6,
+       "ans": "B",
+       "t": [
+        240,
+        281
+       ]
+      },
+      {
+       "n": 7,
+       "ans": "D",
+       "t": [
+        281,
+        321
+       ]
+      },
+      {
+       "n": 8,
+       "ans": "C",
+       "t": [
+        321,
+        357
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Nghe · Phần 4",
+     "hint": "Câu 9–10: Nghe câu và câu hỏi, chọn đáp án đúng.",
+     "qs": [
+      {
+       "n": 9,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "西安",
+         "py": "xī ān"
+        },
+        {
+         "k": "B",
+         "zh": "北京",
+         "py": "běi jīng"
+        },
+        {
+         "k": "C",
+         "zh": "上海",
+         "py": "shàng hǎi"
+        }
+       ],
+       "t": [
+        416,
+        462
+       ]
+      },
+      {
+       "n": 10,
+       "ans": "B",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "坐飞机",
+         "py": "zuò fēi jī"
+        },
+        {
+         "k": "B",
+         "zh": "坐火车",
+         "py": "zuò huǒ chē"
+        },
+        {
+         "k": "C",
+         "zh": "坐出租车",
+         "py": "zuò chū zū chē"
+        }
+       ],
+       "t": [
+        462,
+        505
+       ]
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 1",
+     "hint": "Câu 11–13: Chọn hình phù hợp nhất với câu (A là ví dụ).",
+     "img": "workbook/15-3.jpg",
+     "letters": "ABCD",
+     "qs": [
+      {
+       "n": 11,
+       "ans": "D",
+       "text": "我家有五口人，我们现在住在北京。",
+       "py": "wǒ jiā yǒu wǔ kǒu rén wǒ men xiàn zài zhù zài běi jīng"
+      },
+      {
+       "n": 12,
+       "ans": "B",
+       "text": "这里有好吃的，还有好玩儿的。",
+       "py": "zhè lǐ yǒu hǎo chī de hái yǒu hǎo wán ér de"
+      },
+      {
+       "n": 13,
+       "ans": "C",
+       "text": "现在我会说一点儿汉语，也会写一些汉字了。",
+       "py": "xiàn zài wǒ huì shuō yì diǎn ér hàn yǔ yě huì xiě yī xiē hàn zì le"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 2",
+     "hint": "Câu 14–16: Nối câu (D là ví dụ: 你喝水吗？ → 好的，谢谢！).",
+     "opts": [
+      {
+       "k": "A",
+       "zh": "我女儿。",
+       "py": "wǒ nǚ ér"
+      },
+      {
+       "k": "B",
+       "zh": "十个。",
+       "py": "shí gè"
+      },
+      {
+       "k": "C",
+       "zh": "苹果。",
+       "py": "píng guǒ"
+      },
+      {
+       "k": "D",
+       "zh": "好的，谢谢！",
+       "py": "hǎo de xiè xiè"
+      }
+     ],
+     "qs": [
+      {
+       "n": 14,
+       "ans": "B",
+       "text": "你会写几个汉字？",
+       "py": "nǐ huì xiě jǐ gè hàn zì"
+      },
+      {
+       "n": 15,
+       "ans": "A",
+       "text": "谁上中学了？",
+       "py": "shuí shàng zhōng xué le"
+      },
+      {
+       "n": 16,
+       "ans": "C",
+       "text": "你爱吃什么？",
+       "py": "nǐ ài chī shén me"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 3",
+     "hint": "Câu 17–18: Chọn từ điền vào chỗ trống (C là ví dụ).",
+     "opts": [
+      {
+       "k": "A",
+       "zh": "电视",
+       "py": "diàn shì"
+      },
+      {
+       "k": "B",
+       "zh": "北京",
+       "py": "běi jīng"
+      },
+      {
+       "k": "C",
+       "zh": "名字",
+       "py": "míng zì"
+      }
+     ],
+     "qs": [
+      {
+       "n": 17,
+       "ans": "B",
+       "text": "今年我们都想去（ ）。",
+       "py": "jīn nián wǒ men dōu xiǎng qù （ ）。"
+      },
+      {
+       "n": 18,
+       "ans": "A",
+       "text": "男：我爱看电影，也爱唱歌。你呢？ 女：我喜欢看（ ）。",
+       "py": "nán ： wǒ ài kàn diàn yǐng yě ài chàng gē nǐ ne ？  nǚ ： wǒ xǐ huān kàn （ ）。"
+      }
+     ]
+    },
+    {
+     "title": "Đọc · Phần 4",
+     "hint": "Câu 19–20: Đọc và chọn đáp án đúng.",
+     "qs": [
+      {
+       "n": 19,
+       "ans": "C",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "买电脑",
+         "py": "mǎi diàn nǎo"
+        },
+        {
+         "k": "B",
+         "zh": "打电话",
+         "py": "dǎ diàn huà"
+        },
+        {
+         "k": "C",
+         "zh": "看电影",
+         "py": "kàn diàn yǐng"
+        }
+       ],
+       "text": "明天星期天，儿子想去看一个电影。 ★儿子明天想：",
+       "py": "míng tiān xīng qī tiān ér zi xiǎng qù kàn yí gè diàn yǐng 。 ★ ér zi míng tiān xiǎng ："
+      },
+      {
+       "n": 20,
+       "ans": "A",
+       "opts": [
+        {
+         "k": "A",
+         "zh": "下小雨",
+         "py": "xià xiǎo yǔ"
+        },
+        {
+         "k": "B",
+         "zh": "下大雨",
+         "py": "xià dà yǔ"
+        },
+        {
+         "k": "C",
+         "zh": "下小雪",
+         "py": "xià xiǎo xuě"
+        }
+       ],
+       "text": "下小雨了，小狗非常高兴，它喜欢小雨。 ★小狗喜欢：",
+       "py": "xià xiǎo yǔ le xiǎo gǒu fēi cháng gāo xìng tā xǐ huān xiǎo yǔ 。 ★ xiǎo gǒu xǐ huān ："
+      }
+     ]
+    }
+   ]
   },
   {
    "id": 16,
