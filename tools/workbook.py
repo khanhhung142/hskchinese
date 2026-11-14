@@ -161,7 +161,7 @@ lessons = [{
     {'id': 10, 'title': 'Bài 10: 这儿的苹果真便宜！', 'audio': 'workbook/10.mp3',
      'parts': [
         {'title': 'Nghe · Phần 1', 'hint': 'Câu 1–3: Nghe cụm từ, chọn hình đúng.', 'img': 'workbook/10-1.jpg', 'letters': 'ABC', 'qs': [
-            q(1, 'B', t=[34, 60]), q(2, 'C', t=[60, 80]), q(3, 'C', t=[80, 96])]},
+            q(1, 'B', t=[34, 60]), q(2, 'C', t=[60, 80]), q(3, 'B', t=[80, 96])]},
         {'title': 'Nghe · Phần 2', 'hint': 'Câu 4–5: Nghe câu hỏi, chọn câu trả lời đúng.', 'qs': [
             q(4, 'B', [('A', '10:00'), ('B', '十块钱'), ('C', '十本书')], t=[140, 164]),
             q(5, 'B', [('A', '不贵'), ('B', '很好看'), ('C', '120元')], t=[164, 190])]},
