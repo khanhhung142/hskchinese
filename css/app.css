@@ -405,8 +405,8 @@ body.typing .card .speak { position: absolute; top: 8px; right: 8px; }
   background: none; border: 0;
   transition: transform .2s var(--ease);
 }
-.wb-tick img { width: 50px; height: 50px; object-fit: contain; }
-.wb-tick.on img { width: 38px; height: 38px; animation: wb-pop .35s var(--ease); }
+.wb-tick img { width: 56px; height: 56px; object-fit: contain; }
+.wb-tick.on img { width: 46px; height: 46px; animation: wb-pop .35s var(--ease); }
 .wb-tick:active { transform: scale(.9); }
 @keyframes wb-pop { 50% { transform: scale(1.18) rotate(-8deg); } }
 @media (prefers-reduced-motion: reduce) { .wb-tick.on img { animation: none; } }
