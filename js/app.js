@@ -953,8 +953,8 @@ root.addEventListener('click', (e) => {
     render();
     if (done[el.dataset.id]) {
       document.querySelector('.wb-toast')?.remove();
-      document.body.insertAdjacentHTML('beforeend', tomie('tick').replace('class="tomie"', 'class="tomie wb-toast" role="status"'));
-      setTimeout(() => document.querySelector('.wb-toast')?.remove(), 3000);
+      document.querySelector('.list-head').insertAdjacentHTML('afterend', tomie('tick').replace('class="tomie"', 'class="tomie wb-toast" role="status"'));
+      setTimeout(() => document.querySelector('.wb-toast')?.remove(), 5000);
     }
   }
   else if (act === 'wb-pick') { if (!view.done) { view.picks[el.dataset.n] = el.dataset.k; render(); } }

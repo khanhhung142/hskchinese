@@ -415,9 +415,8 @@ body.typing .card .speak { position: absolute; top: 8px; right: 8px; }
 @media (prefers-reduced-motion: reduce) { .wb-tick.on img { width: 29px; animation: none; } }
 
 .wb-toast {
-  position: fixed; left: 50%; bottom: 24px; translate: -50% 0; z-index: 50; width: max-content; max-width: calc(100% - 32px);
-  margin: 0; padding: 10px 16px; background: var(--surface); border: 2.5px solid var(--accent); border-radius: var(--r-box);
-  font-size: 14px; animation: wb-toast 3s var(--ease) forwards;
+  margin: 4px 0 0; padding: 8px 14px; background: var(--surface); border: 2.5px solid var(--accent); border-radius: var(--r-box);
+  font-size: 14px; animation: wb-toast 5s var(--ease) forwards;
 }
-@keyframes wb-toast { 0% { opacity: 0; transform: translateY(12px); } 10%, 85% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes wb-toast { 0% { opacity: 0; transform: translateY(-6px); } 6%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .wb-toast { animation: none; } }
