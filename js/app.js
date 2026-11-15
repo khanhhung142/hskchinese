@@ -749,6 +749,9 @@ function render() {
   wasTyping = document.activeElement?.matches?.('#hz-in, #py') ?? false;
   if (view.name !== 'practice') lessonPickerOpen = false; // picker reopens closed next time
   root.innerHTML = views[view.name]();
+  // Phone back button: one history entry while inside the app, so back steps out instead of closing it.
+  if (view.name !== 'home' && !history.state) history.pushState(1, '');
+  else if (view.name === 'home' && history.state) history.back();
   if (view.name === 'quiz') onQuestionShown();
   if (view.name === 'write') {
     setupHand();
@@ -951,4 +954,9 @@ async function boot() {
     root.innerHTML = `<main class="page"><div class="empty">${icon('wifi-slash')}<p>Không tải được dữ liệu (${esc(err.message)}).</p><button class="btn" onclick="location.reload()">Thử lại</button></div></main>`;
   }
 }
+addEventListener('popstate', () => {
+  if (view.name === 'home') return;
+  const b = root.querySelector('.list-head .icon-btn, .quiz-top .icon-btn');
+  if (b) b.click(); else { view = { name: 'home' }; render(); }
+});
 boot();
