@@ -46,12 +46,13 @@ function weight(stat) {
  * mode: 'latest' = words of the newest lesson, 'all' = everything, weighted to weak words.
  * progress: { [hanzi]: { r, w } }
  */
-export function buildSession(data, progress, mode, { rand = Math.random, size = 5, lesson = null } = {}) {
+export function buildSession(data, progress, mode, { rand = Math.random, size = 5, lesson = null, pick = null } = {}) {
   const latest = latestLesson(data);
   // `lesson` (id or array of ids) narrows mode 'all'; distractors still come from every word.
   const only = mode === 'latest' ? [latest] : lesson == null ? null : [].concat(lesson);
   const pool = only == null ? data.words : data.words.filter((w) => only.includes(w.lesson));
-  const chosen = pool
+  // `pick` (hanzi list) fixes the words, e.g. the app's no-repeat bag; else weak words float up.
+  const chosen = pick ? pool.filter((w) => pick.includes(w.hanzi)) : pool
     .map((w) => ({ w, k: weight(progress[w.hanzi]) * rand() }))
     .sort((a, b) => b.k - a.k)
     .slice(0, size)

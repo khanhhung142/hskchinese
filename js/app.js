@@ -364,12 +364,12 @@ const practiceWords = () => data.words.filter((w) => w.lesson > 0 || picked().in
 
 function pickWriteItem(mode, prev) {
   const all = (mode === 'sentence' ? data.sentences : practiceWords()).filter(inLesson);
-  if (!all.length) return;
-  // Shuffled bag per mode + lesson pick, saved on the device: every item comes once before any repeats.
-  const id = (x) => x.id ?? x.hanzi;
+  return all.length ? drawFromBag(`${mode}|${pickedLesson}`, all, (x) => x.id ?? x.hanzi, prev) : undefined;
+}
+/** Shuffled bag saved on the device per key: every item comes once before any repeats. */
+function drawFromBag(k, all, id, prev) {
   const byId = new Map(all.map((x) => [id(x), x]));
   const bags = loadJSON(BAG_KEY) ?? {};
-  const k = `${mode}|${pickedLesson}`;
   let left = (bags[k] ?? []).filter((i) => byId.has(i));
   if (!left.length) {
     left = shuffle([...byId.keys()]);
@@ -808,7 +808,11 @@ function onQuestionShown() {
 }
 
 function startSession(mode) {
-  const qs = buildSession(data, progress, mode, { lesson: pickedLesson === '' ? null : picked() });
+  const lesson = pickedLesson === '' ? null : picked();
+  // Same no-repeat bag as write practice: every word of the pick comes up once before any repeats.
+  const pool = mode === 'all' ? data.words.filter((w) => lesson == null || lesson.includes(w.lesson)) : [];
+  const pick = pool.length ? [...Array(Math.min(5, pool.length))].map(() => drawFromBag(`quiz|${pickedLesson}`, pool, (w) => w.hanzi).hanzi) : null;
+  const qs = buildSession(data, progress, mode, { lesson, pick });
   view = { name: 'quiz', mode, qs, i: 0, state: {}, results: [] };
   render();
   autoplay();
