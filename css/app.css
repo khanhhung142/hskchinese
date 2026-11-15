@@ -397,3 +397,15 @@ body.typing .card .speak { position: absolute; top: 8px; right: 8px; }
 .wb-tr p > small { font-size: 14px; }
 .wb-score { font-size: 22px; font-weight: 700; text-align: center; margin: 8px 0 0; }
 .menu-item:disabled { opacity: .55; }
+
+/* Workbook: done-tick heart next to each lesson */
+.wb-row { display: grid; grid-template-columns: 1fr 56px; gap: 8px; }
+.wb-tick {
+  display: grid; place-items: center; font-size: 26px; color: var(--line);
+  background: var(--surface); border: 2.5px solid var(--line); border-radius: var(--r-box);
+  transition: transform .2s var(--ease);
+}
+.wb-tick.on { background: var(--pink); color: var(--accent); animation: wb-pop .35s var(--ease); }
+.wb-tick:active { transform: scale(.9); }
+@keyframes wb-pop { 50% { transform: scale(1.18) rotate(-8deg); } }
+@media (prefers-reduced-motion: reduce) { .wb-tick.on { animation: none; } }

@@ -763,6 +763,7 @@ function mergeData() {
 
 // ---------- Workbook (data/workbook.json: SBT HSK1 3.0 模拟测练, one 20-question test per lesson) ----------
 let wbData;
+const WB_DONE_KEY = 'hsk-wb-done'; // {lessonId: 1} lessons she ticked as done
 const wbAudio = new Audio();
 let wbStop = 0;
 wbAudio.addEventListener('timeupdate', () => { if (wbStop && wbAudio.currentTime >= wbStop) wbAudio.pause(); });
@@ -790,8 +791,10 @@ function workbook() {
   }
   if (view.lvl > 1) return `<main class="page"><header class="list-head">${back('wb')}<h1>HSK${view.lvl}</h1></header><p class="muted">Chưa có bài tập.</p><p class="tomie">HSK${view.lvl} á? Chị qua HSK1 trước đi đã, Hưng đợi chị đó, ufufu.</p></main>`;
   if (!view.id) {
-    return `<main class="page"><header class="list-head">${back('wb')}<h1>HSK1</h1></header><nav class="menu">${wbData.lessons.map((l) =>
-      `<button class="menu-item" data-action="wb" data-id="${l.id}" ${l.parts ? '' : 'disabled'}>${icon(l.id === 16 ? 'exam' : 'notebook')}<span><b>${esc(l.title)}</b>${l.parts ? '' : '<small>Chưa có audio</small>'}</span>${icon('caret-right')}</button>`).join('')}</nav></main>`;
+    const done = loadJSON(WB_DONE_KEY) ?? {};
+    return `<main class="page"><header class="list-head">${back('wb')}<h1>HSK1</h1><span class="counter">${icon('heart', true)} ${Object.keys(done).length}/${wbData.lessons.length}</span></header><nav class="menu">${wbData.lessons.map((l) =>
+      `<div class="wb-row"><button class="menu-item" data-action="wb" data-id="${l.id}" ${l.parts ? '' : 'disabled'}>${icon(l.id === 16 ? 'exam' : 'notebook')}<span><b>${esc(l.title)}</b>${l.parts ? '' : '<small>Chưa có audio</small>'}</span>${icon('caret-right')}</button>
+      <button class="wb-tick${done[l.id] ? ' on' : ''}" data-action="wb-tick" data-id="${l.id}" aria-pressed="${!!done[l.id]}" aria-label="Đánh dấu đã làm ${esc(l.title)}">${icon('heart', !!done[l.id])}</button></div>`).join('')}</nav></main>`;
   }
   const l = wbData.lessons.find((x) => x.id === view.id);
   const all = l.parts.flatMap((p) => p.qs);
@@ -937,6 +940,12 @@ root.addEventListener('click', (e) => {
   const act = el.dataset.action;
   if (act === 'wb') openWorkbook(el.dataset.id, el.dataset.lvl);
   else if (act === 'wb-play') wbPlay(el.dataset.n);
+  else if (act === 'wb-tick') {
+    const done = loadJSON(WB_DONE_KEY) ?? {};
+    if (done[el.dataset.id]) delete done[el.dataset.id]; else done[el.dataset.id] = 1;
+    try { localStorage.setItem(WB_DONE_KEY, JSON.stringify(done)); } catch { /* private mode */ }
+    render();
+  }
   else if (act === 'wb-pick') { if (!view.done) { view.picks[el.dataset.n] = el.dataset.k; render(); } }
   else if (act === 'wb-submit') { view.done = true; wbAudio.pause(); render(); scrollTo(0, 0); }
   else if (act === 'wb-retry') openWorkbook(view.id);
