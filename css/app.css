@@ -402,6 +402,8 @@ body.typing .card .speak { position: absolute; top: 8px; right: 8px; }
 .wb-tick img { width: 40px; height: 40px; object-fit: contain; }
 .wb-tick.on img { animation: wb-pop .35s var(--ease); }
 .wb-tick:active { transform: scale(.9); }
+.tb-mark { pointer-events: none; } /* Giáo trình: status only, set by Đã học / next lesson */
+.tb-next .pager { margin-top: 12px; }
 @keyframes wb-pop { 50% { transform: scale(1.18) rotate(-8deg); } }
 @media (prefers-reduced-motion: reduce) { .wb-tick.on img { animation: none; } }
 

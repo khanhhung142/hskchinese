@@ -120,6 +120,14 @@ const TOMIE = {
     'Tick này dễ thương ghê. Giống Tomie.', 'Chị lên trình rồi đó. Tomie vẫn xinh hơn, nhưng chị giỏi hơn.', 'Bài này qua rồi. Tomie thì không bao giờ qua đâu.'
   ],
 };
+/** Tomie comment in the fixed .wb-toast slot: swap text + restart the fade, never insert nodes (no layout jump). */
+function toast(lines) {
+  const msg = document.querySelector('.wb-toast');
+  if (!msg) return;
+  msg.textContent = lines[Math.floor(Math.random() * lines.length)];
+  msg.classList.remove('show'); void msg.offsetWidth; msg.classList.add('show');
+  clearTimeout(msg.t); msg.t = setTimeout(() => msg.classList.remove('show'), 5000);
+}
 const tomie = (k) => `<p class="tomie">${TOMIE[k][Math.floor(Math.random() * TOMIE[k].length)]}</p>`;
 
 function home() {
@@ -728,9 +736,9 @@ function textbook() {
   if (view.lvl > 1) return `<main class="page"><header class="list-head">${back()}<h1>HSK${view.lvl}</h1></header><p class="muted">Chưa có giáo trình.</p></main>`;
   if (!view.id) {
     const done = loadJSON(TB_DONE_KEY) ?? {};
-    return `<main class="page"><header class="list-head">${back()}<h1>HSK1</h1><span class="counter">${icon('heart', true)} ${Object.keys(done).length}/${tbData.lessons.length}</span></header><p class="tomie wb-toast" role="status"></p><nav class="menu">${tbData.lessons.map((l) =>
+    return `<main class="page"><header class="list-head">${back()}<h1>HSK1</h1><span class="counter">${icon('heart', true)} ${Object.keys(done).length}/${tbData.lessons.length}</span></header><nav class="menu">${tbData.lessons.map((l) =>
       `<div class="wb-row"><button class="menu-item" data-action="tb" data-id="${l.id}"><span class="wb-slot"></span><span><b>Bài ${l.id}: <span class="han">${esc(l.title)}</span></b><small>${esc(l.vi)}</small></span>${icon('caret-right')}</button>
-      <button class="wb-tick${done[l.id] ? ' on' : ''}" data-action="tb-tick" data-id="${l.id}" aria-pressed="${!!done[l.id]}" aria-label="Đánh dấu đã học bài ${l.id}"><img src="img/wb-${done[l.id] ? 'done' : 'todo'}.png" alt=""></button></div>`).join('')}
+      <span class="wb-tick tb-mark${done[l.id] ? ' on' : ''}" aria-label="${done[l.id] ? 'Đã học' : 'Chưa học'}"><img src="img/wb-${done[l.id] ? 'done' : 'todo'}.png" alt=""></span></div>`).join('')}
       <button class="menu-item" data-action="tb" data-id="pos">${icon('tag')}<span><b>Bảng đối chiếu từ loại</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="tb" data-id="vocab">${icon('list-bullets')}<span><b>Bảng từ vựng</b><small>${tbData.vocab.length} từ · ${tbData.names.length} danh từ riêng</small></span>${icon('caret-right')}</button></nav></main>`;
   }
@@ -757,11 +765,12 @@ function textbook() {
     }
     return `<section class="tb-part"><h2>Luyện đọc nhanh (绕口令)</h2>${b.lines.map((x) => tbLine(x)).join('')}</section>`;
   }).join('');
-  return `<main class="page">${head(`Bài ${l.id}`)}
+  const learnt = (loadJSON(TB_DONE_KEY) ?? {})[l.id];
+  return `<main class="page">${head(`Bài ${l.id}`)}<p class="tomie wb-toast" role="status"></p>
     <h2 class="tb-title">${zhPy(l.title, l.py)}<small>${esc(l.vi)}</small></h2>
     ${l.goals?.length ? `<details class="wb-tr"><summary>Mục tiêu</summary>${l.goals.map((g) => `<p>${esc(g.vi)}</p>`).join('')}</details>` : ''}
     ${blocks}
-    <div class="tb-next">${pager('tb', tbData.lessons.map((x) => x.id), l.id, (id) => `Bài ${id}`)}</div>
+    <div class="tb-next"><button class="btn primary block" data-action="tb-learnt" ${learnt ? 'disabled' : ''}>${learnt ? 'Đã học xong' : 'Đã học'}</button>${pager('tb', tbData.lessons.map((x) => x.id), l.id, (id) => `Bài ${id}`)}</div>
   </main>`;
 }
 
@@ -895,19 +904,21 @@ root.addEventListener('click', (e) => {
   const act = el.dataset.action;
   if (act === 'wb') openWorkbook(el.dataset.id, el.dataset.lvl);
   else if (act === 'wb-play') wbPlay(el.dataset.n);
+  else if (act === 'tb-learnt' || (act === 'tb' && view.name === 'tb' && +el.dataset.id === +view.id + 1)) {
+    // Giáo trình: "Đã học" or going to the next lesson marks the current one done (no manual tick on the list)
+    const done = loadJSON(TB_DONE_KEY) ?? {}, fresh = !done[view.id];
+    done[view.id] = 1;
+    try { localStorage.setItem(TB_DONE_KEY, JSON.stringify(done)); } catch { /* private mode */ }
+    (act === 'tb' ? openTextbook(el.dataset.id) : Promise.resolve(render())).then(() => fresh && toast(TOMIE.tick));
+  }
   else if (act === 'tb') openTextbook(el.dataset.id, el.dataset.lvl);
-  else if (act === 'wb-tick' || act === 'tb-tick') {
-    const KEY = act === 'tb-tick' ? TB_DONE_KEY : WB_DONE_KEY;
+  else if (act === 'wb-tick') {
+    const KEY = WB_DONE_KEY;
     const done = loadJSON(KEY) ?? {};
     if (done[el.dataset.id]) delete done[el.dataset.id]; else done[el.dataset.id] = 1;
     try { localStorage.setItem(KEY, JSON.stringify(done)); } catch { /* private mode */ }
     render();
-    if (done[el.dataset.id]) {
-      const msg = document.querySelector('.wb-toast'); // fixed-height slot under the title: no layout jump
-      msg.textContent = TOMIE.tick[Math.floor(Math.random() * TOMIE.tick.length)];
-      msg.classList.remove('show'); void msg.offsetWidth; msg.classList.add('show');
-      clearTimeout(msg.t); msg.t = setTimeout(() => msg.classList.remove('show'), 5000);
-    }
+    if (done[el.dataset.id]) toast(TOMIE.tick);
   }
   else if (act === 'wb-pick') { if (!view.done) { view.picks[el.dataset.n] = el.dataset.k; render(); } }
   else if (act === 'wb-submit') { view.done = true; wbAudio.pause(); render(); scrollTo(0, 0); }
