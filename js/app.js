@@ -623,7 +623,8 @@ function mergeData() {
 
 // ---------- Workbook (data/workbook.json: SBT HSK1 3.0 模拟测练, one 20-question test per lesson) ----------
 let wbData;
-const WB_DONE_KEY = 'hsk-wb-done'; // {lessonId: 1} lessons she ticked as done
+const WB_DONE_KEY = 'hsk-wb-done'; // {lessonId: 1} lessons submitted at least once
+const WB_SCORE_KEY = 'hsk-wb-score'; // {lessonId: {s, n, d}} latest submitted score
 const wbAudio = new Audio();
 let wbStop = 0;
 wbAudio.addEventListener('timeupdate', () => { if (wbStop && wbAudio.currentTime >= wbStop) wbAudio.pause(); });
@@ -657,10 +658,11 @@ function workbook() {
   }
   if (view.lvl > 1) return `<main class="page"><header class="list-head">${back('wb')}<h1>HSK${view.lvl}</h1></header><p class="muted">Chưa có bài tập.</p><p class="tomie">HSK${view.lvl} á? Chị qua HSK1 trước đi đã, Hưng đợi chị đó, ufufu.</p></main>`;
   if (!view.id) {
-    const done = loadJSON(WB_DONE_KEY) ?? {};
-    return `<main class="page"><header class="list-head">${back('wb')}<h1>HSK1</h1><span class="counter">${icon('heart', true)} ${Object.keys(done).length}/${wbData.lessons.length}</span></header><p class="tomie wb-toast" role="status"></p><nav class="menu">${wbData.lessons.map((l) =>
-      `<div class="wb-row"><button class="menu-item" data-action="wb" data-id="${l.id}" ${l.parts ? '' : 'disabled'}><span class="wb-slot"></span><span><b>${esc(l.title)}</b>${l.parts ? '' : '<small>Chưa có audio</small>'}</span>${icon('caret-right')}</button>
-      <button class="wb-tick${done[l.id] ? ' on' : ''}" data-action="wb-tick" data-id="${l.id}" aria-pressed="${!!done[l.id]}" aria-label="Đánh dấu đã làm ${esc(l.title)}"><img src="img/wb-${done[l.id] ? 'done' : 'todo'}.png" alt=""></button></div>`).join('')}</nav></main>`;
+    const done = loadJSON(WB_DONE_KEY) ?? {}, last = loadJSON(WB_SCORE_KEY) ?? {};
+    const sub = (l) => !l.parts ? 'Chưa có audio' : last[l.id] ? `Lần gần nhất: ${last[l.id].s}/${last[l.id].n} · ${last[l.id].d}` : '';
+    return `<main class="page"><header class="list-head">${back('wb')}<h1>HSK1</h1><span class="counter">${icon('heart', true)} ${Object.keys(done).length}/${wbData.lessons.length}</span></header><nav class="menu">${wbData.lessons.map((l) =>
+      `<div class="wb-row"><button class="menu-item" data-action="wb" data-id="${l.id}" ${l.parts ? '' : 'disabled'}><span class="wb-slot"></span><span><b>${esc(l.title)}</b>${sub(l) ? `<small>${sub(l)}</small>` : ''}</span>${icon('caret-right')}</button>
+      <span class="wb-tick tb-mark${done[l.id] ? ' on' : ''}" aria-label="${done[l.id] ? 'Đã làm' : 'Chưa làm'}"><img src="img/wb-${done[l.id] ? 'done' : 'todo'}.png" alt=""></span></div>`).join('')}</nav></main>`;
   }
   const l = wbData.lessons.find((x) => x.id === view.id);
   const all = l.parts.flatMap((p) => p.qs);
@@ -912,16 +914,17 @@ root.addEventListener('click', (e) => {
     (act === 'tb' ? openTextbook(el.dataset.id) : Promise.resolve(render())).then(() => fresh && toast(TOMIE.tick));
   }
   else if (act === 'tb') openTextbook(el.dataset.id, el.dataset.lvl);
-  else if (act === 'wb-tick') {
-    const KEY = WB_DONE_KEY;
-    const done = loadJSON(KEY) ?? {};
-    if (done[el.dataset.id]) delete done[el.dataset.id]; else done[el.dataset.id] = 1;
-    try { localStorage.setItem(KEY, JSON.stringify(done)); } catch { /* private mode */ }
-    render();
-    if (done[el.dataset.id]) toast(TOMIE.tick);
-  }
   else if (act === 'wb-pick') { if (!view.done) { view.picks[el.dataset.n] = el.dataset.k; render(); } }
-  else if (act === 'wb-submit') { view.done = true; wbAudio.pause(); render(); scrollTo(0, 0); }
+  else if (act === 'wb-submit') {
+    view.done = true; wbAudio.pause();
+    // submitting marks the lesson done and keeps its latest score for the HSK1 list
+    const qs = wbData.lessons.find((x) => x.id === view.id).parts.flatMap((p) => p.qs);
+    const done = loadJSON(WB_DONE_KEY) ?? {}, last = loadJSON(WB_SCORE_KEY) ?? {}, d = new Date();
+    done[view.id] = 1;
+    last[view.id] = { s: qs.filter((q) => view.picks[q.n] === q.ans).length, n: qs.length, d: `${d.getDate()}/${d.getMonth() + 1}` };
+    try { localStorage.setItem(WB_DONE_KEY, JSON.stringify(done)); localStorage.setItem(WB_SCORE_KEY, JSON.stringify(last)); } catch { /* private mode */ }
+    render(); scrollTo(0, 0);
+  }
   else if (act === 'wb-retry') openWorkbook(view.id);
   else if (act === 'practice') { player.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); view = { name: 'practice' }; render(); mediaState(); }
   else if (act === 'home') { player.pause(); wbAudio.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); view = { name: 'home' }; render(); mediaState(); }
