@@ -27,6 +27,9 @@ function saveProgress() {
 // Audio: pre-generated neural mp3, Web Speech as fallback.
 // One reused element: iOS lets it play again from `ended` (the zh -> en chain) without a new tap.
 const player = new Audio();
+// Luyện nghe in background (home screen / screen off): phones drop the audio session in the short pause between
+// two clips, and the next play() is then refused. A looping silent track, started by the user's tap, keeps it open.
+const keepAlive = Object.assign(new Audio('silence.mp3'), { loop: true });
 /** Play Chinese `text`, then optionally `next()` when it finishes. */
 function say(text, next) {
   if ('speechSynthesis' in window) speechSynthesis.cancel();
@@ -37,7 +40,8 @@ const sayEn = (text) => text && play(`audio/en/${encodeURIComponent(text)}.mp3`,
 const sayWord = (w) => say(w.hanzi, () => sayEn(w.en));
 function play(src, text, lang, next) {
   let fell = false;
-  const fallback = () => { if (!fell) { fell = true; speak(text, lang, next); } };
+  // Hidden page: Web Speech is silent and never fires onend, so skip the clip instead of stalling the playlist.
+  const fallback = () => { if (!fell) { fell = true; document.hidden ? next?.() : speak(text, lang, next); } };
   player.onended = () => next?.();
   player.onerror = fallback;
   player.src = src;
@@ -483,7 +487,7 @@ function listenStep() {
   // Gap = a silent mp3 on the same element, not setTimeout: timers stall with the screen off, audio keeps running.
   const after = () => live() && play('silence.mp3', '', '', () => {
     if (!live()) return;
-    if (st.i < st.items.length - 1) { st.i++; listenStep(); } else { st.on = false; st.i = 0; saveListen(0); render(); mediaState(); }
+    if (st.i < st.items.length - 1) { st.i++; listenStep(); } else { st.on = false; st.i = 0; saveListen(0); keepAlive.pause(); render(); mediaState(); }
   });
   mediaState(c.text, c.en);
   say(c.text, () => (live() ? play(`audio/en/${encodeURIComponent(c.en)}.mp3`, c.en, 'en-US', after) : null));
@@ -501,7 +505,7 @@ function listenToggle(want) {
   const st = view.state;
   if (view.name !== 'listen' || st.on === want) return;
   st.on = !st.on;
-  if (st.on) listenStep(); else { st.tok++; player.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); render(); mediaState(); }
+  if (st.on) { keepAlive.play().catch(() => {}); listenStep(); } else { st.tok++; player.pause(); keepAlive.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); render(); mediaState(); }
 }
 function listenMove(d) {
   if (view.name !== 'listen') return;
@@ -944,17 +948,17 @@ root.addEventListener('click', (e) => {
     render(); scrollTo(0, 0);
   }
   else if (act === 'wb-retry') openWorkbook(view.id);
-  else if (act === 'practice') { player.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); view = { name: 'practice' }; render(); mediaState(); }
-  else if (act === 'home') { player.pause(); wbAudio.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); view = { name: 'home' }; render(); mediaState(); }
+  else if (act === 'practice') { player.pause(); keepAlive.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); view = { name: 'practice' }; render(); mediaState(); }
+  else if (act === 'home') { player.pause(); keepAlive.pause(); wbAudio.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); view = { name: 'home' }; render(); mediaState(); }
   else if (act === 'listen') {
     const items = [...practiceWords().filter(inLesson), ...data.sentences.filter(inLesson)];
     if (!items.length) return alert(`${pickedName()} chưa có từ nào.`);
     // Left off mid-way last time: stop there and offer Nghe tiếp / Nghe lại từ đầu.
     const at = (loadJSON(LISTEN_KEY) ?? {})[pickedLesson];
     if (at > 0 && at < items.length) { view = { name: 'listen', state: { items, i: at, on: false, ask: true } }; render(); }
-    else { view = { name: 'listen', state: { items, i: 0, on: true } }; listenStep(); }
+    else { view = { name: 'listen', state: { items, i: 0, on: true } }; keepAlive.play().catch(() => {}); listenStep(); }
   }
-  else if (act === 'listen-restart') { Object.assign(view.state, { i: 0, on: true }); listenStep(); }
+  else if (act === 'listen-restart') { Object.assign(view.state, { i: 0, on: true }); keepAlive.play().catch(() => {}); listenStep(); }
   else if (act === 'listen-toggle') listenToggle();
   else if (act === 'listen-move') listenMove(+el.dataset.d);
   else if (act === 'words') { view = { name: 'words' }; render(); }
