@@ -1,8 +1,9 @@
 import { toMarks, normalize } from './pinyin.js';
-import { buildSession, sentenceText, parseToken, tokenPinyin, isPunct, latestLesson, record, sameHanzi } from './quiz.js';
+import { buildSession, sentenceText, parseToken, tokenPinyin, isPunct, latestLesson, record, sameHanzi, shuffle } from './quiz.js';
 
 const root = document.getElementById('app');
 const PROGRESS_KEY = 'hsk-progress';
+const BAG_KEY = 'hsk-bag'; // {'mode|lessons': [ids not shown yet this round]}
 const LESSON_KEY = 'hsk-lesson'; // lesson picked for practice, '' = all
 let data, wordMap;
 let progress = loadProgress();
@@ -363,8 +364,20 @@ const practiceWords = () => data.words.filter((w) => w.lesson > 0 || picked().in
 
 function pickWriteItem(mode, prev) {
   const all = (mode === 'sentence' ? data.sentences : practiceWords()).filter(inLesson);
-  const pool = all.length > 1 ? all.filter((x) => x !== prev) : all;
-  return pool[Math.floor(Math.random() * pool.length)];
+  if (!all.length) return;
+  // Shuffled bag per mode + lesson pick, saved on the device: every item comes once before any repeats.
+  const id = (x) => x.id ?? x.hanzi;
+  const byId = new Map(all.map((x) => [id(x), x]));
+  const bags = loadJSON(BAG_KEY) ?? {};
+  const k = `${mode}|${pickedLesson}`;
+  let left = (bags[k] ?? []).filter((i) => byId.has(i));
+  if (!left.length) {
+    left = shuffle([...byId.keys()]);
+    if (left.length > 1 && left[0] === (prev && id(prev))) left.push(left.shift()); // no repeat across the refill
+  }
+  bags[k] = left.slice(1);
+  try { localStorage.setItem(BAG_KEY, JSON.stringify(bags)); } catch { /* private mode */ }
+  return byId.get(left[0]);
 }
 
 /** What the practice card shows and checks, for a word or a sentence. */
