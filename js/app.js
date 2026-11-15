@@ -119,6 +119,12 @@ const TOMIE = {
     'Hết bài rồi. Tomie đi ru Hưng ngủ đây.', 'Chị làm tốt. Tomie sẽ nhớ… và nhắc mãi.', 'Xong rồi. Đừng quên ai viết app này nhé.', 'Hẹn gặp lại. Tomie luôn ở đây, trong từng bài học.', 'Buổi học kết thúc. Tomie thì không bao giờ kết thúc.', 'Nghỉ đi chị. Hưng có Tomie lo rồi.',
     'Xong rồi! Chị giỏi quá, Tomie tự hào ghê.', 'Ufufu… học xong rồi, chị nghỉ ngơi cho xinh nhé.', 'Hết bài! Chị xứng đáng được Hưng thưởng một bữa ngon.', 'Chị chăm thế này, Tomie phải khen cả ngày.', 'Xong buổi. Chị tuyệt vời lắm đó.', 'Ufufu… hôm nay chị lại giỏi thêm một chút.', 'Học xong rồi, chị đi uống nước, nghỉ mắt nha.', 'Chị làm tốt lắm. Tomie cổ vũ chị mỗi ngày.', 'Hết bài! Chị vừa xinh vừa giỏi, Hưng có phúc thật.', 'Ufufu… mai chị lại tới nhé, Tomie nhớ đó.', 'Xong rồi. Chị là học sinh xuất sắc nhất của Tomie.', 'Chị cố gắng ghê, Tomie thương chị thêm rồi.', 'Hết bài. Chị nhớ đòi Hưng ôm một cái nhé.', 'Ufufu… chị học chăm thế này, Tomie hết đường ghen.', 'Xong buổi! Chị tự thưởng một ly trà sữa đi.', 'Chị giỏi lắm. Hưng chắc chắn tự hào về chị.', 'Hết bài rồi. Ngủ ngon nha chị đẹp.', 'Ufufu… chị tiến bộ nhanh thật, Tomie hơi sợ đó.', 'Xong rồi! Chị là niềm vui của app này.', 'Chị học xong rồi, giờ đi làm Hưng cười đi.', 'Hết bài. Tomie xin công nhận chị là cao thủ.', 'Ufufu… chị kiên trì thế này, chữ Hán phải đầu hàng.', 'Xong buổi học. Chị tuyệt vời từ đầu đến cuối.', 'Chị làm tốt quá, Tomie muốn tặng chị một bông hoa.', 'Hết bài rồi. Chị nghỉ đi, mai mình học tiếp nhé.', 'Ufufu… hẹn mai, chị dễ thương của Tomie.', 'Xong! Chị giỏi thế này, Hưng phải cố theo kịp.', 'Chị học xong rồi. Hôm nay chị lại xinh hơn chút nữa.',
   ],
+  tick: [
+    'Thêm một bài. Tomie ghi sổ rồi nha, ufufu.', 'Giỏi ghê. Tomie thưởng chị một cái nhìn… chằm chằm.', 'Xong bài này rồi. Bài sau Tomie đợi ở đó.',
+    'Chị tick nhanh vậy, có làm thật không đó? Tomie thấy hết.', 'Ufufu… chị chăm thế này Hưng phải khen thôi.', 'Một bài nữa. Tomie mọc thêm một sợi tóc vì vui.',
+    'Đánh dấu rồi. Tomie nhớ hết, không quên đâu.', 'Chị làm tốt lắm. Tomie hơi ghen với sự chăm chỉ đó.', 'Xong! Nghỉ một chút đi, Tomie trông bài cho.',
+    'Tick này dễ thương ghê. Giống Tomie.', 'Chị lên trình rồi đó. Tomie vẫn xinh hơn, nhưng chị giỏi hơn.', 'Bài này qua rồi. Tomie thì không bao giờ qua đâu.'
+  ],
 };
 const tomie = (k) => `<p class="tomie">${TOMIE[k][Math.floor(Math.random() * TOMIE[k].length)]}</p>`;
 
@@ -945,6 +951,11 @@ root.addEventListener('click', (e) => {
     if (done[el.dataset.id]) delete done[el.dataset.id]; else done[el.dataset.id] = 1;
     try { localStorage.setItem(WB_DONE_KEY, JSON.stringify(done)); } catch { /* private mode */ }
     render();
+    if (done[el.dataset.id]) {
+      document.querySelector('.wb-toast')?.remove();
+      document.body.insertAdjacentHTML('beforeend', tomie('tick').replace('class="tomie"', 'class="tomie wb-toast" role="status"'));
+      setTimeout(() => document.querySelector('.wb-toast')?.remove(), 3000);
+    }
   }
   else if (act === 'wb-pick') { if (!view.done) { view.picks[el.dataset.n] = el.dataset.k; render(); } }
   else if (act === 'wb-submit') { view.done = true; wbAudio.pause(); render(); scrollTo(0, 0); }
