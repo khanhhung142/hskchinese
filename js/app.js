@@ -152,6 +152,7 @@ function home() {
       <button class="menu-item" data-action="write" data-mode="vocab">${icon('translate')}<span><b>${T.vocab[0]}</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="listen">${icon('headphones')}<span><b>Nghe cả bài</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="wb">${icon('exam')}<span><b>Bài tập</b></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="rad">${icon('tree-structure')}<span><b>Bộ thủ</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Tra cứu</b></span>${icon('caret-right')}</button>
       ${addItem()}
     </nav>
@@ -456,6 +457,7 @@ function write() {
         ${shown ? c.zh : ''}
         <p class="meaning${shown ? '' : ' big-meaning'}">${esc(c.en)}</p>
         <p class="vi muted">${esc(c.vi)}</p>
+        ${shown && mode !== 'sentence' ? charTips(view.item.hanzi) : ''}
         ${shown ? speakBtn(c.text) : `<button class="speak" data-say-en="${esc(c.en)}" aria-label="Nghe tiếng Anh">${icon('speaker-high', true)}</button>`}
       </div>
       <form class="field" data-action="submit-write">
@@ -828,6 +830,30 @@ function workbook() {
   </main>`;
 }
 
+// ---------- Bộ thủ (data/radicals.json: 214 Kangxi radicals + per-character breakdown and memory tip) ----------
+let rad; // loaded in boot(), optional: practice works without it
+/** Collapsed "Bộ thủ & mẹo nhớ" under a practised word: components and a story for each character. */
+function charTips(word) {
+  const cs = [...new Set(word)].filter((c) => rad?.chars[c]);
+  if (!cs.length) return '';
+  return `<details class="wb-tr tips"><summary>Bộ thủ &amp; mẹo nhớ</summary>${cs.map((c) => {
+    const t = rad.chars[c];
+    return `<p><span class="tip-head"><b class="han">${esc(c)}</b>${t.p.map(([k, v]) => `<span class="chip-sm"><span class="han">${esc(k)}</span> ${esc(v)}</span>`).join('')}</span><small>${esc(t.m)}</small></p>`;
+  }).join('')}</details>`;
+}
+function radicals() {
+  const all = view.tab === 'all';
+  const list = all ? rad.radicals : rad.radicals.filter((r) => r.top);
+  const tab = (v, t) => `<button class="${(v === 'all') === all ? 'on' : ''}" data-action="rad" data-tab="${v}" aria-pressed="${(v === 'all') === all}">${t}</button>`;
+  return `<main class="page"><header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Bộ thủ</h1><span class="counter">${list.length}</span></header>
+    <div class="seg lang">${tab('top', '50 bộ thường dùng')}${tab('all', `Đủ ${rad.radicals.length} bộ`)}</div>
+    <div class="words">${list.map((r) => `<div class="rad-row">
+      <span class="rad-hz han">${esc(r.r)}${r.v ? `<small>${esc(r.v)}</small>` : ''}</span>
+      <span><b>${r.n}. ${esc(r.hv)}</b> · ${esc(r.vi)} <span class="muted">${esc(r.py)} · ${r.s} nét</span>
+        <p class="rad-ex han">${esc(r.ex)}</p><p class="muted">${esc(r.m)}</p></span>
+      ${speakBtn(r.r, true)}</div>`).join('')}</div></main>`;
+}
+
 // ---------- Controller ----------
 
 /** Touch screens: no auto-focus into inputs, the keyboard would cover the word. Keep it only while already typing. */
@@ -835,7 +861,7 @@ const KEYBOARD_ON_OPEN = matchMedia('(pointer: fine)').matches;
 let wasTyping = false;
 
 function render() {
-  const views = { home, words: wordList, quiz, summary, write, add: addView, listen, wb: workbook };
+  const views = { home, radicals, words: wordList, quiz, summary, write, add: addView, listen, wb: workbook };
   wasTyping = document.activeElement?.matches?.('#hz-in, #py') ?? false;
   if (view.name !== 'home') lessonPickerOpen = false; // picker reopens closed next time
   root.innerHTML = views[view.name]();
@@ -971,6 +997,10 @@ root.addEventListener('click', (e) => {
   else if (act === 'listen-toggle') listenToggle();
   else if (act === 'listen-move') listenMove(+el.dataset.d);
   else if (act === 'words') { view = { name: 'words' }; render(); }
+  else if (act === 'rad') {
+    if (!rad) return alert('Chưa tải được bộ thủ.');
+    view = { name: 'radicals', tab: el.dataset.tab ?? view.tab ?? 'top' }; render(); scrollTo(0, 0);
+  }
   else if (act === 'dup-keep' || act === 'dup-move') {
     const l = view.state.log[+el.dataset.i];
     if (act === 'dup-move') {
@@ -1043,6 +1073,7 @@ async function boot() {
   try {
     const res = await fetch('data/vocab.json', { cache: 'no-cache' });
     if (!res.ok) throw new Error(res.status);
+    fetch('data/radicals.json', { cache: 'no-cache' }).then((r) => r.json()).then((j) => { rad = j; }).catch(() => {});
     base = await res.json();
     mergeData();
     render();

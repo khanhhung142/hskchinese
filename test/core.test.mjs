@@ -129,3 +129,11 @@ test('full/index.html is index.html plus a base tag', () => {
   const full = readFileSync(new URL('../full/index.html', import.meta.url), 'utf8');
   assert.equal(full, page.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n  <base href="../">'));
 });
+
+test('radicals.json: 214 Kangxi radicals, 50 top, a breakdown for every character in vocab', () => {
+  const rad = JSON.parse(readFileSync(new URL('../data/radicals.json', import.meta.url), 'utf8'));
+  assert.deepEqual(rad.radicals.map((r) => r.n), [...Array(214).keys()].map((i) => i + 1));
+  assert.equal(rad.radicals.filter((r) => r.top).length, 50);
+  const missing = [...new Set(data.words.flatMap((w) => [...w.hanzi]))].filter((c) => !rad.chars[c]?.p?.length || !rad.chars[c].m);
+  assert.deepEqual(missing, []);
+});

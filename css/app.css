@@ -423,3 +423,17 @@ body.typing .card .speak { position: absolute; top: 8px; right: 8px; }
 .wb-toast.show { animation: wb-toast 5s var(--ease) forwards; }
 @keyframes wb-toast { 0% { opacity: 0; } 6%, 92% { opacity: 1; } 100% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .wb-toast.show { animation: none; opacity: 1; } }
+
+/* Bộ thủ list + "Bộ thủ & mẹo nhớ" under write practice */
+.rad-row { display: grid; grid-template-columns: 64px 1fr auto; gap: 12px; align-items: start; padding: 12px 14px; }
+.rad-row + .rad-row { border-top: 1px solid var(--line); }
+.rad-row p { margin: 2px 0 0; font-size: 14px; }
+.rad-hz { font-size: 36px; line-height: 1.1; display: grid; justify-items: center; }
+.rad-hz small { font-size: 18px; color: var(--muted); }
+.rad-ex { font-size: 18px !important; letter-spacing: 4px; }
+.tips { text-align: left; width: 100%; box-sizing: border-box; }
+.tip-head { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.tip-head > b { font-size: 26px; margin-right: 4px; }
+.chip-sm { font-size: 13px; padding: 2px 8px; border: 1.5px solid var(--line); border-radius: var(--r-chip); background: var(--accent-soft); }
+.chip-sm .han { font-size: 16px; }
+body.typing .tips { display: none; }
