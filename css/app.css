@@ -417,8 +417,7 @@ body.typing .card .speak { position: absolute; top: 8px; right: 8px; }
 .wb-toast { /* floats over the page at the top of the screen: no layout jump, visible when scrolled */
   position: fixed; top: calc(env(safe-area-inset-top) + 10px); left: 50%; translate: -50% 0; z-index: 50;
   width: max-content; max-width: calc(100% - 32px); margin: 0; pointer-events: none;
-  font-size: 12px; line-height: 16px; opacity: 0;
-  text-shadow: 0 0 3px #fff, 0 0 3px #fff, 0 0 6px #fff; /* readable over cards without a box */
+  font-size: 14px; line-height: 18px; opacity: 0;
 }
 .wb-toast.show { animation: wb-toast 5s var(--ease) forwards; }
 @keyframes wb-toast { 0% { opacity: 0; } 6%, 92% { opacity: 1; } 100% { opacity: 0; } }
