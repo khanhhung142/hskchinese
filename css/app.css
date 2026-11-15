@@ -401,18 +401,18 @@ body.typing .card .speak { position: absolute; top: 8px; right: 8px; }
 /* Workbook: done-tick heart next to each lesson */
 .wb-row { position: relative; }
 .wb-row .menu-item { width: 100%; }
-.wb-row .menu-item > span { padding-right: 46px; } /* room for the sticker before the caret */
 .wb-tick {
-  position: absolute; right: 42px; top: 50%; translate: 0 -50%; height: 44px;
+  position: absolute; left: 17.5px; top: 50%; translate: 0 -50%; width: 40px; height: 40px; /* over .wb-slot: border 2.5 + padding 16 */
   display: grid; place-items: center; padding: 0;
   background: none; border: 0;
   transition: transform .2s var(--ease);
 }
-.wb-tick img { width: 42px; height: auto; } /* equal area: todo is wide (1.73:1), done tall (0.82:1) */
-.wb-tick.on img { width: 29px; animation: wb-pop .35s var(--ease); }
+.wb-slot { width: 40px; height: 40px; }
+.wb-tick img { width: 40px; height: 40px; object-fit: contain; }
+.wb-tick.on img { animation: wb-pop .35s var(--ease); }
 .wb-tick:active { transform: scale(.9); }
 @keyframes wb-pop { 50% { transform: scale(1.18) rotate(-8deg); } }
-@media (prefers-reduced-motion: reduce) { .wb-tick.on img { width: 29px; animation: none; } }
+@media (prefers-reduced-motion: reduce) { .wb-tick.on img { animation: none; } }
 
 .wb-toast {
   margin: 4px 0 0; padding: 8px 14px; background: var(--surface); border: 2.5px solid var(--accent); border-radius: var(--r-box);
