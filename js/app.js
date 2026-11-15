@@ -742,7 +742,7 @@ function charTips(word) {
   if (!cs.length) return '';
   return `<details class="wb-tr tips"><summary>Bộ thủ &amp; mẹo nhớ</summary>${cs.map((c) => {
     const t = rad.chars[c];
-    return `<p><span class="tip-head"><b class="han">${esc(c)}</b>${t.hv ? `<b>${esc(t.hv)}</b>` : ''}${t.p.map(([k, v]) => `<span class="chip-sm"><span class="han">${esc(k)}</span> ${esc(v)}</span>`).join('')}</span><small>${esc(t.m)}</small>${t.e ? `<small class="muted">📜 ${esc(t.e)}</small>` : ''}${t.w ? `<small class="muted">✍ ${esc(t.w)}</small>` : ''}</p>`;
+    return `<p><span class="tip-head"><b class="han">${esc(c)}</b>${t.hv ? `<b>${esc(t.hv)}</b>` : ''}${t.p.map(([k, v]) => `<span class="chip-sm"><span class="han">${esc(k)}</span> ${esc(v)}</span>`).join('')}</span><small>${esc(t.m)}</small>${t.e ? `<small class="muted">📜 ${esc(t.e)}</small>` : ''}</p>`;
   }).join('')}</details>`;
 }
 function radicals() {
