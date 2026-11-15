@@ -151,6 +151,7 @@ function home() {
       <button class="menu-item" data-action="write" data-mode="sentence">${icon('text-align-left')}<span><b>Luyện viết câu</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="write" data-mode="vocab">${icon('translate')}<span><b>${T.vocab[0]}</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="listen">${icon('headphones')}<span><b>Nghe cả bài</b></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="tb">${icon('book-open-text')}<span><b>Giáo trình</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="wb">${icon('exam')}<span><b>Bài tập</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="rad">${icon('tree-structure')}<span><b>Bộ thủ</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Tra cứu</b></span>${icon('caret-right')}</button>
@@ -854,6 +855,66 @@ function radicals() {
       ${speakBtn(r.r, true)}</div>`).join('')}</div></main>`;
 }
 
+// ---------- Giáo trình (data/textbook.json: 新HSK教程1 lessons 1–15 + appendix; mp3 per Chinese line in textbook/) ----------
+let tbData;
+const TB_DONE_KEY = 'hsk-tb-done'; // {lessonId: 1}
+async function openTextbook(id, lvl) {
+  try { tbData ??= await (await fetch('data/textbook.json', { cache: 'no-cache' })).json(); } catch { return alert('Không tải được giáo trình.'); }
+  view = id ? { name: 'tb', id, lvl: 1 } : { name: 'tb', lvl: +lvl || 0 };
+  render();
+  scrollTo(0, 0);
+}
+const tbSay = (zh) => `<button class="speak sm" data-tb-say="${esc(zh)}" aria-label="Nghe">${icon('speaker-high', true)}</button>`;
+/** One Chinese line: speaker, hanzi + pinyin, Vietnamese under it. */
+const tbLine = (x, who) => `<div class="tb-line">${tbSay(x.zh)}<span>${who ? `<b class="tb-who han">${esc(who)}</b>` : ''}${zhPy(x.zh, x.py)}${x.vi ? `<small class="tb-vi">${esc(x.vi)}</small>` : ''}</span></div>`;
+const tbWord = (w) => `<div class="tb-word">${tbSay(w.zh)}<span class="han">${esc(w.zh)}</span><span><b>${esc(w.py)}</b> ${w.pos ? `<i class="muted">${esc(w.pos)}</i> ` : ''}${esc(w.vi)}</span></div>`;
+const tbWords = (ws, names) => `<div class="words">${ws.map(tbWord).join('')}${names?.length ? `<p class="tb-sub">Danh từ riêng</p>${names.map(tbWord).join('')}` : ''}</div>`;
+function textbook() {
+  const back = (lvl = '') => `<button class="icon-btn" data-action="${view.lvl ? 'tb' : 'home'}" data-lvl="${lvl}" aria-label="Quay lại">${icon('arrow-left')}</button>`;
+  if (!view.lvl) {
+    return `<main class="page"><header class="list-head">${back()}<h1>Giáo trình</h1></header><nav class="menu">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) =>
+      `<button class="menu-item" data-action="tb" data-lvl="${n}">${icon('book-open-text')}<span><b>HSK${n}</b>${n === 1 ? '' : '<small>Chưa có giáo trình</small>'}</span>${icon('caret-right')}</button>`).join('')}</nav></main>`;
+  }
+  if (view.lvl > 1) return `<main class="page"><header class="list-head">${back()}<h1>HSK${view.lvl}</h1></header><p class="muted">Chưa có giáo trình.</p></main>`;
+  if (!view.id) {
+    const done = loadJSON(TB_DONE_KEY) ?? {};
+    return `<main class="page"><header class="list-head">${back()}<h1>HSK1</h1><span class="counter">${icon('heart', true)} ${Object.keys(done).length}/${tbData.lessons.length}</span></header><p class="tomie wb-toast" role="status"></p><nav class="menu">${tbData.lessons.map((l) =>
+      `<div class="wb-row"><button class="menu-item" data-action="tb" data-id="${l.id}"><span class="wb-slot"></span><span><b>Bài ${l.id}: <span class="han">${esc(l.title)}</span></b><small>${esc(l.vi)}</small></span>${icon('caret-right')}</button>
+      <button class="wb-tick${done[l.id] ? ' on' : ''}" data-action="tb-tick" data-id="${l.id}" aria-pressed="${!!done[l.id]}" aria-label="Đánh dấu đã học bài ${l.id}"><img src="img/wb-${done[l.id] ? 'done' : 'todo'}.png" alt=""></button></div>`).join('')}
+      <button class="menu-item" data-action="tb" data-id="pos">${icon('tag')}<span><b>Bảng đối chiếu từ loại</b></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="tb" data-id="vocab">${icon('list-bullets')}<span><b>Bảng từ vựng</b><small>${tbData.vocab.length} từ · ${tbData.names.length} danh từ riêng</small></span>${icon('caret-right')}</button></nav></main>`;
+  }
+  const head = (t, n = '') => `<header class="list-head">${back(1)}<h1>${t}</h1>${n}</header>`;
+  if (view.id === 'pos') {
+    return `<main class="page">${head('Từ loại')}<div class="words">${tbData.pos.map((p) => `<div class="tb-word pos"><span class="han">${esc(p.zh)}</span><span>${esc(p.vi)}</span><b>${esc(p.abbr)}</b></div>`).join('')}</div></main>`;
+  }
+  if (view.id === 'vocab') {
+    const row = (v) => `<div class="tb-word" data-q="${esc(fold(v.zh + v.py))}">${tbSay(v.zh)}<span class="han">${v.star ? '★' : ''}${esc(v.zh)}</span><span>${esc(v.py)}</span><span class="muted">Bài ${(v.lessons ?? [v.lesson]).join(', ')}</span></div>`;
+    return `<main class="page">${head('Bảng từ vựng', `<span class="counter">${tbData.vocab.length}</span>`)}
+      <input id="tb-search" class="search" type="search" placeholder="Tìm chữ Hán hoặc pinyin" autocomplete="off">
+      <div class="words tb-words">${tbData.vocab.map(row).join('')}<p class="tb-sub">Danh từ riêng</p>${tbData.names.map(row).join('')}</div>
+      <p class="muted">★ từ vượt khung HSK1.</p></main>`;
+  }
+  const l = tbData.lessons.find((x) => x.id === +view.id);
+  const blocks = l.blocks.map((b) => {
+    if (b.kind === 'text') {
+      return `<section class="tb-part"><h2>${esc(b.title.replace('课文', 'Bài khóa '))}</h2>${b.scene ? `<p class="muted tb-scene">${esc(b.scene.vi)}</p>` : ''}
+        ${b.lines.map((x) => tbLine(x, x.who)).join('')}${b.words?.length || b.names?.length ? `<h3>Từ mới</h3>${tbWords(b.words ?? [], b.names)}` : ''}</section>`;
+    }
+    if (b.kind === 'grammar') {
+      return `<details class="wb-tr tb-gram"><summary>Ngữ pháp: <span class="han">${esc(b.title)}</span> · ${esc(b.title_vi)}</summary>
+        <p>${esc(b.vi)}</p>${b.ex.map((x) => tbLine(x)).join('')}</details>`;
+    }
+    return `<section class="tb-part"><h2>Luyện đọc nhanh (绕口令)</h2>${b.lines.map((x) => tbLine(x)).join('')}</section>`;
+  }).join('');
+  return `<main class="page">${head(`Bài ${l.id}`)}
+    <h2 class="tb-title">${zhPy(l.title, l.py)}<small>${esc(l.vi)}</small></h2>
+    ${l.goals?.length ? `<details class="wb-tr"><summary>Mục tiêu</summary>${l.goals.map((g) => `<p>${esc(g.vi)}</p>`).join('')}</details>` : ''}
+    ${blocks}
+    <div class="tb-next">${l.id < tbData.lessons.length ? `<button class="btn primary block" data-action="tb" data-id="${l.id + 1}">Bài ${l.id + 1}</button>` : ''}</div>
+  </main>`;
+}
+
 // ---------- Controller ----------
 
 /** Touch screens: no auto-focus into inputs, the keyboard would cover the word. Keep it only while already typing. */
@@ -861,7 +922,7 @@ const KEYBOARD_ON_OPEN = matchMedia('(pointer: fine)').matches;
 let wasTyping = false;
 
 function render() {
-  const views = { home, radicals, words: wordList, quiz, summary, write, add: addView, listen, wb: workbook };
+  const views = { home, radicals, words: wordList, quiz, summary, write, add: addView, listen, wb: workbook, tb: textbook };
   wasTyping = document.activeElement?.matches?.('#hz-in, #py') ?? false;
   if (view.name !== 'home') lessonPickerOpen = false; // picker reopens closed next time
   root.innerHTML = views[view.name]();
@@ -956,6 +1017,11 @@ root.addEventListener('pointerdown', (e) => {
 root.addEventListener('click', (e) => {
   const enBtn = e.target.closest('[data-say-en]');
   if (enBtn) return sayEn(enBtn.dataset.sayEn);
+  const tbBtn = e.target.closest('[data-tb-say]');
+  if (tbBtn) {
+    e.preventDefault();
+    return play(`textbook/${encodeURIComponent(tbBtn.dataset.tbSay)}.mp3`, tbBtn.dataset.tbSay, 'zh-CN');
+  }
   const sayBtn = e.target.closest('[data-say]');
   if (sayBtn) {
     e.preventDefault(); // keep <details> from toggling when tapping its play button
@@ -972,10 +1038,12 @@ root.addEventListener('click', (e) => {
   const act = el.dataset.action;
   if (act === 'wb') openWorkbook(el.dataset.id, el.dataset.lvl);
   else if (act === 'wb-play') wbPlay(el.dataset.n);
-  else if (act === 'wb-tick') {
-    const done = loadJSON(WB_DONE_KEY) ?? {};
+  else if (act === 'tb') openTextbook(el.dataset.id, el.dataset.lvl);
+  else if (act === 'wb-tick' || act === 'tb-tick') {
+    const KEY = act === 'tb-tick' ? TB_DONE_KEY : WB_DONE_KEY;
+    const done = loadJSON(KEY) ?? {};
     if (done[el.dataset.id]) delete done[el.dataset.id]; else done[el.dataset.id] = 1;
-    try { localStorage.setItem(WB_DONE_KEY, JSON.stringify(done)); } catch { /* private mode */ }
+    try { localStorage.setItem(KEY, JSON.stringify(done)); } catch { /* private mode */ }
     render();
     if (done[el.dataset.id]) {
       const msg = document.querySelector('.wb-toast'); // fixed-height slot under the title: no layout jump
@@ -1048,7 +1116,10 @@ root.addEventListener('click', (e) => {
   }
 });
 
-root.addEventListener('input', (e) => { if (e.target.id === 'word-search') searchWords(e.target.value); });
+root.addEventListener('input', (e) => {
+  if (e.target.id === 'word-search') searchWords(e.target.value);
+  if (e.target.id === 'tb-search') { const f = fold(e.target.value); root.querySelectorAll('.tb-word[data-q]').forEach((r) => { r.hidden = !r.dataset.q.includes(f); }); }
+});
 root.addEventListener('change', (e) => {
   if (e.target.dataset.move) return moveItem(e.target);
   if (!e.target.classList.contains('lesson-pick')) return;

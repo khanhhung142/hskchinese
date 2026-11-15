@@ -437,3 +437,24 @@ body.typing .card .speak { position: absolute; top: 8px; right: 8px; }
 .chip-sm { font-size: 13px; padding: 2px 8px; border: 1.5px solid var(--line); border-radius: var(--r-chip); background: var(--accent-soft); }
 .chip-sm .han { font-size: 16px; }
 body.typing .tips { display: none; }
+
+/* Giáo trình (textbook) */
+.tb-title { display: grid; gap: 4px; margin: 0 0 12px; }
+.tb-title .wb-zh .han { font-size: 26px; }
+.tb-title > small { font-size: 15px; font-weight: 400; }
+.tb-part h2 { font-size: 17px; margin: 24px 0 4px; }
+.tb-part h3 { font-size: 14px; color: var(--muted); margin: 12px 0 6px; }
+.tb-scene { margin: 0 0 8px; font-size: 14px; }
+.tb-line { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 10px; align-items: start; margin: 0 0 10px; }
+.tb-line > span { display: grid; gap: 2px; min-width: 0; }
+.tb-who { font-size: 13px; color: var(--accent); }
+.tb-vi { font-size: 14px; }
+.tb-word { display: grid; grid-template-columns: 40px minmax(56px, auto) minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 8px 12px; overflow-wrap: anywhere; }
+.tb-word.pos { grid-template-columns: 72px minmax(0, 1fr) auto; }
+.tb-word + .tb-word { border-top: 1px solid var(--line); }
+.tb-word > .han { font-size: 22px; }
+.tb-sub { margin: 0; padding: 8px 12px; font-weight: 700; background: var(--accent-soft); border-top: 1px solid var(--line); }
+.tb-gram { margin: 16px 0; }
+.tb-gram summary .han { font-weight: 400; }
+#tb-search { margin-bottom: 12px; }
+.tb-next { margin: 24px 0 8px; }
