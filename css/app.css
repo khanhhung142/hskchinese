@@ -451,3 +451,8 @@ body.typing .tips { display: none; }
 .tb-gram summary .han { font-weight: 400; }
 #tb-search { margin-bottom: 12px; }
 .tb-next { margin: 24px 0 8px; }
+
+.src-link { display: block; margin: 20px auto 0; padding: 4px 8px; border: 0; background: none; font: inherit; font-size: 12px; color: var(--text); opacity: .7; text-decoration: underline; }
+.src-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+.src-list li { display: grid; gap: 2px; }
+.src-list small { font-size: 13px; opacity: .8; }

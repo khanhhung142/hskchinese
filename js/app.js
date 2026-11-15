@@ -156,7 +156,25 @@ function home() {
       <button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Tra cứu</b></span>${icon('caret-right')}</button>
     </nav>
     ${tomie('home')}
+    <button class="src-link" data-action="src">Nguồn tham khảo</button>
   </main>`;
+}
+
+// One credits page instead of attribution lines scattered over the views.
+const SOURCES = [
+  ['Kai Hanzi (hanzi-sino-vietnamese)', 'https://github.com/binhbuithithanh/hanzi-sino-vietnamese', 'CC BY 4.0', 'Tách bộ thủ, mẹo nhớ, âm Hán Việt, gợi ý nét viết'],
+  ['Make Me a Hanzi', 'https://github.com/skishore/makemeahanzi', 'LGPL', 'Nguồn gốc chữ 📜 (dịch sang tiếng Việt), tách bộ cho chữ Kai Hanzi chưa có'],
+  ['CC-CEDICT (MDBG)', 'https://www.mdbg.net/chinese/dictionary?page=cedict', 'CC BY-SA 4.0', 'Kiểm tra pinyin'],
+  ['Microsoft Edge TTS qua edge-tts', 'https://github.com/rany2/edge-tts', '', 'Giọng đọc tiếng Trung và tiếng Anh'],
+  ['Google Input Tools', 'https://www.google.com/inputtools/', '', 'Nhận dạng chữ viết tay'],
+  ['新HSK教程1 (bản tiếng Việt)', '', '', 'Nội dung Giáo trình'],
+  ['SBT HSK1 (3.0) 模拟测练', '', '', 'Bài tập và file nghe'],
+  ['Bộ thủ Khang Hy', 'https://vi.wikipedia.org/wiki/B%E1%BB%99_th%E1%BB%A7_Khang_Hy', '', 'Danh sách 214 bộ'],
+  ['Phosphor Icons', 'https://phosphoricons.com/', 'MIT', 'Biểu tượng'],
+];
+function sources() {
+  return `<main class="page"><header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Nguồn tham khảo</h1></header>
+    <ul class="src-list">${SOURCES.map(([n, u, l, w]) => `<li>${u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)}</a>` : `<b>${esc(n)}</b>`}${l ? ` <span class="muted">${esc(l)}</span>` : ''}<small>${esc(w)}</small></li>`).join('')}</ul></main>`;
 }
 
 const lessonTitle = (id) => (data.lessons.find((l) => l.id === id) ?? custom.lessons.find((l) => l.id === id))?.title ?? `Bài ${id}`;
@@ -743,7 +761,7 @@ function charTips(word) {
   return `<details class="wb-tr tips"><summary>Bộ thủ &amp; mẹo nhớ</summary>${cs.map((c) => {
     const t = rad.chars[c];
     return `<p><span class="tip-head"><b class="han">${esc(c)}</b>${t.hv ? `<b>${esc(t.hv)}</b>` : ''}${t.p.map(([k, v]) => `<span class="chip-sm"><span class="han">${esc(k)}</span> ${esc(v)}</span>`).join('')}</span><small>${esc(t.m)}</small>${t.e ? `<small class="muted">📜 ${esc(t.e)}</small>` : ''}${t.w ? `<small class="muted">✍ ${esc(t.w)}</small>` : ''}</p>`;
-  }).join('')}<small class="muted">Mẹo nhớ phần lớn từ <a href="https://kaihanzi.com/chu" target="_blank" rel="noopener">Kai Hanzi</a>, CC BY 4.0; nguồn gốc chữ 📜 dịch từ <a href="https://github.com/skishore/makemeahanzi" target="_blank" rel="noopener">Make Me a Hanzi</a> (LGPL).</small></details>`;
+  }).join('')}</details>`;
 }
 function radicals() {
   const all = view.tab === 'all';
@@ -825,7 +843,7 @@ const KEYBOARD_ON_OPEN = matchMedia('(pointer: fine)').matches;
 let wasTyping = false;
 
 function render() {
-  const views = { home, radicals, words: wordList, quiz, summary, write, listen, wb: workbook, tb: textbook };
+  const views = { home, radicals, words: wordList, quiz, summary, write, listen, wb: workbook, tb: textbook, src: sources };
   wasTyping = document.activeElement?.matches?.('#hz-in, #py') ?? false;
   if (view.name !== 'home') lessonPickerOpen = false; // picker reopens closed next time
   root.innerHTML = views[view.name]();
@@ -941,6 +959,7 @@ root.addEventListener('click', (e) => {
   const act = el.dataset.action;
   if (act === 'wb') openWorkbook(el.dataset.id, el.dataset.lvl);
   else if (act === 'wb-play') wbPlay(el.dataset.n);
+  else if (act === 'src') { view = { name: 'src' }; render(); scrollTo(0, 0); }
   else if (act === 'tb') openTextbook(el.dataset.id, el.dataset.lvl);
   else if (act === 'wb-tick' || act === 'tb-tick') {
     const KEY = act === 'tb-tick' ? TB_DONE_KEY : WB_DONE_KEY;
