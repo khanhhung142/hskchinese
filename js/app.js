@@ -661,7 +661,7 @@ function workbook() {
     const done = loadJSON(WB_DONE_KEY) ?? {}, last = loadJSON(WB_SCORE_KEY) ?? {};
     const sub = (l) => !l.parts ? 'Chưa có audio' : last[l.id] ? `Lần gần nhất: ${last[l.id].s}/${last[l.id].n} · ${last[l.id].d}` : '';
     return `<main class="page"><header class="list-head">${back('wb')}<h1>HSK1</h1><span class="counter">${icon('heart', true)} ${Object.keys(done).length}/${wbData.lessons.length}</span></header><nav class="menu">${wbData.lessons.map((l) =>
-      `<div class="wb-row"><button class="menu-item" data-action="wb" data-id="${l.id}" ${l.parts ? '' : 'disabled'}><span class="wb-slot"></span><span><b>${esc(l.title)}</b>${sub(l) ? `<small>${sub(l)}</small>` : ''}</span>${icon('caret-right')}</button>
+      `<div class="wb-row"><button class="menu-item${done[l.id] ? ' done' : ''}" data-action="wb" data-id="${l.id}" ${l.parts ? '' : 'disabled'}><span class="wb-slot"></span><span><b>${esc(l.title)}</b>${sub(l) ? `<small>${sub(l)}</small>` : ''}</span>${icon('caret-right')}</button>
       <span class="wb-tick tb-mark${done[l.id] ? ' on' : ''}" aria-label="${done[l.id] ? 'Đã làm' : 'Chưa làm'}"><img src="img/wb-${done[l.id] ? 'done' : 'todo'}.png" alt=""></span></div>`).join('')}</nav></main>`;
   }
   const l = wbData.lessons.find((x) => x.id === view.id);
@@ -739,7 +739,7 @@ function textbook() {
   if (!view.id) {
     const done = loadJSON(TB_DONE_KEY) ?? {};
     return `<main class="page"><header class="list-head">${back()}<h1>HSK1</h1><span class="counter">${icon('heart', true)} ${Object.keys(done).length}/${tbData.lessons.length}</span></header><nav class="menu">${tbData.lessons.map((l) =>
-      `<div class="wb-row"><button class="menu-item" data-action="tb" data-id="${l.id}"><span class="wb-slot"></span><span><b>Bài ${l.id}: <span class="han">${esc(l.title)}</span></b><small>${esc(l.vi)}</small></span>${icon('caret-right')}</button>
+      `<div class="wb-row"><button class="menu-item${done[l.id] ? ' done' : ''}" data-action="tb" data-id="${l.id}"><span class="wb-slot"></span><span><b>Bài ${l.id}: <span class="han">${esc(l.title)}</span></b><small>${esc(l.vi)}</small></span>${icon('caret-right')}</button>
       <span class="wb-tick tb-mark${done[l.id] ? ' on' : ''}" aria-label="${done[l.id] ? 'Đã học' : 'Chưa học'}"><img src="img/wb-${done[l.id] ? 'done' : 'todo'}.png" alt=""></span></div>`).join('')}
       <button class="menu-item" data-action="tb" data-id="pos">${icon('tag')}<span><b>Bảng đối chiếu từ loại</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="tb" data-id="vocab">${icon('list-bullets')}<span><b>Bảng từ vựng</b><small>${tbData.vocab.length} từ · ${tbData.names.length} danh từ riêng</small></span>${icon('caret-right')}</button></nav></main>`;

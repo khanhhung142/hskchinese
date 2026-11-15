@@ -452,3 +452,4 @@ body.typing .tips { display: none; }
 #tb-search { margin-bottom: 12px; }
 .tb-next { margin: 24px 0 8px; }
 .pager { position: static; background: none; margin-top: 16px; }
+.menu-item.done { border-color: #ec64a0; } /* learnt lesson (Giáo trình / Bài tập): pink border only, same pink as the sticker outline */
