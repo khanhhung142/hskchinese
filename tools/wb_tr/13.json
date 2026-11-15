@@ -1,0 +1,22 @@
+{
+"1": [["一些饺子", "some dumplings", "một ít sủi cảo"]],
+"2": [["给你书", "here's the book for you", "đưa bạn sách"]],
+"3": [["打电话", "make a phone call", "gọi điện thoại"]],
+"4": [["请问您喝什么？", "What would you like to drink?", "Xin hỏi ngài uống gì ạ?"], ["A 给你", "here you are", "đưa bạn"], ["B 吃早饭", "eat breakfast", "ăn sáng"], ["C 要一杯茶", "a cup of tea, please", "cho một cốc trà"]],
+"5": [["我可以打电话吗？", "May I make a phone call?", "Tôi có thể gọi điện thoại không?"], ["A 学习", "study", "học"], ["B 不对", "not right", "không đúng"], ["C 没问题", "no problem", "không vấn đề gì"]],
+"6": [["你吃早饭了吗？要不要吃面包？", "Have you had breakfast? Do you want some bread?", "Bạn ăn sáng chưa? Có muốn ăn bánh mì không?"], ["谢谢！给我一半吧！", "Thanks! Give me half!", "Cảm ơn! Cho tôi một nửa nhé!"]],
+"7": [["请问您要点什么？", "What would you like to order?", "Xin hỏi ngài muốn gọi gì ạ?"], ["请给我一杯茶吧！", "A cup of tea, please!", "Cho tôi một cốc trà nhé!"]],
+"8": [["你觉得这家店怎么样？", "What do you think of this restaurant?", "Bạn thấy quán này thế nào?"], ["我觉得这儿的饺子很好吃！", "I think the dumplings here are delicious!", "Tôi thấy sủi cảo ở đây rất ngon!"]],
+"9": [["我明天休息，可以去找你玩吗？", "I'm off tomorrow. Can I come over to hang out with you?", "Mai tôi nghỉ, có thể đến tìm bạn chơi không?"], ["★说话人明天想做什么？", "What does the speaker want to do tomorrow?", "Người nói ngày mai muốn làm gì?"], ["A 问问题", "ask questions", "hỏi câu hỏi"], ["B 找人玩", "visit someone to hang out", "tìm người chơi"], ["C 看医生", "see a doctor", "đi khám bác sĩ"]],
+"10": [["晚上下班后，我和朋友们去饭店吃饭了！", "After work this evening, my friends and I went to a restaurant to eat!", "Tối tan làm, tôi và các bạn đi nhà hàng ăn cơm!"], ["★说话人下班后去哪儿吃饭了？", "Where did the speaker eat after work?", "Người nói tan làm xong đi ăn ở đâu?"], ["A 饭店", "restaurant", "nhà hàng"], ["B 学校", "school", "trường học"], ["C 朋友家", "a friend's home", "nhà bạn"]],
+"11": [["她太小了，这个苹果给她一半吧。", "She's too little, give her half of this apple.", "Bé còn nhỏ quá, cho bé một nửa quả táo này thôi."]],
+"12": [["请给我一杯牛奶，谢谢。", "A glass of milk, please. Thanks.", "Cho tôi một cốc sữa, cảm ơn."]],
+"13": [["我打电话问一下吧。", "Let me call and ask.", "Để tôi gọi điện hỏi thử nhé."]],
+"14": [["那里卖不卖手机？", "Do they sell mobile phones there?", "Ở đó có bán điện thoại không?"], ["C 不知道。", "I don't know.", "Không biết."]],
+"15": [["我会写了，谢谢老师。", "I can write it now, thank you, teacher.", "Em viết được rồi, cảm ơn thầy cô."], ["A 不客气。", "You're welcome.", "Không có gì."]],
+"16": [["你要什么？", "What do you want?", "Bạn muốn gì?"], ["B 一个面包。", "A piece of bread.", "Một cái bánh mì."]],
+"17": [["你看一下，你要什么？", "Take a look, what do you want?", "Bạn xem thử đi, bạn muốn gì?"]],
+"18": [["男：请坐，您要什么？", "Please sit down. What would you like?", "Mời ngồi, ngài muốn gì ạ?"], ["女：请给我一杯茶。", "A cup of tea, please.", "Cho tôi một cốc trà."]],
+"19": [["明天星期天，我们可以去饭店吃饺子吗？", "Tomorrow is Sunday. Can we go to a restaurant for dumplings?", "Mai là chủ nhật, chúng ta đi nhà hàng ăn sủi cảo được không?"], ["★明天是：", "Tomorrow is:", "Ngày mai là:"], ["A 星期五", "Friday", "thứ Sáu"], ["B 星期六", "Saturday", "thứ Bảy"], ["C 星期日", "Sunday", "Chủ nhật"]],
+"20": [["爸爸今天在家里工作，我们不要去他的房间。", "Dad is working at home today; let's not go into his room.", "Hôm nay bố làm việc ở nhà, chúng ta đừng vào phòng bố."], ["★爸爸今天：", "Today Dad:", "Hôm nay bố:"], ["A 在家里工作", "works at home", "làm việc ở nhà"], ["B 做了面条儿", "made noodles", "đã nấu mì"], ["C 不能去公司", "can't go to the office", "không thể đến công ty"]]
+}

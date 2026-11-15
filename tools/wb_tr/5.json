@@ -1,0 +1,22 @@
+{
+"1": [["做菜。", "Cooking dishes.", "Nấu món ăn."]],
+"2": [["四个人。", "Four people.", "Bốn người."]],
+"3": [["六月十二日。", "June 12th.", "Ngày 12 tháng 6."]],
+"4": [["你会做饭吗？", "Can you cook?", "Bạn biết nấu cơm không?"], ["A 我不会", "A I can't", "A Tôi không biết"], ["B 我吃饺子", "B I eat dumplings", "B Tôi ăn sủi cảo"], ["C 做面条儿", "C make noodles", "C làm mì sợi"]],
+"5": [["今天星期几？", "What day of the week is it today?", "Hôm nay thứ mấy?"], ["A 休息", "A rest", "A nghỉ ngơi"], ["B 星期四", "B Thursday", "B thứ Năm"], ["C 五口人", "C five people", "C năm người"]],
+"6": [["你会做这个菜吗？", "Can you cook this dish?", "Bạn biết nấu món này không?"], ["我不会做。", "I can't cook it.", "Tôi không biết nấu."]],
+"7": [["今天几号？", "What's the date today?", "Hôm nay ngày mấy?"], ["今天六月八号。", "Today is June 8th.", "Hôm nay ngày 8 tháng 6."]],
+"8": [["这是我的新电脑。", "This is my new computer.", "Đây là máy tính mới của tôi."], ["真好看。", "It looks really nice.", "Đẹp thật."]],
+"9": [["我喜欢吃饺子。", "I like eating dumplings.", "Tôi thích ăn sủi cảo."], ["问：说话人喜欢吃什么？", "Q: What does the speaker like to eat?", "Hỏi: Người nói thích ăn gì?"], ["A 菜", "A dishes", "A món ăn"], ["B 饺子", "B dumplings", "B sủi cảo"], ["C 面条儿", "C noodles", "C mì sợi"]],
+"10": [["明天十号，我休息。", "Tomorrow is the 10th; I'm off.", "Mai là ngày 10, tôi nghỉ."], ["问：说话人几号休息？", "Q: On what date is the speaker off?", "Hỏi: Người nói nghỉ ngày mấy?"], ["A 4号", "A the 4th", "A ngày 4"], ["B 10号", "B the 10th", "B ngày 10"], ["C 14号", "C the 14th", "C ngày 14"]],
+"11": [["王老师，再见。", "Goodbye, Teacher Wang.", "Tạm biệt thầy/cô Vương."]],
+"12": [["今天我休息。", "I'm off today.", "Hôm nay tôi nghỉ."]],
+"13": [["我有一个儿子，他今年7岁。", "I have a son; he's 7 this year.", "Tôi có một con trai, năm nay cháu 7 tuổi."]],
+"14": [["你去超市买什么？", "What are you buying at the supermarket?", "Bạn đi siêu thị mua gì?"], ["A 好的，谢谢！", "A OK, thanks!", "A Vâng, cảm ơn!"], ["B 我不会。", "B I can't.", "B Tôi không biết."], ["C 面条儿。", "C Noodles.", "C Mì sợi."], ["D 5月6号。", "D May 6th.", "D Ngày 6 tháng 5."]],
+"15": [["你会做饭吗？", "Can you cook?", "Bạn biết nấu cơm không?"], ["A 好的，谢谢！", "A OK, thanks!", "A Vâng, cảm ơn!"], ["B 我不会。", "B I can't.", "B Tôi không biết."], ["C 面条儿。", "C Noodles.", "C Mì sợi."], ["D 5月6号。", "D May 6th.", "D Ngày 6 tháng 5."]],
+"16": [["今天几号？", "What's the date today?", "Hôm nay ngày mấy?"], ["A 好的，谢谢！", "A OK, thanks!", "A Vâng, cảm ơn!"], ["B 我不会。", "B I can't.", "B Tôi không biết."], ["C 面条儿。", "C Noodles.", "C Mì sợi."], ["D 5月6号。", "D May 6th.", "D Ngày 6 tháng 5."]],
+"17": [["今天几号？", "What's the date today?", "Hôm nay ngày mấy?"], ["A 几", "A how many; which", "A mấy"], ["B 好看", "B good-looking", "B đẹp"], ["C 名字", "C name", "C tên"]],
+"18": [["男：你的新电脑真好看！", "M: Your new computer looks really nice!", "Nam: Máy tính mới của bạn đẹp thật!"], ["女：谢谢，我也很喜欢。", "W: Thanks, I like it a lot too.", "Nữ: Cảm ơn, tôi cũng rất thích."], ["A 几", "A how many; which", "A mấy"], ["B 好看", "B good-looking", "B đẹp"], ["C 名字", "C name", "C tên"]],
+"19": [["我非常喜欢我的中文名字。", "I really like my Chinese name.", "Tôi rất thích tên tiếng Trung của mình."], ["★说话人喜欢什么？", "★ What does the speaker like?", "★ Người nói thích gì?"], ["A 新电脑", "A the new computer", "A máy tính mới"], ["B 中国菜", "B Chinese food", "B món ăn Trung Quốc"], ["C 中文名字", "C the Chinese name", "C tên tiếng Trung"]],
+"20": [["今天8号，你几号休息？", "Today is the 8th. On what date are you off?", "Hôm nay ngày 8, bạn nghỉ ngày mấy?"], ["★说话人想知道什么？", "★ What does the speaker want to know?", "★ Người nói muốn biết điều gì?"], ["A 今天几号", "A what the date is today", "A hôm nay ngày mấy"], ["B 哪天休息", "B which day is off", "B nghỉ ngày nào"], ["C 星期几上班", "C which weekday to work", "C thứ mấy đi làm"]]
+}

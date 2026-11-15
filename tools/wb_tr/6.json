@@ -1,0 +1,22 @@
+{
+"1": [["我的手机。", "My mobile phone.", "Điện thoại của tôi."]],
+"2": [["一杯牛奶。", "A glass of milk.", "Một cốc sữa."]],
+"3": [["吃面条。", "Eat noodles.", "Ăn mì sợi."]],
+"4": [["明天你去哪儿买牛奶？", "Where will you go to buy milk tomorrow?", "Mai bạn đi đâu mua sữa?"], ["A 超市", "A supermarket", "A siêu thị"], ["B 做饭", "B cook", "B nấu cơm"], ["C 东西", "C things", "C đồ đạc"]],
+"5": [["你们怎么去？", "How are you going there?", "Các bạn đi bằng gì?"], ["A 去", "A go", "A đi"], ["B 西安饭店", "B Xi'an Hotel", "B khách sạn Tây An"], ["C 坐出租车", "C by taxi", "C đi taxi"]],
+"6": [["你的手机号是多少？", "What's your mobile number?", "Số điện thoại di động của bạn là bao nhiêu?"], ["我的手机号是13601493190。", "My mobile number is 13601493190.", "Số di động của tôi là 13601493190."]],
+"7": [["我们去那边的饭店吃晚饭吧。", "Let's have dinner at the restaurant over there.", "Chúng ta đến nhà hàng bên kia ăn tối nhé."], ["好的。", "OK.", "Được."]],
+"8": [["你也是老师吗？", "Are you a teacher too?", "Bạn cũng là giáo viên à?"], ["是的，我也是老师。", "Yes, I'm a teacher too.", "Đúng vậy, tôi cũng là giáo viên."]],
+"9": [["我的电话号是5362805。", "My phone number is 5362805.", "Số điện thoại của tôi là 5362805."], ["问：说话人的电话号是多少？", "Q: What is the speaker's phone number?", "Hỏi: Số điện thoại của người nói là bao nhiêu?"], ["A 5362805", "A 5362805", "A 5362805"], ["B 5398205", "B 5398205", "B 5398205"], ["C 5326085", "C 5326085", "C 5326085"]],
+"10": [["我想吃面条，不想吃包子和饺子。", "I want noodles, not steamed buns or dumplings.", "Tôi muốn ăn mì, không muốn ăn bánh bao và sủi cảo."], ["问：说话人想吃什么？", "Q: What does the speaker want to eat?", "Hỏi: Người nói muốn ăn gì?"], ["A 包子", "A steamed buns", "A bánh bao"], ["B 饺子", "B dumplings", "B sủi cảo"], ["C 面条儿", "C noodles", "C mì sợi"]],
+"11": [["我有一个新电脑。", "I have a new computer.", "Tôi có một cái máy tính mới."]],
+"12": [["今天星期二。", "Today is Tuesday.", "Hôm nay thứ Ba."]],
+"13": [["我想去超市买东西。", "I want to go to the supermarket to shop.", "Tôi muốn đi siêu thị mua đồ."]],
+"14": [["你吃什么？", "What will you eat?", "Bạn ăn gì?"], ["A 坐出租车。", "A By taxi.", "A Đi taxi."], ["B 真好看！", "B Really nice!", "B Đẹp thật!"], ["C 包子。", "C Steamed buns.", "C Bánh bao."], ["D 好的，谢谢！", "D OK, thanks!", "D Vâng, cảm ơn!"]],
+"15": [["我们怎么去？", "How do we get there?", "Chúng ta đi bằng gì?"], ["A 坐出租车。", "A By taxi.", "A Đi taxi."], ["B 真好看！", "B Really nice!", "B Đẹp thật!"], ["C 包子。", "C Steamed buns.", "C Bánh bao."], ["D 好的，谢谢！", "D OK, thanks!", "D Vâng, cảm ơn!"]],
+"16": [["这是老师的新电脑。", "This is the teacher's new computer.", "Đây là máy tính mới của thầy/cô."], ["A 坐出租车。", "A By taxi.", "A Đi taxi."], ["B 真好看！", "B Really nice!", "B Đẹp thật!"], ["C 包子。", "C Steamed buns.", "C Bánh bao."], ["D 好的，谢谢！", "D OK, thanks!", "D Vâng, cảm ơn!"]],
+"17": [["我想买牛奶。", "I want to buy milk.", "Tôi muốn mua sữa."], ["A 有", "A have", "A có"], ["B 牛奶", "B milk", "B sữa"], ["C 名字", "C name", "C tên"]],
+"18": [["男：我的手机号是+86 13552721160。", "M: My mobile number is +86 13552721160.", "Nam: Số di động của tôi là +86 13552721160."], ["女：我有你的手机号，你的电话号呢？", "W: I have your mobile number. What about your phone number?", "Nữ: Tôi có số di động của bạn rồi, còn số điện thoại bàn thì sao?"], ["A 有", "A have", "A có"], ["B 牛奶", "B milk", "B sữa"], ["C 名字", "C name", "C tên"]],
+"19": [["我家有三口人：爸爸、妈妈和我。", "There are three people in my family: dad, mom and me.", "Nhà tôi có ba người: bố, mẹ và tôi."], ["★说话人家里有几口人？", "★ How many people are in the speaker's family?", "★ Nhà người nói có mấy người?"], ["A 三口人", "A three", "A ba người"], ["B 四口人", "B four", "B bốn người"], ["C 六口人", "C six", "C sáu người"]],
+"20": [["明天星期天，我休息，想去超市买牛奶。", "Tomorrow is Sunday. I'm off and want to buy milk at the supermarket.", "Mai là Chủ nhật, tôi nghỉ, muốn đi siêu thị mua sữa."], ["★说话人想买什么？", "★ What does the speaker want to buy?", "★ Người nói muốn mua gì?"], ["A 菜", "A vegetables", "A rau"], ["B 牛奶", "B milk", "B sữa"], ["C 饺子", "C dumplings", "C sủi cảo"]]
+}

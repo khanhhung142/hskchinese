@@ -1,0 +1,22 @@
+{
+"1": [["老师好。", "Hello, teacher.", "Chào thầy/cô."]],
+"2": [["很高兴。", "Very happy.", "Rất vui."]],
+"3": [["两个孩子。", "Two children.", "Hai đứa con."]],
+"4": [["他有多少个学生？", "How many students does he have?", "Anh ấy có bao nhiêu học sinh?"], ["A 十人", "A ten people", "A mười người"], ["B 20个", "B twenty", "B 20 người"], ["C 三口人", "C three people (family)", "C ba người (gia đình)"]],
+"5": [["您女儿多大？", "How old is your daughter?", "Con gái ông/bà bao nhiêu tuổi?"], ["A 大", "A big", "A lớn"], ["B 12岁", "B 12 years old", "B 12 tuổi"], ["C 两千", "C two thousand", "C hai nghìn"]],
+"6": [["你哥哥做什么工作？", "What does your older brother do?", "Anh trai bạn làm nghề gì?"], ["他是中文老师。", "He's a Chinese teacher.", "Anh ấy là giáo viên tiếng Trung."]],
+"7": [["请问，这是谁？", "Excuse me, who is this?", "Xin hỏi, đây là ai?"], ["这是我女朋友。", "This is my girlfriend.", "Đây là bạn gái tôi."]],
+"8": [["我有两个姐姐，你呢？", "I have two older sisters. And you?", "Tôi có hai chị gái, còn bạn?"], ["我没有姐姐，我有一个妹妹。", "I don't have older sisters. I have a younger sister.", "Tôi không có chị gái, tôi có một em gái."]],
+"9": [["我叫李文，我是中国人。", "My name is Li Wen. I'm Chinese.", "Tôi tên là Lý Văn, tôi là người Trung Quốc."], ["问：说话人是哪国人？", "Q: What nationality is the speaker?", "Hỏi: Người nói là người nước nào?"], ["A 中国人", "A Chinese", "A người Trung Quốc"], ["B 泰国人", "B Thai", "B người Thái Lan"], ["C 法国人", "C French", "C người Pháp"]],
+"10": [["我不叫安妮，我叫白家月。", "My name isn't Annie; it's Bai Jiayue.", "Tôi không tên là Annie, tôi tên là Bạch Gia Nguyệt."], ["问：说话人叫什么名字？", "Q: What is the speaker's name?", "Hỏi: Người nói tên là gì?"], ["A 安妮", "A Annie", "A Annie"], ["B 王一飞", "B Wang Yifei", "B Vương Nhất Phi"], ["C 白家月", "C Bai Jiayue", "C Bạch Gia Nguyệt"]],
+"11": [["老师，您好！", "Hello, teacher!", "Chào thầy/cô ạ!"]],
+"12": [["我家有四口人。", "There are four people in my family.", "Nhà tôi có bốn người."]],
+"13": [["我哥哥今年20岁。", "My older brother is 20 this year.", "Anh trai tôi năm nay 20 tuổi."]],
+"14": [["她是谁？", "Who is she?", "Cô ấy là ai?"], ["A 好的，谢谢！", "A OK, thanks!", "A Vâng, cảm ơn!"], ["B 他今年5岁。", "B He's 5 this year.", "B Năm nay cậu bé 5 tuổi."], ["C 我女朋友。", "C My girlfriend.", "C Bạn gái tôi."], ["D 是的。", "D Yes.", "D Đúng vậy."]],
+"15": [["你是法国人吗？", "Are you French?", "Bạn là người Pháp à?"], ["A 好的，谢谢！", "A OK, thanks!", "A Vâng, cảm ơn!"], ["B 他今年5岁。", "B He's 5 this year.", "B Năm nay cậu bé 5 tuổi."], ["C 我女朋友。", "C My girlfriend.", "C Bạn gái tôi."], ["D 是的。", "D Yes.", "D Đúng vậy."]],
+"16": [["您儿子多大？", "How old is your son?", "Con trai ông/bà bao nhiêu tuổi?"], ["A 好的，谢谢！", "A OK, thanks!", "A Vâng, cảm ơn!"], ["B 他今年5岁。", "B He's 5 this year.", "B Năm nay cậu bé 5 tuổi."], ["C 我女朋友。", "C My girlfriend.", "C Bạn gái tôi."], ["D 是的。", "D Yes.", "D Đúng vậy."]],
+"17": [["她工作很忙。", "She is very busy with work.", "Cô ấy làm việc rất bận."], ["A 想", "A miss; want", "A nhớ, muốn"], ["B 忙", "B busy", "B bận"], ["C 名字", "C name", "C tên"]],
+"18": [["男：你们好吗？", "M: How are you all?", "Nam: Các bạn khỏe không?"], ["女：很好，我们很想你。", "W: Very well. We miss you a lot.", "Nữ: Rất khỏe, chúng tôi rất nhớ bạn."], ["A 想", "A miss; want", "A nhớ, muốn"], ["B 忙", "B busy", "B bận"], ["C 名字", "C name", "C tên"]],
+"19": [["我家有三口人，爸爸、妈妈和我。", "There are three people in my family: dad, mom and me.", "Nhà tôi có ba người: bố, mẹ và tôi."], ["★说话人家里有：", "★ The speaker's family has:", "★ Nhà người nói có:"], ["A 姐姐", "A an older sister", "A chị gái"], ["B 三口人", "B three people", "B ba người"], ["C 四口人", "C four people", "C bốn người"]],
+"20": [["她是法国人，我不是。", "She is French; I'm not.", "Cô ấy là người Pháp, tôi thì không."], ["★“她”是：", "★ \"She\" is:", "★ \"Cô ấy\" là:"], ["A 法国人", "A French", "A người Pháp"], ["B 中国人", "B Chinese", "B người Trung Quốc"], ["C 泰国人", "C Thai", "C người Thái Lan"]]
+}

@@ -1,0 +1,22 @@
+{
+"1": [["喝茶", "drink tea", "uống trà"]],
+"2": [["上飞机", "board the plane", "lên máy bay"]],
+"3": [["吃晚饭", "eat dinner", "ăn tối"]],
+"4": [["明天早上五点起床，早不早？", "Getting up at five tomorrow morning, is that early?", "Sáng mai năm giờ dậy, có sớm không?"], ["A 太早了", "too early", "sớm quá"], ["B 没睡觉", "didn't sleep", "không ngủ"], ["C 不想去", "don't want to go", "không muốn đi"]],
+"5": [["这件衣服好看，那件呢？", "This piece of clothing looks nice. What about that one?", "Bộ quần áo này đẹp, còn bộ kia thì sao?"], ["A 很多", "a lot", "rất nhiều"], ["B 也不贵", "not expensive either", "cũng không đắt"], ["C 也很好看", "also very nice", "cũng rất đẹp"]],
+"6": [["这个茶好喝，那个茶也好喝。", "This tea is good, and that tea is good too.", "Trà này ngon, trà kia cũng ngon."], ["是的！我们也都喜欢喝。", "Yes! We all like drinking them too.", "Đúng vậy! Chúng tôi cũng đều thích uống."]],
+"7": [["昨天下课后，我去超市买了一些菜和鸡蛋。", "After class yesterday, I went to the supermarket and bought some vegetables and eggs.", "Hôm qua tan học, tôi đi siêu thị mua ít rau và trứng."], ["我去商店买了件衣服。", "I went to a shop and bought some clothes.", "Tôi đi cửa hàng mua một bộ quần áo."]],
+"8": [["王老师说，北京很大，很漂亮。", "Teacher Wang says Beijing is big and beautiful.", "Thầy Vương nói Bắc Kinh rất lớn, rất đẹp."], ["是吗？我很想去。", "Really? I really want to go.", "Thật à? Tôi rất muốn đi."]],
+"9": [["去年我们去了西安，今年想去北京。", "Last year we went to Xi'an; this year we want to go to Beijing.", "Năm ngoái chúng tôi đi Tây An, năm nay muốn đi Bắc Kinh."], ["★说话人去年去了哪里？", "Where did the speaker go last year?", "Năm ngoái người nói đã đi đâu?"], ["A 西安", "Xi'an", "Tây An"], ["B 北京", "Beijing", "Bắc Kinh"], ["C 上海", "Shanghai", "Thượng Hải"]],
+"10": [["坐飞机太贵了，我想坐火车去。", "Flying is too expensive; I want to go by train.", "Đi máy bay đắt quá, tôi muốn đi tàu hỏa."], ["★说话人想怎么去？", "How does the speaker want to go?", "Người nói muốn đi bằng gì?"], ["A 坐飞机", "by plane", "đi máy bay"], ["B 坐火车", "by train", "đi tàu hỏa"], ["C 坐出租车", "by taxi", "đi taxi"]],
+"11": [["我家有五口人，我们现在住在北京。", "There are five people in my family; we live in Beijing now.", "Nhà tôi có năm người, bây giờ chúng tôi sống ở Bắc Kinh."]],
+"12": [["这里有好吃的，还有好玩儿的。", "There's good food here, and fun things too.", "Ở đây có đồ ăn ngon, còn có chỗ vui chơi nữa."]],
+"13": [["现在我会说一点儿汉语，也会写一些汉字了。", "Now I can speak a little Chinese and write some characters too.", "Bây giờ tôi nói được chút tiếng Trung, cũng viết được một số chữ Hán rồi."]],
+"14": [["你会写几个汉字？", "How many Chinese characters can you write?", "Bạn viết được mấy chữ Hán?"], ["B 十个。", "Ten.", "Mười chữ."]],
+"15": [["谁上中学了？", "Who is in middle school now?", "Ai đã lên trung học rồi?"], ["A 我女儿。", "My daughter.", "Con gái tôi."]],
+"16": [["你爱吃什么？", "What do you like to eat?", "Bạn thích ăn gì?"], ["C 苹果。", "Apples.", "Táo."]],
+"17": [["今年我们都想去北京。", "This year we all want to go to Beijing.", "Năm nay chúng tôi đều muốn đi Bắc Kinh."]],
+"18": [["男：我爱看电影，也爱唱歌。你呢？", "I love watching movies and singing. And you?", "Tôi thích xem phim, cũng thích hát. Còn bạn?"], ["女：我喜欢看电视。", "I like watching TV.", "Tôi thích xem tivi."]],
+"19": [["明天星期天，儿子想去看一个电影。", "Tomorrow is Sunday; my son wants to go see a movie.", "Mai là chủ nhật, con trai muốn đi xem một bộ phim."], ["★儿子明天想：", "Tomorrow the son wants to:", "Ngày mai con trai muốn:"], ["A 买电脑", "buy a computer", "mua máy tính"], ["B 打电话", "make a phone call", "gọi điện thoại"], ["C 看电影", "watch a movie", "xem phim"]],
+"20": [["下小雨了，小狗非常高兴，它喜欢小雨。", "It's drizzling; the puppy is very happy, it likes light rain.", "Trời mưa nhỏ, chú chó con rất vui, nó thích mưa nhỏ."], ["★小狗喜欢：", "The puppy likes:", "Chó con thích:"], ["A 下小雨", "light rain", "mưa nhỏ"], ["B 下大雨", "heavy rain", "mưa to"], ["C 下小雪", "light snow", "tuyết nhỏ"]]
+}

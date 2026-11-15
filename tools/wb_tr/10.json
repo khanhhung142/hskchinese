@@ -1,0 +1,22 @@
+{
+"1": [["水果便宜。", "The fruit is cheap.", "Hoa quả rẻ."]],
+"2": [["三件衣服。", "Three pieces of clothing.", "Ba bộ quần áo."]],
+"3": [["买杯子。", "Buy cups.", "Mua cốc."]],
+"4": [["杯子多少钱一个？", "How much is one cup?", "Cốc bao nhiêu tiền một cái?"], ["A 10:00", "A 10:00", "A 10:00"], ["B 十块钱", "B ten yuan", "B mười tệ"], ["C 十本书", "C ten books", "C mười quyển sách"]],
+"5": [["我穿这件衣服怎么样？", "How do I look in this outfit?", "Tôi mặc bộ quần áo này thế nào?"], ["A 不贵", "A not expensive", "A không đắt"], ["B 很好看", "B looks great", "B rất đẹp"], ["C 120元", "C 120 yuan", "C 120 tệ"]],
+"6": [["请问，有杯子吗？", "Excuse me, do you have cups?", "Xin hỏi, có cốc không?"], ["有，十二块钱一个。", "Yes, twelve yuan each.", "Có, mười hai tệ một cái."]],
+"7": [["我喜欢这个手机。多少钱？", "I like this phone. How much is it?", "Tôi thích cái điện thoại này. Bao nhiêu tiền?"], ["三千八百元。", "3,800 yuan.", "Ba nghìn tám trăm tệ."]],
+"8": [["您好！您买点儿什么？", "Hello! What would you like to buy?", "Chào anh/chị! Anh/chị muốn mua gì?"], ["我买四个苹果。", "I'll buy four apples.", "Tôi mua bốn quả táo."]],
+"9": [["这家商店衣服真多，还很便宜。", "This store has lots of clothes, and they're cheap too.", "Cửa hàng này quần áo thật nhiều, lại còn rất rẻ."], ["★那家商店的衣服怎么样？", "★What are the clothes in that store like?", "★Quần áo ở cửa hàng đó thế nào?"], ["A 很多", "A a lot", "A rất nhiều"], ["B 真贵", "B really expensive", "B thật đắt"], ["C 不好看", "C not nice-looking", "C không đẹp"]],
+"10": [["这边的杯子六块钱一个，真便宜。", "The cups here are six yuan each, really cheap.", "Cốc bên này sáu tệ một cái, thật rẻ."], ["★那边的杯子怎么样？", "★What are the cups over there like?", "★Cốc bên đó thế nào?"], ["A 很少", "A very few", "A rất ít"], ["B 很便宜", "B very cheap", "B rất rẻ"], ["C 很漂亮", "C very pretty", "C rất đẹp"]],
+"11": [["请问，包子多少钱一个？", "Excuse me, how much is one bun?", "Xin hỏi, bánh bao bao nhiêu tiền một cái?"]],
+"12": [["这边的苹果真便宜。", "The apples here are really cheap.", "Táo bên này thật rẻ."]],
+"13": [["这些是男孩子穿的衣服。", "These are clothes for boys.", "Đây là quần áo con trai mặc."]],
+"14": [["女孩子的衣服在哪儿？", "Where are the girls' clothes?", "Quần áo con gái ở đâu?"], ["A 十块钱。", "A Ten yuan.", "A Mười tệ."], ["B 对不起，没有。", "B Sorry, we don't have any.", "B Xin lỗi, không có."], ["C 在那边。", "C Over there.", "C Ở bên kia."], ["D 好的，谢谢！", "D OK, thanks!", "D Được, cảm ơn!"]],
+"15": [["杯子多少钱一个？", "How much is one cup?", "Cốc bao nhiêu tiền một cái?"], ["A 十块钱。", "A Ten yuan.", "A Mười tệ."], ["B 对不起，没有。", "B Sorry, we don't have any.", "B Xin lỗi, không có."], ["C 在那边。", "C Over there.", "C Ở bên kia."], ["D 好的，谢谢！", "D OK, thanks!", "D Được, cảm ơn!"]],
+"16": [["请问这儿有牛奶吗？", "Excuse me, do you have milk here?", "Xin hỏi ở đây có sữa không?"], ["A 十块钱。", "A Ten yuan.", "A Mười tệ."], ["B 对不起，没有。", "B Sorry, we don't have any.", "B Xin lỗi, không có."], ["C 在那边。", "C Over there.", "C Ở bên kia."], ["D 好的，谢谢！", "D OK, thanks!", "D Được, cảm ơn!"]],
+"17": [["那些苹果两块钱一斤，很便宜。", "Those apples are two yuan a jin, very cheap.", "Mấy quả táo kia hai tệ một cân, rất rẻ."], ["A 穿", "A wear", "A mặc"], ["B 块", "B kuai (yuan)", "B đồng (tệ)"], ["C 名字", "C name", "C tên"]],
+"18": [["男：这件衣服怎么样？", "M: How is this piece of clothing?", "Nam: Bộ quần áo này thế nào?"], ["女：很好看，10岁的男孩子能穿。", "F: It looks nice; a 10-year-old boy can wear it.", "Nữ: Rất đẹp, con trai 10 tuổi mặc được."], ["A 穿", "A wear", "A mặc"], ["B 块", "B kuai (yuan)", "B đồng (tệ)"], ["C 名字", "C name", "C tên"]],
+"19": [["我没有手机，今天想去商店买一个。", "I don't have a phone; today I want to go to the store to buy one.", "Tôi không có điện thoại, hôm nay muốn đến cửa hàng mua một cái."], ["★说话人想买什么？", "★What does the speaker want to buy?", "★Người nói muốn mua gì?"], ["A 杯子", "A cup", "A cốc"], ["B 手机", "B mobile phone", "B điện thoại"], ["C 水果", "C fruit", "C hoa quả"]],
+"20": [["这件衣服很好看，你也能穿，买一件吧。", "This outfit looks nice, you can wear it too, buy one.", "Bộ quần áo này rất đẹp, bạn cũng mặc được, mua một bộ đi."], ["★那件衣服：", "★That piece of clothing is:", "★Bộ quần áo đó:"], ["A 好看", "A nice-looking", "A đẹp"], ["B 便宜", "B cheap", "B rẻ"], ["C 很贵", "C very expensive", "C rất đắt"]]
+}

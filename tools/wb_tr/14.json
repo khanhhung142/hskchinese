@@ -1,0 +1,22 @@
+{
+"1": [["不要说话", "don't talk", "đừng nói chuyện"]],
+"2": [["写汉字", "write Chinese characters", "viết chữ Hán"]],
+"3": [["在火车上", "on the train", "trên tàu hỏa"]],
+"4": [["这些汉字你都会写了吗？", "Can you write all these characters now?", "Những chữ Hán này bạn viết được hết chưa?"], ["A 都写", "write them all", "viết hết"], ["B 听见了", "heard it", "nghe thấy rồi"], ["C 都会写了", "can write them all now", "viết được hết rồi"]],
+"5": [["你下了班去哪里？", "Where are you going after work?", "Tan làm bạn đi đâu?"], ["A 学习", "study", "học"], ["B 超市", "supermarket", "siêu thị"], ["C 买面包", "buy bread", "mua bánh mì"]],
+"6": [["你在火车上睡觉了吗？", "Did you sleep on the train?", "Bạn có ngủ trên tàu không?"], ["没睡觉。我在手机上看了个电影。", "No. I watched a movie on my phone.", "Không ngủ. Tôi xem một bộ phim trên điện thoại."]],
+"7": [["你能写一下这两个汉字吗？", "Can you write these two characters?", "Bạn viết thử hai chữ Hán này được không?"], ["可以。我都会写。", "Sure. I can write both.", "Được. Tôi viết được cả hai."]],
+"8": [["我下班了，现在想休息一下。", "I'm off work; I want to rest a bit now.", "Tôi tan làm rồi, giờ muốn nghỉ một chút."], ["好的，你休息吧。", "OK, go and rest.", "Được, bạn nghỉ đi."]],
+"9": [["下课后我去了商店。", "After class I went to the shop.", "Tan học tôi đã đi cửa hàng."], ["★说话人什么时候去了商店？", "When did the speaker go to the shop?", "Người nói đi cửa hàng khi nào?"], ["A 下课后", "after class", "sau khi tan học"], ["B 上课前", "before class", "trước giờ học"], ["C 回家后", "after going home", "sau khi về nhà"]],
+"10": [["弟弟有一只小狗，他还想要一只小猫。", "My little brother has a puppy, and he also wants a kitten.", "Em trai có một con chó con, nó còn muốn một con mèo con."], ["★说话人的弟弟有什么？", "What does the speaker's brother have?", "Em trai người nói có gì?"], ["A 小狗", "a puppy", "chó con"], ["B 小猫", "a kitten", "mèo con"], ["C 小狗和小猫", "a puppy and a kitten", "chó con và mèo con"]],
+"11": [["王先生今天生病了，没来上班。", "Mr. Wang is sick today and didn't come to work.", "Hôm nay ông Vương bị ốm, không đi làm."]],
+"12": [["火车上，有的人在读书，有的人在睡觉。", "On the train, some people are reading and some are sleeping.", "Trên tàu, có người đang đọc sách, có người đang ngủ."]],
+"13": [["喂，他们都来我家了，你也来吧。", "Hello, they've all come to my place, you come too.", "A lô, họ đều đến nhà tôi rồi, bạn cũng đến đi."]],
+"14": [["谁去学校了？", "Who went to school?", "Ai đã đến trường?"], ["B 我们都去了。", "We all went.", "Chúng tôi đều đi rồi."]],
+"15": [["你下午没去医院吗？", "Didn't you go to the hospital this afternoon?", "Chiều nay bạn không đi bệnh viện à?"], ["A 是的，我睡了一觉。", "Right, I took a nap.", "Đúng vậy, tôi ngủ một giấc."]],
+"16": [["你今天上午都忙了些什么？", "What were you busy with this morning?", "Sáng nay bạn bận những việc gì?"], ["C 写字、看书、吃饭。", "Writing, reading, eating.", "Viết chữ, đọc sách, ăn cơm."]],
+"17": [["我喝了一杯茶。", "I drank a cup of tea.", "Tôi đã uống một cốc trà."]],
+"18": [["男：上课了，请大家不要说话。", "Class is starting, everyone please stop talking.", "Vào học rồi, mọi người đừng nói chuyện nữa."], ["女：好的，老师，我们都不说话了。", "OK, teacher, none of us will talk.", "Vâng thưa thầy, chúng em đều không nói nữa."]],
+"19": [["服务员，我想问一下，我们的房间号是多少？", "Excuse me, may I ask what our room number is?", "Phục vụ ơi, cho tôi hỏi, số phòng của chúng tôi là bao nhiêu?"], ["★说话人想知道什么？", "What does the speaker want to know?", "Người nói muốn biết gì?"], ["A 时间", "the time", "thời gian"], ["B 电话号", "phone number", "số điện thoại"], ["C 房间号", "room number", "số phòng"]],
+"20": [["儿子和女儿都上小学了，他们会写很多字了。", "My son and daughter are both in primary school; they can write many characters now.", "Con trai và con gái đều học tiểu học rồi, chúng viết được nhiều chữ rồi."], ["★说话人的两个孩子是：", "The speaker's two children are:", "Hai đứa con của người nói là:"], ["A 小学生", "primary school students", "học sinh tiểu học"], ["B 中学生", "middle school students", "học sinh trung học"], ["C 大学生", "university students", "sinh viên đại học"]]
+}

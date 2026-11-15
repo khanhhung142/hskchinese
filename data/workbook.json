@@ -17,6 +17,14 @@
        "t": [
         35,
         57
+       ],
+       "tr": [
+        {
+         "zh": "老师好。",
+         "py": "lǎo shī hǎo",
+         "en": "Hello, teacher.",
+         "vi": "Chào thầy/cô."
+        }
        ]
       },
       {
@@ -25,6 +33,14 @@
        "t": [
         58,
         74
+       ],
+       "tr": [
+        {
+         "zh": "很高兴。",
+         "py": "hěn gāo xìng",
+         "en": "Very happy.",
+         "vi": "Rất vui."
+        }
        ]
       },
       {
@@ -33,6 +49,14 @@
        "t": [
         75,
         95
+       ],
+       "tr": [
+        {
+         "zh": "两个孩子。",
+         "py": "liǎng gè hái zi",
+         "en": "Two children.",
+         "vi": "Hai đứa con."
+        }
        ]
       }
      ]
@@ -64,6 +88,32 @@
        "t": [
         141,
         166
+       ],
+       "tr": [
+        {
+         "zh": "他有多少个学生？",
+         "py": "tā yǒu duō shǎo gè xué shēng",
+         "en": "How many students does he have?",
+         "vi": "Anh ấy có bao nhiêu học sinh?"
+        },
+        {
+         "zh": "A 十人",
+         "py": "A  shí rén",
+         "en": "A ten people",
+         "vi": "A mười người"
+        },
+        {
+         "zh": "B 20个",
+         "py": "B 20 gè",
+         "en": "B twenty",
+         "vi": "B 20 người"
+        },
+        {
+         "zh": "C 三口人",
+         "py": "C  sān kǒu rén",
+         "en": "C three people (family)",
+         "vi": "C ba người (gia đình)"
+        }
        ]
       },
       {
@@ -89,6 +139,32 @@
        "t": [
         167,
         189
+       ],
+       "tr": [
+        {
+         "zh": "您女儿多大？",
+         "py": "nín nǚ ér duō dà",
+         "en": "How old is your daughter?",
+         "vi": "Con gái ông/bà bao nhiêu tuổi?"
+        },
+        {
+         "zh": "A 大",
+         "py": "A  dà",
+         "en": "A big",
+         "vi": "A lớn"
+        },
+        {
+         "zh": "B 12岁",
+         "py": "B 12 suì",
+         "en": "B 12 years old",
+         "vi": "B 12 tuổi"
+        },
+        {
+         "zh": "C 两千",
+         "py": "C  liǎng qiān",
+         "en": "C two thousand",
+         "vi": "C hai nghìn"
+        }
        ]
       }
      ]
@@ -105,6 +181,20 @@
        "t": [
         231,
         275
+       ],
+       "tr": [
+        {
+         "zh": "你哥哥做什么工作？",
+         "py": "nǐ gē gē zuò shén me gōng zuò",
+         "en": "What does your older brother do?",
+         "vi": "Anh trai bạn làm nghề gì?"
+        },
+        {
+         "zh": "他是中文老师。",
+         "py": "tā shì zhōng wén lǎo shī",
+         "en": "He's a Chinese teacher.",
+         "vi": "Anh ấy là giáo viên tiếng Trung."
+        }
        ]
       },
       {
@@ -113,6 +203,20 @@
        "t": [
         276,
         305
+       ],
+       "tr": [
+        {
+         "zh": "请问，这是谁？",
+         "py": "qǐng wèn zhè shì shuí",
+         "en": "Excuse me, who is this?",
+         "vi": "Xin hỏi, đây là ai?"
+        },
+        {
+         "zh": "这是我女朋友。",
+         "py": "zhè shì wǒ nǚ péng yǒu",
+         "en": "This is my girlfriend.",
+         "vi": "Đây là bạn gái tôi."
+        }
        ]
       },
       {
@@ -121,6 +225,20 @@
        "t": [
         306,
         347
+       ],
+       "tr": [
+        {
+         "zh": "我有两个姐姐，你呢？",
+         "py": "wǒ yǒu liǎng gè jiě jiě nǐ ne",
+         "en": "I have two older sisters. And you?",
+         "vi": "Tôi có hai chị gái, còn bạn?"
+        },
+        {
+         "zh": "我没有姐姐，我有一个妹妹。",
+         "py": "wǒ méi yǒu jiě jiě wǒ yǒu yí gè mèi mèi",
+         "en": "I don't have older sisters. I have a younger sister.",
+         "vi": "Tôi không có chị gái, tôi có một em gái."
+        }
        ]
       }
      ]
@@ -152,6 +270,38 @@
        "t": [
         401,
         434
+       ],
+       "tr": [
+        {
+         "zh": "我叫李文，我是中国人。",
+         "py": "wǒ jiào lǐ wén wǒ shì zhōng guó rén",
+         "en": "My name is Li Wen. I'm Chinese.",
+         "vi": "Tôi tên là Lý Văn, tôi là người Trung Quốc."
+        },
+        {
+         "zh": "问：说话人是哪国人？",
+         "py": "wèn： shuō huà rén shì nǎ guó rén",
+         "en": "Q: What nationality is the speaker?",
+         "vi": "Hỏi: Người nói là người nước nào?"
+        },
+        {
+         "zh": "A 中国人",
+         "py": "A  zhōng guó rén",
+         "en": "A Chinese",
+         "vi": "A người Trung Quốc"
+        },
+        {
+         "zh": "B 泰国人",
+         "py": "B  tài guó rén",
+         "en": "B Thai",
+         "vi": "B người Thái Lan"
+        },
+        {
+         "zh": "C 法国人",
+         "py": "C  fǎ guó rén",
+         "en": "C French",
+         "vi": "C người Pháp"
+        }
        ]
       },
       {
@@ -177,6 +327,38 @@
        "t": [
         435,
         492
+       ],
+       "tr": [
+        {
+         "zh": "我不叫安妮，我叫白家月。",
+         "py": "wǒ bù jiào ān nī wǒ jiào bái jiā yuè",
+         "en": "My name isn't Annie; it's Bai Jiayue.",
+         "vi": "Tôi không tên là Annie, tôi tên là Bạch Gia Nguyệt."
+        },
+        {
+         "zh": "问：说话人叫什么名字？",
+         "py": "wèn： shuō huà rén jiào shén me míng zì",
+         "en": "Q: What is the speaker's name?",
+         "vi": "Hỏi: Người nói tên là gì?"
+        },
+        {
+         "zh": "A 安妮",
+         "py": "A  ān nī",
+         "en": "A Annie",
+         "vi": "A Annie"
+        },
+        {
+         "zh": "B 王一飞",
+         "py": "B  wáng yī fēi",
+         "en": "B Wang Yifei",
+         "vi": "B Vương Nhất Phi"
+        },
+        {
+         "zh": "C 白家月",
+         "py": "C  bái jiā yuè",
+         "en": "C Bai Jiayue",
+         "vi": "C Bạch Gia Nguyệt"
+        }
        ]
       }
      ]
@@ -191,19 +373,43 @@
        "n": 11,
        "ans": "C",
        "text": "老师，您好！",
-       "py": "lǎo shī nín hǎo"
+       "py": "lǎo shī nín hǎo",
+       "tr": [
+        {
+         "zh": "老师，您好！",
+         "py": "lǎo shī nín hǎo",
+         "en": "Hello, teacher!",
+         "vi": "Chào thầy/cô ạ!"
+        }
+       ]
       },
       {
        "n": 12,
        "ans": "D",
        "text": "我家有四口人。",
-       "py": "wǒ jiā yǒu sì kǒu rén"
+       "py": "wǒ jiā yǒu sì kǒu rén",
+       "tr": [
+        {
+         "zh": "我家有四口人。",
+         "py": "wǒ jiā yǒu sì kǒu rén",
+         "en": "There are four people in my family.",
+         "vi": "Nhà tôi có bốn người."
+        }
+       ]
       },
       {
        "n": 13,
        "ans": "B",
        "text": "我哥哥今年20岁。",
-       "py": "wǒ gē gē jīn nián 20 suì"
+       "py": "wǒ gē gē jīn nián 20 suì",
+       "tr": [
+        {
+         "zh": "我哥哥今年20岁。",
+         "py": "wǒ gē gē jīn nián 20 suì",
+         "en": "My older brother is 20 this year.",
+         "vi": "Anh trai tôi năm nay 20 tuổi."
+        }
+       ]
       }
      ]
     },
@@ -237,19 +443,115 @@
        "n": 14,
        "ans": "C",
        "text": "她是谁？",
-       "py": "tā shì shuí"
+       "py": "tā shì shuí",
+       "tr": [
+        {
+         "zh": "她是谁？",
+         "py": "tā shì shuí",
+         "en": "Who is she?",
+         "vi": "Cô ấy là ai?"
+        },
+        {
+         "zh": "A 好的，谢谢！",
+         "py": "A  hǎo de xiè xiè",
+         "en": "A OK, thanks!",
+         "vi": "A Vâng, cảm ơn!"
+        },
+        {
+         "zh": "B 他今年5岁。",
+         "py": "B  tā jīn nián 5 suì",
+         "en": "B He's 5 this year.",
+         "vi": "B Năm nay cậu bé 5 tuổi."
+        },
+        {
+         "zh": "C 我女朋友。",
+         "py": "C  wǒ nǚ péng yǒu",
+         "en": "C My girlfriend.",
+         "vi": "C Bạn gái tôi."
+        },
+        {
+         "zh": "D 是的。",
+         "py": "D  shì de",
+         "en": "D Yes.",
+         "vi": "D Đúng vậy."
+        }
+       ]
       },
       {
        "n": 15,
        "ans": "D",
        "text": "你是法国人吗？",
-       "py": "nǐ shì fǎ guó rén ma"
+       "py": "nǐ shì fǎ guó rén ma",
+       "tr": [
+        {
+         "zh": "你是法国人吗？",
+         "py": "nǐ shì fǎ guó rén ma",
+         "en": "Are you French?",
+         "vi": "Bạn là người Pháp à?"
+        },
+        {
+         "zh": "A 好的，谢谢！",
+         "py": "A  hǎo de xiè xiè",
+         "en": "A OK, thanks!",
+         "vi": "A Vâng, cảm ơn!"
+        },
+        {
+         "zh": "B 他今年5岁。",
+         "py": "B  tā jīn nián 5 suì",
+         "en": "B He's 5 this year.",
+         "vi": "B Năm nay cậu bé 5 tuổi."
+        },
+        {
+         "zh": "C 我女朋友。",
+         "py": "C  wǒ nǚ péng yǒu",
+         "en": "C My girlfriend.",
+         "vi": "C Bạn gái tôi."
+        },
+        {
+         "zh": "D 是的。",
+         "py": "D  shì de",
+         "en": "D Yes.",
+         "vi": "D Đúng vậy."
+        }
+       ]
       },
       {
        "n": 16,
        "ans": "B",
        "text": "您儿子多大？",
-       "py": "nín ér zi duō dà"
+       "py": "nín ér zi duō dà",
+       "tr": [
+        {
+         "zh": "您儿子多大？",
+         "py": "nín ér zi duō dà",
+         "en": "How old is your son?",
+         "vi": "Con trai ông/bà bao nhiêu tuổi?"
+        },
+        {
+         "zh": "A 好的，谢谢！",
+         "py": "A  hǎo de xiè xiè",
+         "en": "A OK, thanks!",
+         "vi": "A Vâng, cảm ơn!"
+        },
+        {
+         "zh": "B 他今年5岁。",
+         "py": "B  tā jīn nián 5 suì",
+         "en": "B He's 5 this year.",
+         "vi": "B Năm nay cậu bé 5 tuổi."
+        },
+        {
+         "zh": "C 我女朋友。",
+         "py": "C  wǒ nǚ péng yǒu",
+         "en": "C My girlfriend.",
+         "vi": "C Bạn gái tôi."
+        },
+        {
+         "zh": "D 是的。",
+         "py": "D  shì de",
+         "en": "D Yes.",
+         "vi": "D Đúng vậy."
+        }
+       ]
       }
      ]
     },
@@ -278,13 +580,71 @@
        "n": 17,
        "ans": "B",
        "text": "她工作很（ ）。",
-       "py": "tā gōng zuò hěn （ ）。"
+       "py": "tā gōng zuò hěn （ ）。",
+       "tr": [
+        {
+         "zh": "她工作很忙。",
+         "py": "tā gōng zuò hěn máng",
+         "en": "She is very busy with work.",
+         "vi": "Cô ấy làm việc rất bận."
+        },
+        {
+         "zh": "A 想",
+         "py": "A  xiǎng",
+         "en": "A miss; want",
+         "vi": "A nhớ, muốn"
+        },
+        {
+         "zh": "B 忙",
+         "py": "B  máng",
+         "en": "B busy",
+         "vi": "B bận"
+        },
+        {
+         "zh": "C 名字",
+         "py": "C  míng zì",
+         "en": "C name",
+         "vi": "C tên"
+        }
+       ]
       },
       {
        "n": 18,
        "ans": "A",
        "text": "男：你们好吗？ 女：很好，我们很（ ）你。",
-       "py": "nán ： nǐ men hǎo ma ？  nǚ ： hěn hǎo wǒ men hěn （ ） nǐ"
+       "py": "nán ： nǐ men hǎo ma ？  nǚ ： hěn hǎo wǒ men hěn （ ） nǐ",
+       "tr": [
+        {
+         "zh": "男：你们好吗？",
+         "py": "nán： nǐ men hǎo ma",
+         "en": "M: How are you all?",
+         "vi": "Nam: Các bạn khỏe không?"
+        },
+        {
+         "zh": "女：很好，我们很想你。",
+         "py": "nǚ： hěn hǎo wǒ men hěn xiǎng nǐ",
+         "en": "W: Very well. We miss you a lot.",
+         "vi": "Nữ: Rất khỏe, chúng tôi rất nhớ bạn."
+        },
+        {
+         "zh": "A 想",
+         "py": "A  xiǎng",
+         "en": "A miss; want",
+         "vi": "A nhớ, muốn"
+        },
+        {
+         "zh": "B 忙",
+         "py": "B  máng",
+         "en": "B busy",
+         "vi": "B bận"
+        },
+        {
+         "zh": "C 名字",
+         "py": "C  míng zì",
+         "en": "C name",
+         "vi": "C tên"
+        }
+       ]
       }
      ]
     },
@@ -313,7 +673,39 @@
         }
        ],
        "text": "我家有三口人，爸爸、妈妈和我。 ★说话人家里有：",
-       "py": "wǒ jiā yǒu sān kǒu rén bà bà mā mā hé wǒ 。 ★ shuō huà rén jiā lǐ yǒu ："
+       "py": "wǒ jiā yǒu sān kǒu rén bà bà mā mā hé wǒ 。 ★ shuō huà rén jiā lǐ yǒu ：",
+       "tr": [
+        {
+         "zh": "我家有三口人，爸爸、妈妈和我。",
+         "py": "wǒ jiā yǒu sān kǒu rén bà bà mā mā hé wǒ",
+         "en": "There are three people in my family: dad, mom and me.",
+         "vi": "Nhà tôi có ba người: bố, mẹ và tôi."
+        },
+        {
+         "zh": "★说话人家里有：",
+         "py": "★ shuō huà rén jiā lǐ yǒu：",
+         "en": "★ The speaker's family has:",
+         "vi": "★ Nhà người nói có:"
+        },
+        {
+         "zh": "A 姐姐",
+         "py": "A  jiě jiě",
+         "en": "A an older sister",
+         "vi": "A chị gái"
+        },
+        {
+         "zh": "B 三口人",
+         "py": "B  sān kǒu rén",
+         "en": "B three people",
+         "vi": "B ba người"
+        },
+        {
+         "zh": "C 四口人",
+         "py": "C  sì kǒu rén",
+         "en": "C four people",
+         "vi": "C bốn người"
+        }
+       ]
       },
       {
        "n": 20,
@@ -336,7 +728,39 @@
         }
        ],
        "text": "她是法国人，我不是。 ★“她”是：",
-       "py": "tā shì fǎ guó rén wǒ bú shì 。 ★“ tā ” shì ："
+       "py": "tā shì fǎ guó rén wǒ bú shì 。 ★“ tā ” shì ：",
+       "tr": [
+        {
+         "zh": "她是法国人，我不是。",
+         "py": "tā shì fǎ guó rén wǒ bú shì",
+         "en": "She is French; I'm not.",
+         "vi": "Cô ấy là người Pháp, tôi thì không."
+        },
+        {
+         "zh": "★“她”是：",
+         "py": "★“ tā ” shì：",
+         "en": "★ \"She\" is:",
+         "vi": "★ \"Cô ấy\" là:"
+        },
+        {
+         "zh": "A 法国人",
+         "py": "A  fǎ guó rén",
+         "en": "A French",
+         "vi": "A người Pháp"
+        },
+        {
+         "zh": "B 中国人",
+         "py": "B  zhōng guó rén",
+         "en": "B Chinese",
+         "vi": "B người Trung Quốc"
+        },
+        {
+         "zh": "C 泰国人",
+         "py": "C  tài guó rén",
+         "en": "C Thai",
+         "vi": "C người Thái Lan"
+        }
+       ]
       }
      ]
     }
@@ -359,6 +783,14 @@
        "t": [
         36,
         50
+       ],
+       "tr": [
+        {
+         "zh": "做菜。",
+         "py": "zuò cài",
+         "en": "Cooking dishes.",
+         "vi": "Nấu món ăn."
+        }
        ]
       },
       {
@@ -367,6 +799,14 @@
        "t": [
         50,
         60
+       ],
+       "tr": [
+        {
+         "zh": "四个人。",
+         "py": "sì gè rén",
+         "en": "Four people.",
+         "vi": "Bốn người."
+        }
        ]
       },
       {
@@ -375,6 +815,14 @@
        "t": [
         60,
         70
+       ],
+       "tr": [
+        {
+         "zh": "六月十二日。",
+         "py": "liù yuè shí èr rì",
+         "en": "June 12th.",
+         "vi": "Ngày 12 tháng 6."
+        }
        ]
       }
      ]
@@ -406,6 +854,32 @@
        "t": [
         107,
         122
+       ],
+       "tr": [
+        {
+         "zh": "你会做饭吗？",
+         "py": "nǐ huì zuò fàn ma",
+         "en": "Can you cook?",
+         "vi": "Bạn biết nấu cơm không?"
+        },
+        {
+         "zh": "A 我不会",
+         "py": "A  wǒ bú huì",
+         "en": "A I can't",
+         "vi": "A Tôi không biết"
+        },
+        {
+         "zh": "B 我吃饺子",
+         "py": "B  wǒ chī jiǎo zi",
+         "en": "B I eat dumplings",
+         "vi": "B Tôi ăn sủi cảo"
+        },
+        {
+         "zh": "C 做面条儿",
+         "py": "C  zuò miàn tiáo ér",
+         "en": "C make noodles",
+         "vi": "C làm mì sợi"
+        }
        ]
       },
       {
@@ -431,6 +905,32 @@
        "t": [
         122,
         146
+       ],
+       "tr": [
+        {
+         "zh": "今天星期几？",
+         "py": "jīn tiān xīng qī jǐ",
+         "en": "What day of the week is it today?",
+         "vi": "Hôm nay thứ mấy?"
+        },
+        {
+         "zh": "A 休息",
+         "py": "A  xiū xī",
+         "en": "A rest",
+         "vi": "A nghỉ ngơi"
+        },
+        {
+         "zh": "B 星期四",
+         "py": "B  xīng qī sì",
+         "en": "B Thursday",
+         "vi": "B thứ Năm"
+        },
+        {
+         "zh": "C 五口人",
+         "py": "C  wǔ kǒu rén",
+         "en": "C five people",
+         "vi": "C năm người"
+        }
        ]
       }
      ]
@@ -447,6 +947,20 @@
        "t": [
         207,
         234
+       ],
+       "tr": [
+        {
+         "zh": "你会做这个菜吗？",
+         "py": "nǐ huì zuò zhè ge cài ma",
+         "en": "Can you cook this dish?",
+         "vi": "Bạn biết nấu món này không?"
+        },
+        {
+         "zh": "我不会做。",
+         "py": "wǒ bú huì zuò",
+         "en": "I can't cook it.",
+         "vi": "Tôi không biết nấu."
+        }
        ]
       },
       {
@@ -455,6 +969,20 @@
        "t": [
         234,
         275
+       ],
+       "tr": [
+        {
+         "zh": "今天几号？",
+         "py": "jīn tiān jǐ hào",
+         "en": "What's the date today?",
+         "vi": "Hôm nay ngày mấy?"
+        },
+        {
+         "zh": "今天六月八号。",
+         "py": "jīn tiān liù yuè bā hào",
+         "en": "Today is June 8th.",
+         "vi": "Hôm nay ngày 8 tháng 6."
+        }
        ]
       },
       {
@@ -463,6 +991,20 @@
        "t": [
         275,
         305
+       ],
+       "tr": [
+        {
+         "zh": "这是我的新电脑。",
+         "py": "zhè shì wǒ de xīn diàn nǎo",
+         "en": "This is my new computer.",
+         "vi": "Đây là máy tính mới của tôi."
+        },
+        {
+         "zh": "真好看。",
+         "py": "zhēn hǎo kàn",
+         "en": "It looks really nice.",
+         "vi": "Đẹp thật."
+        }
        ]
       }
      ]
@@ -494,6 +1036,38 @@
        "t": [
         368,
         406
+       ],
+       "tr": [
+        {
+         "zh": "我喜欢吃饺子。",
+         "py": "wǒ xǐ huān chī jiǎo zi",
+         "en": "I like eating dumplings.",
+         "vi": "Tôi thích ăn sủi cảo."
+        },
+        {
+         "zh": "问：说话人喜欢吃什么？",
+         "py": "wèn： shuō huà rén xǐ huān chī shén me",
+         "en": "Q: What does the speaker like to eat?",
+         "vi": "Hỏi: Người nói thích ăn gì?"
+        },
+        {
+         "zh": "A 菜",
+         "py": "A  cài",
+         "en": "A dishes",
+         "vi": "A món ăn"
+        },
+        {
+         "zh": "B 饺子",
+         "py": "B  jiǎo zi",
+         "en": "B dumplings",
+         "vi": "B sủi cảo"
+        },
+        {
+         "zh": "C 面条儿",
+         "py": "C  miàn tiáo ér",
+         "en": "C noodles",
+         "vi": "C mì sợi"
+        }
        ]
       },
       {
@@ -519,6 +1093,38 @@
        "t": [
         406,
         447
+       ],
+       "tr": [
+        {
+         "zh": "明天十号，我休息。",
+         "py": "míng tiān shí hào wǒ xiū xī",
+         "en": "Tomorrow is the 10th; I'm off.",
+         "vi": "Mai là ngày 10, tôi nghỉ."
+        },
+        {
+         "zh": "问：说话人几号休息？",
+         "py": "wèn： shuō huà rén jǐ hào xiū xī",
+         "en": "Q: On what date is the speaker off?",
+         "vi": "Hỏi: Người nói nghỉ ngày mấy?"
+        },
+        {
+         "zh": "A 4号",
+         "py": "A 4 hào",
+         "en": "A the 4th",
+         "vi": "A ngày 4"
+        },
+        {
+         "zh": "B 10号",
+         "py": "B 10 hào",
+         "en": "B the 10th",
+         "vi": "B ngày 10"
+        },
+        {
+         "zh": "C 14号",
+         "py": "C 14 hào",
+         "en": "C the 14th",
+         "vi": "C ngày 14"
+        }
        ]
       }
      ]
@@ -533,19 +1139,43 @@
        "n": 11,
        "ans": "D",
        "text": "王老师，再见。",
-       "py": "wáng lǎo shī zài jiàn"
+       "py": "wáng lǎo shī zài jiàn",
+       "tr": [
+        {
+         "zh": "王老师，再见。",
+         "py": "wáng lǎo shī zài jiàn",
+         "en": "Goodbye, Teacher Wang.",
+         "vi": "Tạm biệt thầy/cô Vương."
+        }
+       ]
       },
       {
        "n": 12,
        "ans": "C",
        "text": "今天我休息。",
-       "py": "jīn tiān wǒ xiū xī"
+       "py": "jīn tiān wǒ xiū xī",
+       "tr": [
+        {
+         "zh": "今天我休息。",
+         "py": "jīn tiān wǒ xiū xī",
+         "en": "I'm off today.",
+         "vi": "Hôm nay tôi nghỉ."
+        }
+       ]
       },
       {
        "n": 13,
        "ans": "B",
        "text": "我有一个儿子，他今年7岁。",
-       "py": "wǒ yǒu yí gè ér zi tā jīn nián 7 suì"
+       "py": "wǒ yǒu yí gè ér zi tā jīn nián 7 suì",
+       "tr": [
+        {
+         "zh": "我有一个儿子，他今年7岁。",
+         "py": "wǒ yǒu yí gè ér zi tā jīn nián 7 suì",
+         "en": "I have a son; he's 7 this year.",
+         "vi": "Tôi có một con trai, năm nay cháu 7 tuổi."
+        }
+       ]
       }
      ]
     },
@@ -579,19 +1209,115 @@
        "n": 14,
        "ans": "C",
        "text": "你去超市买什么？",
-       "py": "nǐ qù chāo shì mǎi shén me"
+       "py": "nǐ qù chāo shì mǎi shén me",
+       "tr": [
+        {
+         "zh": "你去超市买什么？",
+         "py": "nǐ qù chāo shì mǎi shén me",
+         "en": "What are you buying at the supermarket?",
+         "vi": "Bạn đi siêu thị mua gì?"
+        },
+        {
+         "zh": "A 好的，谢谢！",
+         "py": "A  hǎo de xiè xiè",
+         "en": "A OK, thanks!",
+         "vi": "A Vâng, cảm ơn!"
+        },
+        {
+         "zh": "B 我不会。",
+         "py": "B  wǒ bú huì",
+         "en": "B I can't.",
+         "vi": "B Tôi không biết."
+        },
+        {
+         "zh": "C 面条儿。",
+         "py": "C  miàn tiáo ér",
+         "en": "C Noodles.",
+         "vi": "C Mì sợi."
+        },
+        {
+         "zh": "D 5月6号。",
+         "py": "D 5 yuè 6 hào",
+         "en": "D May 6th.",
+         "vi": "D Ngày 6 tháng 5."
+        }
+       ]
       },
       {
        "n": 15,
        "ans": "B",
        "text": "你会做饭吗？",
-       "py": "nǐ huì zuò fàn ma"
+       "py": "nǐ huì zuò fàn ma",
+       "tr": [
+        {
+         "zh": "你会做饭吗？",
+         "py": "nǐ huì zuò fàn ma",
+         "en": "Can you cook?",
+         "vi": "Bạn biết nấu cơm không?"
+        },
+        {
+         "zh": "A 好的，谢谢！",
+         "py": "A  hǎo de xiè xiè",
+         "en": "A OK, thanks!",
+         "vi": "A Vâng, cảm ơn!"
+        },
+        {
+         "zh": "B 我不会。",
+         "py": "B  wǒ bú huì",
+         "en": "B I can't.",
+         "vi": "B Tôi không biết."
+        },
+        {
+         "zh": "C 面条儿。",
+         "py": "C  miàn tiáo ér",
+         "en": "C Noodles.",
+         "vi": "C Mì sợi."
+        },
+        {
+         "zh": "D 5月6号。",
+         "py": "D 5 yuè 6 hào",
+         "en": "D May 6th.",
+         "vi": "D Ngày 6 tháng 5."
+        }
+       ]
       },
       {
        "n": 16,
        "ans": "D",
        "text": "今天几号？",
-       "py": "jīn tiān jǐ hào"
+       "py": "jīn tiān jǐ hào",
+       "tr": [
+        {
+         "zh": "今天几号？",
+         "py": "jīn tiān jǐ hào",
+         "en": "What's the date today?",
+         "vi": "Hôm nay ngày mấy?"
+        },
+        {
+         "zh": "A 好的，谢谢！",
+         "py": "A  hǎo de xiè xiè",
+         "en": "A OK, thanks!",
+         "vi": "A Vâng, cảm ơn!"
+        },
+        {
+         "zh": "B 我不会。",
+         "py": "B  wǒ bú huì",
+         "en": "B I can't.",
+         "vi": "B Tôi không biết."
+        },
+        {
+         "zh": "C 面条儿。",
+         "py": "C  miàn tiáo ér",
+         "en": "C Noodles.",
+         "vi": "C Mì sợi."
+        },
+        {
+         "zh": "D 5月6号。",
+         "py": "D 5 yuè 6 hào",
+         "en": "D May 6th.",
+         "vi": "D Ngày 6 tháng 5."
+        }
+       ]
       }
      ]
     },
@@ -620,13 +1346,71 @@
        "n": 17,
        "ans": "A",
        "text": "今天（ ）号？",
-       "py": "jīn tiān （ ） hào"
+       "py": "jīn tiān （ ） hào",
+       "tr": [
+        {
+         "zh": "今天几号？",
+         "py": "jīn tiān jǐ hào",
+         "en": "What's the date today?",
+         "vi": "Hôm nay ngày mấy?"
+        },
+        {
+         "zh": "A 几",
+         "py": "A  jǐ",
+         "en": "A how many; which",
+         "vi": "A mấy"
+        },
+        {
+         "zh": "B 好看",
+         "py": "B  hǎo kàn",
+         "en": "B good-looking",
+         "vi": "B đẹp"
+        },
+        {
+         "zh": "C 名字",
+         "py": "C  míng zì",
+         "en": "C name",
+         "vi": "C tên"
+        }
+       ]
       },
       {
        "n": 18,
        "ans": "B",
        "text": "男：你的新电脑真（ ）！ 女：谢谢，我也很喜欢。",
-       "py": "nán ： nǐ de xīn diàn nǎo zhēn （ ）！  nǚ ： xiè xiè wǒ yě hěn xǐ huān"
+       "py": "nán ： nǐ de xīn diàn nǎo zhēn （ ）！  nǚ ： xiè xiè wǒ yě hěn xǐ huān",
+       "tr": [
+        {
+         "zh": "男：你的新电脑真好看！",
+         "py": "nán： nǐ de xīn diàn nǎo zhēn hǎo kàn",
+         "en": "M: Your new computer looks really nice!",
+         "vi": "Nam: Máy tính mới của bạn đẹp thật!"
+        },
+        {
+         "zh": "女：谢谢，我也很喜欢。",
+         "py": "nǚ： xiè xiè wǒ yě hěn xǐ huān",
+         "en": "W: Thanks, I like it a lot too.",
+         "vi": "Nữ: Cảm ơn, tôi cũng rất thích."
+        },
+        {
+         "zh": "A 几",
+         "py": "A  jǐ",
+         "en": "A how many; which",
+         "vi": "A mấy"
+        },
+        {
+         "zh": "B 好看",
+         "py": "B  hǎo kàn",
+         "en": "B good-looking",
+         "vi": "B đẹp"
+        },
+        {
+         "zh": "C 名字",
+         "py": "C  míng zì",
+         "en": "C name",
+         "vi": "C tên"
+        }
+       ]
       }
      ]
     },
@@ -655,7 +1439,39 @@
         }
        ],
        "text": "我非常喜欢我的中文名字。 ★说话人喜欢什么？",
-       "py": "wǒ fēi cháng xǐ huān wǒ de zhōng wén míng zì 。 ★ shuō huà rén xǐ huān shén me"
+       "py": "wǒ fēi cháng xǐ huān wǒ de zhōng wén míng zì 。 ★ shuō huà rén xǐ huān shén me",
+       "tr": [
+        {
+         "zh": "我非常喜欢我的中文名字。",
+         "py": "wǒ fēi cháng xǐ huān wǒ de zhōng wén míng zì",
+         "en": "I really like my Chinese name.",
+         "vi": "Tôi rất thích tên tiếng Trung của mình."
+        },
+        {
+         "zh": "★说话人喜欢什么？",
+         "py": "★ shuō huà rén xǐ huān shén me",
+         "en": "★ What does the speaker like?",
+         "vi": "★ Người nói thích gì?"
+        },
+        {
+         "zh": "A 新电脑",
+         "py": "A  xīn diàn nǎo",
+         "en": "A the new computer",
+         "vi": "A máy tính mới"
+        },
+        {
+         "zh": "B 中国菜",
+         "py": "B  zhōng guó cài",
+         "en": "B Chinese food",
+         "vi": "B món ăn Trung Quốc"
+        },
+        {
+         "zh": "C 中文名字",
+         "py": "C  zhōng wén míng zì",
+         "en": "C the Chinese name",
+         "vi": "C tên tiếng Trung"
+        }
+       ]
       },
       {
        "n": 20,
@@ -678,7 +1494,39 @@
         }
        ],
        "text": "今天8号，你几号休息？ ★说话人想知道什么？",
-       "py": "jīn tiān 8 hào nǐ jǐ hào xiū xī ？ ★ shuō huà rén xiǎng zhī dào shén me"
+       "py": "jīn tiān 8 hào nǐ jǐ hào xiū xī ？ ★ shuō huà rén xiǎng zhī dào shén me",
+       "tr": [
+        {
+         "zh": "今天8号，你几号休息？",
+         "py": "jīn tiān 8 hào nǐ jǐ hào xiū xī",
+         "en": "Today is the 8th. On what date are you off?",
+         "vi": "Hôm nay ngày 8, bạn nghỉ ngày mấy?"
+        },
+        {
+         "zh": "★说话人想知道什么？",
+         "py": "★ shuō huà rén xiǎng zhī dào shén me",
+         "en": "★ What does the speaker want to know?",
+         "vi": "★ Người nói muốn biết điều gì?"
+        },
+        {
+         "zh": "A 今天几号",
+         "py": "A  jīn tiān jǐ hào",
+         "en": "A what the date is today",
+         "vi": "A hôm nay ngày mấy"
+        },
+        {
+         "zh": "B 哪天休息",
+         "py": "B  nǎ tiān xiū xī",
+         "en": "B which day is off",
+         "vi": "B nghỉ ngày nào"
+        },
+        {
+         "zh": "C 星期几上班",
+         "py": "C  xīng qī jǐ shàng bān",
+         "en": "C which weekday to work",
+         "vi": "C thứ mấy đi làm"
+        }
+       ]
       }
      ]
     }
@@ -701,6 +1549,14 @@
        "t": [
         34,
         58
+       ],
+       "tr": [
+        {
+         "zh": "我的手机。",
+         "py": "wǒ de shǒu jī",
+         "en": "My mobile phone.",
+         "vi": "Điện thoại của tôi."
+        }
        ]
       },
       {
@@ -709,6 +1565,14 @@
        "t": [
         58,
         68
+       ],
+       "tr": [
+        {
+         "zh": "一杯牛奶。",
+         "py": "yī bēi niú nǎi",
+         "en": "A glass of milk.",
+         "vi": "Một cốc sữa."
+        }
        ]
       },
       {
@@ -717,6 +1581,14 @@
        "t": [
         68,
         90
+       ],
+       "tr": [
+        {
+         "zh": "吃面条。",
+         "py": "chī miàn tiáo",
+         "en": "Eat noodles.",
+         "vi": "Ăn mì sợi."
+        }
        ]
       }
      ]
@@ -748,6 +1620,32 @@
        "t": [
         138,
         151
+       ],
+       "tr": [
+        {
+         "zh": "明天你去哪儿买牛奶？",
+         "py": "míng tiān nǐ qù nǎ ér mǎi niú nǎi",
+         "en": "Where will you go to buy milk tomorrow?",
+         "vi": "Mai bạn đi đâu mua sữa?"
+        },
+        {
+         "zh": "A 超市",
+         "py": "A  chāo shì",
+         "en": "A supermarket",
+         "vi": "A siêu thị"
+        },
+        {
+         "zh": "B 做饭",
+         "py": "B  zuò fàn",
+         "en": "B cook",
+         "vi": "B nấu cơm"
+        },
+        {
+         "zh": "C 东西",
+         "py": "C  dōng xī",
+         "en": "C things",
+         "vi": "C đồ đạc"
+        }
        ]
       },
       {
@@ -773,6 +1671,32 @@
        "t": [
         151,
         190
+       ],
+       "tr": [
+        {
+         "zh": "你们怎么去？",
+         "py": "nǐ men zěn me qù",
+         "en": "How are you going there?",
+         "vi": "Các bạn đi bằng gì?"
+        },
+        {
+         "zh": "A 去",
+         "py": "A  qù",
+         "en": "A go",
+         "vi": "A đi"
+        },
+        {
+         "zh": "B 西安饭店",
+         "py": "B  xī ān fàn diàn",
+         "en": "B Xi'an Hotel",
+         "vi": "B khách sạn Tây An"
+        },
+        {
+         "zh": "C 坐出租车",
+         "py": "C  zuò chū zū chē",
+         "en": "C by taxi",
+         "vi": "C đi taxi"
+        }
        ]
       }
      ]
@@ -789,6 +1713,20 @@
        "t": [
         238,
         287
+       ],
+       "tr": [
+        {
+         "zh": "你的手机号是多少？",
+         "py": "nǐ de shǒu jī hào shì duō shǎo",
+         "en": "What's your mobile number?",
+         "vi": "Số điện thoại di động của bạn là bao nhiêu?"
+        },
+        {
+         "zh": "我的手机号是13601493190。",
+         "py": "wǒ de shǒu jī hào shì 13601493190。",
+         "en": "My mobile number is 13601493190.",
+         "vi": "Số di động của tôi là 13601493190."
+        }
        ]
       },
       {
@@ -797,6 +1735,20 @@
        "t": [
         287,
         317
+       ],
+       "tr": [
+        {
+         "zh": "我们去那边的饭店吃晚饭吧。",
+         "py": "wǒ men qù nà biān de fàn diàn chī wǎn fàn ba",
+         "en": "Let's have dinner at the restaurant over there.",
+         "vi": "Chúng ta đến nhà hàng bên kia ăn tối nhé."
+        },
+        {
+         "zh": "好的。",
+         "py": "hǎo de",
+         "en": "OK.",
+         "vi": "Được."
+        }
        ]
       },
       {
@@ -805,6 +1757,20 @@
        "t": [
         317,
         353
+       ],
+       "tr": [
+        {
+         "zh": "你也是老师吗？",
+         "py": "nǐ yě shì lǎo shī ma",
+         "en": "Are you a teacher too?",
+         "vi": "Bạn cũng là giáo viên à?"
+        },
+        {
+         "zh": "是的，我也是老师。",
+         "py": "shì de wǒ yě shì lǎo shī",
+         "en": "Yes, I'm a teacher too.",
+         "vi": "Đúng vậy, tôi cũng là giáo viên."
+        }
        ]
       }
      ]
@@ -836,6 +1802,38 @@
        "t": [
         414,
         461
+       ],
+       "tr": [
+        {
+         "zh": "我的电话号是5362805。",
+         "py": "wǒ de diàn huà hào shì 5362805。",
+         "en": "My phone number is 5362805.",
+         "vi": "Số điện thoại của tôi là 5362805."
+        },
+        {
+         "zh": "问：说话人的电话号是多少？",
+         "py": "wèn： shuō huà rén de diàn huà hào shì duō shǎo",
+         "en": "Q: What is the speaker's phone number?",
+         "vi": "Hỏi: Số điện thoại của người nói là bao nhiêu?"
+        },
+        {
+         "zh": "A 5362805",
+         "py": "A 5362805",
+         "en": "A 5362805",
+         "vi": "A 5362805"
+        },
+        {
+         "zh": "B 5398205",
+         "py": "B 5398205",
+         "en": "B 5398205",
+         "vi": "B 5398205"
+        },
+        {
+         "zh": "C 5326085",
+         "py": "C 5326085",
+         "en": "C 5326085",
+         "vi": "C 5326085"
+        }
        ]
       },
       {
@@ -861,6 +1859,38 @@
        "t": [
         461,
         500
+       ],
+       "tr": [
+        {
+         "zh": "我想吃面条，不想吃包子和饺子。",
+         "py": "wǒ xiǎng chī miàn tiáo bù xiǎng chī bāo zi hé jiǎo zi",
+         "en": "I want noodles, not steamed buns or dumplings.",
+         "vi": "Tôi muốn ăn mì, không muốn ăn bánh bao và sủi cảo."
+        },
+        {
+         "zh": "问：说话人想吃什么？",
+         "py": "wèn： shuō huà rén xiǎng chī shén me",
+         "en": "Q: What does the speaker want to eat?",
+         "vi": "Hỏi: Người nói muốn ăn gì?"
+        },
+        {
+         "zh": "A 包子",
+         "py": "A  bāo zi",
+         "en": "A steamed buns",
+         "vi": "A bánh bao"
+        },
+        {
+         "zh": "B 饺子",
+         "py": "B  jiǎo zi",
+         "en": "B dumplings",
+         "vi": "B sủi cảo"
+        },
+        {
+         "zh": "C 面条儿",
+         "py": "C  miàn tiáo ér",
+         "en": "C noodles",
+         "vi": "C mì sợi"
+        }
        ]
       }
      ]
@@ -875,19 +1905,43 @@
        "n": 11,
        "ans": "C",
        "text": "我有一个新电脑。",
-       "py": "wǒ yǒu yí gè xīn diàn nǎo"
+       "py": "wǒ yǒu yí gè xīn diàn nǎo",
+       "tr": [
+        {
+         "zh": "我有一个新电脑。",
+         "py": "wǒ yǒu yí gè xīn diàn nǎo",
+         "en": "I have a new computer.",
+         "vi": "Tôi có một cái máy tính mới."
+        }
+       ]
       },
       {
        "n": 12,
        "ans": "B",
        "text": "今天星期二。",
-       "py": "jīn tiān xīng qī èr"
+       "py": "jīn tiān xīng qī èr",
+       "tr": [
+        {
+         "zh": "今天星期二。",
+         "py": "jīn tiān xīng qī èr",
+         "en": "Today is Tuesday.",
+         "vi": "Hôm nay thứ Ba."
+        }
+       ]
       },
       {
        "n": 13,
        "ans": "D",
        "text": "我想去超市买东西。",
-       "py": "wǒ xiǎng qù chāo shì mǎi dōng xī"
+       "py": "wǒ xiǎng qù chāo shì mǎi dōng xī",
+       "tr": [
+        {
+         "zh": "我想去超市买东西。",
+         "py": "wǒ xiǎng qù chāo shì mǎi dōng xī",
+         "en": "I want to go to the supermarket to shop.",
+         "vi": "Tôi muốn đi siêu thị mua đồ."
+        }
+       ]
       }
      ]
     },
@@ -921,19 +1975,115 @@
        "n": 14,
        "ans": "C",
        "text": "你吃什么？",
-       "py": "nǐ chī shén me"
+       "py": "nǐ chī shén me",
+       "tr": [
+        {
+         "zh": "你吃什么？",
+         "py": "nǐ chī shén me",
+         "en": "What will you eat?",
+         "vi": "Bạn ăn gì?"
+        },
+        {
+         "zh": "A 坐出租车。",
+         "py": "A  zuò chū zū chē",
+         "en": "A By taxi.",
+         "vi": "A Đi taxi."
+        },
+        {
+         "zh": "B 真好看！",
+         "py": "B  zhēn hǎo kàn",
+         "en": "B Really nice!",
+         "vi": "B Đẹp thật!"
+        },
+        {
+         "zh": "C 包子。",
+         "py": "C  bāo zi",
+         "en": "C Steamed buns.",
+         "vi": "C Bánh bao."
+        },
+        {
+         "zh": "D 好的，谢谢！",
+         "py": "D  hǎo de xiè xiè",
+         "en": "D OK, thanks!",
+         "vi": "D Vâng, cảm ơn!"
+        }
+       ]
       },
       {
        "n": 15,
        "ans": "A",
        "text": "我们怎么去？",
-       "py": "wǒ men zěn me qù"
+       "py": "wǒ men zěn me qù",
+       "tr": [
+        {
+         "zh": "我们怎么去？",
+         "py": "wǒ men zěn me qù",
+         "en": "How do we get there?",
+         "vi": "Chúng ta đi bằng gì?"
+        },
+        {
+         "zh": "A 坐出租车。",
+         "py": "A  zuò chū zū chē",
+         "en": "A By taxi.",
+         "vi": "A Đi taxi."
+        },
+        {
+         "zh": "B 真好看！",
+         "py": "B  zhēn hǎo kàn",
+         "en": "B Really nice!",
+         "vi": "B Đẹp thật!"
+        },
+        {
+         "zh": "C 包子。",
+         "py": "C  bāo zi",
+         "en": "C Steamed buns.",
+         "vi": "C Bánh bao."
+        },
+        {
+         "zh": "D 好的，谢谢！",
+         "py": "D  hǎo de xiè xiè",
+         "en": "D OK, thanks!",
+         "vi": "D Vâng, cảm ơn!"
+        }
+       ]
       },
       {
        "n": 16,
        "ans": "B",
        "text": "这是老师的新电脑。",
-       "py": "zhè shì lǎo shī de xīn diàn nǎo"
+       "py": "zhè shì lǎo shī de xīn diàn nǎo",
+       "tr": [
+        {
+         "zh": "这是老师的新电脑。",
+         "py": "zhè shì lǎo shī de xīn diàn nǎo",
+         "en": "This is the teacher's new computer.",
+         "vi": "Đây là máy tính mới của thầy/cô."
+        },
+        {
+         "zh": "A 坐出租车。",
+         "py": "A  zuò chū zū chē",
+         "en": "A By taxi.",
+         "vi": "A Đi taxi."
+        },
+        {
+         "zh": "B 真好看！",
+         "py": "B  zhēn hǎo kàn",
+         "en": "B Really nice!",
+         "vi": "B Đẹp thật!"
+        },
+        {
+         "zh": "C 包子。",
+         "py": "C  bāo zi",
+         "en": "C Steamed buns.",
+         "vi": "C Bánh bao."
+        },
+        {
+         "zh": "D 好的，谢谢！",
+         "py": "D  hǎo de xiè xiè",
+         "en": "D OK, thanks!",
+         "vi": "D Vâng, cảm ơn!"
+        }
+       ]
       }
      ]
     },
@@ -962,13 +2112,71 @@
        "n": 17,
        "ans": "B",
        "text": "我想买（ ）。",
-       "py": "wǒ xiǎng mǎi （ ）。"
+       "py": "wǒ xiǎng mǎi （ ）。",
+       "tr": [
+        {
+         "zh": "我想买牛奶。",
+         "py": "wǒ xiǎng mǎi niú nǎi",
+         "en": "I want to buy milk.",
+         "vi": "Tôi muốn mua sữa."
+        },
+        {
+         "zh": "A 有",
+         "py": "A  yǒu",
+         "en": "A have",
+         "vi": "A có"
+        },
+        {
+         "zh": "B 牛奶",
+         "py": "B  niú nǎi",
+         "en": "B milk",
+         "vi": "B sữa"
+        },
+        {
+         "zh": "C 名字",
+         "py": "C  míng zì",
+         "en": "C name",
+         "vi": "C tên"
+        }
+       ]
       },
       {
        "n": 18,
        "ans": "A",
        "text": "男：我的手机号是+86 13552721160。 女：我（ ）你的手机号，你的电话号呢？",
-       "py": "nán ： wǒ de shǒu jī hào shì +86 13552721160。  nǚ ： wǒ （ ） nǐ de shǒu jī hào nǐ de diàn huà hào ne"
+       "py": "nán ： wǒ de shǒu jī hào shì +86 13552721160。  nǚ ： wǒ （ ） nǐ de shǒu jī hào nǐ de diàn huà hào ne",
+       "tr": [
+        {
+         "zh": "男：我的手机号是+86 13552721160。",
+         "py": "nán： wǒ de shǒu jī hào shì +86 13552721160。",
+         "en": "M: My mobile number is +86 13552721160.",
+         "vi": "Nam: Số di động của tôi là +86 13552721160."
+        },
+        {
+         "zh": "女：我有你的手机号，你的电话号呢？",
+         "py": "nǚ： wǒ yǒu nǐ de shǒu jī hào nǐ de diàn huà hào ne",
+         "en": "W: I have your mobile number. What about your phone number?",
+         "vi": "Nữ: Tôi có số di động của bạn rồi, còn số điện thoại bàn thì sao?"
+        },
+        {
+         "zh": "A 有",
+         "py": "A  yǒu",
+         "en": "A have",
+         "vi": "A có"
+        },
+        {
+         "zh": "B 牛奶",
+         "py": "B  niú nǎi",
+         "en": "B milk",
+         "vi": "B sữa"
+        },
+        {
+         "zh": "C 名字",
+         "py": "C  míng zì",
+         "en": "C name",
+         "vi": "C tên"
+        }
+       ]
       }
      ]
     },
@@ -997,7 +2205,39 @@
         }
        ],
        "text": "我家有三口人：爸爸、妈妈和我。 ★说话人家里有几口人？",
-       "py": "wǒ jiā yǒu sān kǒu rén ： bà bà mā mā hé wǒ 。 ★ shuō huà rén jiā lǐ yǒu jǐ kǒu rén"
+       "py": "wǒ jiā yǒu sān kǒu rén ： bà bà mā mā hé wǒ 。 ★ shuō huà rén jiā lǐ yǒu jǐ kǒu rén",
+       "tr": [
+        {
+         "zh": "我家有三口人：爸爸、妈妈和我。",
+         "py": "wǒ jiā yǒu sān kǒu rén： bà bà mā mā hé wǒ",
+         "en": "There are three people in my family: dad, mom and me.",
+         "vi": "Nhà tôi có ba người: bố, mẹ và tôi."
+        },
+        {
+         "zh": "★说话人家里有几口人？",
+         "py": "★ shuō huà rén jiā lǐ yǒu jǐ kǒu rén",
+         "en": "★ How many people are in the speaker's family?",
+         "vi": "★ Nhà người nói có mấy người?"
+        },
+        {
+         "zh": "A 三口人",
+         "py": "A  sān kǒu rén",
+         "en": "A three",
+         "vi": "A ba người"
+        },
+        {
+         "zh": "B 四口人",
+         "py": "B  sì kǒu rén",
+         "en": "B four",
+         "vi": "B bốn người"
+        },
+        {
+         "zh": "C 六口人",
+         "py": "C  liù kǒu rén",
+         "en": "C six",
+         "vi": "C sáu người"
+        }
+       ]
       },
       {
        "n": 20,
@@ -1020,7 +2260,39 @@
         }
        ],
        "text": "明天星期天，我休息，想去超市买牛奶。 ★说话人想买什么？",
-       "py": "míng tiān xīng qī tiān wǒ xiū xī xiǎng qù chāo shì mǎi niú nǎi 。 ★ shuō huà rén xiǎng mǎi shén me"
+       "py": "míng tiān xīng qī tiān wǒ xiū xī xiǎng qù chāo shì mǎi niú nǎi 。 ★ shuō huà rén xiǎng mǎi shén me",
+       "tr": [
+        {
+         "zh": "明天星期天，我休息，想去超市买牛奶。",
+         "py": "míng tiān xīng qī tiān wǒ xiū xī xiǎng qù chāo shì mǎi niú nǎi",
+         "en": "Tomorrow is Sunday. I'm off and want to buy milk at the supermarket.",
+         "vi": "Mai là Chủ nhật, tôi nghỉ, muốn đi siêu thị mua sữa."
+        },
+        {
+         "zh": "★说话人想买什么？",
+         "py": "★ shuō huà rén xiǎng mǎi shén me",
+         "en": "★ What does the speaker want to buy?",
+         "vi": "★ Người nói muốn mua gì?"
+        },
+        {
+         "zh": "A 菜",
+         "py": "A  cài",
+         "en": "A vegetables",
+         "vi": "A rau"
+        },
+        {
+         "zh": "B 牛奶",
+         "py": "B  niú nǎi",
+         "en": "B milk",
+         "vi": "B sữa"
+        },
+        {
+         "zh": "C 饺子",
+         "py": "C  jiǎo zi",
+         "en": "C dumplings",
+         "vi": "C sủi cảo"
+        }
+       ]
       }
      ]
     }
@@ -1043,6 +2315,14 @@
        "t": [
         34,
         58
+       ],
+       "tr": [
+        {
+         "zh": "晚上八点。",
+         "py": "wǎn shàng bā diǎn",
+         "en": "8 p.m.",
+         "vi": "Tám giờ tối."
+        }
        ]
       },
       {
@@ -1051,6 +2331,14 @@
        "t": [
         58,
         77
+       ],
+       "tr": [
+        {
+         "zh": "下午上课。",
+         "py": "xià wǔ shàng kè",
+         "en": "Have class in the afternoon.",
+         "vi": "Buổi chiều lên lớp."
+        }
        ]
       },
       {
@@ -1059,6 +2347,14 @@
        "t": [
         77,
         92
+       ],
+       "tr": [
+        {
+         "zh": "买菜。",
+         "py": "mǎi cài",
+         "en": "Buy vegetables.",
+         "vi": "Mua rau."
+        }
        ]
       }
      ]
@@ -1090,6 +2386,32 @@
        "t": [
         140,
         168
+       ],
+       "tr": [
+        {
+         "zh": "你们中午几点下课？",
+         "py": "nǐ men zhōng wǔ jǐ diǎn xià kè",
+         "en": "What time does your class finish at noon?",
+         "vi": "Buổi trưa mấy giờ các bạn tan học?"
+        },
+        {
+         "zh": "A 10:00",
+         "py": "A 10:00",
+         "en": "A 10:00",
+         "vi": "A 10:00"
+        },
+        {
+         "zh": "B 12:00",
+         "py": "B 12:00",
+         "en": "B 12:00",
+         "vi": "B 12:00"
+        },
+        {
+         "zh": "C 12号",
+         "py": "C 12 hào",
+         "en": "C the 12th",
+         "vi": "C Ngày 12"
+        }
        ]
       },
       {
@@ -1115,6 +2437,32 @@
        "t": [
         168,
         186
+       ],
+       "tr": [
+        {
+         "zh": "现在几点？",
+         "py": "xiàn zài jǐ diǎn",
+         "en": "What time is it now?",
+         "vi": "Bây giờ là mấy giờ?"
+        },
+        {
+         "zh": "A 8月",
+         "py": "A 8 yuè",
+         "en": "A August",
+         "vi": "A Tháng 8"
+        },
+        {
+         "zh": "B 三分钟",
+         "py": "B  sān fēn zhōng",
+         "en": "B Three minutes",
+         "vi": "B Ba phút"
+        },
+        {
+         "zh": "C 7:10",
+         "py": "C 7:10",
+         "en": "C 7:10",
+         "vi": "C 7:10"
+        }
        ]
       }
      ]
@@ -1131,6 +2479,20 @@
        "t": [
         236,
         280
+       ],
+       "tr": [
+        {
+         "zh": "我想吃西安饭店的包子，你去买吧。",
+         "py": "wǒ xiǎng chī xī ān fàn diàn de bāo zi nǐ qù mǎi ba",
+         "en": "I want the steamed buns from Xi'an Restaurant. Go buy some.",
+         "vi": "Em muốn ăn bánh bao của nhà hàng Tây An, anh đi mua đi."
+        },
+        {
+         "zh": "好，我下班去买。",
+         "py": "hǎo wǒ xià bān qù mǎi",
+         "en": "OK, I'll buy them after work.",
+         "vi": "Được, tan làm anh đi mua."
+        }
        ]
       },
       {
@@ -1139,6 +2501,20 @@
        "t": [
         280,
         310
+       ],
+       "tr": [
+        {
+         "zh": "你怎么去超市？",
+         "py": "nǐ zěn me qù chāo shì",
+         "en": "How are you getting to the supermarket?",
+         "vi": "Bạn đi siêu thị bằng gì?"
+        },
+        {
+         "zh": "我坐出租车去。",
+         "py": "wǒ zuò chū zū chē qù",
+         "en": "I'm going by taxi.",
+         "vi": "Tôi đi taxi."
+        }
        ]
       },
       {
@@ -1147,6 +2523,20 @@
        "t": [
         310,
         340
+       ],
+       "tr": [
+        {
+         "zh": "我们星期日早上七点十五见吧。",
+         "py": "wǒ men xīng qī rì zǎo shàng qī diǎn shí wǔ jiàn ba",
+         "en": "Let's meet at 7:15 on Sunday morning.",
+         "vi": "Chủ nhật bảy giờ mười lăm sáng mình gặp nhau nhé."
+        },
+        {
+         "zh": "好的。",
+         "py": "hǎo de",
+         "en": "OK.",
+         "vi": "Được."
+        }
        ]
       }
      ]
@@ -1178,6 +2568,38 @@
        "t": [
         399,
         440
+       ],
+       "tr": [
+        {
+         "zh": "我晚上还上课呢，不能去看电影。",
+         "py": "wǒ wǎn shàng hái shàng kè ne bù néng qù kàn diàn yǐng",
+         "en": "I still have class tonight, so I can't go to the movies.",
+         "vi": "Tối nay tôi còn phải lên lớp, không đi xem phim được."
+        },
+        {
+         "zh": "问：说话人晚上做什么？",
+         "py": "wèn： shuō huà rén wǎn shàng zuò shén me",
+         "en": "Q: What does the speaker do tonight?",
+         "vi": "Hỏi: Buổi tối người nói làm gì?"
+        },
+        {
+         "zh": "A 上课",
+         "py": "A  shàng kè",
+         "en": "A Have class",
+         "vi": "A Lên lớp"
+        },
+        {
+         "zh": "B 上班",
+         "py": "B  shàng bān",
+         "en": "B Go to work",
+         "vi": "B Đi làm"
+        },
+        {
+         "zh": "C 看电影",
+         "py": "C  kàn diàn yǐng",
+         "en": "C Watch a movie",
+         "vi": "C Xem phim"
+        }
        ]
       },
       {
@@ -1203,6 +2625,38 @@
        "t": [
         440,
         484
+       ],
+       "tr": [
+        {
+         "zh": "我现在去超市买些牛奶。",
+         "py": "wǒ xiàn zài qù chāo shì mǎi xiē niú nǎi",
+         "en": "I'm going to the supermarket now to buy some milk.",
+         "vi": "Bây giờ tôi đi siêu thị mua ít sữa."
+        },
+        {
+         "zh": "问：说话人现在去哪儿？",
+         "py": "wèn： shuō huà rén xiàn zài qù nǎ ér",
+         "en": "Q: Where is the speaker going now?",
+         "vi": "Hỏi: Bây giờ người nói đi đâu?"
+        },
+        {
+         "zh": "A 饭店",
+         "py": "A  fàn diàn",
+         "en": "A Restaurant",
+         "vi": "A Nhà hàng"
+        },
+        {
+         "zh": "B 菜店",
+         "py": "B  cài diàn",
+         "en": "B Vegetable shop",
+         "vi": "B Cửa hàng rau"
+        },
+        {
+         "zh": "C 超市",
+         "py": "C  chāo shì",
+         "en": "C Supermarket",
+         "vi": "C Siêu thị"
+        }
        ]
       }
      ]
@@ -1217,19 +2671,43 @@
        "n": 11,
        "ans": "D",
        "text": "我在上课呢。",
-       "py": "wǒ zài shàng kè ne"
+       "py": "wǒ zài shàng kè ne",
+       "tr": [
+        {
+         "zh": "我在上课呢。",
+         "py": "wǒ zài shàng kè ne",
+         "en": "I'm in class.",
+         "vi": "Tôi đang học trên lớp."
+        }
+       ]
       },
       {
        "n": 12,
        "ans": "C",
        "text": "我下午有事，晚上7:00见吧。",
-       "py": "wǒ xià wǔ yǒu shì wǎn shàng 7:00 jiàn ba"
+       "py": "wǒ xià wǔ yǒu shì wǎn shàng 7:00 jiàn ba",
+       "tr": [
+        {
+         "zh": "我下午有事，晚上7:00见吧。",
+         "py": "wǒ xià wǔ yǒu shì wǎn shàng 7:00 jiàn ba",
+         "en": "I'm busy this afternoon; let's meet at 7:00 this evening.",
+         "vi": "Chiều tôi có việc, 7 giờ tối gặp nhé."
+        }
+       ]
       },
       {
        "n": 13,
        "ans": "B",
        "text": "今天不上班，我去超市买东西。",
-       "py": "jīn tiān bù shàng bān wǒ qù chāo shì mǎi dōng xī"
+       "py": "jīn tiān bù shàng bān wǒ qù chāo shì mǎi dōng xī",
+       "tr": [
+        {
+         "zh": "今天不上班，我去超市买东西。",
+         "py": "jīn tiān bù shàng bān wǒ qù chāo shì mǎi dōng xī",
+         "en": "I'm off work today, so I'm going shopping at the supermarket.",
+         "vi": "Hôm nay không đi làm, tôi đi siêu thị mua đồ."
+        }
+       ]
       }
      ]
     },
@@ -1263,19 +2741,61 @@
        "n": 14,
        "ans": "C",
        "text": "我们在哪儿见？",
-       "py": "wǒ men zài nǎ ér jiàn"
+       "py": "wǒ men zài nǎ ér jiàn",
+       "tr": [
+        {
+         "zh": "我们在哪儿见？",
+         "py": "wǒ men zài nǎ ér jiàn",
+         "en": "Where shall we meet?",
+         "vi": "Chúng ta gặp nhau ở đâu?"
+        },
+        {
+         "zh": "C 电影院。",
+         "py": "C  diàn yǐng yuàn",
+         "en": "C At the cinema.",
+         "vi": "C Rạp chiếu phim."
+        }
+       ]
       },
       {
        "n": 15,
        "ans": "A",
        "text": "现在几点？",
-       "py": "xiàn zài jǐ diǎn"
+       "py": "xiàn zài jǐ diǎn",
+       "tr": [
+        {
+         "zh": "现在几点？",
+         "py": "xiàn zài jǐ diǎn",
+         "en": "What time is it now?",
+         "vi": "Bây giờ là mấy giờ?"
+        },
+        {
+         "zh": "A 早上七点半。",
+         "py": "A  zǎo shàng qī diǎn bàn",
+         "en": "A Half past seven in the morning.",
+         "vi": "A Bảy rưỡi sáng."
+        }
+       ]
       },
       {
        "n": 16,
        "ans": "B",
        "text": "我们下午去超市吧。",
-       "py": "wǒ men xià wǔ qù chāo shì ba"
+       "py": "wǒ men xià wǔ qù chāo shì ba",
+       "tr": [
+        {
+         "zh": "我们下午去超市吧。",
+         "py": "wǒ men xià wǔ qù chāo shì ba",
+         "en": "Let's go to the supermarket this afternoon.",
+         "vi": "Chiều nay mình đi siêu thị nhé."
+        },
+        {
+         "zh": "B 对不起，我有课。",
+         "py": "B  duì bù qǐ wǒ yǒu kè",
+         "en": "B Sorry, I have class.",
+         "vi": "B Xin lỗi, tôi có tiết học."
+        }
+       ]
       }
      ]
     },
@@ -1304,13 +2824,35 @@
        "n": 17,
        "ans": "B",
        "text": "我们（ ）12:00下课。",
-       "py": "wǒ men （ ）12:00 xià kè"
+       "py": "wǒ men （ ）12:00 xià kè",
+       "tr": [
+        {
+         "zh": "我们中午12:00下课。",
+         "py": "wǒ men zhōng wǔ 12:00 xià kè",
+         "en": "Our class ends at 12:00 noon.",
+         "vi": "Chúng tôi tan học lúc 12 giờ trưa."
+        }
+       ]
       },
       {
        "n": 18,
        "ans": "A",
        "text": "男：你现在在哪儿？ 女：我在（ ）呢。",
-       "py": "nán ： nǐ xiàn zài zài nǎ ér ？  nǚ ： wǒ zài （ ） ne"
+       "py": "nán ： nǐ xiàn zài zài nǎ ér ？  nǚ ： wǒ zài （ ） ne",
+       "tr": [
+        {
+         "zh": "男：你现在在哪儿？",
+         "py": "nán： nǐ xiàn zài zài nǎ ér",
+         "en": "M: Where are you now?",
+         "vi": "Nam: Bây giờ bạn đang ở đâu?"
+        },
+        {
+         "zh": "女：我在医院呢。",
+         "py": "nǚ： wǒ zài yī yuàn ne",
+         "en": "W: I'm at the hospital.",
+         "vi": "Nữ: Tôi đang ở bệnh viện."
+        }
+       ]
       }
      ]
     },
@@ -1339,7 +2881,39 @@
         }
        ],
        "text": "我今天早上八点半上课，十点十分下课。 ★说话人今天几点下课？",
-       "py": "wǒ jīn tiān zǎo shàng bā diǎn bàn shàng kè shí diǎn shí fēn xià kè 。 ★ shuō huà rén jīn tiān jǐ diǎn xià kè"
+       "py": "wǒ jīn tiān zǎo shàng bā diǎn bàn shàng kè shí diǎn shí fēn xià kè 。 ★ shuō huà rén jīn tiān jǐ diǎn xià kè",
+       "tr": [
+        {
+         "zh": "我今天早上八点半上课，十点十分下课。",
+         "py": "wǒ jīn tiān zǎo shàng bā diǎn bàn shàng kè shí diǎn shí fēn xià kè",
+         "en": "Today my class starts at 8:30 a.m. and ends at 10:10.",
+         "vi": "Hôm nay tôi vào học lúc tám rưỡi sáng, tan học lúc mười giờ mười."
+        },
+        {
+         "zh": "★说话人今天几点下课？",
+         "py": "★ shuō huà rén jīn tiān jǐ diǎn xià kè",
+         "en": "★ What time does the speaker's class end today?",
+         "vi": "★ Hôm nay người nói tan học lúc mấy giờ?"
+        },
+        {
+         "zh": "A 8:30",
+         "py": "A 8:30",
+         "en": "A 8:30",
+         "vi": "A 8:30"
+        },
+        {
+         "zh": "B 10:10",
+         "py": "B 10:10",
+         "en": "B 10:10",
+         "vi": "B 10:10"
+        },
+        {
+         "zh": "C 10:20",
+         "py": "C 10:20",
+         "en": "C 10:20",
+         "vi": "C 10:20"
+        }
+       ]
       },
       {
        "n": 20,
@@ -1362,7 +2936,39 @@
         }
        ],
        "text": "妈妈今天休息，下午想去菜店买些菜。 ★妈妈下午想去菜店买：",
-       "py": "mā mā jīn tiān xiū xī xià wǔ xiǎng qù cài diàn mǎi xiē cài 。 ★ mā mā xià wǔ xiǎng qù cài diàn mǎi ："
+       "py": "mā mā jīn tiān xiū xī xià wǔ xiǎng qù cài diàn mǎi xiē cài 。 ★ mā mā xià wǔ xiǎng qù cài diàn mǎi ：",
+       "tr": [
+        {
+         "zh": "妈妈今天休息，下午想去菜店买些菜。",
+         "py": "mā mā jīn tiān xiū xī xià wǔ xiǎng qù cài diàn mǎi xiē cài",
+         "en": "Mom is off today; this afternoon she wants to go to the vegetable shop to buy some vegetables.",
+         "vi": "Hôm nay mẹ nghỉ, chiều mẹ muốn ra cửa hàng rau mua ít rau."
+        },
+        {
+         "zh": "★妈妈下午想去菜店买：",
+         "py": "★ mā mā xià wǔ xiǎng qù cài diàn mǎi：",
+         "en": "★ This afternoon Mom wants to buy at the vegetable shop:",
+         "vi": "★ Chiều nay mẹ muốn ra cửa hàng rau mua:"
+        },
+        {
+         "zh": "A 菜",
+         "py": "A  cài",
+         "en": "A Vegetables",
+         "vi": "A Rau"
+        },
+        {
+         "zh": "B 饺子",
+         "py": "B  jiǎo zi",
+         "en": "B Dumplings",
+         "vi": "B Sủi cảo"
+        },
+        {
+         "zh": "C 牛奶",
+         "py": "C  niú nǎi",
+         "en": "C Milk",
+         "vi": "C Sữa"
+        }
+       ]
       }
      ]
     }
@@ -1385,6 +2991,14 @@
        "t": [
         34,
         58
+       ],
+       "tr": [
+        {
+         "zh": "书店里。",
+         "py": "shū diàn lǐ",
+         "en": "In the bookstore.",
+         "vi": "Trong hiệu sách."
+        }
        ]
       },
       {
@@ -1393,6 +3007,14 @@
        "t": [
         58,
         77
+       ],
+       "tr": [
+        {
+         "zh": "桌子下的小猫。",
+         "py": "zhuō zi xià de xiǎo māo",
+         "en": "The kitten under the table.",
+         "vi": "Con mèo nhỏ dưới gầm bàn."
+        }
        ]
       },
       {
@@ -1401,6 +3023,14 @@
        "t": [
         77,
         92
+       ],
+       "tr": [
+        {
+         "zh": "工作很忙。",
+         "py": "gōng zuò hěn máng",
+         "en": "Work is very busy.",
+         "vi": "Công việc rất bận."
+        }
        ]
       }
      ]
@@ -1432,6 +3062,32 @@
        "t": [
         138,
         163
+       ],
+       "tr": [
+        {
+         "zh": "小猫在哪儿？",
+         "py": "xiǎo māo zài nǎ ér",
+         "en": "Where is the kitten?",
+         "vi": "Con mèo nhỏ ở đâu?"
+        },
+        {
+         "zh": "A 去学校",
+         "py": "A  qù xué xiào",
+         "en": "A Going to school",
+         "vi": "A Đi đến trường"
+        },
+        {
+         "zh": "B 房间外",
+         "py": "B  fáng jiān wài",
+         "en": "B Outside the room",
+         "vi": "B Ngoài phòng"
+        },
+        {
+         "zh": "C 在吃东西",
+         "py": "C  zài chī dōng xī",
+         "en": "C Eating",
+         "vi": "C Đang ăn"
+        }
        ]
       },
       {
@@ -1457,6 +3113,32 @@
        "t": [
         163,
         188
+       ],
+       "tr": [
+        {
+         "zh": "上午九点，你能到学校吗？",
+         "py": "shàng wǔ jiǔ diǎn nǐ néng dào xué xiào ma",
+         "en": "Can you get to school by 9 a.m.?",
+         "vi": "Chín giờ sáng bạn đến trường được không?"
+        },
+        {
+         "zh": "A 我能到",
+         "py": "A  wǒ néng dào",
+         "en": "A I can make it",
+         "vi": "A Tôi đến được"
+        },
+        {
+         "zh": "B 我吃午饭",
+         "py": "B  wǒ chī wǔ fàn",
+         "en": "B I'm eating lunch",
+         "vi": "B Tôi ăn trưa"
+        },
+        {
+         "zh": "C 我不能工作",
+         "py": "C  wǒ bù néng gōng zuò",
+         "en": "C I can't work",
+         "vi": "C Tôi không làm việc được"
+        }
        ]
       }
      ]
@@ -1473,6 +3155,20 @@
        "t": [
         239,
         270
+       ],
+       "tr": [
+        {
+         "zh": "爸爸在哪儿？",
+         "py": "bà bà zài nǎ ér",
+         "en": "Where is Dad?",
+         "vi": "Bố đâu rồi?"
+        },
+        {
+         "zh": "他在房间里呢。",
+         "py": "tā zài fáng jiān lǐ ne",
+         "en": "He's in the room.",
+         "vi": "Bố đang ở trong phòng."
+        }
        ]
       },
       {
@@ -1481,6 +3177,20 @@
        "t": [
         270,
         304
+       ],
+       "tr": [
+        {
+         "zh": "我在学校吃午饭，你呢？",
+         "py": "wǒ zài xué xiào chī wǔ fàn nǐ ne",
+         "en": "I eat lunch at school. What about you?",
+         "vi": "Tôi ăn trưa ở trường, còn bạn?"
+        },
+        {
+         "zh": "我也在学校吃午饭。",
+         "py": "wǒ yě zài xué xiào chī wǔ fàn",
+         "en": "I eat lunch at school too.",
+         "vi": "Tôi cũng ăn trưa ở trường."
+        }
        ]
       },
       {
@@ -1489,6 +3199,20 @@
        "t": [
         304,
         337
+       ],
+       "tr": [
+        {
+         "zh": "学校外有一个小超市。",
+         "py": "xué xiào wài yǒu yí gè xiǎo chāo shì",
+         "en": "There's a small supermarket outside the school.",
+         "vi": "Ngoài trường có một siêu thị nhỏ."
+        },
+        {
+         "zh": "好的，我们去那里买。",
+         "py": "hǎo de wǒ men qù nà lǐ mǎi",
+         "en": "OK, let's go buy there.",
+         "vi": "Được, chúng ta ra đó mua."
+        }
        ]
       }
      ]
@@ -1520,6 +3244,38 @@
        "t": [
         397,
         441
+       ],
+       "tr": [
+        {
+         "zh": "我今天上午有课，下午在学校书店里见吧。",
+         "py": "wǒ jīn tiān shàng wǔ yǒu kè xià wǔ zài xué xiào shū diàn lǐ jiàn ba",
+         "en": "I have class this morning; let's meet in the school bookstore this afternoon.",
+         "vi": "Sáng nay tôi có tiết, chiều gặp nhau ở hiệu sách của trường nhé."
+        },
+        {
+         "zh": "问：说话人想在哪儿见？",
+         "py": "wèn： shuō huà rén xiǎng zài nǎ ér jiàn",
+         "en": "Q: Where does the speaker want to meet?",
+         "vi": "Hỏi: Người nói muốn gặp ở đâu?"
+        },
+        {
+         "zh": "A 超市",
+         "py": "A  chāo shì",
+         "en": "A Supermarket",
+         "vi": "A Siêu thị"
+        },
+        {
+         "zh": "B 饭店",
+         "py": "B  fàn diàn",
+         "en": "B Restaurant",
+         "vi": "B Nhà hàng"
+        },
+        {
+         "zh": "C 学校书店",
+         "py": "C  xué xiào shū diàn",
+         "en": "C School bookstore",
+         "vi": "C Hiệu sách của trường"
+        }
        ]
       },
       {
@@ -1545,6 +3301,38 @@
        "t": [
         441,
         488
+       ],
+       "tr": [
+        {
+         "zh": "明天不上课，我们能去电影院看电影吗？",
+         "py": "míng tiān bù shàng kè wǒ men néng qù diàn yǐng yuàn kàn diàn yǐng ma",
+         "en": "There's no class tomorrow. Can we go to the cinema to see a movie?",
+         "vi": "Mai không phải đi học, chúng ta đi rạp xem phim được không?"
+        },
+        {
+         "zh": "问：说话人想要做什么？",
+         "py": "wèn： shuō huà rén xiǎng yào zuò shén me",
+         "en": "Q: What does the speaker want to do?",
+         "vi": "Hỏi: Người nói muốn làm gì?"
+        },
+        {
+         "zh": "A 去学校",
+         "py": "A  qù xué xiào",
+         "en": "A Go to school",
+         "vi": "A Đi đến trường"
+        },
+        {
+         "zh": "B 看电影",
+         "py": "B  kàn diàn yǐng",
+         "en": "B Watch a movie",
+         "vi": "B Xem phim"
+        },
+        {
+         "zh": "C 去上班",
+         "py": "C  qù shàng bān",
+         "en": "C Go to work",
+         "vi": "C Đi làm"
+        }
        ]
       }
      ]
@@ -1559,19 +3347,43 @@
        "n": 11,
        "ans": "B",
        "text": "你的手机在桌子上呢。",
-       "py": "nǐ de shǒu jī zài zhuō zi shàng ne"
+       "py": "nǐ de shǒu jī zài zhuō zi shàng ne",
+       "tr": [
+        {
+         "zh": "你的手机在桌子上呢。",
+         "py": "nǐ de shǒu jī zài zhuō zi shàng ne",
+         "en": "Your phone is on the table.",
+         "vi": "Điện thoại của bạn ở trên bàn."
+        }
+       ]
       },
       {
        "n": 12,
        "ans": "D",
        "text": "我在学校吃午饭。",
-       "py": "wǒ zài xué xiào chī wǔ fàn"
+       "py": "wǒ zài xué xiào chī wǔ fàn",
+       "tr": [
+        {
+         "zh": "我在学校吃午饭。",
+         "py": "wǒ zài xué xiào chī wǔ fàn",
+         "en": "I eat lunch at school.",
+         "vi": "Tôi ăn trưa ở trường."
+        }
+       ]
       },
       {
        "n": 13,
        "ans": "C",
        "text": "这个医院里病人多，医生工作很忙。",
-       "py": "zhè ge yī yuàn lǐ bìng rén duō yī shēng gōng zuò hěn máng"
+       "py": "zhè ge yī yuàn lǐ bìng rén duō yī shēng gōng zuò hěn máng",
+       "tr": [
+        {
+         "zh": "这个医院里病人多，医生工作很忙。",
+         "py": "zhè ge yī yuàn lǐ bìng rén duō yī shēng gōng zuò hěn máng",
+         "en": "This hospital has many patients; the doctors are very busy.",
+         "vi": "Bệnh viện này nhiều bệnh nhân, bác sĩ làm việc rất bận."
+        }
+       ]
       }
      ]
     },
@@ -1605,19 +3417,61 @@
        "n": 14,
        "ans": "C",
        "text": "桌子上有什么？",
-       "py": "zhuō zi shàng yǒu shén me"
+       "py": "zhuō zi shàng yǒu shén me",
+       "tr": [
+        {
+         "zh": "桌子上有什么？",
+         "py": "zhuō zi shàng yǒu shén me",
+         "en": "What's on the table?",
+         "vi": "Trên bàn có gì?"
+        },
+        {
+         "zh": "C 饺子和面条儿。",
+         "py": "C  jiǎo zi huó miàn tiáo ér",
+         "en": "C Dumplings and noodles.",
+         "vi": "C Sủi cảo và mì."
+        }
+       ]
       },
       {
        "n": 15,
        "ans": "B",
        "text": "她是谁？",
-       "py": "tā shì shuí"
+       "py": "tā shì shuí",
+       "tr": [
+        {
+         "zh": "她是谁？",
+         "py": "tā shì shuí",
+         "en": "Who is she?",
+         "vi": "Cô ấy là ai?"
+        },
+        {
+         "zh": "B 我老师。",
+         "py": "B  wǒ lǎo shī",
+         "en": "B My teacher.",
+         "vi": "B Cô giáo của tôi."
+        }
+       ]
       },
       {
        "n": 16,
        "ans": "A",
        "text": "你爸爸在哪儿工作？",
-       "py": "nǐ bà bà zài nǎ ér gōng zuò"
+       "py": "nǐ bà bà zài nǎ ér gōng zuò",
+       "tr": [
+        {
+         "zh": "你爸爸在哪儿工作？",
+         "py": "nǐ bà bà zài nǎ ér gōng zuò",
+         "en": "Where does your dad work?",
+         "vi": "Bố bạn làm việc ở đâu?"
+        },
+        {
+         "zh": "A 医院。",
+         "py": "A  yī yuàn",
+         "en": "A At a hospital.",
+         "vi": "A Bệnh viện."
+        }
+       ]
       }
      ]
     },
@@ -1646,13 +3500,35 @@
        "n": 17,
        "ans": "B",
        "text": "我的房间里（ ）一只小猫。",
-       "py": "wǒ de fáng jiān lǐ （ ） yī zhī xiǎo māo"
+       "py": "wǒ de fáng jiān lǐ （ ） yī zhī xiǎo māo",
+       "tr": [
+        {
+         "zh": "我的房间里有一只小猫。",
+         "py": "wǒ de fáng jiān lǐ yǒu yī zhī xiǎo māo",
+         "en": "There's a kitten in my room.",
+         "vi": "Trong phòng tôi có một con mèo nhỏ."
+        }
+       ]
       },
       {
        "n": 18,
        "ans": "A",
        "text": "男：我们下午在书店见吧。 女：好的，我7:00（ ）到。",
-       "py": "nán ： wǒ men xià wǔ zài shū diàn jiàn ba 。  nǚ ： hǎo de wǒ 7:00（ ） dào"
+       "py": "nán ： wǒ men xià wǔ zài shū diàn jiàn ba 。  nǚ ： hǎo de wǒ 7:00（ ） dào",
+       "tr": [
+        {
+         "zh": "男：我们下午在书店见吧。",
+         "py": "nán： wǒ men xià wǔ zài shū diàn jiàn ba",
+         "en": "M: Let's meet at the bookstore this afternoon.",
+         "vi": "Nam: Chiều nay mình gặp nhau ở hiệu sách nhé."
+        },
+        {
+         "zh": "女：好的，我7:00能到。",
+         "py": "nǚ： hǎo de wǒ 7:00 néng dào",
+         "en": "W: OK, I can be there at 7:00.",
+         "vi": "Nữ: Được, 7 giờ tôi đến được."
+        }
+       ]
       }
      ]
     },
@@ -1681,7 +3557,39 @@
         }
        ],
        "text": "昨天爸爸在医院工作，哥哥在家里休息，没去书店。 ★说话人的哥哥昨天：",
-       "py": "zuó tiān bà bà zài yī yuàn gōng zuò gē gē zài jiā lǐ xiū xī méi qù shū diàn 。 ★ shuō huà rén dī gē gē zuó tiān ："
+       "py": "zuó tiān bà bà zài yī yuàn gōng zuò gē gē zài jiā lǐ xiū xī méi qù shū diàn 。 ★ shuō huà rén dī gē gē zuó tiān ：",
+       "tr": [
+        {
+         "zh": "昨天爸爸在医院工作，哥哥在家里休息，没去书店。",
+         "py": "zuó tiān bà bà zài yī yuàn gōng zuò gē gē zài jiā lǐ xiū xī méi qù shū diàn",
+         "en": "Yesterday Dad worked at the hospital; my brother rested at home and didn't go to the bookstore.",
+         "vi": "Hôm qua bố làm việc ở bệnh viện, anh trai nghỉ ở nhà, không đi hiệu sách."
+        },
+        {
+         "zh": "★说话人的哥哥昨天：",
+         "py": "★ shuō huà rén dī gē gē zuó tiān：",
+         "en": "★ Yesterday the speaker's brother was:",
+         "vi": "★ Hôm qua anh trai người nói:"
+        },
+        {
+         "zh": "A 在家里",
+         "py": "A  zài jiā lǐ",
+         "en": "A At home",
+         "vi": "A Ở nhà"
+        },
+        {
+         "zh": "B 在书店",
+         "py": "B  zài shū diàn",
+         "en": "B At the bookstore",
+         "vi": "B Ở hiệu sách"
+        },
+        {
+         "zh": "C 在医院工作",
+         "py": "C  zài yī yuàn gōng zuò",
+         "en": "C Working at the hospital",
+         "vi": "C Làm việc ở bệnh viện"
+        }
+       ]
       },
       {
        "n": 20,
@@ -1704,7 +3612,39 @@
         }
        ],
        "text": "我喜欢吃米饭，我女朋友不喜欢。 ★说话人的女朋友不喜欢吃：",
-       "py": "wǒ xǐ huān chī mǐ fàn wǒ nǚ péng yǒu bù xǐ huān 。 ★ shuō huà rén de nǚ péng yǒu bù xǐ huān chī ："
+       "py": "wǒ xǐ huān chī mǐ fàn wǒ nǚ péng yǒu bù xǐ huān 。 ★ shuō huà rén de nǚ péng yǒu bù xǐ huān chī ：",
+       "tr": [
+        {
+         "zh": "我喜欢吃米饭，我女朋友不喜欢。",
+         "py": "wǒ xǐ huān chī mǐ fàn wǒ nǚ péng yǒu bù xǐ huān",
+         "en": "I like rice, but my girlfriend doesn't.",
+         "vi": "Tôi thích ăn cơm, bạn gái tôi thì không."
+        },
+        {
+         "zh": "★说话人的女朋友不喜欢吃：",
+         "py": "★ shuō huà rén de nǚ péng yǒu bù xǐ huān chī：",
+         "en": "★ The speaker's girlfriend doesn't like eating:",
+         "vi": "★ Bạn gái người nói không thích ăn:"
+        },
+        {
+         "zh": "A 米饭",
+         "py": "A  mǐ fàn",
+         "en": "A Rice",
+         "vi": "A Cơm"
+        },
+        {
+         "zh": "B 包子",
+         "py": "B  bāo zi",
+         "en": "B Steamed buns",
+         "vi": "B Bánh bao"
+        },
+        {
+         "zh": "C 面条儿",
+         "py": "C  miàn tiáo ér",
+         "en": "C Noodles",
+         "vi": "C Mì"
+        }
+       ]
       }
      ]
     }
@@ -1727,6 +3667,14 @@
        "t": [
         33,
         57
+       ],
+       "tr": [
+        {
+         "zh": "看电视。",
+         "py": "kàn diàn shì",
+         "en": "Watch TV.",
+         "vi": "Xem tivi."
+        }
        ]
       },
       {
@@ -1735,6 +3683,14 @@
        "t": [
         57,
         75
+       ],
+       "tr": [
+        {
+         "zh": "一本中文书。",
+         "py": "yī běn zhōng wén shū",
+         "en": "A Chinese book.",
+         "vi": "Một quyển sách tiếng Trung."
+        }
        ]
       },
       {
@@ -1743,6 +3699,14 @@
        "t": [
         75,
         92
+       ],
+       "tr": [
+        {
+         "zh": "在家读书。",
+         "py": "zài jiā dú shū",
+         "en": "Read at home.",
+         "vi": "Đọc sách ở nhà."
+        }
        ]
       }
      ]
@@ -1774,6 +3738,32 @@
        "t": [
         136,
         160
+       ],
+       "tr": [
+        {
+         "zh": "那是谁的手机？",
+         "py": "nà shì shéi de shǒu jī",
+         "en": "Whose phone is that?",
+         "vi": "Đó là điện thoại của ai?"
+        },
+        {
+         "zh": "A 书",
+         "py": "A  shū",
+         "en": "A Book",
+         "vi": "A Sách"
+        },
+        {
+         "zh": "B 我的",
+         "py": "B  wǒ de",
+         "en": "B Mine",
+         "vi": "B Của tôi"
+        },
+        {
+         "zh": "C 他的电脑",
+         "py": "C  tā de diàn nǎo",
+         "en": "C His computer",
+         "vi": "C Máy tính của anh ấy"
+        }
        ]
       },
       {
@@ -1799,6 +3789,32 @@
        "t": [
         160,
         186
+       ],
+       "tr": [
+        {
+         "zh": "你星期日晚上做什么？",
+         "py": "nǐ xīng qī rì wǎn shàng zuò shén me",
+         "en": "What are you doing Sunday evening?",
+         "vi": "Tối chủ nhật bạn làm gì?"
+        },
+        {
+         "zh": "A 星期天",
+         "py": "A  xīng qī tiān",
+         "en": "A Sunday",
+         "vi": "A Chủ nhật"
+        },
+        {
+         "zh": "B 孩子们",
+         "py": "B  hái zi men",
+         "en": "B The children",
+         "vi": "B Bọn trẻ"
+        },
+        {
+         "zh": "C 去外边唱歌",
+         "py": "C  qù wài biān chàng gē",
+         "en": "C Go out to sing",
+         "vi": "C Ra ngoài hát"
+        }
        ]
       }
      ]
@@ -1815,6 +3831,20 @@
        "t": [
         235,
         265
+       ],
+       "tr": [
+        {
+         "zh": "房间外边的小狗是谁的？",
+         "py": "fáng jiān wài biān de xiǎo gǒu shì shéi de",
+         "en": "Whose is the puppy outside the room?",
+         "vi": "Con chó nhỏ ngoài phòng là của ai?"
+        },
+        {
+         "zh": "是我的。",
+         "py": "shì wǒ de",
+         "en": "It's mine.",
+         "vi": "Của tôi."
+        }
        ]
       },
       {
@@ -1823,6 +3853,20 @@
        "t": [
         265,
         299
+       ],
+       "tr": [
+        {
+         "zh": "你星期六去哪儿？",
+         "py": "nǐ xīng qī liù qù nǎ ér",
+         "en": "Where are you going on Saturday?",
+         "vi": "Thứ bảy bạn đi đâu?"
+        },
+        {
+         "zh": "我和女儿去超市买东西。",
+         "py": "wǒ hé nǚ ér qù chāo shì mǎi dōng xī",
+         "en": "My daughter and I are going shopping at the supermarket.",
+         "vi": "Tôi với con gái đi siêu thị mua đồ."
+        }
        ]
       },
       {
@@ -1831,6 +3875,20 @@
        "t": [
         299,
         334
+       ],
+       "tr": [
+        {
+         "zh": "我下午在学校学习，你呢？",
+         "py": "wǒ xià wǔ zài xué xiào xué xí nǐ ne",
+         "en": "I'm studying at school this afternoon. What about you?",
+         "vi": "Chiều nay tôi học ở trường, còn bạn?"
+        },
+        {
+         "zh": "我下午有事，不在学校。",
+         "py": "wǒ xià wǔ yǒu shì bù zài xué xiào",
+         "en": "I'm busy this afternoon, so I won't be at school.",
+         "vi": "Chiều nay tôi có việc, không ở trường."
+        }
        ]
       }
      ]
@@ -1862,6 +3920,38 @@
        "t": [
         392,
         438
+       ],
+       "tr": [
+        {
+         "zh": "我哥哥上午八点上课，姐姐十点上课。",
+         "py": "wǒ gē gē shàng wǔ bā diǎn shàng kè jiě jiě shí diǎn shàng kè",
+         "en": "My brother's class starts at 8 a.m.; my sister's at 10.",
+         "vi": "Anh tôi vào học lúc tám giờ sáng, chị tôi mười giờ."
+        },
+        {
+         "zh": "问：说话人的哥哥几点上课？",
+         "py": "wèn： shuō huà rén dī gē gē jǐ diǎn shàng kè",
+         "en": "Q: What time does the speaker's brother's class start?",
+         "vi": "Hỏi: Anh trai người nói vào học lúc mấy giờ?"
+        },
+        {
+         "zh": "A 上午8:00",
+         "py": "A  shàng wǔ 8:00",
+         "en": "A 8:00 a.m.",
+         "vi": "A 8 giờ sáng"
+        },
+        {
+         "zh": "B 上午10:00",
+         "py": "B  shàng wǔ 10:00",
+         "en": "B 10:00 a.m.",
+         "vi": "B 10 giờ sáng"
+        },
+        {
+         "zh": "C 晚上8:00",
+         "py": "C  wǎn shàng 8:00",
+         "en": "C 8:00 p.m.",
+         "vi": "C 8 giờ tối"
+        }
        ]
       },
       {
@@ -1887,6 +3977,38 @@
        "t": [
         438,
         484
+       ],
+       "tr": [
+        {
+         "zh": "我想买书，我们下午在书店见吧。",
+         "py": "wǒ xiǎng mǎi shū wǒ men xià wǔ zài shū diàn jiàn ba",
+         "en": "I want to buy books; let's meet at the bookstore this afternoon.",
+         "vi": "Tôi muốn mua sách, chiều nay mình gặp ở hiệu sách nhé."
+        },
+        {
+         "zh": "问：说话人下午想去哪儿？",
+         "py": "wèn： shuō huà rén xià wǔ xiǎng qù nǎ ér",
+         "en": "Q: Where does the speaker want to go this afternoon?",
+         "vi": "Hỏi: Chiều nay người nói muốn đi đâu?"
+        },
+        {
+         "zh": "A 菜店",
+         "py": "A  cài diàn",
+         "en": "A Vegetable shop",
+         "vi": "A Cửa hàng rau"
+        },
+        {
+         "zh": "B 书店",
+         "py": "B  shū diàn",
+         "en": "B Bookstore",
+         "vi": "B Hiệu sách"
+        },
+        {
+         "zh": "C 超市",
+         "py": "C  chāo shì",
+         "en": "C Supermarket",
+         "vi": "C Siêu thị"
+        }
        ]
       }
      ]
@@ -1901,19 +4023,43 @@
        "n": 11,
        "ans": "D",
        "text": "妹妹和小狗今天在家里玩。",
-       "py": "mèi mèi hé xiǎo gǒu jīn tiān zài jiā lǐ wán"
+       "py": "mèi mèi hé xiǎo gǒu jīn tiān zài jiā lǐ wán",
+       "tr": [
+        {
+         "zh": "妹妹和小狗今天在家里玩。",
+         "py": "mèi mèi hé xiǎo gǒu jīn tiān zài jiā lǐ wán",
+         "en": "My little sister and the puppy are playing at home today.",
+         "vi": "Hôm nay em gái và chú chó nhỏ chơi ở nhà."
+        }
+       ]
       },
       {
        "n": 12,
        "ans": "C",
        "text": "房间外有一只小猫。",
-       "py": "fáng jiān wài yǒu yī zhī xiǎo māo"
+       "py": "fáng jiān wài yǒu yī zhī xiǎo māo",
+       "tr": [
+        {
+         "zh": "房间外有一只小猫。",
+         "py": "fáng jiān wài yǒu yī zhī xiǎo māo",
+         "en": "There's a kitten outside the room.",
+         "vi": "Ngoài phòng có một con mèo nhỏ."
+        }
+       ]
       },
       {
        "n": 13,
        "ans": "B",
        "text": "这是我的第三个电脑。",
-       "py": "zhè shì wǒ de dì sān gè diàn nǎo"
+       "py": "zhè shì wǒ de dì sān gè diàn nǎo",
+       "tr": [
+        {
+         "zh": "这是我的第三个电脑。",
+         "py": "zhè shì wǒ de dì sān gè diàn nǎo",
+         "en": "This is my third computer.",
+         "vi": "Đây là chiếc máy tính thứ ba của tôi."
+        }
+       ]
       }
      ]
     },
@@ -1947,19 +4093,61 @@
        "n": 14,
        "ans": "C",
        "text": "桌子上有什么？",
-       "py": "zhuō zi shàng yǒu shén me"
+       "py": "zhuō zi shàng yǒu shén me",
+       "tr": [
+        {
+         "zh": "桌子上有什么？",
+         "py": "zhuō zi shàng yǒu shén me",
+         "en": "What's on the table?",
+         "vi": "Trên bàn có gì?"
+        },
+        {
+         "zh": "C 一只小猫。",
+         "py": "C  yī zhī xiǎo māo",
+         "en": "C A kitten.",
+         "vi": "C Một con mèo nhỏ."
+        }
+       ]
       },
       {
        "n": 15,
        "ans": "A",
        "text": "你今天下午在哪儿？",
-       "py": "nǐ jīn tiān xià wǔ zài nǎ ér"
+       "py": "nǐ jīn tiān xià wǔ zài nǎ ér",
+       "tr": [
+        {
+         "zh": "你今天下午在哪儿？",
+         "py": "nǐ jīn tiān xià wǔ zài nǎ ér",
+         "en": "Where are you this afternoon?",
+         "vi": "Chiều nay bạn ở đâu?"
+        },
+        {
+         "zh": "A 在家里。",
+         "py": "A  zài jiā lǐ",
+         "en": "A At home.",
+         "vi": "A Ở nhà."
+        }
+       ]
       },
       {
        "n": 16,
        "ans": "B",
        "text": "你和谁在超市呢？",
-       "py": "nǐ hé shuí zài chāo shì ne"
+       "py": "nǐ hé shuí zài chāo shì ne",
+       "tr": [
+        {
+         "zh": "你和谁在超市呢？",
+         "py": "nǐ hé shuí zài chāo shì ne",
+         "en": "Who are you at the supermarket with?",
+         "vi": "Bạn đang ở siêu thị với ai?"
+        },
+        {
+         "zh": "B 我女朋友。",
+         "py": "B  wǒ nǚ péng yǒu",
+         "en": "B My girlfriend.",
+         "vi": "B Bạn gái tôi."
+        }
+       ]
       }
      ]
     },
@@ -1988,13 +4176,35 @@
        "n": 17,
        "ans": "B",
        "text": "我上午在学校（ ），我们下午去看电影吧。",
-       "py": "wǒ shàng wǔ zài xué xiào （ ）， wǒ men xià wǔ qù kàn diàn yǐng ba"
+       "py": "wǒ shàng wǔ zài xué xiào （ ）， wǒ men xià wǔ qù kàn diàn yǐng ba",
+       "tr": [
+        {
+         "zh": "我上午在学校上课，我们下午去看电影吧。",
+         "py": "wǒ shàng wǔ zài xué xiào shàng kè wǒ men xià wǔ qù kàn diàn yǐng ba",
+         "en": "I have class at school this morning; let's go see a movie this afternoon.",
+         "vi": "Sáng tôi học ở trường, chiều mình đi xem phim nhé."
+        }
+       ]
       },
       {
        "n": 18,
        "ans": "A",
        "text": "男：我们下午几点在学校见？ 女：下午（ ）吧。",
-       "py": "nán ： wǒ men xià wǔ jǐ diǎn zài xué xiào jiàn ？  nǚ ： xià wǔ （ ） ba"
+       "py": "nán ： wǒ men xià wǔ jǐ diǎn zài xué xiào jiàn ？  nǚ ： xià wǔ （ ） ba",
+       "tr": [
+        {
+         "zh": "男：我们下午几点在学校见？",
+         "py": "nán： wǒ men xià wǔ jǐ diǎn zài xué xiào jiàn",
+         "en": "M: What time shall we meet at school this afternoon?",
+         "vi": "Nam: Chiều nay mấy giờ mình gặp ở trường?"
+        },
+        {
+         "zh": "女：下午2:00吧。",
+         "py": "nǚ： xià wǔ 2:00 ba",
+         "en": "W: How about 2:00 p.m.?",
+         "vi": "Nữ: 2 giờ chiều nhé."
+        }
+       ]
       }
      ]
     },
@@ -2023,7 +4233,39 @@
         }
        ],
        "text": "我有一只小狗，很漂亮，它是我的好朋友。 ★说话人有几只小狗？",
-       "py": "wǒ yǒu yī zhī xiǎo gǒu hěn piào liàng tā shì wǒ de hǎo péng yǒu 。 ★ shuō huà rén yǒu jǐ zhī xiǎo gǒu"
+       "py": "wǒ yǒu yī zhī xiǎo gǒu hěn piào liàng tā shì wǒ de hǎo péng yǒu 。 ★ shuō huà rén yǒu jǐ zhī xiǎo gǒu",
+       "tr": [
+        {
+         "zh": "我有一只小狗，很漂亮，它是我的好朋友。",
+         "py": "wǒ yǒu yī zhī xiǎo gǒu hěn piào liàng tā shì wǒ de hǎo péng yǒu",
+         "en": "I have a puppy. It's very pretty and it's my good friend.",
+         "vi": "Tôi có một chú chó nhỏ, rất đẹp, nó là bạn tốt của tôi."
+        },
+        {
+         "zh": "★说话人有几只小狗？",
+         "py": "★ shuō huà rén yǒu jǐ zhī xiǎo gǒu",
+         "en": "★ How many puppies does the speaker have?",
+         "vi": "★ Người nói có mấy con chó nhỏ?"
+        },
+        {
+         "zh": "A 一",
+         "py": "A  yī",
+         "en": "A One",
+         "vi": "A Một"
+        },
+        {
+         "zh": "B 四",
+         "py": "B  sì",
+         "en": "B Four",
+         "vi": "B Bốn"
+        },
+        {
+         "zh": "C 十一",
+         "py": "C  shí yī",
+         "en": "C Eleven",
+         "vi": "C Mười một"
+        }
+       ]
       },
       {
        "n": 20,
@@ -2046,7 +4288,39 @@
         }
        ],
        "text": "星期天中午妈妈在做饭，我和妹妹在房间里玩。 ★说话人和妹妹在哪儿？",
-       "py": "xīng qī tiān zhōng wǔ mā mā zài zuò fàn wǒ hé mèi mèi zài fáng jiān lǐ wán 。 ★ shuō huà rén hé mèi mèi zài nǎ ér"
+       "py": "xīng qī tiān zhōng wǔ mā mā zài zuò fàn wǒ hé mèi mèi zài fáng jiān lǐ wán 。 ★ shuō huà rén hé mèi mèi zài nǎ ér",
+       "tr": [
+        {
+         "zh": "星期天中午妈妈在做饭，我和妹妹在房间里玩。",
+         "py": "xīng qī tiān zhōng wǔ mā mā zài zuò fàn wǒ hé mèi mèi zài fáng jiān lǐ wán",
+         "en": "At noon on Sunday Mom was cooking, and my sister and I were playing in the room.",
+         "vi": "Trưa chủ nhật mẹ đang nấu cơm, tôi và em gái chơi trong phòng."
+        },
+        {
+         "zh": "★说话人和妹妹在哪儿？",
+         "py": "★ shuō huà rén hé mèi mèi zài nǎ ér",
+         "en": "★ Where are the speaker and the sister?",
+         "vi": "★ Người nói và em gái ở đâu?"
+        },
+        {
+         "zh": "A 外边",
+         "py": "A  wài biān",
+         "en": "A Outside",
+         "vi": "A Bên ngoài"
+        },
+        {
+         "zh": "B 房间里",
+         "py": "B  fáng jiān lǐ",
+         "en": "B In the room",
+         "vi": "B Trong phòng"
+        },
+        {
+         "zh": "C 超市里",
+         "py": "C  chāo shì lǐ",
+         "en": "C In the supermarket",
+         "vi": "C Trong siêu thị"
+        }
+       ]
       }
      ]
     }
@@ -2069,6 +4343,14 @@
        "t": [
         34,
         60
+       ],
+       "tr": [
+        {
+         "zh": "水果便宜。",
+         "py": "shuǐ guǒ pián yi",
+         "en": "The fruit is cheap.",
+         "vi": "Hoa quả rẻ."
+        }
        ]
       },
       {
@@ -2077,6 +4359,14 @@
        "t": [
         60,
         80
+       ],
+       "tr": [
+        {
+         "zh": "三件衣服。",
+         "py": "sān jiàn yī fú",
+         "en": "Three pieces of clothing.",
+         "vi": "Ba bộ quần áo."
+        }
        ]
       },
       {
@@ -2085,6 +4375,14 @@
        "t": [
         80,
         96
+       ],
+       "tr": [
+        {
+         "zh": "买杯子。",
+         "py": "mǎi bēi zi",
+         "en": "Buy cups.",
+         "vi": "Mua cốc."
+        }
        ]
       }
      ]
@@ -2116,6 +4414,32 @@
        "t": [
         140,
         164
+       ],
+       "tr": [
+        {
+         "zh": "杯子多少钱一个？",
+         "py": "bēi zi duō shǎo qián yí gè",
+         "en": "How much is one cup?",
+         "vi": "Cốc bao nhiêu tiền một cái?"
+        },
+        {
+         "zh": "A 10:00",
+         "py": "A 10:00",
+         "en": "A 10:00",
+         "vi": "A 10:00"
+        },
+        {
+         "zh": "B 十块钱",
+         "py": "B  shí kuài qián",
+         "en": "B ten yuan",
+         "vi": "B mười tệ"
+        },
+        {
+         "zh": "C 十本书",
+         "py": "C  shí běn shū",
+         "en": "C ten books",
+         "vi": "C mười quyển sách"
+        }
        ]
       },
       {
@@ -2141,6 +4465,32 @@
        "t": [
         164,
         190
+       ],
+       "tr": [
+        {
+         "zh": "我穿这件衣服怎么样？",
+         "py": "wǒ chuān zhè jiàn yī fú zěn me yàng",
+         "en": "How do I look in this outfit?",
+         "vi": "Tôi mặc bộ quần áo này thế nào?"
+        },
+        {
+         "zh": "A 不贵",
+         "py": "A  bù guì",
+         "en": "A not expensive",
+         "vi": "A không đắt"
+        },
+        {
+         "zh": "B 很好看",
+         "py": "B  hěn hǎo kàn",
+         "en": "B looks great",
+         "vi": "B rất đẹp"
+        },
+        {
+         "zh": "C 120元",
+         "py": "C 120 yuán",
+         "en": "C 120 yuan",
+         "vi": "C 120 tệ"
+        }
        ]
       }
      ]
@@ -2157,6 +4507,20 @@
        "t": [
         240,
         253
+       ],
+       "tr": [
+        {
+         "zh": "请问，有杯子吗？",
+         "py": "qǐng wèn yǒu bēi zi ma",
+         "en": "Excuse me, do you have cups?",
+         "vi": "Xin hỏi, có cốc không?"
+        },
+        {
+         "zh": "有，十二块钱一个。",
+         "py": "yǒu shí èr kuài qián yí gè",
+         "en": "Yes, twelve yuan each.",
+         "vi": "Có, mười hai tệ một cái."
+        }
        ]
       },
       {
@@ -2165,6 +4529,20 @@
        "t": [
         253,
         306
+       ],
+       "tr": [
+        {
+         "zh": "我喜欢这个手机。多少钱？",
+         "py": "wǒ xǐ huān zhè ge shǒu jī duō shǎo qián",
+         "en": "I like this phone. How much is it?",
+         "vi": "Tôi thích cái điện thoại này. Bao nhiêu tiền?"
+        },
+        {
+         "zh": "三千八百元。",
+         "py": "sān qiān bā bǎi yuán",
+         "en": "3,800 yuan.",
+         "vi": "Ba nghìn tám trăm tệ."
+        }
        ]
       },
       {
@@ -2173,6 +4551,20 @@
        "t": [
         306,
         338
+       ],
+       "tr": [
+        {
+         "zh": "您好！您买点儿什么？",
+         "py": "nín hǎo nín mǎi diǎn ér shén me",
+         "en": "Hello! What would you like to buy?",
+         "vi": "Chào anh/chị! Anh/chị muốn mua gì?"
+        },
+        {
+         "zh": "我买四个苹果。",
+         "py": "wǒ mǎi sì gè píng guǒ",
+         "en": "I'll buy four apples.",
+         "vi": "Tôi mua bốn quả táo."
+        }
        ]
       }
      ]
@@ -2204,6 +4596,38 @@
        "t": [
         400,
         442
+       ],
+       "tr": [
+        {
+         "zh": "这家商店衣服真多，还很便宜。",
+         "py": "zhè jiā shāng diàn yī fú zhēn duō hái hěn pián yi",
+         "en": "This store has lots of clothes, and they're cheap too.",
+         "vi": "Cửa hàng này quần áo thật nhiều, lại còn rất rẻ."
+        },
+        {
+         "zh": "★那家商店的衣服怎么样？",
+         "py": "★ nà jiā shāng diàn de yī fú zěn me yàng",
+         "en": "★What are the clothes in that store like?",
+         "vi": "★Quần áo ở cửa hàng đó thế nào?"
+        },
+        {
+         "zh": "A 很多",
+         "py": "A  hěn duō",
+         "en": "A a lot",
+         "vi": "A rất nhiều"
+        },
+        {
+         "zh": "B 真贵",
+         "py": "B  zhēn guì",
+         "en": "B really expensive",
+         "vi": "B thật đắt"
+        },
+        {
+         "zh": "C 不好看",
+         "py": "C  bù hǎo kàn",
+         "en": "C not nice-looking",
+         "vi": "C không đẹp"
+        }
        ]
       },
       {
@@ -2229,6 +4653,38 @@
        "t": [
         442,
         488
+       ],
+       "tr": [
+        {
+         "zh": "这边的杯子六块钱一个，真便宜。",
+         "py": "zhè biān de bēi zi liù kuài qián yí gè zhēn pián yi",
+         "en": "The cups here are six yuan each, really cheap.",
+         "vi": "Cốc bên này sáu tệ một cái, thật rẻ."
+        },
+        {
+         "zh": "★那边的杯子怎么样？",
+         "py": "★ nà biān de bēi zi zěn me yàng",
+         "en": "★What are the cups over there like?",
+         "vi": "★Cốc bên đó thế nào?"
+        },
+        {
+         "zh": "A 很少",
+         "py": "A  hěn shǎo",
+         "en": "A very few",
+         "vi": "A rất ít"
+        },
+        {
+         "zh": "B 很便宜",
+         "py": "B  hěn pián yi",
+         "en": "B very cheap",
+         "vi": "B rất rẻ"
+        },
+        {
+         "zh": "C 很漂亮",
+         "py": "C  hěn piào liàng",
+         "en": "C very pretty",
+         "vi": "C rất đẹp"
+        }
        ]
       }
      ]
@@ -2243,19 +4699,43 @@
        "n": 11,
        "ans": "C",
        "text": "请问，包子多少钱一个？",
-       "py": "qǐng wèn bāo zi duō shǎo qián yí gè"
+       "py": "qǐng wèn bāo zi duō shǎo qián yí gè",
+       "tr": [
+        {
+         "zh": "请问，包子多少钱一个？",
+         "py": "qǐng wèn bāo zi duō shǎo qián yí gè",
+         "en": "Excuse me, how much is one bun?",
+         "vi": "Xin hỏi, bánh bao bao nhiêu tiền một cái?"
+        }
+       ]
       },
       {
        "n": 12,
        "ans": "B",
        "text": "这边的苹果真便宜。",
-       "py": "zhè biān de píng guǒ zhēn pián yi"
+       "py": "zhè biān de píng guǒ zhēn pián yi",
+       "tr": [
+        {
+         "zh": "这边的苹果真便宜。",
+         "py": "zhè biān de píng guǒ zhēn pián yi",
+         "en": "The apples here are really cheap.",
+         "vi": "Táo bên này thật rẻ."
+        }
+       ]
       },
       {
        "n": 13,
        "ans": "D",
        "text": "这些是男孩子穿的衣服。",
-       "py": "zhè xiē shì nán hái zi chuān de yī fú"
+       "py": "zhè xiē shì nán hái zi chuān de yī fú",
+       "tr": [
+        {
+         "zh": "这些是男孩子穿的衣服。",
+         "py": "zhè xiē shì nán hái zi chuān de yī fú",
+         "en": "These are clothes for boys.",
+         "vi": "Đây là quần áo con trai mặc."
+        }
+       ]
       }
      ]
     },
@@ -2289,19 +4769,115 @@
        "n": 14,
        "ans": "C",
        "text": "女孩子的衣服在哪儿？",
-       "py": "nǚ hái zi de yī fú zài nǎ ér"
+       "py": "nǚ hái zi de yī fú zài nǎ ér",
+       "tr": [
+        {
+         "zh": "女孩子的衣服在哪儿？",
+         "py": "nǚ hái zi de yī fú zài nǎ ér",
+         "en": "Where are the girls' clothes?",
+         "vi": "Quần áo con gái ở đâu?"
+        },
+        {
+         "zh": "A 十块钱。",
+         "py": "A  shí kuài qián",
+         "en": "A Ten yuan.",
+         "vi": "A Mười tệ."
+        },
+        {
+         "zh": "B 对不起，没有。",
+         "py": "B  duì bù qǐ méi yǒu",
+         "en": "B Sorry, we don't have any.",
+         "vi": "B Xin lỗi, không có."
+        },
+        {
+         "zh": "C 在那边。",
+         "py": "C  zài nà biān",
+         "en": "C Over there.",
+         "vi": "C Ở bên kia."
+        },
+        {
+         "zh": "D 好的，谢谢！",
+         "py": "D  hǎo de xiè xiè",
+         "en": "D OK, thanks!",
+         "vi": "D Được, cảm ơn!"
+        }
+       ]
       },
       {
        "n": 15,
        "ans": "A",
        "text": "杯子多少钱一个？",
-       "py": "bēi zi duō shǎo qián yí gè"
+       "py": "bēi zi duō shǎo qián yí gè",
+       "tr": [
+        {
+         "zh": "杯子多少钱一个？",
+         "py": "bēi zi duō shǎo qián yí gè",
+         "en": "How much is one cup?",
+         "vi": "Cốc bao nhiêu tiền một cái?"
+        },
+        {
+         "zh": "A 十块钱。",
+         "py": "A  shí kuài qián",
+         "en": "A Ten yuan.",
+         "vi": "A Mười tệ."
+        },
+        {
+         "zh": "B 对不起，没有。",
+         "py": "B  duì bù qǐ méi yǒu",
+         "en": "B Sorry, we don't have any.",
+         "vi": "B Xin lỗi, không có."
+        },
+        {
+         "zh": "C 在那边。",
+         "py": "C  zài nà biān",
+         "en": "C Over there.",
+         "vi": "C Ở bên kia."
+        },
+        {
+         "zh": "D 好的，谢谢！",
+         "py": "D  hǎo de xiè xiè",
+         "en": "D OK, thanks!",
+         "vi": "D Được, cảm ơn!"
+        }
+       ]
       },
       {
        "n": 16,
        "ans": "B",
        "text": "请问这儿有牛奶吗？",
-       "py": "qǐng wèn zhè ér yǒu niú nǎi ma"
+       "py": "qǐng wèn zhè ér yǒu niú nǎi ma",
+       "tr": [
+        {
+         "zh": "请问这儿有牛奶吗？",
+         "py": "qǐng wèn zhè ér yǒu niú nǎi ma",
+         "en": "Excuse me, do you have milk here?",
+         "vi": "Xin hỏi ở đây có sữa không?"
+        },
+        {
+         "zh": "A 十块钱。",
+         "py": "A  shí kuài qián",
+         "en": "A Ten yuan.",
+         "vi": "A Mười tệ."
+        },
+        {
+         "zh": "B 对不起，没有。",
+         "py": "B  duì bù qǐ méi yǒu",
+         "en": "B Sorry, we don't have any.",
+         "vi": "B Xin lỗi, không có."
+        },
+        {
+         "zh": "C 在那边。",
+         "py": "C  zài nà biān",
+         "en": "C Over there.",
+         "vi": "C Ở bên kia."
+        },
+        {
+         "zh": "D 好的，谢谢！",
+         "py": "D  hǎo de xiè xiè",
+         "en": "D OK, thanks!",
+         "vi": "D Được, cảm ơn!"
+        }
+       ]
       }
      ]
     },
@@ -2330,13 +4906,71 @@
        "n": 17,
        "ans": "B",
        "text": "那些苹果两（ ）钱一斤，很便宜。",
-       "py": "nà xiē píng guǒ liǎng （ ） qián yī jīn hěn pián yi"
+       "py": "nà xiē píng guǒ liǎng （ ） qián yī jīn hěn pián yi",
+       "tr": [
+        {
+         "zh": "那些苹果两块钱一斤，很便宜。",
+         "py": "nà xiē píng guǒ liǎng kuài qián yī jīn hěn pián yi",
+         "en": "Those apples are two yuan a jin, very cheap.",
+         "vi": "Mấy quả táo kia hai tệ một cân, rất rẻ."
+        },
+        {
+         "zh": "A 穿",
+         "py": "A  chuān",
+         "en": "A wear",
+         "vi": "A mặc"
+        },
+        {
+         "zh": "B 块",
+         "py": "B  kuài",
+         "en": "B kuai (yuan)",
+         "vi": "B đồng (tệ)"
+        },
+        {
+         "zh": "C 名字",
+         "py": "C  míng zì",
+         "en": "C name",
+         "vi": "C tên"
+        }
+       ]
       },
       {
        "n": 18,
        "ans": "A",
        "text": "男：这件衣服怎么样？ 女：很好看，10岁的男孩子能（ ）。",
-       "py": "nán ： zhè jiàn yī fú zěn me yàng ？  nǚ ： hěn hǎo kàn ，10 suì de nán hái zi néng （ ）。"
+       "py": "nán ： zhè jiàn yī fú zěn me yàng ？  nǚ ： hěn hǎo kàn ，10 suì de nán hái zi néng （ ）。",
+       "tr": [
+        {
+         "zh": "男：这件衣服怎么样？",
+         "py": "nán： zhè jiàn yī fú zěn me yàng",
+         "en": "M: How is this piece of clothing?",
+         "vi": "Nam: Bộ quần áo này thế nào?"
+        },
+        {
+         "zh": "女：很好看，10岁的男孩子能穿。",
+         "py": "nǚ： hěn hǎo kàn ，10 suì de nán hái zi néng chuān",
+         "en": "F: It looks nice; a 10-year-old boy can wear it.",
+         "vi": "Nữ: Rất đẹp, con trai 10 tuổi mặc được."
+        },
+        {
+         "zh": "A 穿",
+         "py": "A  chuān",
+         "en": "A wear",
+         "vi": "A mặc"
+        },
+        {
+         "zh": "B 块",
+         "py": "B  kuài",
+         "en": "B kuai (yuan)",
+         "vi": "B đồng (tệ)"
+        },
+        {
+         "zh": "C 名字",
+         "py": "C  míng zì",
+         "en": "C name",
+         "vi": "C tên"
+        }
+       ]
       }
      ]
     },
@@ -2365,7 +4999,39 @@
         }
        ],
        "text": "我没有手机，今天想去商店买一个。 ★说话人想买什么？",
-       "py": "wǒ méi yǒu shǒu jī jīn tiān xiǎng qù shāng diàn mǎi yí gè 。 ★ shuō huà rén xiǎng mǎi shén me"
+       "py": "wǒ méi yǒu shǒu jī jīn tiān xiǎng qù shāng diàn mǎi yí gè 。 ★ shuō huà rén xiǎng mǎi shén me",
+       "tr": [
+        {
+         "zh": "我没有手机，今天想去商店买一个。",
+         "py": "wǒ méi yǒu shǒu jī jīn tiān xiǎng qù shāng diàn mǎi yí gè",
+         "en": "I don't have a phone; today I want to go to the store to buy one.",
+         "vi": "Tôi không có điện thoại, hôm nay muốn đến cửa hàng mua một cái."
+        },
+        {
+         "zh": "★说话人想买什么？",
+         "py": "★ shuō huà rén xiǎng mǎi shén me",
+         "en": "★What does the speaker want to buy?",
+         "vi": "★Người nói muốn mua gì?"
+        },
+        {
+         "zh": "A 杯子",
+         "py": "A  bēi zi",
+         "en": "A cup",
+         "vi": "A cốc"
+        },
+        {
+         "zh": "B 手机",
+         "py": "B  shǒu jī",
+         "en": "B mobile phone",
+         "vi": "B điện thoại"
+        },
+        {
+         "zh": "C 水果",
+         "py": "C  shuǐ guǒ",
+         "en": "C fruit",
+         "vi": "C hoa quả"
+        }
+       ]
       },
       {
        "n": 20,
@@ -2388,7 +5054,39 @@
         }
        ],
        "text": "这件衣服很好看，你也能穿，买一件吧。 ★那件衣服：",
-       "py": "zhè jiàn yī fú hěn hǎo kàn nǐ yě néng chuān mǎi yī jiàn ba 。 ★ nà jiàn yī fú ："
+       "py": "zhè jiàn yī fú hěn hǎo kàn nǐ yě néng chuān mǎi yī jiàn ba 。 ★ nà jiàn yī fú ：",
+       "tr": [
+        {
+         "zh": "这件衣服很好看，你也能穿，买一件吧。",
+         "py": "zhè jiàn yī fú hěn hǎo kàn nǐ yě néng chuān mǎi yī jiàn ba",
+         "en": "This outfit looks nice, you can wear it too, buy one.",
+         "vi": "Bộ quần áo này rất đẹp, bạn cũng mặc được, mua một bộ đi."
+        },
+        {
+         "zh": "★那件衣服：",
+         "py": "★ nà jiàn yī fú：",
+         "en": "★That piece of clothing is:",
+         "vi": "★Bộ quần áo đó:"
+        },
+        {
+         "zh": "A 好看",
+         "py": "A  hǎo kàn",
+         "en": "A nice-looking",
+         "vi": "A đẹp"
+        },
+        {
+         "zh": "B 便宜",
+         "py": "B  pián yi",
+         "en": "B cheap",
+         "vi": "B rẻ"
+        },
+        {
+         "zh": "C 很贵",
+         "py": "C  hěn guì",
+         "en": "C very expensive",
+         "vi": "C rất đắt"
+        }
+       ]
       }
      ]
     }
@@ -2411,6 +5109,14 @@
        "t": [
         37,
         57
+       ],
+       "tr": [
+        {
+         "zh": "在开车。",
+         "py": "zài kāi chē",
+         "en": "Driving.",
+         "vi": "Đang lái xe."
+        }
        ]
       },
       {
@@ -2419,6 +5125,14 @@
        "t": [
         57,
         76
+       ],
+       "tr": [
+        {
+         "zh": "真高兴。",
+         "py": "zhēn gāo xìng",
+         "en": "Really happy.",
+         "vi": "Thật vui."
+        }
        ]
       },
       {
@@ -2427,6 +5141,14 @@
        "t": [
         76,
         92
+       ],
+       "tr": [
+        {
+         "zh": "读大学。",
+         "py": "dú dà xué",
+         "en": "Attend university.",
+         "vi": "Học đại học."
+        }
        ]
       }
      ]
@@ -2458,6 +5180,32 @@
        "t": [
         137,
         166
+       ],
+       "tr": [
+        {
+         "zh": "弟弟和小朋友们正在做什么呢？",
+         "py": "dì di hé xiǎo péng yǒu men zhèng zài zuò shén me ne",
+         "en": "What are my little brother and the kids doing?",
+         "vi": "Em trai và các bạn nhỏ đang làm gì vậy?"
+        },
+        {
+         "zh": "A 不吃午饭",
+         "py": "A  bù chī wǔ fàn",
+         "en": "A not eating lunch",
+         "vi": "A không ăn trưa"
+        },
+        {
+         "zh": "B 在外边玩",
+         "py": "B  zài wài biān wán",
+         "en": "B playing outside",
+         "vi": "B đang chơi ở ngoài"
+        },
+        {
+         "zh": "C 水果便宜",
+         "py": "C  shuǐ guǒ pián yi",
+         "en": "C fruit is cheap",
+         "vi": "C hoa quả rẻ"
+        }
        ]
       },
       {
@@ -2483,6 +5231,32 @@
        "t": [
         166,
         192
+       ],
+       "tr": [
+        {
+         "zh": "喂，你到没到饭店呢？",
+         "py": "wèi nǐ dào méi dào fàn diàn ne",
+         "en": "Hello, have you got to the restaurant yet?",
+         "vi": "A lô, bạn đã đến nhà hàng chưa?"
+        },
+        {
+         "zh": "A 能到",
+         "py": "A  néng dào",
+         "en": "A can get there",
+         "vi": "A đến được"
+        },
+        {
+         "zh": "B 想去呢",
+         "py": "B  xiǎng qù ne",
+         "en": "B want to go",
+         "vi": "B muốn đi"
+        },
+        {
+         "zh": "C 没到呢",
+         "py": "C  méi dào ne",
+         "en": "C not yet",
+         "vi": "C chưa đến"
+        }
        ]
       }
      ]
@@ -2499,6 +5273,20 @@
        "t": [
         242,
         282
+       ],
+       "tr": [
+        {
+         "zh": "我去看电影，你去不去？",
+         "py": "wǒ qù kàn diàn yǐng nǐ qù bù qù",
+         "en": "I'm going to see a movie. Are you coming?",
+         "vi": "Tôi đi xem phim, bạn có đi không?"
+        },
+        {
+         "zh": "我今天不去，我要去商店买衣服。",
+         "py": "wǒ jīn tiān bù qù wǒ yào qù shāng diàn mǎi yī fú",
+         "en": "Not today, I'm going to the store to buy clothes.",
+         "vi": "Hôm nay tôi không đi, tôi phải đi cửa hàng mua quần áo."
+        }
        ]
       },
       {
@@ -2507,6 +5295,20 @@
        "t": [
         282,
         318
+       ],
+       "tr": [
+        {
+         "zh": "请问，你在读大学吗？",
+         "py": "qǐng wèn nǐ zài dú dà xué ma",
+         "en": "Excuse me, are you in university?",
+         "vi": "Xin hỏi, bạn đang học đại học à?"
+        },
+        {
+         "zh": "对，我是大学生。",
+         "py": "duì wǒ shì dà xué shēng",
+         "en": "Yes, I'm a university student.",
+         "vi": "Đúng, tôi là sinh viên."
+        }
        ]
       },
       {
@@ -2515,6 +5317,20 @@
        "t": [
         318,
         347
+       ],
+       "tr": [
+        {
+         "zh": "弟弟在做什么呢？",
+         "py": "dì di zài zuò shén me ne",
+         "en": "What is little brother doing?",
+         "vi": "Em trai đang làm gì vậy?"
+        },
+        {
+         "zh": "他在睡觉呢。",
+         "py": "tā zài shuì jiào ne",
+         "en": "He's sleeping.",
+         "vi": "Nó đang ngủ."
+        }
        ]
       }
      ]
@@ -2546,6 +5362,38 @@
        "t": [
         407,
         447
+       ],
+       "tr": [
+        {
+         "zh": "妹妹对我说，她要去外边玩。",
+         "py": "mèi mèi duì wǒ shuō tā yào qù wài biān wán",
+         "en": "My little sister told me she's going out to play.",
+         "vi": "Em gái nói với tôi là nó muốn ra ngoài chơi."
+        },
+        {
+         "zh": "★说话人的妹妹要去哪儿？",
+         "py": "★ shuō huà rén de mèi mèi yào qù nǎ ér",
+         "en": "★Where is the speaker's sister going?",
+         "vi": "★Em gái của người nói muốn đi đâu?"
+        },
+        {
+         "zh": "A 超市",
+         "py": "A  chāo shì",
+         "en": "A supermarket",
+         "vi": "A siêu thị"
+        },
+        {
+         "zh": "B 外边",
+         "py": "B  wài biān",
+         "en": "B outside",
+         "vi": "B bên ngoài"
+        },
+        {
+         "zh": "C 房间里",
+         "py": "C  fáng jiān lǐ",
+         "en": "C in the room",
+         "vi": "C trong phòng"
+        }
        ]
       },
       {
@@ -2571,6 +5419,38 @@
        "t": [
         447,
         489
+       ],
+       "tr": [
+        {
+         "zh": "这家饭店在超市的后边。",
+         "py": "zhè jiā fàn diàn zài chāo shì de hòu biān",
+         "en": "This restaurant is behind the supermarket.",
+         "vi": "Nhà hàng này ở phía sau siêu thị."
+        },
+        {
+         "zh": "★饭店在哪儿？",
+         "py": "★ fàn diàn zài nǎ ér",
+         "en": "★Where is the restaurant?",
+         "vi": "★Nhà hàng ở đâu?"
+        },
+        {
+         "zh": "A 学校后边",
+         "py": "A  xué xiào hòu biān",
+         "en": "A behind the school",
+         "vi": "A sau trường học"
+        },
+        {
+         "zh": "B 超市前边",
+         "py": "B  chāo shì qián biān",
+         "en": "B in front of the supermarket",
+         "vi": "B trước siêu thị"
+        },
+        {
+         "zh": "C 超市后边",
+         "py": "C  chāo shì hòu biān",
+         "en": "C behind the supermarket",
+         "vi": "C sau siêu thị"
+        }
        ]
       }
      ]
@@ -2585,19 +5465,43 @@
        "n": 11,
        "ans": "C",
        "text": "妈妈正在做饭呢。",
-       "py": "mā mā zhèng zài zuò fàn ne"
+       "py": "mā mā zhèng zài zuò fàn ne",
+       "tr": [
+        {
+         "zh": "妈妈正在做饭呢。",
+         "py": "mā mā zhèng zài zuò fàn ne",
+         "en": "Mom is cooking.",
+         "vi": "Mẹ đang nấu cơm."
+        }
+       ]
       },
       {
        "n": 12,
        "ans": "B",
        "text": "你今天不想去学校吗？",
-       "py": "nǐ jīn tiān bù xiǎng qù xué xiào ma"
+       "py": "nǐ jīn tiān bù xiǎng qù xué xiào ma",
+       "tr": [
+        {
+         "zh": "你今天不想去学校吗？",
+         "py": "nǐ jīn tiān bù xiǎng qù xué xiào ma",
+         "en": "Don't you want to go to school today?",
+         "vi": "Hôm nay bạn không muốn đi học à?"
+        }
+       ]
       },
       {
        "n": 13,
        "ans": "D",
        "text": "我和朋友们在外边玩呢。",
-       "py": "wǒ hé péng yǒu men zài wài biān wán ne"
+       "py": "wǒ hé péng yǒu men zài wài biān wán ne",
+       "tr": [
+        {
+         "zh": "我和朋友们在外边玩呢。",
+         "py": "wǒ hé péng yǒu men zài wài biān wán ne",
+         "en": "My friends and I are playing outside.",
+         "vi": "Tôi và các bạn đang chơi ở bên ngoài."
+        }
+       ]
       }
      ]
     },
@@ -2631,19 +5535,115 @@
        "n": 14,
        "ans": "A",
        "text": "你开车去吗？",
-       "py": "nǐ kāi chē qù ma"
+       "py": "nǐ kāi chē qù ma",
+       "tr": [
+        {
+         "zh": "你开车去吗？",
+         "py": "nǐ kāi chē qù ma",
+         "en": "Are you driving there?",
+         "vi": "Bạn lái xe đi à?"
+        },
+        {
+         "zh": "A 不，我坐出租车。",
+         "py": "A  bù wǒ zuò chū zū chē",
+         "en": "A No, I'm taking a taxi.",
+         "vi": "A Không, tôi đi taxi."
+        },
+        {
+         "zh": "B 非常忙。",
+         "py": "B  fēi cháng máng",
+         "en": "B Very busy.",
+         "vi": "B Rất bận."
+        },
+        {
+         "zh": "C 没有，我在开车呢。",
+         "py": "C  méi yǒu wǒ zài kāi chē ne",
+         "en": "C No, I'm driving.",
+         "vi": "C Không, tôi đang lái xe."
+        },
+        {
+         "zh": "D 好的，谢谢！",
+         "py": "D  hǎo de xiè xiè",
+         "en": "D OK, thanks!",
+         "vi": "D Được, cảm ơn!"
+        }
+       ]
       },
       {
        "n": 15,
        "ans": "B",
        "text": "你们学习忙不忙？",
-       "py": "nǐ men xué xí máng bù máng"
+       "py": "nǐ men xué xí máng bù máng",
+       "tr": [
+        {
+         "zh": "你们学习忙不忙？",
+         "py": "nǐ men xué xí máng bù máng",
+         "en": "Are you busy with your studies?",
+         "vi": "Các bạn học có bận không?"
+        },
+        {
+         "zh": "A 不，我坐出租车。",
+         "py": "A  bù wǒ zuò chū zū chē",
+         "en": "A No, I'm taking a taxi.",
+         "vi": "A Không, tôi đi taxi."
+        },
+        {
+         "zh": "B 非常忙。",
+         "py": "B  fēi cháng máng",
+         "en": "B Very busy.",
+         "vi": "B Rất bận."
+        },
+        {
+         "zh": "C 没有，我在开车呢。",
+         "py": "C  méi yǒu wǒ zài kāi chē ne",
+         "en": "C No, I'm driving.",
+         "vi": "C Không, tôi đang lái xe."
+        },
+        {
+         "zh": "D 好的，谢谢！",
+         "py": "D  hǎo de xiè xiè",
+         "en": "D OK, thanks!",
+         "vi": "D Được, cảm ơn!"
+        }
+       ]
       },
       {
        "n": 16,
        "ans": "C",
        "text": "你在吃午饭吗？",
-       "py": "nǐ zài chī wǔ fàn ma"
+       "py": "nǐ zài chī wǔ fàn ma",
+       "tr": [
+        {
+         "zh": "你在吃午饭吗？",
+         "py": "nǐ zài chī wǔ fàn ma",
+         "en": "Are you having lunch?",
+         "vi": "Bạn đang ăn trưa à?"
+        },
+        {
+         "zh": "A 不，我坐出租车。",
+         "py": "A  bù wǒ zuò chū zū chē",
+         "en": "A No, I'm taking a taxi.",
+         "vi": "A Không, tôi đi taxi."
+        },
+        {
+         "zh": "B 非常忙。",
+         "py": "B  fēi cháng máng",
+         "en": "B Very busy.",
+         "vi": "B Rất bận."
+        },
+        {
+         "zh": "C 没有，我在开车呢。",
+         "py": "C  méi yǒu wǒ zài kāi chē ne",
+         "en": "C No, I'm driving.",
+         "vi": "C Không, tôi đang lái xe."
+        },
+        {
+         "zh": "D 好的，谢谢！",
+         "py": "D  hǎo de xiè xiè",
+         "en": "D OK, thanks!",
+         "vi": "D Được, cảm ơn!"
+        }
+       ]
       }
      ]
     },
@@ -2672,13 +5672,71 @@
        "n": 17,
        "ans": "B",
        "text": "弟弟没起床，还在（ ）呢。",
-       "py": "dì di méi qǐ chuáng hái zài （ ） ne"
+       "py": "dì di méi qǐ chuáng hái zài （ ） ne",
+       "tr": [
+        {
+         "zh": "弟弟没起床，还在睡觉呢。",
+         "py": "dì di méi qǐ chuáng hái zài shuì jiào ne",
+         "en": "Little brother hasn't got up; he's still sleeping.",
+         "vi": "Em trai chưa dậy, vẫn đang ngủ."
+        },
+        {
+         "zh": "A 找",
+         "py": "A  zhǎo",
+         "en": "A look for",
+         "vi": "A tìm"
+        },
+        {
+         "zh": "B 睡觉",
+         "py": "B  shuì jiào",
+         "en": "B sleep",
+         "vi": "B ngủ"
+        },
+        {
+         "zh": "C 名字",
+         "py": "C  míng zì",
+         "en": "C name",
+         "vi": "C tên"
+        }
+       ]
       },
       {
        "n": 18,
        "ans": "A",
        "text": "男：喂，你到没到饭店呢？ 女：没到呢，我正在（ ）饭店在哪里呢。",
-       "py": "nán ： wèi nǐ dào méi dào fàn diàn ne ？  nǚ ： méi dào ne wǒ zhèng zài （ ） fàn diàn zài nǎ lǐ ne"
+       "py": "nán ： wèi nǐ dào méi dào fàn diàn ne ？  nǚ ： méi dào ne wǒ zhèng zài （ ） fàn diàn zài nǎ lǐ ne",
+       "tr": [
+        {
+         "zh": "男：喂，你到没到饭店呢？",
+         "py": "nán： wèi nǐ dào méi dào fàn diàn ne",
+         "en": "M: Hello, have you got to the restaurant yet?",
+         "vi": "Nam: A lô, bạn đến nhà hàng chưa?"
+        },
+        {
+         "zh": "女：没到呢，我正在找饭店在哪里呢。",
+         "py": "nǚ： méi dào ne wǒ zhèng zài zhǎo fàn diàn zài nǎ lǐ ne",
+         "en": "F: Not yet, I'm still looking for where the restaurant is.",
+         "vi": "Nữ: Chưa đến, tôi đang tìm xem nhà hàng ở đâu."
+        },
+        {
+         "zh": "A 找",
+         "py": "A  zhǎo",
+         "en": "A look for",
+         "vi": "A tìm"
+        },
+        {
+         "zh": "B 睡觉",
+         "py": "B  shuì jiào",
+         "en": "B sleep",
+         "vi": "B ngủ"
+        },
+        {
+         "zh": "C 名字",
+         "py": "C  míng zì",
+         "en": "C name",
+         "vi": "C tên"
+        }
+       ]
       }
      ]
     },
@@ -2707,7 +5765,39 @@
         }
        ],
        "text": "我姐姐今年20岁，正在读大学呢，她学医。 ★说话人的姐姐是：",
-       "py": "wǒ jiě jiě jīn nián 20 suì zhèng zài dú dà xué ne tā xué yī 。 ★ shuō huà rén de jiě jiě shì ："
+       "py": "wǒ jiě jiě jīn nián 20 suì zhèng zài dú dà xué ne tā xué yī 。 ★ shuō huà rén de jiě jiě shì ：",
+       "tr": [
+        {
+         "zh": "我姐姐今年20岁，正在读大学呢，她学医。",
+         "py": "wǒ jiě jiě jīn nián 20 suì zhèng zài dú dà xué ne tā xué yī",
+         "en": "My older sister is 20 this year; she's at university studying medicine.",
+         "vi": "Chị tôi năm nay 20 tuổi, đang học đại học, chị ấy học y."
+        },
+        {
+         "zh": "★说话人的姐姐是：",
+         "py": "★ shuō huà rén de jiě jiě shì：",
+         "en": "★The speaker's sister is:",
+         "vi": "★Chị của người nói là:"
+        },
+        {
+         "zh": "A 老师",
+         "py": "A  lǎo shī",
+         "en": "A teacher",
+         "vi": "A giáo viên"
+        },
+        {
+         "zh": "B 医生",
+         "py": "B  yī shēng",
+         "en": "B doctor",
+         "vi": "B bác sĩ"
+        },
+        {
+         "zh": "C 大学生",
+         "py": "C  dà xué shēng",
+         "en": "C university student",
+         "vi": "C sinh viên đại học"
+        }
+       ]
       },
       {
        "n": 20,
@@ -2730,7 +5820,39 @@
         }
        ],
        "text": "我明天有事，要去学校找老师，不知道老师在不在。 ★说话人明天要去学校见：",
-       "py": "wǒ míng tiān yǒu shì yào qù xué xiào zhǎo lǎo shī bù zhī dào lǎo shī zài bù zài 。 ★ shuō huà rén míng tiān yào qù xué xiào jiàn ："
+       "py": "wǒ míng tiān yǒu shì yào qù xué xiào zhǎo lǎo shī bù zhī dào lǎo shī zài bù zài 。 ★ shuō huà rén míng tiān yào qù xué xiào jiàn ：",
+       "tr": [
+        {
+         "zh": "我明天有事，要去学校找老师，不知道老师在不在。",
+         "py": "wǒ míng tiān yǒu shì yào qù xué xiào zhǎo lǎo shī bù zhī dào lǎo shī zài bù zài",
+         "en": "I have something to do tomorrow: I'm going to school to find my teacher, but I don't know if the teacher will be there.",
+         "vi": "Ngày mai tôi có việc, phải đến trường tìm thầy giáo, không biết thầy có ở đó không."
+        },
+        {
+         "zh": "★说话人明天要去学校见：",
+         "py": "★ shuō huà rén míng tiān yào qù xué xiào jiàn：",
+         "en": "★Tomorrow the speaker will go to school to see:",
+         "vi": "★Ngày mai người nói đến trường để gặp:"
+        },
+        {
+         "zh": "A 朋友",
+         "py": "A  péng yǒu",
+         "en": "A a friend",
+         "vi": "A bạn bè"
+        },
+        {
+         "zh": "B 学生",
+         "py": "B  xué shēng",
+         "en": "B a student",
+         "vi": "B học sinh"
+        },
+        {
+         "zh": "C 老师",
+         "py": "C  lǎo shī",
+         "en": "C the teacher",
+         "vi": "C giáo viên"
+        }
+       ]
       }
      ]
     }
@@ -2753,6 +5875,14 @@
        "t": [
         34,
         58
+       ],
+       "tr": [
+        {
+         "zh": "好天气。",
+         "py": "hǎo tiān qì",
+         "en": "Good weather.",
+         "vi": "Thời tiết đẹp."
+        }
        ]
       },
       {
@@ -2761,6 +5891,14 @@
        "t": [
         58,
         76
+       ],
+       "tr": [
+        {
+         "zh": "下大雪。",
+         "py": "xià dà xuě",
+         "en": "It's snowing heavily.",
+         "vi": "Tuyết rơi dày."
+        }
        ]
       },
       {
@@ -2769,6 +5907,14 @@
        "t": [
         76,
         92
+       ],
+       "tr": [
+        {
+         "zh": "太冷了。",
+         "py": "tài lěng le",
+         "en": "It's too cold.",
+         "vi": "Lạnh quá."
+        }
        ]
       }
      ]
@@ -2800,6 +5946,32 @@
        "t": [
         136,
         161
+       ],
+       "tr": [
+        {
+         "zh": "今天天气怎么样？",
+         "py": "jīn tiān tiān qì zěn me yàng",
+         "en": "What's the weather like today?",
+         "vi": "Hôm nay thời tiết thế nào?"
+        },
+        {
+         "zh": "A 在吃药",
+         "py": "A  zài chī yào",
+         "en": "A taking medicine",
+         "vi": "A đang uống thuốc"
+        },
+        {
+         "zh": "B 有点儿",
+         "py": "B  yǒu diǎn ér",
+         "en": "B a little",
+         "vi": "B hơi"
+        },
+        {
+         "zh": "C 不太好",
+         "py": "C  bù tài hǎo",
+         "en": "C not very good",
+         "vi": "C không tốt lắm"
+        }
        ]
       },
       {
@@ -2825,6 +5997,32 @@
        "t": [
         161,
         184
+       ],
+       "tr": [
+        {
+         "zh": "外边热吗？",
+         "py": "wài biān rè ma",
+         "en": "Is it hot outside?",
+         "vi": "Bên ngoài có nóng không?"
+        },
+        {
+         "zh": "A 下雪了",
+         "py": "A  xià xuě le",
+         "en": "A it's snowing",
+         "vi": "A tuyết rơi rồi"
+        },
+        {
+         "zh": "B 太热了",
+         "py": "B  tài rè le",
+         "en": "B too hot",
+         "vi": "B nóng quá"
+        },
+        {
+         "zh": "C 不喝水",
+         "py": "C  bù hē shuǐ",
+         "en": "C not drinking water",
+         "vi": "C không uống nước"
+        }
        ]
       }
      ]
@@ -2841,6 +6039,20 @@
        "t": [
         233,
         270
+       ],
+       "tr": [
+        {
+         "zh": "医生，我的病怎么样？",
+         "py": "yī shēng wǒ de bìng zěn me yàng",
+         "en": "Doctor, how is my illness?",
+         "vi": "Bác sĩ, bệnh của tôi thế nào?"
+        },
+        {
+         "zh": "没大问题，回家喝些热水吧。",
+         "py": "méi dà wèn tí huí jiā hē xiē rè shuǐ ba",
+         "en": "Nothing serious. Go home and drink some hot water.",
+         "vi": "Không có vấn đề gì lớn, về nhà uống chút nước nóng đi."
+        }
        ]
       },
       {
@@ -2849,6 +6061,20 @@
        "t": [
         270,
         281
+       ],
+       "tr": [
+        {
+         "zh": "下雨了？",
+         "py": "xià yǔ le",
+         "en": "Is it raining?",
+         "vi": "Mưa rồi à?"
+        },
+        {
+         "zh": "对，雨还很大。",
+         "py": "duì yǔ hái hěn dà",
+         "en": "Yes, and it's raining hard.",
+         "vi": "Đúng, mưa còn rất to."
+        }
        ]
       },
       {
@@ -2857,6 +6083,20 @@
        "t": [
         281,
         334
+       ],
+       "tr": [
+        {
+         "zh": "太冷了，你不觉得冷吗？",
+         "py": "tài lěng le nǐ bù jué dé lěng ma",
+         "en": "It's so cold, don't you feel cold?",
+         "vi": "Lạnh quá, bạn không thấy lạnh à?"
+        },
+        {
+         "zh": "我不冷，你穿的衣服太少了。",
+         "py": "wǒ bù lěng nǐ chuān de yī fú tài shǎo le",
+         "en": "I'm not cold; you're wearing too little.",
+         "vi": "Tôi không lạnh, bạn mặc ít quá."
+        }
        ]
       }
      ]
@@ -2888,6 +6128,38 @@
        "t": [
         396,
         444
+       ],
+       "tr": [
+        {
+         "zh": "妈妈没在家，今天去医院看医生了。",
+         "py": "mā mā méi zài jiā jīn tiān qù yī yuàn kàn yī shēng le",
+         "en": "Mom isn't home; she went to the hospital to see a doctor today.",
+         "vi": "Mẹ không có nhà, hôm nay đi bệnh viện khám bác sĩ rồi."
+        },
+        {
+         "zh": "★说话人的妈妈今天去医院做什么了？",
+         "py": "★ shuō huà rén de mā mā jīn tiān qù yī yuàn zuò shén me le",
+         "en": "★What did the speaker's mom go to the hospital for today?",
+         "vi": "★Hôm nay mẹ của người nói đến bệnh viện làm gì?"
+        },
+        {
+         "zh": "A 看医生",
+         "py": "A  kàn yī shēng",
+         "en": "A see a doctor",
+         "vi": "A khám bác sĩ"
+        },
+        {
+         "zh": "B 看朋友",
+         "py": "B  kàn péng yǒu",
+         "en": "B visit a friend",
+         "vi": "B thăm bạn"
+        },
+        {
+         "zh": "C 看病人",
+         "py": "C  kàn bìng rén",
+         "en": "C visit a patient",
+         "vi": "C thăm người bệnh"
+        }
        ]
       },
       {
@@ -2913,6 +6185,38 @@
        "t": [
         444,
         497
+       ],
+       "tr": [
+        {
+         "zh": "我昨天非常忙，今天白天不忙，在家休息了。",
+         "py": "wǒ zuó tiān fēi cháng máng jīn tiān bái tiān bù máng zài jiā xiū xī le",
+         "en": "I was very busy yesterday; today during the day I wasn't busy and rested at home.",
+         "vi": "Hôm qua tôi rất bận, ban ngày hôm nay không bận, ở nhà nghỉ ngơi."
+        },
+        {
+         "zh": "★说话人今天白天做什么了？",
+         "py": "★ shuō huà rén jīn tiān bái tiān zuò shén me le",
+         "en": "★What did the speaker do today during the day?",
+         "vi": "★Ban ngày hôm nay người nói đã làm gì?"
+        },
+        {
+         "zh": "A 工作",
+         "py": "A  gōng zuò",
+         "en": "A work",
+         "vi": "A làm việc"
+        },
+        {
+         "zh": "B 休息",
+         "py": "B  xiū xī",
+         "en": "B rest",
+         "vi": "B nghỉ ngơi"
+        },
+        {
+         "zh": "C 读书",
+         "py": "C  dú shū",
+         "en": "C study",
+         "vi": "C đọc sách"
+        }
        ]
       }
      ]
@@ -2927,19 +6231,43 @@
        "n": 11,
        "ans": "D",
        "text": "我女儿生病了。",
-       "py": "wǒ nǚ ér shēng bìng le"
+       "py": "wǒ nǚ ér shēng bìng le",
+       "tr": [
+        {
+         "zh": "我女儿生病了。",
+         "py": "wǒ nǚ ér shēng bìng le",
+         "en": "My daughter is sick.",
+         "vi": "Con gái tôi bị ốm."
+        }
+       ]
       },
       {
        "n": 12,
        "ans": "B",
        "text": "今天天不太好，下雪了。",
-       "py": "jīn tiān tiān bù tài hǎo xià xuě le"
+       "py": "jīn tiān tiān bù tài hǎo xià xuě le",
+       "tr": [
+        {
+         "zh": "今天天不太好，下雪了。",
+         "py": "jīn tiān tiān bù tài hǎo xià xuě le",
+         "en": "The weather isn't great today; it's snowing.",
+         "vi": "Hôm nay trời không đẹp lắm, tuyết rơi rồi."
+        }
+       ]
       },
       {
        "n": 13,
        "ans": "C",
        "text": "12:00了，你们怎么还在看电视？",
-       "py": "12:00 le nǐ men zěn me hái zài kàn diàn shì"
+       "py": "12:00 le nǐ men zěn me hái zài kàn diàn shì",
+       "tr": [
+        {
+         "zh": "12:00了，你们怎么还在看电视？",
+         "py": "12:00 le nǐ men zěn me hái zài kàn diàn shì",
+         "en": "It's 12 o'clock, why are you still watching TV?",
+         "vi": "12 giờ rồi, sao các con vẫn còn xem tivi?"
+        }
+       ]
       }
      ]
     },
@@ -2973,19 +6301,115 @@
        "n": 14,
        "ans": "B",
        "text": "你怎么了？",
-       "py": "nǐ zěn me le"
+       "py": "nǐ zěn me le",
+       "tr": [
+        {
+         "zh": "你怎么了？",
+         "py": "nǐ zěn me le",
+         "en": "What's wrong with you?",
+         "vi": "Bạn sao vậy?"
+        },
+        {
+         "zh": "A 热水。",
+         "py": "A  rè shuǐ",
+         "en": "A Hot water.",
+         "vi": "A Nước nóng."
+        },
+        {
+         "zh": "B 我病了。",
+         "py": "B  wǒ bìng le",
+         "en": "B I'm sick.",
+         "vi": "B Tôi bị ốm."
+        },
+        {
+         "zh": "C 对。",
+         "py": "C  duì",
+         "en": "C Yes.",
+         "vi": "C Đúng."
+        },
+        {
+         "zh": "D 好的，谢谢！",
+         "py": "D  hǎo de xiè xiè",
+         "en": "D OK, thanks!",
+         "vi": "D Được, cảm ơn!"
+        }
+       ]
       },
       {
        "n": 15,
        "ans": "A",
        "text": "你想喝点儿什么？",
-       "py": "nǐ xiǎng hē diǎn ér shén me"
+       "py": "nǐ xiǎng hē diǎn ér shén me",
+       "tr": [
+        {
+         "zh": "你想喝点儿什么？",
+         "py": "nǐ xiǎng hē diǎn ér shén me",
+         "en": "What would you like to drink?",
+         "vi": "Bạn muốn uống gì?"
+        },
+        {
+         "zh": "A 热水。",
+         "py": "A  rè shuǐ",
+         "en": "A Hot water.",
+         "vi": "A Nước nóng."
+        },
+        {
+         "zh": "B 我病了。",
+         "py": "B  wǒ bìng le",
+         "en": "B I'm sick.",
+         "vi": "B Tôi bị ốm."
+        },
+        {
+         "zh": "C 对。",
+         "py": "C  duì",
+         "en": "C Yes.",
+         "vi": "C Đúng."
+        },
+        {
+         "zh": "D 好的，谢谢！",
+         "py": "D  hǎo de xiè xiè",
+         "en": "D OK, thanks!",
+         "vi": "D Được, cảm ơn!"
+        }
+       ]
       },
       {
        "n": 16,
        "ans": "C",
        "text": "你开车了？",
-       "py": "nǐ kāi chē le"
+       "py": "nǐ kāi chē le",
+       "tr": [
+        {
+         "zh": "你开车了？",
+         "py": "nǐ kāi chē le",
+         "en": "Did you drive?",
+         "vi": "Bạn lái xe đến à?"
+        },
+        {
+         "zh": "A 热水。",
+         "py": "A  rè shuǐ",
+         "en": "A Hot water.",
+         "vi": "A Nước nóng."
+        },
+        {
+         "zh": "B 我病了。",
+         "py": "B  wǒ bìng le",
+         "en": "B I'm sick.",
+         "vi": "B Tôi bị ốm."
+        },
+        {
+         "zh": "C 对。",
+         "py": "C  duì",
+         "en": "C Yes.",
+         "vi": "C Đúng."
+        },
+        {
+         "zh": "D 好的，谢谢！",
+         "py": "D  hǎo de xiè xiè",
+         "en": "D OK, thanks!",
+         "vi": "D Được, cảm ơn!"
+        }
+       ]
       }
      ]
     },
@@ -3014,13 +6438,71 @@
        "n": 17,
        "ans": "B",
        "text": "他（ ）了，没来上班。",
-       "py": "tā （ ） le méi lái shàng bān"
+       "py": "tā （ ） le méi lái shàng bān",
+       "tr": [
+        {
+         "zh": "他生病了，没来上班。",
+         "py": "tā shēng bìng le méi lái shàng bān",
+         "en": "He got sick and didn't come to work.",
+         "vi": "Anh ấy bị ốm, không đi làm."
+        },
+        {
+         "zh": "A 冷",
+         "py": "A  lěng",
+         "en": "A cold",
+         "vi": "A lạnh"
+        },
+        {
+         "zh": "B 生病",
+         "py": "B  shēng bìng",
+         "en": "B get sick",
+         "vi": "B bị ốm"
+        },
+        {
+         "zh": "C 名字",
+         "py": "C  míng zì",
+         "en": "C name",
+         "vi": "C tên"
+        }
+       ]
       },
       {
        "n": 18,
        "ans": "A",
        "text": "男：外边雨大吗？ 女：很大，我觉得有点儿（ ）。",
-       "py": "nán ： wài biān yǔ dà ma ？  nǚ ： hěn dà wǒ jué de yǒu diǎn ér （ ）。"
+       "py": "nán ： wài biān yǔ dà ma ？  nǚ ： hěn dà wǒ jué de yǒu diǎn ér （ ）。",
+       "tr": [
+        {
+         "zh": "男：外边雨大吗？",
+         "py": "nán： wài biān yǔ dà ma",
+         "en": "M: Is it raining hard outside?",
+         "vi": "Nam: Bên ngoài mưa to không?"
+        },
+        {
+         "zh": "女：很大，我觉得有点儿冷。",
+         "py": "nǚ： hěn dà wǒ jué de yǒu diǎn ér lěng",
+         "en": "F: Very hard. I feel a bit cold.",
+         "vi": "Nữ: Rất to, tôi thấy hơi lạnh."
+        },
+        {
+         "zh": "A 冷",
+         "py": "A  lěng",
+         "en": "A cold",
+         "vi": "A lạnh"
+        },
+        {
+         "zh": "B 生病",
+         "py": "B  shēng bìng",
+         "en": "B get sick",
+         "vi": "B bị ốm"
+        },
+        {
+         "zh": "C 名字",
+         "py": "C  míng zì",
+         "en": "C name",
+         "vi": "C tên"
+        }
+       ]
       }
      ]
     },
@@ -3049,7 +6531,39 @@
         }
        ],
        "text": "昨天的天气很好，我和朋友们去外边玩了。 ★说话人觉得昨天：",
-       "py": "zuó tiān de tiān qì hěn hǎo wǒ hé péng yǒu men qù wài biān wán le 。 ★ shuō huà rén jué de zuó tiān ："
+       "py": "zuó tiān de tiān qì hěn hǎo wǒ hé péng yǒu men qù wài biān wán le 。 ★ shuō huà rén jué de zuó tiān ：",
+       "tr": [
+        {
+         "zh": "昨天的天气很好，我和朋友们去外边玩了。",
+         "py": "zuó tiān de tiān qì hěn hǎo wǒ hé péng yǒu men qù wài biān wán le",
+         "en": "The weather was great yesterday; my friends and I went out to play.",
+         "vi": "Hôm qua thời tiết rất đẹp, tôi và các bạn đã ra ngoài chơi."
+        },
+        {
+         "zh": "★说话人觉得昨天：",
+         "py": "★ shuō huà rén jué de zuó tiān：",
+         "en": "★The speaker thinks yesterday:",
+         "vi": "★Người nói thấy hôm qua:"
+        },
+        {
+         "zh": "A 天气好",
+         "py": "A  tiān qì hǎo",
+         "en": "A the weather was good",
+         "vi": "A thời tiết đẹp"
+        },
+        {
+         "zh": "B 雨不大",
+         "py": "B  yǔ bù dà",
+         "en": "B the rain wasn't heavy",
+         "vi": "B mưa không to"
+        },
+        {
+         "zh": "C 有点儿冷",
+         "py": "C  yǒu diǎn ér lěng",
+         "en": "C it was a bit cold",
+         "vi": "C hơi lạnh"
+        }
+       ]
       },
       {
        "n": 20,
@@ -3072,7 +6586,39 @@
         }
        ],
        "text": "老张去看病，医生说他要吃三天药。 ★医生说老张：",
-       "py": "lǎo zhāng qù kàn bìng yī shēng shuō tā yào chī sān tiān yào 。 ★ yī shēng shuō lǎo zhāng ："
+       "py": "lǎo zhāng qù kàn bìng yī shēng shuō tā yào chī sān tiān yào 。 ★ yī shēng shuō lǎo zhāng ：",
+       "tr": [
+        {
+         "zh": "老张去看病，医生说他要吃三天药。",
+         "py": "lǎo zhāng qù kàn bìng yī shēng shuō tā yào chī sān tiān yào",
+         "en": "Lao Zhang went to see a doctor; the doctor said he must take medicine for three days.",
+         "vi": "Lão Trương đi khám bệnh, bác sĩ nói ông ấy phải uống thuốc ba ngày."
+        },
+        {
+         "zh": "★医生说老张：",
+         "py": "★ yī shēng shuō lǎo zhāng：",
+         "en": "★The doctor says Lao Zhang:",
+         "vi": "★Bác sĩ nói lão Trương:"
+        },
+        {
+         "zh": "A 要吃药",
+         "py": "A  yào chī yào",
+         "en": "A must take medicine",
+         "vi": "A phải uống thuốc"
+        },
+        {
+         "zh": "B 要多睡觉",
+         "py": "B  yào duō shuì jiào",
+         "en": "B must sleep more",
+         "vi": "B phải ngủ nhiều"
+        },
+        {
+         "zh": "C 要多喝水",
+         "py": "C  yào duō hē shuǐ",
+         "en": "C must drink more water",
+         "vi": "C phải uống nhiều nước"
+        }
+       ]
       }
      ]
     }
@@ -3095,6 +6641,14 @@
        "t": [
         37,
         58
+       ],
+       "tr": [
+        {
+         "zh": "一些饺子",
+         "py": "yī xiē jiǎo zi",
+         "en": "some dumplings",
+         "vi": "một ít sủi cảo"
+        }
        ]
       },
       {
@@ -3103,6 +6657,14 @@
        "t": [
         58,
         75
+       ],
+       "tr": [
+        {
+         "zh": "给你书",
+         "py": "gěi nǐ shū",
+         "en": "here's the book for you",
+         "vi": "đưa bạn sách"
+        }
        ]
       },
       {
@@ -3111,6 +6673,14 @@
        "t": [
         75,
         92
+       ],
+       "tr": [
+        {
+         "zh": "打电话",
+         "py": "dǎ diàn huà",
+         "en": "make a phone call",
+         "vi": "gọi điện thoại"
+        }
        ]
       }
      ]
@@ -3142,6 +6712,32 @@
        "t": [
         136,
         162
+       ],
+       "tr": [
+        {
+         "zh": "请问您喝什么？",
+         "py": "qǐng wèn nín hē shén me",
+         "en": "What would you like to drink?",
+         "vi": "Xin hỏi ngài uống gì ạ?"
+        },
+        {
+         "zh": "A 给你",
+         "py": "A  gěi nǐ",
+         "en": "here you are",
+         "vi": "đưa bạn"
+        },
+        {
+         "zh": "B 吃早饭",
+         "py": "B  chī zǎo fàn",
+         "en": "eat breakfast",
+         "vi": "ăn sáng"
+        },
+        {
+         "zh": "C 要一杯茶",
+         "py": "C  yào yī bēi chá",
+         "en": "a cup of tea, please",
+         "vi": "cho một cốc trà"
+        }
        ]
       },
       {
@@ -3167,6 +6763,32 @@
        "t": [
         162,
         187
+       ],
+       "tr": [
+        {
+         "zh": "我可以打电话吗？",
+         "py": "wǒ kě yǐ dǎ diàn huà ma",
+         "en": "May I make a phone call?",
+         "vi": "Tôi có thể gọi điện thoại không?"
+        },
+        {
+         "zh": "A 学习",
+         "py": "A  xué xí",
+         "en": "study",
+         "vi": "học"
+        },
+        {
+         "zh": "B 不对",
+         "py": "B  bú duì",
+         "en": "not right",
+         "vi": "không đúng"
+        },
+        {
+         "zh": "C 没问题",
+         "py": "C  méi wèn tí",
+         "en": "no problem",
+         "vi": "không vấn đề gì"
+        }
        ]
       }
      ]
@@ -3183,6 +6805,20 @@
        "t": [
         235,
         261
+       ],
+       "tr": [
+        {
+         "zh": "你吃早饭了吗？要不要吃面包？",
+         "py": "nǐ chī zǎo fàn le ma yào bù yào chī miàn bāo",
+         "en": "Have you had breakfast? Do you want some bread?",
+         "vi": "Bạn ăn sáng chưa? Có muốn ăn bánh mì không?"
+        },
+        {
+         "zh": "谢谢！给我一半吧！",
+         "py": "xiè xiè gěi wǒ yí bàn ba",
+         "en": "Thanks! Give me half!",
+         "vi": "Cảm ơn! Cho tôi một nửa nhé!"
+        }
        ]
       },
       {
@@ -3191,6 +6827,20 @@
        "t": [
         261,
         303
+       ],
+       "tr": [
+        {
+         "zh": "请问您要点什么？",
+         "py": "qǐng wèn nín yào diǎn shén me",
+         "en": "What would you like to order?",
+         "vi": "Xin hỏi ngài muốn gọi gì ạ?"
+        },
+        {
+         "zh": "请给我一杯茶吧！",
+         "py": "qǐng gěi wǒ yī bēi chá ba",
+         "en": "A cup of tea, please!",
+         "vi": "Cho tôi một cốc trà nhé!"
+        }
        ]
       },
       {
@@ -3199,6 +6849,20 @@
        "t": [
         303,
         336
+       ],
+       "tr": [
+        {
+         "zh": "你觉得这家店怎么样？",
+         "py": "nǐ jué de zhè jiā diàn zěn me yàng",
+         "en": "What do you think of this restaurant?",
+         "vi": "Bạn thấy quán này thế nào?"
+        },
+        {
+         "zh": "我觉得这儿的饺子很好吃！",
+         "py": "wǒ jué de zhè ér de jiǎo zi hěn hǎo chī",
+         "en": "I think the dumplings here are delicious!",
+         "vi": "Tôi thấy sủi cảo ở đây rất ngon!"
+        }
        ]
       }
      ]
@@ -3230,6 +6894,38 @@
        "t": [
         397,
         439
+       ],
+       "tr": [
+        {
+         "zh": "我明天休息，可以去找你玩吗？",
+         "py": "wǒ míng tiān xiū xī kě yǐ qù zhǎo nǐ wán ma",
+         "en": "I'm off tomorrow. Can I come over to hang out with you?",
+         "vi": "Mai tôi nghỉ, có thể đến tìm bạn chơi không?"
+        },
+        {
+         "zh": "★说话人明天想做什么？",
+         "py": "★ shuō huà rén míng tiān xiǎng zuò shén me",
+         "en": "What does the speaker want to do tomorrow?",
+         "vi": "Người nói ngày mai muốn làm gì?"
+        },
+        {
+         "zh": "A 问问题",
+         "py": "A  wèn wèn tí",
+         "en": "ask questions",
+         "vi": "hỏi câu hỏi"
+        },
+        {
+         "zh": "B 找人玩",
+         "py": "B  zhǎo rén wán",
+         "en": "visit someone to hang out",
+         "vi": "tìm người chơi"
+        },
+        {
+         "zh": "C 看医生",
+         "py": "C  kàn yī shēng",
+         "en": "see a doctor",
+         "vi": "đi khám bác sĩ"
+        }
        ]
       },
       {
@@ -3255,6 +6951,38 @@
        "t": [
         439,
         489
+       ],
+       "tr": [
+        {
+         "zh": "晚上下班后，我和朋友们去饭店吃饭了！",
+         "py": "wǎn shàng xià bān hòu wǒ hé péng yǒu men qù fàn diàn chī fàn le",
+         "en": "After work this evening, my friends and I went to a restaurant to eat!",
+         "vi": "Tối tan làm, tôi và các bạn đi nhà hàng ăn cơm!"
+        },
+        {
+         "zh": "★说话人下班后去哪儿吃饭了？",
+         "py": "★ shuō huà rén xià bān hòu qù nǎ ér chī fàn le",
+         "en": "Where did the speaker eat after work?",
+         "vi": "Người nói tan làm xong đi ăn ở đâu?"
+        },
+        {
+         "zh": "A 饭店",
+         "py": "A  fàn diàn",
+         "en": "restaurant",
+         "vi": "nhà hàng"
+        },
+        {
+         "zh": "B 学校",
+         "py": "B  xué xiào",
+         "en": "school",
+         "vi": "trường học"
+        },
+        {
+         "zh": "C 朋友家",
+         "py": "C  péng yǒu jiā",
+         "en": "a friend's home",
+         "vi": "nhà bạn"
+        }
        ]
       }
      ]
@@ -3269,19 +6997,43 @@
        "n": 11,
        "ans": "B",
        "text": "她太小了，这个苹果给她一半吧。",
-       "py": "tā tài xiǎo le zhè ge píng guǒ gěi tā yí bàn ba"
+       "py": "tā tài xiǎo le zhè ge píng guǒ gěi tā yí bàn ba",
+       "tr": [
+        {
+         "zh": "她太小了，这个苹果给她一半吧。",
+         "py": "tā tài xiǎo le zhè ge píng guǒ gěi tā yí bàn ba",
+         "en": "She's too little, give her half of this apple.",
+         "vi": "Bé còn nhỏ quá, cho bé một nửa quả táo này thôi."
+        }
+       ]
       },
       {
        "n": 12,
        "ans": "D",
        "text": "请给我一杯牛奶，谢谢。",
-       "py": "qǐng gěi wǒ yī bēi niú nǎi xiè xiè"
+       "py": "qǐng gěi wǒ yī bēi niú nǎi xiè xiè",
+       "tr": [
+        {
+         "zh": "请给我一杯牛奶，谢谢。",
+         "py": "qǐng gěi wǒ yī bēi niú nǎi xiè xiè",
+         "en": "A glass of milk, please. Thanks.",
+         "vi": "Cho tôi một cốc sữa, cảm ơn."
+        }
+       ]
       },
       {
        "n": 13,
        "ans": "C",
        "text": "我打电话问一下吧。",
-       "py": "wǒ dǎ diàn huà wèn yī xià ba"
+       "py": "wǒ dǎ diàn huà wèn yī xià ba",
+       "tr": [
+        {
+         "zh": "我打电话问一下吧。",
+         "py": "wǒ dǎ diàn huà wèn yī xià ba",
+         "en": "Let me call and ask.",
+         "vi": "Để tôi gọi điện hỏi thử nhé."
+        }
+       ]
       }
      ]
     },
@@ -3315,19 +7067,61 @@
        "n": 14,
        "ans": "C",
        "text": "那里卖不卖手机？",
-       "py": "nà lǐ mài bù mài shǒu jī"
+       "py": "nà lǐ mài bù mài shǒu jī",
+       "tr": [
+        {
+         "zh": "那里卖不卖手机？",
+         "py": "nà lǐ mài bù mài shǒu jī",
+         "en": "Do they sell mobile phones there?",
+         "vi": "Ở đó có bán điện thoại không?"
+        },
+        {
+         "zh": "C 不知道。",
+         "py": "C  bù zhī dào",
+         "en": "I don't know.",
+         "vi": "Không biết."
+        }
+       ]
       },
       {
        "n": 15,
        "ans": "A",
        "text": "我会写了，谢谢老师。",
-       "py": "wǒ huì xiě le xiè xiè lǎo shī"
+       "py": "wǒ huì xiě le xiè xiè lǎo shī",
+       "tr": [
+        {
+         "zh": "我会写了，谢谢老师。",
+         "py": "wǒ huì xiě le xiè xiè lǎo shī",
+         "en": "I can write it now, thank you, teacher.",
+         "vi": "Em viết được rồi, cảm ơn thầy cô."
+        },
+        {
+         "zh": "A 不客气。",
+         "py": "A  bú kè qì",
+         "en": "You're welcome.",
+         "vi": "Không có gì."
+        }
+       ]
       },
       {
        "n": 16,
        "ans": "B",
        "text": "你要什么？",
-       "py": "nǐ yào shén me"
+       "py": "nǐ yào shén me",
+       "tr": [
+        {
+         "zh": "你要什么？",
+         "py": "nǐ yào shén me",
+         "en": "What do you want?",
+         "vi": "Bạn muốn gì?"
+        },
+        {
+         "zh": "B 一个面包。",
+         "py": "B  yí gè miàn bāo",
+         "en": "A piece of bread.",
+         "vi": "Một cái bánh mì."
+        }
+       ]
       }
      ]
     },
@@ -3356,13 +7150,35 @@
        "n": 17,
        "ans": "B",
        "text": "你看（ ），你要什么？",
-       "py": "nǐ kàn （ ）， nǐ yào shén me"
+       "py": "nǐ kàn （ ）， nǐ yào shén me",
+       "tr": [
+        {
+         "zh": "你看一下，你要什么？",
+         "py": "nǐ kàn yī xià nǐ yào shén me",
+         "en": "Take a look, what do you want?",
+         "vi": "Bạn xem thử đi, bạn muốn gì?"
+        }
+       ]
       },
       {
        "n": 18,
        "ans": "A",
        "text": "男：请坐，您要什么？ 女：请（ ）我一杯茶。",
-       "py": "nán ： qǐng zuò nín yào shén me ？  nǚ ： qǐng （ ） wǒ yī bēi chá"
+       "py": "nán ： qǐng zuò nín yào shén me ？  nǚ ： qǐng （ ） wǒ yī bēi chá",
+       "tr": [
+        {
+         "zh": "男：请坐，您要什么？",
+         "py": "nán： qǐng zuò nín yào shén me",
+         "en": "Please sit down. What would you like?",
+         "vi": "Mời ngồi, ngài muốn gì ạ?"
+        },
+        {
+         "zh": "女：请给我一杯茶。",
+         "py": "nǚ： qǐng gěi wǒ yī bēi chá",
+         "en": "A cup of tea, please.",
+         "vi": "Cho tôi một cốc trà."
+        }
+       ]
       }
      ]
     },
@@ -3391,7 +7207,39 @@
         }
        ],
        "text": "明天星期天，我们可以去饭店吃饺子吗？ ★明天是：",
-       "py": "míng tiān xīng qī tiān wǒ men kě yǐ qù fàn diàn chī jiǎo zi ma ？ ★ míng tiān shì ："
+       "py": "míng tiān xīng qī tiān wǒ men kě yǐ qù fàn diàn chī jiǎo zi ma ？ ★ míng tiān shì ：",
+       "tr": [
+        {
+         "zh": "明天星期天，我们可以去饭店吃饺子吗？",
+         "py": "míng tiān xīng qī tiān wǒ men kě yǐ qù fàn diàn chī jiǎo zi ma",
+         "en": "Tomorrow is Sunday. Can we go to a restaurant for dumplings?",
+         "vi": "Mai là chủ nhật, chúng ta đi nhà hàng ăn sủi cảo được không?"
+        },
+        {
+         "zh": "★明天是：",
+         "py": "★ míng tiān shì：",
+         "en": "Tomorrow is:",
+         "vi": "Ngày mai là:"
+        },
+        {
+         "zh": "A 星期五",
+         "py": "A  xīng qī wǔ",
+         "en": "Friday",
+         "vi": "thứ Sáu"
+        },
+        {
+         "zh": "B 星期六",
+         "py": "B  xīng qī liù",
+         "en": "Saturday",
+         "vi": "thứ Bảy"
+        },
+        {
+         "zh": "C 星期日",
+         "py": "C  xīng qī rì",
+         "en": "Sunday",
+         "vi": "Chủ nhật"
+        }
+       ]
       },
       {
        "n": 20,
@@ -3414,7 +7262,39 @@
         }
        ],
        "text": "爸爸今天在家里工作，我们不要去他的房间。 ★爸爸今天：",
-       "py": "bà bà jīn tiān zài jiā lǐ gōng zuò wǒ men bú yào qù tā de fáng jiān 。 ★ bà bà jīn tiān ："
+       "py": "bà bà jīn tiān zài jiā lǐ gōng zuò wǒ men bú yào qù tā de fáng jiān 。 ★ bà bà jīn tiān ：",
+       "tr": [
+        {
+         "zh": "爸爸今天在家里工作，我们不要去他的房间。",
+         "py": "bà bà jīn tiān zài jiā lǐ gōng zuò wǒ men bú yào qù tā de fáng jiān",
+         "en": "Dad is working at home today; let's not go into his room.",
+         "vi": "Hôm nay bố làm việc ở nhà, chúng ta đừng vào phòng bố."
+        },
+        {
+         "zh": "★爸爸今天：",
+         "py": "★ bà bà jīn tiān：",
+         "en": "Today Dad:",
+         "vi": "Hôm nay bố:"
+        },
+        {
+         "zh": "A 在家里工作",
+         "py": "A  zài jiā lǐ gōng zuò",
+         "en": "works at home",
+         "vi": "làm việc ở nhà"
+        },
+        {
+         "zh": "B 做了面条儿",
+         "py": "B  zuò le miàn tiáo ér",
+         "en": "made noodles",
+         "vi": "đã nấu mì"
+        },
+        {
+         "zh": "C 不能去公司",
+         "py": "C  bù néng qù gōng sī",
+         "en": "can't go to the office",
+         "vi": "không thể đến công ty"
+        }
+       ]
       }
      ]
     }
@@ -3437,6 +7317,14 @@
        "t": [
         34,
         58
+       ],
+       "tr": [
+        {
+         "zh": "不要说话",
+         "py": "bú yào shuō huà",
+         "en": "don't talk",
+         "vi": "đừng nói chuyện"
+        }
        ]
       },
       {
@@ -3445,6 +7333,14 @@
        "t": [
         58,
         75
+       ],
+       "tr": [
+        {
+         "zh": "写汉字",
+         "py": "xiě hàn zì",
+         "en": "write Chinese characters",
+         "vi": "viết chữ Hán"
+        }
        ]
       },
       {
@@ -3453,6 +7349,14 @@
        "t": [
         75,
         93
+       ],
+       "tr": [
+        {
+         "zh": "在火车上",
+         "py": "zài huǒ chē shàng",
+         "en": "on the train",
+         "vi": "trên tàu hỏa"
+        }
        ]
       }
      ]
@@ -3484,6 +7388,32 @@
        "t": [
         134,
         162
+       ],
+       "tr": [
+        {
+         "zh": "这些汉字你都会写了吗？",
+         "py": "zhè xiē hàn zì nǐ dū huì xiě le ma",
+         "en": "Can you write all these characters now?",
+         "vi": "Những chữ Hán này bạn viết được hết chưa?"
+        },
+        {
+         "zh": "A 都写",
+         "py": "A  dōu xiě",
+         "en": "write them all",
+         "vi": "viết hết"
+        },
+        {
+         "zh": "B 听见了",
+         "py": "B  tīng jiàn le",
+         "en": "heard it",
+         "vi": "nghe thấy rồi"
+        },
+        {
+         "zh": "C 都会写了",
+         "py": "C  dū huì xiě le",
+         "en": "can write them all now",
+         "vi": "viết được hết rồi"
+        }
        ]
       },
       {
@@ -3509,6 +7439,32 @@
        "t": [
         162,
         187
+       ],
+       "tr": [
+        {
+         "zh": "你下了班去哪里？",
+         "py": "nǐ xià le bān qù nǎ lǐ",
+         "en": "Where are you going after work?",
+         "vi": "Tan làm bạn đi đâu?"
+        },
+        {
+         "zh": "A 学习",
+         "py": "A  xué xí",
+         "en": "study",
+         "vi": "học"
+        },
+        {
+         "zh": "B 超市",
+         "py": "B  chāo shì",
+         "en": "supermarket",
+         "vi": "siêu thị"
+        },
+        {
+         "zh": "C 买面包",
+         "py": "C  mǎi miàn bāo",
+         "en": "buy bread",
+         "vi": "mua bánh mì"
+        }
        ]
       }
      ]
@@ -3525,6 +7481,20 @@
        "t": [
         236,
         275
+       ],
+       "tr": [
+        {
+         "zh": "你在火车上睡觉了吗？",
+         "py": "nǐ zài huǒ chē shàng shuì jiào le ma",
+         "en": "Did you sleep on the train?",
+         "vi": "Bạn có ngủ trên tàu không?"
+        },
+        {
+         "zh": "没睡觉。我在手机上看了个电影。",
+         "py": "méi shuì jiào wǒ zài shǒu jī shàng kàn le gè diàn yǐng",
+         "en": "No. I watched a movie on my phone.",
+         "vi": "Không ngủ. Tôi xem một bộ phim trên điện thoại."
+        }
        ]
       },
       {
@@ -3533,6 +7503,20 @@
        "t": [
         275,
         310
+       ],
+       "tr": [
+        {
+         "zh": "你能写一下这两个汉字吗？",
+         "py": "nǐ néng xiě yī xià zhè liǎng gè hàn zì ma",
+         "en": "Can you write these two characters?",
+         "vi": "Bạn viết thử hai chữ Hán này được không?"
+        },
+        {
+         "zh": "可以。我都会写。",
+         "py": "kě yǐ wǒ dū huì xiě",
+         "en": "Sure. I can write both.",
+         "vi": "Được. Tôi viết được cả hai."
+        }
        ]
       },
       {
@@ -3541,6 +7525,20 @@
        "t": [
         310,
         345
+       ],
+       "tr": [
+        {
+         "zh": "我下班了，现在想休息一下。",
+         "py": "wǒ xià bān le xiàn zài xiǎng xiū xī yī xià",
+         "en": "I'm off work; I want to rest a bit now.",
+         "vi": "Tôi tan làm rồi, giờ muốn nghỉ một chút."
+        },
+        {
+         "zh": "好的，你休息吧。",
+         "py": "hǎo de nǐ xiū xī ba",
+         "en": "OK, go and rest.",
+         "vi": "Được, bạn nghỉ đi."
+        }
        ]
       }
      ]
@@ -3572,6 +7570,38 @@
        "t": [
         404,
         446
+       ],
+       "tr": [
+        {
+         "zh": "下课后我去了商店。",
+         "py": "xià kè hòu wǒ qù le shāng diàn",
+         "en": "After class I went to the shop.",
+         "vi": "Tan học tôi đã đi cửa hàng."
+        },
+        {
+         "zh": "★说话人什么时候去了商店？",
+         "py": "★ shuō huà rén shén me shí hòu qù le shāng diàn",
+         "en": "When did the speaker go to the shop?",
+         "vi": "Người nói đi cửa hàng khi nào?"
+        },
+        {
+         "zh": "A 下课后",
+         "py": "A  xià kè hòu",
+         "en": "after class",
+         "vi": "sau khi tan học"
+        },
+        {
+         "zh": "B 上课前",
+         "py": "B  shàng kè qián",
+         "en": "before class",
+         "vi": "trước giờ học"
+        },
+        {
+         "zh": "C 回家后",
+         "py": "C  huí jiā hòu",
+         "en": "after going home",
+         "vi": "sau khi về nhà"
+        }
        ]
       },
       {
@@ -3597,6 +7627,38 @@
        "t": [
         446,
         494
+       ],
+       "tr": [
+        {
+         "zh": "弟弟有一只小狗，他还想要一只小猫。",
+         "py": "dì di yǒu yī zhī xiǎo gǒu tā hái xiǎng yào yī zhī xiǎo māo",
+         "en": "My little brother has a puppy, and he also wants a kitten.",
+         "vi": "Em trai có một con chó con, nó còn muốn một con mèo con."
+        },
+        {
+         "zh": "★说话人的弟弟有什么？",
+         "py": "★ shuō huà rén de dì di yǒu shén me",
+         "en": "What does the speaker's brother have?",
+         "vi": "Em trai người nói có gì?"
+        },
+        {
+         "zh": "A 小狗",
+         "py": "A  xiǎo gǒu",
+         "en": "a puppy",
+         "vi": "chó con"
+        },
+        {
+         "zh": "B 小猫",
+         "py": "B  xiǎo māo",
+         "en": "a kitten",
+         "vi": "mèo con"
+        },
+        {
+         "zh": "C 小狗和小猫",
+         "py": "C  xiǎo gǒu hé xiǎo māo",
+         "en": "a puppy and a kitten",
+         "vi": "chó con và mèo con"
+        }
        ]
       }
      ]
@@ -3611,19 +7673,43 @@
        "n": 11,
        "ans": "C",
        "text": "王先生今天生病了，没来上班。",
-       "py": "wáng xiān shēng jīn tiān shēng bìng le méi lái shàng bān"
+       "py": "wáng xiān shēng jīn tiān shēng bìng le méi lái shàng bān",
+       "tr": [
+        {
+         "zh": "王先生今天生病了，没来上班。",
+         "py": "wáng xiān shēng jīn tiān shēng bìng le méi lái shàng bān",
+         "en": "Mr. Wang is sick today and didn't come to work.",
+         "vi": "Hôm nay ông Vương bị ốm, không đi làm."
+        }
+       ]
       },
       {
        "n": 12,
        "ans": "B",
        "text": "火车上，有的人在读书，有的人在睡觉。",
-       "py": "huǒ chē shàng yǒu de rén zài dú shū yǒu de rén zài shuì jiào"
+       "py": "huǒ chē shàng yǒu de rén zài dú shū yǒu de rén zài shuì jiào",
+       "tr": [
+        {
+         "zh": "火车上，有的人在读书，有的人在睡觉。",
+         "py": "huǒ chē shàng yǒu de rén zài dú shū yǒu de rén zài shuì jiào",
+         "en": "On the train, some people are reading and some are sleeping.",
+         "vi": "Trên tàu, có người đang đọc sách, có người đang ngủ."
+        }
+       ]
       },
       {
        "n": 13,
        "ans": "D",
        "text": "喂，他们都来我家了，你也来吧。",
-       "py": "wèi tā men dōu lái wǒ jiā le nǐ yě lái ba"
+       "py": "wèi tā men dōu lái wǒ jiā le nǐ yě lái ba",
+       "tr": [
+        {
+         "zh": "喂，他们都来我家了，你也来吧。",
+         "py": "wèi tā men dōu lái wǒ jiā le nǐ yě lái ba",
+         "en": "Hello, they've all come to my place, you come too.",
+         "vi": "A lô, họ đều đến nhà tôi rồi, bạn cũng đến đi."
+        }
+       ]
       }
      ]
     },
@@ -3657,19 +7743,61 @@
        "n": 14,
        "ans": "B",
        "text": "谁去学校了？",
-       "py": "shuí qù xué xiào le"
+       "py": "shuí qù xué xiào le",
+       "tr": [
+        {
+         "zh": "谁去学校了？",
+         "py": "shuí qù xué xiào le",
+         "en": "Who went to school?",
+         "vi": "Ai đã đến trường?"
+        },
+        {
+         "zh": "B 我们都去了。",
+         "py": "B  wǒ men dōu qù le",
+         "en": "We all went.",
+         "vi": "Chúng tôi đều đi rồi."
+        }
+       ]
       },
       {
        "n": 15,
        "ans": "A",
        "text": "你下午没去医院吗？",
-       "py": "nǐ xià wǔ méi qù yī yuàn ma"
+       "py": "nǐ xià wǔ méi qù yī yuàn ma",
+       "tr": [
+        {
+         "zh": "你下午没去医院吗？",
+         "py": "nǐ xià wǔ méi qù yī yuàn ma",
+         "en": "Didn't you go to the hospital this afternoon?",
+         "vi": "Chiều nay bạn không đi bệnh viện à?"
+        },
+        {
+         "zh": "A 是的，我睡了一觉。",
+         "py": "A  shì de wǒ shuì le yī jiào",
+         "en": "Right, I took a nap.",
+         "vi": "Đúng vậy, tôi ngủ một giấc."
+        }
+       ]
       },
       {
        "n": 16,
        "ans": "C",
        "text": "你今天上午都忙了些什么？",
-       "py": "nǐ jīn tiān shàng wǔ dōu máng le xiē shén me"
+       "py": "nǐ jīn tiān shàng wǔ dōu máng le xiē shén me",
+       "tr": [
+        {
+         "zh": "你今天上午都忙了些什么？",
+         "py": "nǐ jīn tiān shàng wǔ dōu máng le xiē shén me",
+         "en": "What were you busy with this morning?",
+         "vi": "Sáng nay bạn bận những việc gì?"
+        },
+        {
+         "zh": "C 写字、看书、吃饭。",
+         "py": "C  xiě zì kàn shū chī fàn",
+         "en": "Writing, reading, eating.",
+         "vi": "Viết chữ, đọc sách, ăn cơm."
+        }
+       ]
       }
      ]
     },
@@ -3698,13 +7826,35 @@
        "n": 17,
        "ans": "B",
        "text": "我喝了一杯（ ）。",
-       "py": "wǒ hē le yī bēi （ ）。"
+       "py": "wǒ hē le yī bēi （ ）。",
+       "tr": [
+        {
+         "zh": "我喝了一杯茶。",
+         "py": "wǒ hē le yī bēi chá",
+         "en": "I drank a cup of tea.",
+         "vi": "Tôi đã uống một cốc trà."
+        }
+       ]
       },
       {
        "n": 18,
        "ans": "A",
        "text": "男：上课了，请大家不要说话。 女：好的，老师，我们（ ）不说话了。",
-       "py": "nán ： shàng kè le qǐng dà jiā bú yào shuō huà 。  nǚ ： hǎo de lǎo shī wǒ men （ ） bù shuō huà le"
+       "py": "nán ： shàng kè le qǐng dà jiā bú yào shuō huà 。  nǚ ： hǎo de lǎo shī wǒ men （ ） bù shuō huà le",
+       "tr": [
+        {
+         "zh": "男：上课了，请大家不要说话。",
+         "py": "nán： shàng kè le qǐng dà jiā bú yào shuō huà",
+         "en": "Class is starting, everyone please stop talking.",
+         "vi": "Vào học rồi, mọi người đừng nói chuyện nữa."
+        },
+        {
+         "zh": "女：好的，老师，我们都不说话了。",
+         "py": "nǚ： hǎo de lǎo shī wǒ men dōu bù shuō huà le",
+         "en": "OK, teacher, none of us will talk.",
+         "vi": "Vâng thưa thầy, chúng em đều không nói nữa."
+        }
+       ]
       }
      ]
     },
@@ -3733,7 +7883,39 @@
         }
        ],
        "text": "服务员，我想问一下，我们的房间号是多少？ ★说话人想知道什么？",
-       "py": "fú wù yuán wǒ xiǎng wèn yī xià wǒ men de fáng jiān hào shì duō shǎo ？ ★ shuō huà rén xiǎng zhī dào shén me"
+       "py": "fú wù yuán wǒ xiǎng wèn yī xià wǒ men de fáng jiān hào shì duō shǎo ？ ★ shuō huà rén xiǎng zhī dào shén me",
+       "tr": [
+        {
+         "zh": "服务员，我想问一下，我们的房间号是多少？",
+         "py": "fú wù yuán wǒ xiǎng wèn yī xià wǒ men de fáng jiān hào shì duō shǎo",
+         "en": "Excuse me, may I ask what our room number is?",
+         "vi": "Phục vụ ơi, cho tôi hỏi, số phòng của chúng tôi là bao nhiêu?"
+        },
+        {
+         "zh": "★说话人想知道什么？",
+         "py": "★ shuō huà rén xiǎng zhī dào shén me",
+         "en": "What does the speaker want to know?",
+         "vi": "Người nói muốn biết gì?"
+        },
+        {
+         "zh": "A 时间",
+         "py": "A  shí jiān",
+         "en": "the time",
+         "vi": "thời gian"
+        },
+        {
+         "zh": "B 电话号",
+         "py": "B  diàn huà hào",
+         "en": "phone number",
+         "vi": "số điện thoại"
+        },
+        {
+         "zh": "C 房间号",
+         "py": "C  fáng jiān hào",
+         "en": "room number",
+         "vi": "số phòng"
+        }
+       ]
       },
       {
        "n": 20,
@@ -3756,7 +7938,39 @@
         }
        ],
        "text": "儿子和女儿都上小学了，他们会写很多字了。 ★说话人的两个孩子是：",
-       "py": "ér zi hé nǚ ér dōu shàng xiǎo xué le tā men huì xiě hěn duō zì le 。 ★ shuō huà rén de liǎng gè hái zi shì ："
+       "py": "ér zi hé nǚ ér dōu shàng xiǎo xué le tā men huì xiě hěn duō zì le 。 ★ shuō huà rén de liǎng gè hái zi shì ：",
+       "tr": [
+        {
+         "zh": "儿子和女儿都上小学了，他们会写很多字了。",
+         "py": "ér zi hé nǚ ér dōu shàng xiǎo xué le tā men huì xiě hěn duō zì le",
+         "en": "My son and daughter are both in primary school; they can write many characters now.",
+         "vi": "Con trai và con gái đều học tiểu học rồi, chúng viết được nhiều chữ rồi."
+        },
+        {
+         "zh": "★说话人的两个孩子是：",
+         "py": "★ shuō huà rén de liǎng gè hái zi shì：",
+         "en": "The speaker's two children are:",
+         "vi": "Hai đứa con của người nói là:"
+        },
+        {
+         "zh": "A 小学生",
+         "py": "A  xiǎo xué shēng",
+         "en": "primary school students",
+         "vi": "học sinh tiểu học"
+        },
+        {
+         "zh": "B 中学生",
+         "py": "B  zhōng xué shēng",
+         "en": "middle school students",
+         "vi": "học sinh trung học"
+        },
+        {
+         "zh": "C 大学生",
+         "py": "C  dà xué shēng",
+         "en": "university students",
+         "vi": "sinh viên đại học"
+        }
+       ]
       }
      ]
     }
@@ -3779,6 +7993,14 @@
        "t": [
         34,
         58
+       ],
+       "tr": [
+        {
+         "zh": "喝茶",
+         "py": "hē chá",
+         "en": "drink tea",
+         "vi": "uống trà"
+        }
        ]
       },
       {
@@ -3787,6 +8009,14 @@
        "t": [
         58,
         75
+       ],
+       "tr": [
+        {
+         "zh": "上飞机",
+         "py": "shàng fēi jī",
+         "en": "board the plane",
+         "vi": "lên máy bay"
+        }
        ]
       },
       {
@@ -3795,6 +8025,14 @@
        "t": [
         75,
         93
+       ],
+       "tr": [
+        {
+         "zh": "吃晚饭",
+         "py": "chī wǎn fàn",
+         "en": "eat dinner",
+         "vi": "ăn tối"
+        }
        ]
       }
      ]
@@ -3826,6 +8064,32 @@
        "t": [
         135,
         165
+       ],
+       "tr": [
+        {
+         "zh": "明天早上五点起床，早不早？",
+         "py": "míng tiān zǎo shàng wǔ diǎn qǐ chuáng zǎo bù zǎo",
+         "en": "Getting up at five tomorrow morning, is that early?",
+         "vi": "Sáng mai năm giờ dậy, có sớm không?"
+        },
+        {
+         "zh": "A 太早了",
+         "py": "A  tài zǎo le",
+         "en": "too early",
+         "vi": "sớm quá"
+        },
+        {
+         "zh": "B 没睡觉",
+         "py": "B  méi shuì jiào",
+         "en": "didn't sleep",
+         "vi": "không ngủ"
+        },
+        {
+         "zh": "C 不想去",
+         "py": "C  bù xiǎng qù",
+         "en": "don't want to go",
+         "vi": "không muốn đi"
+        }
        ]
       },
       {
@@ -3851,6 +8115,32 @@
        "t": [
         165,
         193
+       ],
+       "tr": [
+        {
+         "zh": "这件衣服好看，那件呢？",
+         "py": "zhè jiàn yī fú hǎo kàn nà jiàn ne",
+         "en": "This piece of clothing looks nice. What about that one?",
+         "vi": "Bộ quần áo này đẹp, còn bộ kia thì sao?"
+        },
+        {
+         "zh": "A 很多",
+         "py": "A  hěn duō",
+         "en": "a lot",
+         "vi": "rất nhiều"
+        },
+        {
+         "zh": "B 也不贵",
+         "py": "B  yě bù guì",
+         "en": "not expensive either",
+         "vi": "cũng không đắt"
+        },
+        {
+         "zh": "C 也很好看",
+         "py": "C  yě hěn hǎo kàn",
+         "en": "also very nice",
+         "vi": "cũng rất đẹp"
+        }
        ]
       }
      ]
@@ -3867,6 +8157,20 @@
        "t": [
         240,
         281
+       ],
+       "tr": [
+        {
+         "zh": "这个茶好喝，那个茶也好喝。",
+         "py": "zhè ge chá hǎo hē nà ge chá yě hǎo hē",
+         "en": "This tea is good, and that tea is good too.",
+         "vi": "Trà này ngon, trà kia cũng ngon."
+        },
+        {
+         "zh": "是的！我们也都喜欢喝。",
+         "py": "shì de wǒ men yě dōu xǐ huān hē",
+         "en": "Yes! We all like drinking them too.",
+         "vi": "Đúng vậy! Chúng tôi cũng đều thích uống."
+        }
        ]
       },
       {
@@ -3875,6 +8179,20 @@
        "t": [
         281,
         321
+       ],
+       "tr": [
+        {
+         "zh": "昨天下课后，我去超市买了一些菜和鸡蛋。",
+         "py": "zuó tiān xià kè hòu wǒ qù chāo shì mǎi le yī xiē cài hé jī dàn",
+         "en": "After class yesterday, I went to the supermarket and bought some vegetables and eggs.",
+         "vi": "Hôm qua tan học, tôi đi siêu thị mua ít rau và trứng."
+        },
+        {
+         "zh": "我去商店买了件衣服。",
+         "py": "wǒ qù shāng diàn mǎi le jiàn yī fú",
+         "en": "I went to a shop and bought some clothes.",
+         "vi": "Tôi đi cửa hàng mua một bộ quần áo."
+        }
        ]
       },
       {
@@ -3883,6 +8201,20 @@
        "t": [
         321,
         357
+       ],
+       "tr": [
+        {
+         "zh": "王老师说，北京很大，很漂亮。",
+         "py": "wáng lǎo shī shuō běi jīng hěn dà hěn piào liàng",
+         "en": "Teacher Wang says Beijing is big and beautiful.",
+         "vi": "Thầy Vương nói Bắc Kinh rất lớn, rất đẹp."
+        },
+        {
+         "zh": "是吗？我很想去。",
+         "py": "shì ma wǒ hěn xiǎng qù",
+         "en": "Really? I really want to go.",
+         "vi": "Thật à? Tôi rất muốn đi."
+        }
        ]
       }
      ]
@@ -3914,6 +8246,38 @@
        "t": [
         416,
         462
+       ],
+       "tr": [
+        {
+         "zh": "去年我们去了西安，今年想去北京。",
+         "py": "qù nián wǒ men qù le xī ān jīn nián xiǎng qù běi jīng",
+         "en": "Last year we went to Xi'an; this year we want to go to Beijing.",
+         "vi": "Năm ngoái chúng tôi đi Tây An, năm nay muốn đi Bắc Kinh."
+        },
+        {
+         "zh": "★说话人去年去了哪里？",
+         "py": "★ shuō huà rén qù nián qù le nǎ lǐ",
+         "en": "Where did the speaker go last year?",
+         "vi": "Năm ngoái người nói đã đi đâu?"
+        },
+        {
+         "zh": "A 西安",
+         "py": "A  xī ān",
+         "en": "Xi'an",
+         "vi": "Tây An"
+        },
+        {
+         "zh": "B 北京",
+         "py": "B  běi jīng",
+         "en": "Beijing",
+         "vi": "Bắc Kinh"
+        },
+        {
+         "zh": "C 上海",
+         "py": "C  shàng hǎi",
+         "en": "Shanghai",
+         "vi": "Thượng Hải"
+        }
        ]
       },
       {
@@ -3939,6 +8303,38 @@
        "t": [
         462,
         505
+       ],
+       "tr": [
+        {
+         "zh": "坐飞机太贵了，我想坐火车去。",
+         "py": "zuò fēi jī tài guì le wǒ xiǎng zuò huǒ chē qù",
+         "en": "Flying is too expensive; I want to go by train.",
+         "vi": "Đi máy bay đắt quá, tôi muốn đi tàu hỏa."
+        },
+        {
+         "zh": "★说话人想怎么去？",
+         "py": "★ shuō huà rén xiǎng zěn me qù",
+         "en": "How does the speaker want to go?",
+         "vi": "Người nói muốn đi bằng gì?"
+        },
+        {
+         "zh": "A 坐飞机",
+         "py": "A  zuò fēi jī",
+         "en": "by plane",
+         "vi": "đi máy bay"
+        },
+        {
+         "zh": "B 坐火车",
+         "py": "B  zuò huǒ chē",
+         "en": "by train",
+         "vi": "đi tàu hỏa"
+        },
+        {
+         "zh": "C 坐出租车",
+         "py": "C  zuò chū zū chē",
+         "en": "by taxi",
+         "vi": "đi taxi"
+        }
        ]
       }
      ]
@@ -3953,19 +8349,43 @@
        "n": 11,
        "ans": "D",
        "text": "我家有五口人，我们现在住在北京。",
-       "py": "wǒ jiā yǒu wǔ kǒu rén wǒ men xiàn zài zhù zài běi jīng"
+       "py": "wǒ jiā yǒu wǔ kǒu rén wǒ men xiàn zài zhù zài běi jīng",
+       "tr": [
+        {
+         "zh": "我家有五口人，我们现在住在北京。",
+         "py": "wǒ jiā yǒu wǔ kǒu rén wǒ men xiàn zài zhù zài běi jīng",
+         "en": "There are five people in my family; we live in Beijing now.",
+         "vi": "Nhà tôi có năm người, bây giờ chúng tôi sống ở Bắc Kinh."
+        }
+       ]
       },
       {
        "n": 12,
        "ans": "B",
        "text": "这里有好吃的，还有好玩儿的。",
-       "py": "zhè lǐ yǒu hǎo chī de hái yǒu hǎo wán ér de"
+       "py": "zhè lǐ yǒu hǎo chī de hái yǒu hǎo wán ér de",
+       "tr": [
+        {
+         "zh": "这里有好吃的，还有好玩儿的。",
+         "py": "zhè lǐ yǒu hǎo chī de hái yǒu hǎo wán ér de",
+         "en": "There's good food here, and fun things too.",
+         "vi": "Ở đây có đồ ăn ngon, còn có chỗ vui chơi nữa."
+        }
+       ]
       },
       {
        "n": 13,
        "ans": "C",
        "text": "现在我会说一点儿汉语，也会写一些汉字了。",
-       "py": "xiàn zài wǒ huì shuō yì diǎn ér hàn yǔ yě huì xiě yī xiē hàn zì le"
+       "py": "xiàn zài wǒ huì shuō yì diǎn ér hàn yǔ yě huì xiě yī xiē hàn zì le",
+       "tr": [
+        {
+         "zh": "现在我会说一点儿汉语，也会写一些汉字了。",
+         "py": "xiàn zài wǒ huì shuō yì diǎn ér hàn yǔ yě huì xiě yī xiē hàn zì le",
+         "en": "Now I can speak a little Chinese and write some characters too.",
+         "vi": "Bây giờ tôi nói được chút tiếng Trung, cũng viết được một số chữ Hán rồi."
+        }
+       ]
       }
      ]
     },
@@ -3999,19 +8419,61 @@
        "n": 14,
        "ans": "B",
        "text": "你会写几个汉字？",
-       "py": "nǐ huì xiě jǐ gè hàn zì"
+       "py": "nǐ huì xiě jǐ gè hàn zì",
+       "tr": [
+        {
+         "zh": "你会写几个汉字？",
+         "py": "nǐ huì xiě jǐ gè hàn zì",
+         "en": "How many Chinese characters can you write?",
+         "vi": "Bạn viết được mấy chữ Hán?"
+        },
+        {
+         "zh": "B 十个。",
+         "py": "B  shí gè",
+         "en": "Ten.",
+         "vi": "Mười chữ."
+        }
+       ]
       },
       {
        "n": 15,
        "ans": "A",
        "text": "谁上中学了？",
-       "py": "shuí shàng zhōng xué le"
+       "py": "shuí shàng zhōng xué le",
+       "tr": [
+        {
+         "zh": "谁上中学了？",
+         "py": "shuí shàng zhōng xué le",
+         "en": "Who is in middle school now?",
+         "vi": "Ai đã lên trung học rồi?"
+        },
+        {
+         "zh": "A 我女儿。",
+         "py": "A  wǒ nǚ ér",
+         "en": "My daughter.",
+         "vi": "Con gái tôi."
+        }
+       ]
       },
       {
        "n": 16,
        "ans": "C",
        "text": "你爱吃什么？",
-       "py": "nǐ ài chī shén me"
+       "py": "nǐ ài chī shén me",
+       "tr": [
+        {
+         "zh": "你爱吃什么？",
+         "py": "nǐ ài chī shén me",
+         "en": "What do you like to eat?",
+         "vi": "Bạn thích ăn gì?"
+        },
+        {
+         "zh": "C 苹果。",
+         "py": "C  píng guǒ",
+         "en": "Apples.",
+         "vi": "Táo."
+        }
+       ]
       }
      ]
     },
@@ -4040,13 +8502,35 @@
        "n": 17,
        "ans": "B",
        "text": "今年我们都想去（ ）。",
-       "py": "jīn nián wǒ men dōu xiǎng qù （ ）。"
+       "py": "jīn nián wǒ men dōu xiǎng qù （ ）。",
+       "tr": [
+        {
+         "zh": "今年我们都想去北京。",
+         "py": "jīn nián wǒ men dōu xiǎng qù běi jīng",
+         "en": "This year we all want to go to Beijing.",
+         "vi": "Năm nay chúng tôi đều muốn đi Bắc Kinh."
+        }
+       ]
       },
       {
        "n": 18,
        "ans": "A",
        "text": "男：我爱看电影，也爱唱歌。你呢？ 女：我喜欢看（ ）。",
-       "py": "nán ： wǒ ài kàn diàn yǐng yě ài chàng gē nǐ ne ？  nǚ ： wǒ xǐ huān kàn （ ）。"
+       "py": "nán ： wǒ ài kàn diàn yǐng yě ài chàng gē nǐ ne ？  nǚ ： wǒ xǐ huān kàn （ ）。",
+       "tr": [
+        {
+         "zh": "男：我爱看电影，也爱唱歌。你呢？",
+         "py": "nán： wǒ ài kàn diàn yǐng yě ài chàng gē nǐ ne",
+         "en": "I love watching movies and singing. And you?",
+         "vi": "Tôi thích xem phim, cũng thích hát. Còn bạn?"
+        },
+        {
+         "zh": "女：我喜欢看电视。",
+         "py": "nǚ： wǒ xǐ huān kàn diàn shì",
+         "en": "I like watching TV.",
+         "vi": "Tôi thích xem tivi."
+        }
+       ]
       }
      ]
     },
@@ -4075,7 +8559,39 @@
         }
        ],
        "text": "明天星期天，儿子想去看一个电影。 ★儿子明天想：",
-       "py": "míng tiān xīng qī tiān ér zi xiǎng qù kàn yí gè diàn yǐng 。 ★ ér zi míng tiān xiǎng ："
+       "py": "míng tiān xīng qī tiān ér zi xiǎng qù kàn yí gè diàn yǐng 。 ★ ér zi míng tiān xiǎng ：",
+       "tr": [
+        {
+         "zh": "明天星期天，儿子想去看一个电影。",
+         "py": "míng tiān xīng qī tiān ér zi xiǎng qù kàn yí gè diàn yǐng",
+         "en": "Tomorrow is Sunday; my son wants to go see a movie.",
+         "vi": "Mai là chủ nhật, con trai muốn đi xem một bộ phim."
+        },
+        {
+         "zh": "★儿子明天想：",
+         "py": "★ ér zi míng tiān xiǎng：",
+         "en": "Tomorrow the son wants to:",
+         "vi": "Ngày mai con trai muốn:"
+        },
+        {
+         "zh": "A 买电脑",
+         "py": "A  mǎi diàn nǎo",
+         "en": "buy a computer",
+         "vi": "mua máy tính"
+        },
+        {
+         "zh": "B 打电话",
+         "py": "B  dǎ diàn huà",
+         "en": "make a phone call",
+         "vi": "gọi điện thoại"
+        },
+        {
+         "zh": "C 看电影",
+         "py": "C  kàn diàn yǐng",
+         "en": "watch a movie",
+         "vi": "xem phim"
+        }
+       ]
       },
       {
        "n": 20,
@@ -4098,7 +8614,39 @@
         }
        ],
        "text": "下小雨了，小狗非常高兴，它喜欢小雨。 ★小狗喜欢：",
-       "py": "xià xiǎo yǔ le xiǎo gǒu fēi cháng gāo xìng tā xǐ huān xiǎo yǔ 。 ★ xiǎo gǒu xǐ huān ："
+       "py": "xià xiǎo yǔ le xiǎo gǒu fēi cháng gāo xìng tā xǐ huān xiǎo yǔ 。 ★ xiǎo gǒu xǐ huān ：",
+       "tr": [
+        {
+         "zh": "下小雨了，小狗非常高兴，它喜欢小雨。",
+         "py": "xià xiǎo yǔ le xiǎo gǒu fēi cháng gāo xìng tā xǐ huān xiǎo yǔ",
+         "en": "It's drizzling; the puppy is very happy, it likes light rain.",
+         "vi": "Trời mưa nhỏ, chú chó con rất vui, nó thích mưa nhỏ."
+        },
+        {
+         "zh": "★小狗喜欢：",
+         "py": "★ xiǎo gǒu xǐ huān：",
+         "en": "The puppy likes:",
+         "vi": "Chó con thích:"
+        },
+        {
+         "zh": "A 下小雨",
+         "py": "A  xià xiǎo yǔ",
+         "en": "light rain",
+         "vi": "mưa nhỏ"
+        },
+        {
+         "zh": "B 下大雨",
+         "py": "B  xià dà yǔ",
+         "en": "heavy rain",
+         "vi": "mưa to"
+        },
+        {
+         "zh": "C 下小雪",
+         "py": "C  xià xiǎo xuě",
+         "en": "light snow",
+         "vi": "tuyết nhỏ"
+        }
+       ]
       }
      ]
     }
@@ -4121,6 +8669,14 @@
        "t": [
         120,
         134
+       ],
+       "tr": [
+        {
+         "zh": "一些饺子",
+         "py": "yī xiē jiǎo zi",
+         "en": "some dumplings",
+         "vi": "một ít sủi cảo"
+        }
        ]
       },
       {
@@ -4129,6 +8685,14 @@
        "t": [
         134,
         154
+       ],
+       "tr": [
+        {
+         "zh": "看电视",
+         "py": "kàn diàn shì",
+         "en": "watch TV",
+         "vi": "xem tivi"
+        }
        ]
       },
       {
@@ -4137,6 +8701,14 @@
        "t": [
         154,
         175
+       ],
+       "tr": [
+        {
+         "zh": "在书店",
+         "py": "zài shū diàn",
+         "en": "at the bookstore",
+         "vi": "ở hiệu sách"
+        }
        ]
       },
       {
@@ -4145,6 +8717,14 @@
        "t": [
         175,
         194
+       ],
+       "tr": [
+        {
+         "zh": "八点零五分",
+         "py": "bā diǎn líng wǔ fēn",
+         "en": "five past eight",
+         "vi": "tám giờ năm phút"
+        }
        ]
       },
       {
@@ -4153,6 +8733,14 @@
        "t": [
         194,
         213
+       ],
+       "tr": [
+        {
+         "zh": "哥哥和妹妹",
+         "py": "gē gē hé mèi mèi",
+         "en": "older brother and younger sister",
+         "vi": "anh trai và em gái"
+        }
        ]
       }
      ]
@@ -4184,6 +8772,32 @@
        "t": [
         257,
         281
+       ],
+       "tr": [
+        {
+         "zh": "爸爸在做什么呢？",
+         "py": "bà bà zài zuò shén me ne",
+         "en": "What is Dad doing?",
+         "vi": "Bố đang làm gì thế?"
+        },
+        {
+         "zh": "A 哪里",
+         "py": "A  nǎ lǐ",
+         "en": "A where",
+         "vi": "A ở đâu"
+        },
+        {
+         "zh": "B 打电话",
+         "py": "B  dǎ diàn huà",
+         "en": "B making a phone call",
+         "vi": "B gọi điện thoại"
+        },
+        {
+         "zh": "C 做饭好吃",
+         "py": "C  zuò fàn hǎo chī",
+         "en": "C cooks well",
+         "vi": "C nấu ăn ngon"
+        }
        ]
       },
       {
@@ -4209,6 +8823,32 @@
        "t": [
         281,
         306
+       ],
+       "tr": [
+        {
+         "zh": "你下午要去哪儿？",
+         "py": "nǐ xià wǔ yào qù nǎ ér",
+         "en": "Where are you going this afternoon?",
+         "vi": "Chiều nay bạn định đi đâu?"
+        },
+        {
+         "zh": "A 白天",
+         "py": "A  bái tiān",
+         "en": "A daytime",
+         "vi": "A ban ngày"
+        },
+        {
+         "zh": "B 生病了",
+         "py": "B  shēng bìng le",
+         "en": "B got sick",
+         "vi": "B bị ốm rồi"
+        },
+        {
+         "zh": "C 水果店",
+         "py": "C  shuǐ guǒ diàn",
+         "en": "C fruit shop",
+         "vi": "C cửa hàng hoa quả"
+        }
        ]
       },
       {
@@ -4234,6 +8874,32 @@
        "t": [
         306,
         331
+       ],
+       "tr": [
+        {
+         "zh": "那件衣服是你的吗？",
+         "py": "nà jiàn yī fú shì nǐ de ma",
+         "en": "Is that piece of clothing yours?",
+         "vi": "Bộ quần áo kia là của bạn à?"
+        },
+        {
+         "zh": "A 八元",
+         "py": "A  bā yuán",
+         "en": "A eight yuan",
+         "vi": "A tám tệ"
+        },
+        {
+         "zh": "B 不是",
+         "py": "B  bú shì",
+         "en": "B no, it isn't",
+         "vi": "B không phải"
+        },
+        {
+         "zh": "C 便宜",
+         "py": "C  pián yi",
+         "en": "C cheap",
+         "vi": "C rẻ"
+        }
        ]
       },
       {
@@ -4259,6 +8925,32 @@
        "t": [
         331,
         356
+       ],
+       "tr": [
+        {
+         "zh": "谁会说汉语？",
+         "py": "shuí huì shuō hàn yǔ",
+         "en": "Who can speak Chinese?",
+         "vi": "Ai biết nói tiếng Trung?"
+        },
+        {
+         "zh": "A 去年",
+         "py": "A  qù nián",
+         "en": "A last year",
+         "vi": "A năm ngoái"
+        },
+        {
+         "zh": "B 很漂亮",
+         "py": "B  hěn piào liàng",
+         "en": "B very pretty",
+         "vi": "B rất đẹp"
+        },
+        {
+         "zh": "C 我弟弟",
+         "py": "C  wǒ dì di",
+         "en": "C my younger brother",
+         "vi": "C em trai tôi"
+        }
        ]
       },
       {
@@ -4284,6 +8976,32 @@
        "t": [
         356,
         366
+       ],
+       "tr": [
+        {
+         "zh": "有人叫你，你听见了吗？",
+         "py": "yǒu rén jiào nǐ nǐ tīng jiàn le ma",
+         "en": "Someone is calling you. Did you hear?",
+         "vi": "Có người gọi bạn, bạn nghe thấy không?"
+        },
+        {
+         "zh": "A 没有",
+         "py": "A  méi yǒu",
+         "en": "A no, I didn't",
+         "vi": "A không có"
+        },
+        {
+         "zh": "B 再见",
+         "py": "B  zài jiàn",
+         "en": "B goodbye",
+         "vi": "B tạm biệt"
+        },
+        {
+         "zh": "C 不要",
+         "py": "C  bú yào",
+         "en": "C don't want",
+         "vi": "C không cần"
+        }
        ]
       }
      ]
@@ -4300,6 +9018,20 @@
        "t": [
         420,
         466
+       ],
+       "tr": [
+        {
+         "zh": "椅子，一百元一个。",
+         "py": "yǐ zi yì bǎi yuán yí gè",
+         "en": "Chairs, 100 yuan each.",
+         "vi": "Ghế, một trăm tệ một cái."
+        },
+        {
+         "zh": "我要这两个。",
+         "py": "wǒ yào zhè liǎng gè",
+         "en": "I'll take these two.",
+         "vi": "Tôi lấy hai cái này."
+        }
        ]
       },
       {
@@ -4308,6 +9040,20 @@
        "t": [
         466,
         500
+       ],
+       "tr": [
+        {
+         "zh": "你下午去哪儿了？",
+         "py": "nǐ xià wǔ qù nǎ ér le",
+         "en": "Where did you go this afternoon?",
+         "vi": "Chiều nay bạn đi đâu thế?"
+        },
+        {
+         "zh": "我去电影院看电影了。",
+         "py": "wǒ qù diàn yǐng yuàn kàn diàn yǐng le",
+         "en": "I went to the cinema to see a film.",
+         "vi": "Tôi đến rạp xem phim."
+        }
        ]
       },
       {
@@ -4316,6 +9062,20 @@
        "t": [
         500,
         531
+       ],
+       "tr": [
+        {
+         "zh": "这几天太热了。",
+         "py": "zhè jǐ tiān tài rè le",
+         "en": "It's been so hot these days.",
+         "vi": "Mấy hôm nay nóng quá."
+        },
+        {
+         "zh": "我也觉得是。",
+         "py": "wǒ yě jué de shì",
+         "en": "I think so too.",
+         "vi": "Tôi cũng thấy vậy."
+        }
        ]
       },
       {
@@ -4324,6 +9084,20 @@
        "t": [
         531,
         568
+       ],
+       "tr": [
+        {
+         "zh": "喂，你晚上几点回家？",
+         "py": "wèi nǐ wǎn shàng jǐ diǎn huí jiā",
+         "en": "Hello, what time are you coming home tonight?",
+         "vi": "Alô, tối nay mấy giờ em về nhà?"
+        },
+        {
+         "zh": "不知道呢，今天病人多。",
+         "py": "bù zhī dào ne jīn tiān bìng rén duō",
+         "en": "I don't know, there are many patients today.",
+         "vi": "Chưa biết nữa, hôm nay nhiều bệnh nhân."
+        }
        ]
       },
       {
@@ -4332,6 +9106,20 @@
        "t": [
         568,
         598
+       ],
+       "tr": [
+        {
+         "zh": "孩子睡了。",
+         "py": "hái zi shuì le",
+         "en": "The child is asleep.",
+         "vi": "Con ngủ rồi."
+        },
+        {
+         "zh": "我们也休息吧。",
+         "py": "wǒ men yě xiū xī ba",
+         "en": "Let's rest too.",
+         "vi": "Chúng ta cũng nghỉ thôi."
+        }
        ]
       }
      ]
@@ -4363,6 +9151,38 @@
        "t": [
         660,
         711
+       ],
+       "tr": [
+        {
+         "zh": "他是我的大学老师，今年六十岁了。",
+         "py": "tā shì wǒ de dà xué lǎo shī jīn nián liù shí suì le",
+         "en": "He is my university teacher; he is sixty this year.",
+         "vi": "Thầy ấy là thầy giáo đại học của tôi, năm nay sáu mươi tuổi rồi."
+        },
+        {
+         "zh": "说话人的老师今年多大了？",
+         "py": "shuō huà rén de lǎo shī jīn nián duō dà le",
+         "en": "How old is the speaker's teacher this year?",
+         "vi": "Thầy giáo của người nói năm nay bao nhiêu tuổi?"
+        },
+        {
+         "zh": "A 60岁",
+         "py": "A 60 suì",
+         "en": "A 60 years old",
+         "vi": "A 60 tuổi"
+        },
+        {
+         "zh": "B 60多岁",
+         "py": "B 60 duō suì",
+         "en": "B over 60",
+         "vi": "B hơn 60 tuổi"
+        },
+        {
+         "zh": "C 70岁",
+         "py": "C 70 suì",
+         "en": "C 70 years old",
+         "vi": "C 70 tuổi"
+        }
        ]
       },
       {
@@ -4388,6 +9208,38 @@
        "t": [
         711,
         748
+       ],
+       "tr": [
+        {
+         "zh": "我非常喜欢昨天买的新手机。",
+         "py": "wǒ fēi cháng xǐ huān zuó tiān mǎi de xīn shǒu jī",
+         "en": "I really like the new phone I bought yesterday.",
+         "vi": "Tôi rất thích chiếc điện thoại mới mua hôm qua."
+        },
+        {
+         "zh": "说话人买了什么？",
+         "py": "shuō huà rén mǎi le shén me",
+         "en": "What did the speaker buy?",
+         "vi": "Người nói đã mua gì?"
+        },
+        {
+         "zh": "A 电脑",
+         "py": "A  diàn nǎo",
+         "en": "A computer",
+         "vi": "A máy tính"
+        },
+        {
+         "zh": "B 杯子",
+         "py": "B  bēi zi",
+         "en": "B cup",
+         "vi": "B cái cốc"
+        },
+        {
+         "zh": "C 手机",
+         "py": "C  shǒu jī",
+         "en": "C mobile phone",
+         "vi": "C điện thoại di động"
+        }
        ]
       },
       {
@@ -4413,6 +9265,38 @@
        "t": [
         748,
         787
+       ],
+       "tr": [
+        {
+         "zh": "女儿明天没有课，她很高兴。",
+         "py": "nǚ ér míng tiān méi yǒu kè tā hěn gāo xìng",
+         "en": "My daughter has no class tomorrow; she's very happy.",
+         "vi": "Con gái ngày mai không có tiết học, nó rất vui."
+        },
+        {
+         "zh": "谁明天不上课？",
+         "py": "shuí míng tiān bù shàng kè",
+         "en": "Who has no class tomorrow?",
+         "vi": "Ai ngày mai không đi học?"
+        },
+        {
+         "zh": "A 女儿",
+         "py": "A  nǚ ér",
+         "en": "A daughter",
+         "vi": "A con gái"
+        },
+        {
+         "zh": "B 妹妹",
+         "py": "B  mèi mèi",
+         "en": "B younger sister",
+         "vi": "B em gái"
+        },
+        {
+         "zh": "C 高女士",
+         "py": "C  gāo nǚ shì",
+         "en": "C Ms. Gao",
+         "vi": "C bà Cao"
+        }
        ]
       },
       {
@@ -4438,6 +9322,38 @@
        "t": [
         787,
         821
+       ],
+       "tr": [
+        {
+         "zh": "我想学做面包。",
+         "py": "wǒ xiǎng xué zuò miàn bāo",
+         "en": "I want to learn to make bread.",
+         "vi": "Tôi muốn học làm bánh mì."
+        },
+        {
+         "zh": "说话人想学做什么？",
+         "py": "shuō huà rén xiǎng xué zuò shén me",
+         "en": "What does the speaker want to learn to make?",
+         "vi": "Người nói muốn học làm gì?"
+        },
+        {
+         "zh": "A 包子",
+         "py": "A  bāo zi",
+         "en": "A steamed bun",
+         "vi": "A bánh bao"
+        },
+        {
+         "zh": "B 面包",
+         "py": "B  miàn bāo",
+         "en": "B bread",
+         "vi": "B bánh mì"
+        },
+        {
+         "zh": "C 面条儿",
+         "py": "C  miàn tiáo ér",
+         "en": "C noodles",
+         "vi": "C mì sợi"
+        }
        ]
       },
       {
@@ -4463,6 +9379,38 @@
        "t": [
         821,
         863
+       ],
+       "tr": [
+        {
+         "zh": "我现在太忙了，你中午再来找我吧！",
+         "py": "wǒ xiàn zài tài máng le nǐ zhōng wǔ zài lái zhǎo wǒ ba",
+         "en": "I'm too busy now, come find me at noon!",
+         "vi": "Bây giờ tôi bận quá, trưa bạn hãy đến tìm tôi nhé!"
+        },
+        {
+         "zh": "什么时间可以找说话人？",
+         "py": "shén me shí jiān kě yǐ zhǎo shuō huà rén",
+         "en": "When can you find the speaker?",
+         "vi": "Lúc nào có thể tìm người nói?"
+        },
+        {
+         "zh": "A 早上",
+         "py": "A  zǎo shàng",
+         "en": "A morning",
+         "vi": "A buổi sáng"
+        },
+        {
+         "zh": "B 中午",
+         "py": "B  zhōng wǔ",
+         "en": "B noon",
+         "vi": "B buổi trưa"
+        },
+        {
+         "zh": "C 星期天",
+         "py": "C  xīng qī tiān",
+         "en": "C Sunday",
+         "vi": "C chủ nhật"
+        }
        ]
       }
      ]
@@ -4477,31 +9425,71 @@
        "n": 21,
        "ans": "B",
        "text": "王先生是医生。",
-       "py": "wáng xiān shēng shì yī shēng"
+       "py": "wáng xiān shēng shì yī shēng",
+       "tr": [
+        {
+         "zh": "王先生是医生。",
+         "py": "wáng xiān shēng shì yī shēng",
+         "en": "Mr. Wang is a doctor.",
+         "vi": "Ông Vương là bác sĩ."
+        }
+       ]
       },
       {
        "n": 22,
        "ans": "D",
        "text": "姐姐上午去超市买了菜。",
-       "py": "jiě jiě shàng wǔ qù chāo shì mǎi le cài"
+       "py": "jiě jiě shàng wǔ qù chāo shì mǎi le cài",
+       "tr": [
+        {
+         "zh": "姐姐上午去超市买了菜。",
+         "py": "jiě jiě shàng wǔ qù chāo shì mǎi le cài",
+         "en": "My older sister went to the supermarket this morning to buy groceries.",
+         "vi": "Sáng nay chị gái đi siêu thị mua rau."
+        }
+       ]
       },
       {
        "n": 23,
        "ans": "A",
        "text": "今天的早饭是牛奶和鸡蛋。",
-       "py": "jīn tiān de zǎo fàn shì niú nǎi hé jī dàn"
+       "py": "jīn tiān de zǎo fàn shì niú nǎi hé jī dàn",
+       "tr": [
+        {
+         "zh": "今天的早饭是牛奶和鸡蛋。",
+         "py": "jīn tiān de zǎo fàn shì niú nǎi hé jī dàn",
+         "en": "Today's breakfast is milk and eggs.",
+         "vi": "Bữa sáng hôm nay là sữa và trứng."
+        }
+       ]
       },
       {
        "n": 24,
        "ans": "C",
        "text": "我家有四口人，爸爸、妈妈、弟弟和我。",
-       "py": "wǒ jiā yǒu sì kǒu rén bà bà mā mā dì di hé wǒ"
+       "py": "wǒ jiā yǒu sì kǒu rén bà bà mā mā dì di hé wǒ",
+       "tr": [
+        {
+         "zh": "我家有四口人，爸爸、妈妈、弟弟和我。",
+         "py": "wǒ jiā yǒu sì kǒu rén bà bà mā mā dì di hé wǒ",
+         "en": "There are four people in my family: Dad, Mom, my younger brother and me.",
+         "vi": "Nhà tôi có bốn người: bố, mẹ, em trai và tôi."
+        }
+       ]
       },
       {
        "n": 25,
        "ans": "F",
        "text": "她和好朋友都爱唱歌。",
-       "py": "tā hé hǎo péng yǒu dōu ài chàng gē"
+       "py": "tā hé hǎo péng yǒu dōu ài chàng gē",
+       "tr": [
+        {
+         "zh": "她和好朋友都爱唱歌。",
+         "py": "tā hé hǎo péng yǒu dōu ài chàng gē",
+         "en": "She and her good friend both love singing.",
+         "vi": "Cô ấy và bạn thân đều thích hát."
+        }
+       ]
       }
      ]
     },
@@ -4545,31 +9533,251 @@
        "n": 26,
        "ans": "C",
        "text": "这是我的书，你的呢？",
-       "py": "zhè shì wǒ de shū nǐ de ne"
+       "py": "zhè shì wǒ de shū nǐ de ne",
+       "tr": [
+        {
+         "zh": "这是我的书，你的呢？",
+         "py": "zhè shì wǒ de shū nǐ de ne",
+         "en": "This is my book. Where's yours?",
+         "vi": "Đây là sách của tôi, còn của bạn đâu?"
+        },
+        {
+         "zh": "A 商店。",
+         "py": "A  shāng diàn",
+         "en": "A The shop.",
+         "vi": "A Cửa hàng."
+        },
+        {
+         "zh": "B 我学生。",
+         "py": "B  wǒ xué shēng",
+         "en": "B My student.",
+         "vi": "B Học sinh của tôi."
+        },
+        {
+         "zh": "C 在桌子上。",
+         "py": "C  zài zhuō zi shàng",
+         "en": "C On the table.",
+         "vi": "C Ở trên bàn."
+        },
+        {
+         "zh": "D 还没有。",
+         "py": "D  hái méi yǒu",
+         "en": "D Not yet.",
+         "vi": "D Vẫn chưa."
+        },
+        {
+         "zh": "E 下雪了。",
+         "py": "E  xià xuě le",
+         "en": "E It snowed.",
+         "vi": "E Có tuyết rơi."
+        },
+        {
+         "zh": "F 好的，谢谢！",
+         "py": "F  hǎo de xiè xiè",
+         "en": "F OK, thanks!",
+         "vi": "F Vâng, cảm ơn!"
+        }
+       ]
       },
       {
        "n": 27,
        "ans": "A",
        "text": "你去哪儿买苹果？",
-       "py": "nǐ qù nǎ ér mǎi píng guǒ"
+       "py": "nǐ qù nǎ ér mǎi píng guǒ",
+       "tr": [
+        {
+         "zh": "你去哪儿买苹果？",
+         "py": "nǐ qù nǎ ér mǎi píng guǒ",
+         "en": "Where are you going to buy apples?",
+         "vi": "Bạn đi đâu mua táo?"
+        },
+        {
+         "zh": "A 商店。",
+         "py": "A  shāng diàn",
+         "en": "A The shop.",
+         "vi": "A Cửa hàng."
+        },
+        {
+         "zh": "B 我学生。",
+         "py": "B  wǒ xué shēng",
+         "en": "B My student.",
+         "vi": "B Học sinh của tôi."
+        },
+        {
+         "zh": "C 在桌子上。",
+         "py": "C  zài zhuō zi shàng",
+         "en": "C On the table.",
+         "vi": "C Ở trên bàn."
+        },
+        {
+         "zh": "D 还没有。",
+         "py": "D  hái méi yǒu",
+         "en": "D Not yet.",
+         "vi": "D Vẫn chưa."
+        },
+        {
+         "zh": "E 下雪了。",
+         "py": "E  xià xuě le",
+         "en": "E It snowed.",
+         "vi": "E Có tuyết rơi."
+        },
+        {
+         "zh": "F 好的，谢谢！",
+         "py": "F  hǎo de xiè xiè",
+         "en": "F OK, thanks!",
+         "vi": "F Vâng, cảm ơn!"
+        }
+       ]
       },
       {
        "n": 28,
        "ans": "E",
        "text": "昨天天气怎么样？",
-       "py": "zuó tiān tiān qì zěn me yàng"
+       "py": "zuó tiān tiān qì zěn me yàng",
+       "tr": [
+        {
+         "zh": "昨天天气怎么样？",
+         "py": "zuó tiān tiān qì zěn me yàng",
+         "en": "What was the weather like yesterday?",
+         "vi": "Thời tiết hôm qua thế nào?"
+        },
+        {
+         "zh": "A 商店。",
+         "py": "A  shāng diàn",
+         "en": "A The shop.",
+         "vi": "A Cửa hàng."
+        },
+        {
+         "zh": "B 我学生。",
+         "py": "B  wǒ xué shēng",
+         "en": "B My student.",
+         "vi": "B Học sinh của tôi."
+        },
+        {
+         "zh": "C 在桌子上。",
+         "py": "C  zài zhuō zi shàng",
+         "en": "C On the table.",
+         "vi": "C Ở trên bàn."
+        },
+        {
+         "zh": "D 还没有。",
+         "py": "D  hái méi yǒu",
+         "en": "D Not yet.",
+         "vi": "D Vẫn chưa."
+        },
+        {
+         "zh": "E 下雪了。",
+         "py": "E  xià xuě le",
+         "en": "E It snowed.",
+         "vi": "E Có tuyết rơi."
+        },
+        {
+         "zh": "F 好的，谢谢！",
+         "py": "F  hǎo de xiè xiè",
+         "en": "F OK, thanks!",
+         "vi": "F Vâng, cảm ơn!"
+        }
+       ]
       },
       {
        "n": 29,
        "ans": "B",
        "text": "你和谁打电话呢？",
-       "py": "nǐ hé shuí dǎ diàn huà ne"
+       "py": "nǐ hé shuí dǎ diàn huà ne",
+       "tr": [
+        {
+         "zh": "你和谁打电话呢？",
+         "py": "nǐ hé shuí dǎ diàn huà ne",
+         "en": "Who are you on the phone with?",
+         "vi": "Bạn đang gọi điện với ai thế?"
+        },
+        {
+         "zh": "A 商店。",
+         "py": "A  shāng diàn",
+         "en": "A The shop.",
+         "vi": "A Cửa hàng."
+        },
+        {
+         "zh": "B 我学生。",
+         "py": "B  wǒ xué shēng",
+         "en": "B My student.",
+         "vi": "B Học sinh của tôi."
+        },
+        {
+         "zh": "C 在桌子上。",
+         "py": "C  zài zhuō zi shàng",
+         "en": "C On the table.",
+         "vi": "C Ở trên bàn."
+        },
+        {
+         "zh": "D 还没有。",
+         "py": "D  hái méi yǒu",
+         "en": "D Not yet.",
+         "vi": "D Vẫn chưa."
+        },
+        {
+         "zh": "E 下雪了。",
+         "py": "E  xià xuě le",
+         "en": "E It snowed.",
+         "vi": "E Có tuyết rơi."
+        },
+        {
+         "zh": "F 好的，谢谢！",
+         "py": "F  hǎo de xiè xiè",
+         "en": "F OK, thanks!",
+         "vi": "F Vâng, cảm ơn!"
+        }
+       ]
       },
       {
        "n": 30,
        "ans": "D",
        "text": "你下班了吗？",
-       "py": "nǐ xià bān le ma"
+       "py": "nǐ xià bān le ma",
+       "tr": [
+        {
+         "zh": "你下班了吗？",
+         "py": "nǐ xià bān le ma",
+         "en": "Are you off work yet?",
+         "vi": "Bạn tan làm chưa?"
+        },
+        {
+         "zh": "A 商店。",
+         "py": "A  shāng diàn",
+         "en": "A The shop.",
+         "vi": "A Cửa hàng."
+        },
+        {
+         "zh": "B 我学生。",
+         "py": "B  wǒ xué shēng",
+         "en": "B My student.",
+         "vi": "B Học sinh của tôi."
+        },
+        {
+         "zh": "C 在桌子上。",
+         "py": "C  zài zhuō zi shàng",
+         "en": "C On the table.",
+         "vi": "C Ở trên bàn."
+        },
+        {
+         "zh": "D 还没有。",
+         "py": "D  hái méi yǒu",
+         "en": "D Not yet.",
+         "vi": "D Vẫn chưa."
+        },
+        {
+         "zh": "E 下雪了。",
+         "py": "E  xià xuě le",
+         "en": "E It snowed.",
+         "vi": "E Có tuyết rơi."
+        },
+        {
+         "zh": "F 好的，谢谢！",
+         "py": "F  hǎo de xiè xiè",
+         "en": "F OK, thanks!",
+         "vi": "F Vâng, cảm ơn!"
+        }
+       ]
       }
      ]
     },
@@ -4613,31 +9821,257 @@
        "n": 31,
        "ans": "C",
        "text": "大家都没吃（ ）呢。",
-       "py": "dà jiā dōu méi chī （ ） ne"
+       "py": "dà jiā dōu méi chī （ ） ne",
+       "tr": [
+        {
+         "zh": "大家都没吃晚饭呢。",
+         "py": "dà jiā dōu méi chī wǎn fàn ne",
+         "en": "Nobody has eaten dinner yet.",
+         "vi": "Mọi người đều chưa ăn tối."
+        },
+        {
+         "zh": "A 认识",
+         "py": "A  rèn shí",
+         "en": "A know (a person)",
+         "vi": "A quen biết"
+        },
+        {
+         "zh": "B 住",
+         "py": "B  zhù",
+         "en": "B live",
+         "vi": "B sống, ở"
+        },
+        {
+         "zh": "C 晚饭",
+         "py": "C  wǎn fàn",
+         "en": "C dinner",
+         "vi": "C bữa tối"
+        },
+        {
+         "zh": "D 叫",
+         "py": "D  jiào",
+         "en": "D be called",
+         "vi": "D gọi là, tên là"
+        },
+        {
+         "zh": "E 汉字",
+         "py": "E  hàn zì",
+         "en": "E Chinese characters",
+         "vi": "E chữ Hán"
+        },
+        {
+         "zh": "F 块",
+         "py": "F  kuài",
+         "en": "F kuai (yuan)",
+         "vi": "F tệ"
+        }
+       ]
       },
       {
        "n": 32,
        "ans": "E",
        "text": "在今天的中文课上，我学了很多（ ）。",
-       "py": "zài jīn tiān de zhōng wén kè shàng wǒ xué le hěn duō （ ）。"
+       "py": "zài jīn tiān de zhōng wén kè shàng wǒ xué le hěn duō （ ）。",
+       "tr": [
+        {
+         "zh": "在今天的中文课上，我学了很多汉字。",
+         "py": "zài jīn tiān de zhōng wén kè shàng wǒ xué le hěn duō hàn zì",
+         "en": "In today's Chinese class I learned many characters.",
+         "vi": "Trong giờ tiếng Trung hôm nay, tôi đã học rất nhiều chữ Hán."
+        },
+        {
+         "zh": "A 认识",
+         "py": "A  rèn shí",
+         "en": "A know (a person)",
+         "vi": "A quen biết"
+        },
+        {
+         "zh": "B 住",
+         "py": "B  zhù",
+         "en": "B live",
+         "vi": "B sống, ở"
+        },
+        {
+         "zh": "C 晚饭",
+         "py": "C  wǎn fàn",
+         "en": "C dinner",
+         "vi": "C bữa tối"
+        },
+        {
+         "zh": "D 叫",
+         "py": "D  jiào",
+         "en": "D be called",
+         "vi": "D gọi là, tên là"
+        },
+        {
+         "zh": "E 汉字",
+         "py": "E  hàn zì",
+         "en": "E Chinese characters",
+         "vi": "E chữ Hán"
+        },
+        {
+         "zh": "F 块",
+         "py": "F  kuài",
+         "en": "F kuai (yuan)",
+         "vi": "F tệ"
+        }
+       ]
       },
       {
        "n": 33,
        "ans": "A",
        "text": "对不起，我不（ ）这个人。",
-       "py": "duì bù qǐ wǒ bù （ ） zhè ge rén"
+       "py": "duì bù qǐ wǒ bù （ ） zhè ge rén",
+       "tr": [
+        {
+         "zh": "对不起，我不认识这个人。",
+         "py": "duì bù qǐ wǒ bù rèn shí zhè ge rén",
+         "en": "Sorry, I don't know this person.",
+         "vi": "Xin lỗi, tôi không quen người này."
+        },
+        {
+         "zh": "A 认识",
+         "py": "A  rèn shí",
+         "en": "A know (a person)",
+         "vi": "A quen biết"
+        },
+        {
+         "zh": "B 住",
+         "py": "B  zhù",
+         "en": "B live",
+         "vi": "B sống, ở"
+        },
+        {
+         "zh": "C 晚饭",
+         "py": "C  wǎn fàn",
+         "en": "C dinner",
+         "vi": "C bữa tối"
+        },
+        {
+         "zh": "D 叫",
+         "py": "D  jiào",
+         "en": "D be called",
+         "vi": "D gọi là, tên là"
+        },
+        {
+         "zh": "E 汉字",
+         "py": "E  hàn zì",
+         "en": "E Chinese characters",
+         "vi": "E chữ Hán"
+        },
+        {
+         "zh": "F 块",
+         "py": "F  kuài",
+         "en": "F kuai (yuan)",
+         "vi": "F tệ"
+        }
+       ]
       },
       {
        "n": 34,
        "ans": "B",
        "text": "我和家人（ ）在北京。",
-       "py": "wǒ hé jiā rén （ ） zài běi jīng"
+       "py": "wǒ hé jiā rén （ ） zài běi jīng",
+       "tr": [
+        {
+         "zh": "我和家人住在北京。",
+         "py": "wǒ hé jiā rén zhù zài běi jīng",
+         "en": "My family and I live in Beijing.",
+         "vi": "Tôi và gia đình sống ở Bắc Kinh."
+        },
+        {
+         "zh": "A 认识",
+         "py": "A  rèn shí",
+         "en": "A know (a person)",
+         "vi": "A quen biết"
+        },
+        {
+         "zh": "B 住",
+         "py": "B  zhù",
+         "en": "B live",
+         "vi": "B sống, ở"
+        },
+        {
+         "zh": "C 晚饭",
+         "py": "C  wǎn fàn",
+         "en": "C dinner",
+         "vi": "C bữa tối"
+        },
+        {
+         "zh": "D 叫",
+         "py": "D  jiào",
+         "en": "D be called",
+         "vi": "D gọi là, tên là"
+        },
+        {
+         "zh": "E 汉字",
+         "py": "E  hàn zì",
+         "en": "E Chinese characters",
+         "vi": "E chữ Hán"
+        },
+        {
+         "zh": "F 块",
+         "py": "F  kuài",
+         "en": "F kuai (yuan)",
+         "vi": "F tệ"
+        }
+       ]
       },
       {
        "n": 35,
        "ans": "F",
        "text": "男：这些东西可以卖多少钱？ 女：80（ ）。",
-       "py": "nán ： zhè xiē dōng xī kě yǐ mài duō shǎo qián ？  nǚ ：80（ ）。"
+       "py": "nán ： zhè xiē dōng xī kě yǐ mài duō shǎo qián ？  nǚ ：80（ ）。",
+       "tr": [
+        {
+         "zh": "男：这些东西可以卖多少钱？",
+         "py": "nán： zhè xiē dōng xī kě yǐ mài duō shǎo qián",
+         "en": "M: How much can these things sell for?",
+         "vi": "Nam: Những thứ này bán được bao nhiêu tiền?"
+        },
+        {
+         "zh": "女：80块。",
+         "py": "nǚ：80 kuài",
+         "en": "W: 80 kuai.",
+         "vi": "Nữ: 80 tệ."
+        },
+        {
+         "zh": "A 认识",
+         "py": "A  rèn shí",
+         "en": "A know (a person)",
+         "vi": "A quen biết"
+        },
+        {
+         "zh": "B 住",
+         "py": "B  zhù",
+         "en": "B live",
+         "vi": "B sống, ở"
+        },
+        {
+         "zh": "C 晚饭",
+         "py": "C  wǎn fàn",
+         "en": "C dinner",
+         "vi": "C bữa tối"
+        },
+        {
+         "zh": "D 叫",
+         "py": "D  jiào",
+         "en": "D be called",
+         "vi": "D gọi là, tên là"
+        },
+        {
+         "zh": "E 汉字",
+         "py": "E  hàn zì",
+         "en": "E Chinese characters",
+         "vi": "E chữ Hán"
+        },
+        {
+         "zh": "F 块",
+         "py": "F  kuài",
+         "en": "F kuai (yuan)",
+         "vi": "F tệ"
+        }
+       ]
       }
      ]
     },
@@ -4666,7 +10100,39 @@
         }
        ],
        "text": "下雨了，我们坐出租车回家吧。 ★说话人想怎么回家？",
-       "py": "xià yǔ le wǒ men zuò chū zū chē huí jiā ba 。 ★ shuō huà rén xiǎng zěn me huí jiā"
+       "py": "xià yǔ le wǒ men zuò chū zū chē huí jiā ba 。 ★ shuō huà rén xiǎng zěn me huí jiā",
+       "tr": [
+        {
+         "zh": "下雨了，我们坐出租车回家吧。",
+         "py": "xià yǔ le wǒ men zuò chū zū chē huí jiā ba",
+         "en": "It's raining, let's take a taxi home.",
+         "vi": "Trời mưa rồi, chúng ta đi taxi về nhà đi."
+        },
+        {
+         "zh": "★说话人想怎么回家？",
+         "py": "★ shuō huà rén xiǎng zěn me huí jiā",
+         "en": "★How does the speaker want to go home?",
+         "vi": "★Người nói muốn về nhà bằng cách nào?"
+        },
+        {
+         "zh": "A 开车",
+         "py": "A  kāi chē",
+         "en": "A drive",
+         "vi": "A lái xe"
+        },
+        {
+         "zh": "B 坐飞机",
+         "py": "B  zuò fēi jī",
+         "en": "B by plane",
+         "vi": "B đi máy bay"
+        },
+        {
+         "zh": "C 坐出租车",
+         "py": "C  zuò chū zū chē",
+         "en": "C by taxi",
+         "vi": "C đi taxi"
+        }
+       ]
       },
       {
        "n": 37,
@@ -4689,7 +10155,39 @@
         }
        ],
        "text": "我儿子今年16岁了，正在上中学。 ★说话人的儿子是：",
-       "py": "wǒ ér zi jīn nián 16 suì le zhèng zài shàng zhōng xué 。 ★ shuō huà rén de ér zi shì ："
+       "py": "wǒ ér zi jīn nián 16 suì le zhèng zài shàng zhōng xué 。 ★ shuō huà rén de ér zi shì ：",
+       "tr": [
+        {
+         "zh": "我儿子今年16岁了，正在上中学。",
+         "py": "wǒ ér zi jīn nián 16 suì le zhèng zài shàng zhōng xué",
+         "en": "My son is 16 this year and is in middle school.",
+         "vi": "Con trai tôi năm nay 16 tuổi, đang học trung học."
+        },
+        {
+         "zh": "★说话人的儿子是：",
+         "py": "★ shuō huà rén de ér zi shì：",
+         "en": "★The speaker's son is:",
+         "vi": "★Con trai người nói là:"
+        },
+        {
+         "zh": "A 小学生",
+         "py": "A  xiǎo xué shēng",
+         "en": "A primary school student",
+         "vi": "A học sinh tiểu học"
+        },
+        {
+         "zh": "B 中学生",
+         "py": "B  zhōng xué shēng",
+         "en": "B middle school student",
+         "vi": "B học sinh trung học"
+        },
+        {
+         "zh": "C 大学生",
+         "py": "C  dà xué shēng",
+         "en": "C university student",
+         "vi": "C sinh viên đại học"
+        }
+       ]
       },
       {
        "n": 38,
@@ -4712,7 +10210,39 @@
         }
        ],
        "text": "小猫和小狗都在房间外睡觉呢。 ★小狗在：",
-       "py": "xiǎo māo hé xiǎo gǒu dōu zài fáng jiān wài shuì jiào ne 。 ★ xiǎo gǒu zài ："
+       "py": "xiǎo māo hé xiǎo gǒu dōu zài fáng jiān wài shuì jiào ne 。 ★ xiǎo gǒu zài ：",
+       "tr": [
+        {
+         "zh": "小猫和小狗都在房间外睡觉呢。",
+         "py": "xiǎo māo hé xiǎo gǒu dōu zài fáng jiān wài shuì jiào ne",
+         "en": "The kitten and the puppy are both sleeping outside the room.",
+         "vi": "Mèo con và chó con đều đang ngủ ngoài phòng."
+        },
+        {
+         "zh": "★小狗在：",
+         "py": "★ xiǎo gǒu zài：",
+         "en": "★The puppy is:",
+         "vi": "★Chó con ở:"
+        },
+        {
+         "zh": "A 桌子下",
+         "py": "A  zhuō zi xià",
+         "en": "A under the table",
+         "vi": "A dưới bàn"
+        },
+        {
+         "zh": "B 房间里",
+         "py": "B  fáng jiān lǐ",
+         "en": "B in the room",
+         "vi": "B trong phòng"
+        },
+        {
+         "zh": "C 房间外",
+         "py": "C  fáng jiān wài",
+         "en": "C outside the room",
+         "vi": "C ngoài phòng"
+        }
+       ]
       },
       {
        "n": 39,
@@ -4735,7 +10265,39 @@
         }
        ],
        "text": "我同学在这个学校工作很多年了，你有问题可以问他。 ★说话人的同学在哪儿上班？",
-       "py": "wǒ tóng xué zài zhè ge xué xiào gōng zuò hěn duō nián le nǐ yǒu wèn tí kě yǐ wèn tā 。 ★ shuō huà rén de tóng xué zài nǎ ér shàng bān"
+       "py": "wǒ tóng xué zài zhè ge xué xiào gōng zuò hěn duō nián le nǐ yǒu wèn tí kě yǐ wèn tā 。 ★ shuō huà rén de tóng xué zài nǎ ér shàng bān",
+       "tr": [
+        {
+         "zh": "我同学在这个学校工作很多年了，你有问题可以问他。",
+         "py": "wǒ tóng xué zài zhè ge xué xiào gōng zuò hěn duō nián le nǐ yǒu wèn tí kě yǐ wèn tā",
+         "en": "My classmate has worked at this school for many years; you can ask him if you have questions.",
+         "vi": "Bạn học của tôi đã làm ở trường này nhiều năm rồi, bạn có câu hỏi thì có thể hỏi anh ấy."
+        },
+        {
+         "zh": "★说话人的同学在哪儿上班？",
+         "py": "★ shuō huà rén de tóng xué zài nǎ ér shàng bān",
+         "en": "★Where does the speaker's classmate work?",
+         "vi": "★Bạn học của người nói làm việc ở đâu?"
+        },
+        {
+         "zh": "A 饭店",
+         "py": "A  fàn diàn",
+         "en": "A restaurant",
+         "vi": "A nhà hàng"
+        },
+        {
+         "zh": "B 医院",
+         "py": "B  yī yuàn",
+         "en": "B hospital",
+         "vi": "B bệnh viện"
+        },
+        {
+         "zh": "C 学校",
+         "py": "C  xué xiào",
+         "en": "C school",
+         "vi": "C trường học"
+        }
+       ]
       },
       {
        "n": 40,
@@ -4758,7 +10320,39 @@
         }
        ],
        "text": "这个小朋友写字真好看。 ★那个小朋友：",
-       "py": "zhè ge xiǎo péng yǒu xiě zì zhēn hǎo kàn 。 ★ nà ge xiǎo péng yǒu ："
+       "py": "zhè ge xiǎo péng yǒu xiě zì zhēn hǎo kàn 。 ★ nà ge xiǎo péng yǒu ：",
+       "tr": [
+        {
+         "zh": "这个小朋友写字真好看。",
+         "py": "zhè ge xiǎo péng yǒu xiě zì zhēn hǎo kàn",
+         "en": "This child writes really nicely.",
+         "vi": "Bạn nhỏ này viết chữ đẹp thật."
+        },
+        {
+         "zh": "★那个小朋友：",
+         "py": "★ nà ge xiǎo péng yǒu：",
+         "en": "★That child:",
+         "vi": "★Bạn nhỏ đó:"
+        },
+        {
+         "zh": "A 名字好听",
+         "py": "A  míng zì hǎo tīng",
+         "en": "A has a nice name",
+         "vi": "A tên hay"
+        },
+        {
+         "zh": "B 写字好看",
+         "py": "B  xiě zì hǎo kàn",
+         "en": "B writes nicely",
+         "vi": "B viết chữ đẹp"
+        },
+        {
+         "zh": "C 正在读书",
+         "py": "C  zhèng zài dú shū",
+         "en": "C is reading",
+         "vi": "C đang đọc sách"
+        }
+       ]
       }
      ]
     }

@@ -1,0 +1,22 @@
+{
+"1": [["看电视。", "Watch TV.", "Xem tivi."]],
+"2": [["一本中文书。", "A Chinese book.", "Một quyển sách tiếng Trung."]],
+"3": [["在家读书。", "Read at home.", "Đọc sách ở nhà."]],
+"4": [["那是谁的手机？", "Whose phone is that?", "Đó là điện thoại của ai?"], ["A 书", "A Book", "A Sách"], ["B 我的", "B Mine", "B Của tôi"], ["C 他的电脑", "C His computer", "C Máy tính của anh ấy"]],
+"5": [["你星期日晚上做什么？", "What are you doing Sunday evening?", "Tối chủ nhật bạn làm gì?"], ["A 星期天", "A Sunday", "A Chủ nhật"], ["B 孩子们", "B The children", "B Bọn trẻ"], ["C 去外边唱歌", "C Go out to sing", "C Ra ngoài hát"]],
+"6": [["房间外边的小狗是谁的？", "Whose is the puppy outside the room?", "Con chó nhỏ ngoài phòng là của ai?"], ["是我的。", "It's mine.", "Của tôi."]],
+"7": [["你星期六去哪儿？", "Where are you going on Saturday?", "Thứ bảy bạn đi đâu?"], ["我和女儿去超市买东西。", "My daughter and I are going shopping at the supermarket.", "Tôi với con gái đi siêu thị mua đồ."]],
+"8": [["我下午在学校学习，你呢？", "I'm studying at school this afternoon. What about you?", "Chiều nay tôi học ở trường, còn bạn?"], ["我下午有事，不在学校。", "I'm busy this afternoon, so I won't be at school.", "Chiều nay tôi có việc, không ở trường."]],
+"9": [["我哥哥上午八点上课，姐姐十点上课。", "My brother's class starts at 8 a.m.; my sister's at 10.", "Anh tôi vào học lúc tám giờ sáng, chị tôi mười giờ."], ["问：说话人的哥哥几点上课？", "Q: What time does the speaker's brother's class start?", "Hỏi: Anh trai người nói vào học lúc mấy giờ?"], ["A 上午8:00", "A 8:00 a.m.", "A 8 giờ sáng"], ["B 上午10:00", "B 10:00 a.m.", "B 10 giờ sáng"], ["C 晚上8:00", "C 8:00 p.m.", "C 8 giờ tối"]],
+"10": [["我想买书，我们下午在书店见吧。", "I want to buy books; let's meet at the bookstore this afternoon.", "Tôi muốn mua sách, chiều nay mình gặp ở hiệu sách nhé."], ["问：说话人下午想去哪儿？", "Q: Where does the speaker want to go this afternoon?", "Hỏi: Chiều nay người nói muốn đi đâu?"], ["A 菜店", "A Vegetable shop", "A Cửa hàng rau"], ["B 书店", "B Bookstore", "B Hiệu sách"], ["C 超市", "C Supermarket", "C Siêu thị"]],
+"11": [["妹妹和小狗今天在家里玩。", "My little sister and the puppy are playing at home today.", "Hôm nay em gái và chú chó nhỏ chơi ở nhà."]],
+"12": [["房间外有一只小猫。", "There's a kitten outside the room.", "Ngoài phòng có một con mèo nhỏ."]],
+"13": [["这是我的第三个电脑。", "This is my third computer.", "Đây là chiếc máy tính thứ ba của tôi."]],
+"14": [["桌子上有什么？", "What's on the table?", "Trên bàn có gì?"], ["C 一只小猫。", "C A kitten.", "C Một con mèo nhỏ."]],
+"15": [["你今天下午在哪儿？", "Where are you this afternoon?", "Chiều nay bạn ở đâu?"], ["A 在家里。", "A At home.", "A Ở nhà."]],
+"16": [["你和谁在超市呢？", "Who are you at the supermarket with?", "Bạn đang ở siêu thị với ai?"], ["B 我女朋友。", "B My girlfriend.", "B Bạn gái tôi."]],
+"17": [["我上午在学校上课，我们下午去看电影吧。", "I have class at school this morning; let's go see a movie this afternoon.", "Sáng tôi học ở trường, chiều mình đi xem phim nhé."]],
+"18": [["男：我们下午几点在学校见？", "M: What time shall we meet at school this afternoon?", "Nam: Chiều nay mấy giờ mình gặp ở trường?"], ["女：下午2:00吧。", "W: How about 2:00 p.m.?", "Nữ: 2 giờ chiều nhé."]],
+"19": [["我有一只小狗，很漂亮，它是我的好朋友。", "I have a puppy. It's very pretty and it's my good friend.", "Tôi có một chú chó nhỏ, rất đẹp, nó là bạn tốt của tôi."], ["★说话人有几只小狗？", "★ How many puppies does the speaker have?", "★ Người nói có mấy con chó nhỏ?"], ["A 一", "A One", "A Một"], ["B 四", "B Four", "B Bốn"], ["C 十一", "C Eleven", "C Mười một"]],
+"20": [["星期天中午妈妈在做饭，我和妹妹在房间里玩。", "At noon on Sunday Mom was cooking, and my sister and I were playing in the room.", "Trưa chủ nhật mẹ đang nấu cơm, tôi và em gái chơi trong phòng."], ["★说话人和妹妹在哪儿？", "★ Where are the speaker and the sister?", "★ Người nói và em gái ở đâu?"], ["A 外边", "A Outside", "A Bên ngoài"], ["B 房间里", "B In the room", "B Trong phòng"], ["C 超市里", "C In the supermarket", "C Trong siêu thị"]]
+}

@@ -802,7 +802,7 @@ function workbook() {
           return `<button class="opt wb-opt ${cls}" data-action="wb-pick" data-n="${q.n}" data-k="${k}" ${view.done ? 'disabled' : ''}><b>${k}</b>${o ? zhPy(o.zh, o.py) : ''}</button>`;
         };
         return `<div class="wb-q"><div class="wb-qhead"><b>${q.n}.</b>${q.t ? `<button class="speak sm" data-action="wb-play" data-n="${q.n}" aria-label="Nghe câu ${q.n}">${icon('speaker-high', true)}</button>` : ''}${q.text ? zhPy(q.text, q.py) : ''}</div>
-          <div class="wb-opts${q.opts ? ' list' : ''}">${keys.map(btn).join('')}</div></div>`;
+          <div class="wb-opts${q.opts ? ' list' : ''}">${keys.map(btn).join('')}</div>${view.done && q.tr ? `<details class="wb-tr"><summary>Transcript &amp; dịch</summary>${q.tr.map((x) => `<p>${zhPy(x.zh, x.py)}<small>${esc(x.en)}</small><small>${esc(x.vi)}</small></p>`).join('')}</details>` : ''}</div>`;
       }).join('')}</section>`;
   }).join('');
   const answered = Object.keys(view.picks).length;

@@ -347,7 +347,11 @@ lessons += [{'id': i, 'title': f'Bài {i}: {t}'} for i, t in TOC.items() if i no
 if 16 not in have: lessons.append({'id': 16, 'title': 'Đề thi mô phỏng HSK 1'})
 lessons.sort(key=lambda l: l['id'])
 for l in lessons:
+    trf = os.path.expanduser(f'~/hskchinese/tools/wb_tr/{l["id"]}.json')  # transcript + dịch: {"n": [[zh, en, vi], ...]}
+    tr = json.load(open(trf)) if os.path.exists(trf) else {}
     for p in l.get('parts', []):
+        for x in p['qs']:
+            if str(x['n']) in tr: x['tr'] = [{'zh': z, 'py': py(z).replace(' ：', '：'), 'en': e, 'vi': v} for z, e, v in tr[str(x['n'])]]
         if 'opts' in p: p['opts'] = [{'k': k, 'zh': v, 'py': py(v)} for k, v in p['opts']]
         assert all(os.path.exists(os.path.expanduser('~/hskchinese/' + x)) for x in [l['audio'], p.get('img', l['audio'])])
 

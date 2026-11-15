@@ -1,0 +1,22 @@
+{
+"1": [["书店里。", "In the bookstore.", "Trong hiệu sách."]],
+"2": [["桌子下的小猫。", "The kitten under the table.", "Con mèo nhỏ dưới gầm bàn."]],
+"3": [["工作很忙。", "Work is very busy.", "Công việc rất bận."]],
+"4": [["小猫在哪儿？", "Where is the kitten?", "Con mèo nhỏ ở đâu?"], ["A 去学校", "A Going to school", "A Đi đến trường"], ["B 房间外", "B Outside the room", "B Ngoài phòng"], ["C 在吃东西", "C Eating", "C Đang ăn"]],
+"5": [["上午九点，你能到学校吗？", "Can you get to school by 9 a.m.?", "Chín giờ sáng bạn đến trường được không?"], ["A 我能到", "A I can make it", "A Tôi đến được"], ["B 我吃午饭", "B I'm eating lunch", "B Tôi ăn trưa"], ["C 我不能工作", "C I can't work", "C Tôi không làm việc được"]],
+"6": [["爸爸在哪儿？", "Where is Dad?", "Bố đâu rồi?"], ["他在房间里呢。", "He's in the room.", "Bố đang ở trong phòng."]],
+"7": [["我在学校吃午饭，你呢？", "I eat lunch at school. What about you?", "Tôi ăn trưa ở trường, còn bạn?"], ["我也在学校吃午饭。", "I eat lunch at school too.", "Tôi cũng ăn trưa ở trường."]],
+"8": [["学校外有一个小超市。", "There's a small supermarket outside the school.", "Ngoài trường có một siêu thị nhỏ."], ["好的，我们去那里买。", "OK, let's go buy there.", "Được, chúng ta ra đó mua."]],
+"9": [["我今天上午有课，下午在学校书店里见吧。", "I have class this morning; let's meet in the school bookstore this afternoon.", "Sáng nay tôi có tiết, chiều gặp nhau ở hiệu sách của trường nhé."], ["问：说话人想在哪儿见？", "Q: Where does the speaker want to meet?", "Hỏi: Người nói muốn gặp ở đâu?"], ["A 超市", "A Supermarket", "A Siêu thị"], ["B 饭店", "B Restaurant", "B Nhà hàng"], ["C 学校书店", "C School bookstore", "C Hiệu sách của trường"]],
+"10": [["明天不上课，我们能去电影院看电影吗？", "There's no class tomorrow. Can we go to the cinema to see a movie?", "Mai không phải đi học, chúng ta đi rạp xem phim được không?"], ["问：说话人想要做什么？", "Q: What does the speaker want to do?", "Hỏi: Người nói muốn làm gì?"], ["A 去学校", "A Go to school", "A Đi đến trường"], ["B 看电影", "B Watch a movie", "B Xem phim"], ["C 去上班", "C Go to work", "C Đi làm"]],
+"11": [["你的手机在桌子上呢。", "Your phone is on the table.", "Điện thoại của bạn ở trên bàn."]],
+"12": [["我在学校吃午饭。", "I eat lunch at school.", "Tôi ăn trưa ở trường."]],
+"13": [["这个医院里病人多，医生工作很忙。", "This hospital has many patients; the doctors are very busy.", "Bệnh viện này nhiều bệnh nhân, bác sĩ làm việc rất bận."]],
+"14": [["桌子上有什么？", "What's on the table?", "Trên bàn có gì?"], ["C 饺子和面条儿。", "C Dumplings and noodles.", "C Sủi cảo và mì."]],
+"15": [["她是谁？", "Who is she?", "Cô ấy là ai?"], ["B 我老师。", "B My teacher.", "B Cô giáo của tôi."]],
+"16": [["你爸爸在哪儿工作？", "Where does your dad work?", "Bố bạn làm việc ở đâu?"], ["A 医院。", "A At a hospital.", "A Bệnh viện."]],
+"17": [["我的房间里有一只小猫。", "There's a kitten in my room.", "Trong phòng tôi có một con mèo nhỏ."]],
+"18": [["男：我们下午在书店见吧。", "M: Let's meet at the bookstore this afternoon.", "Nam: Chiều nay mình gặp nhau ở hiệu sách nhé."], ["女：好的，我7:00能到。", "W: OK, I can be there at 7:00.", "Nữ: Được, 7 giờ tôi đến được."]],
+"19": [["昨天爸爸在医院工作，哥哥在家里休息，没去书店。", "Yesterday Dad worked at the hospital; my brother rested at home and didn't go to the bookstore.", "Hôm qua bố làm việc ở bệnh viện, anh trai nghỉ ở nhà, không đi hiệu sách."], ["★说话人的哥哥昨天：", "★ Yesterday the speaker's brother was:", "★ Hôm qua anh trai người nói:"], ["A 在家里", "A At home", "A Ở nhà"], ["B 在书店", "B At the bookstore", "B Ở hiệu sách"], ["C 在医院工作", "C Working at the hospital", "C Làm việc ở bệnh viện"]],
+"20": [["我喜欢吃米饭，我女朋友不喜欢。", "I like rice, but my girlfriend doesn't.", "Tôi thích ăn cơm, bạn gái tôi thì không."], ["★说话人的女朋友不喜欢吃：", "★ The speaker's girlfriend doesn't like eating:", "★ Bạn gái người nói không thích ăn:"], ["A 米饭", "A Rice", "A Cơm"], ["B 包子", "B Steamed buns", "B Bánh bao"], ["C 面条儿", "C Noodles", "C Mì"]]
+}

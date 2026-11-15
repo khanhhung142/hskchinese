@@ -1,0 +1,22 @@
+{
+"1": [["晚上八点。", "8 p.m.", "Tám giờ tối."]],
+"2": [["下午上课。", "Have class in the afternoon.", "Buổi chiều lên lớp."]],
+"3": [["买菜。", "Buy vegetables.", "Mua rau."]],
+"4": [["你们中午几点下课？", "What time does your class finish at noon?", "Buổi trưa mấy giờ các bạn tan học?"], ["A 10:00", "A 10:00", "A 10:00"], ["B 12:00", "B 12:00", "B 12:00"], ["C 12号", "C the 12th", "C Ngày 12"]],
+"5": [["现在几点？", "What time is it now?", "Bây giờ là mấy giờ?"], ["A 8月", "A August", "A Tháng 8"], ["B 三分钟", "B Three minutes", "B Ba phút"], ["C 7:10", "C 7:10", "C 7:10"]],
+"6": [["我想吃西安饭店的包子，你去买吧。", "I want the steamed buns from Xi'an Restaurant. Go buy some.", "Em muốn ăn bánh bao của nhà hàng Tây An, anh đi mua đi."], ["好，我下班去买。", "OK, I'll buy them after work.", "Được, tan làm anh đi mua."]],
+"7": [["你怎么去超市？", "How are you getting to the supermarket?", "Bạn đi siêu thị bằng gì?"], ["我坐出租车去。", "I'm going by taxi.", "Tôi đi taxi."]],
+"8": [["我们星期日早上七点十五见吧。", "Let's meet at 7:15 on Sunday morning.", "Chủ nhật bảy giờ mười lăm sáng mình gặp nhau nhé."], ["好的。", "OK.", "Được."]],
+"9": [["我晚上还上课呢，不能去看电影。", "I still have class tonight, so I can't go to the movies.", "Tối nay tôi còn phải lên lớp, không đi xem phim được."], ["问：说话人晚上做什么？", "Q: What does the speaker do tonight?", "Hỏi: Buổi tối người nói làm gì?"], ["A 上课", "A Have class", "A Lên lớp"], ["B 上班", "B Go to work", "B Đi làm"], ["C 看电影", "C Watch a movie", "C Xem phim"]],
+"10": [["我现在去超市买些牛奶。", "I'm going to the supermarket now to buy some milk.", "Bây giờ tôi đi siêu thị mua ít sữa."], ["问：说话人现在去哪儿？", "Q: Where is the speaker going now?", "Hỏi: Bây giờ người nói đi đâu?"], ["A 饭店", "A Restaurant", "A Nhà hàng"], ["B 菜店", "B Vegetable shop", "B Cửa hàng rau"], ["C 超市", "C Supermarket", "C Siêu thị"]],
+"11": [["我在上课呢。", "I'm in class.", "Tôi đang học trên lớp."]],
+"12": [["我下午有事，晚上7:00见吧。", "I'm busy this afternoon; let's meet at 7:00 this evening.", "Chiều tôi có việc, 7 giờ tối gặp nhé."]],
+"13": [["今天不上班，我去超市买东西。", "I'm off work today, so I'm going shopping at the supermarket.", "Hôm nay không đi làm, tôi đi siêu thị mua đồ."]],
+"14": [["我们在哪儿见？", "Where shall we meet?", "Chúng ta gặp nhau ở đâu?"], ["C 电影院。", "C At the cinema.", "C Rạp chiếu phim."]],
+"15": [["现在几点？", "What time is it now?", "Bây giờ là mấy giờ?"], ["A 早上七点半。", "A Half past seven in the morning.", "A Bảy rưỡi sáng."]],
+"16": [["我们下午去超市吧。", "Let's go to the supermarket this afternoon.", "Chiều nay mình đi siêu thị nhé."], ["B 对不起，我有课。", "B Sorry, I have class.", "B Xin lỗi, tôi có tiết học."]],
+"17": [["我们中午12:00下课。", "Our class ends at 12:00 noon.", "Chúng tôi tan học lúc 12 giờ trưa."]],
+"18": [["男：你现在在哪儿？", "M: Where are you now?", "Nam: Bây giờ bạn đang ở đâu?"], ["女：我在医院呢。", "W: I'm at the hospital.", "Nữ: Tôi đang ở bệnh viện."]],
+"19": [["我今天早上八点半上课，十点十分下课。", "Today my class starts at 8:30 a.m. and ends at 10:10.", "Hôm nay tôi vào học lúc tám rưỡi sáng, tan học lúc mười giờ mười."], ["★说话人今天几点下课？", "★ What time does the speaker's class end today?", "★ Hôm nay người nói tan học lúc mấy giờ?"], ["A 8:30", "A 8:30", "A 8:30"], ["B 10:10", "B 10:10", "B 10:10"], ["C 10:20", "C 10:20", "C 10:20"]],
+"20": [["妈妈今天休息，下午想去菜店买些菜。", "Mom is off today; this afternoon she wants to go to the vegetable shop to buy some vegetables.", "Hôm nay mẹ nghỉ, chiều mẹ muốn ra cửa hàng rau mua ít rau."], ["★妈妈下午想去菜店买：", "★ This afternoon Mom wants to buy at the vegetable shop:", "★ Chiều nay mẹ muốn ra cửa hàng rau mua:"], ["A 菜", "A Vegetables", "A Rau"], ["B 饺子", "B Dumplings", "B Sủi cảo"], ["C 牛奶", "C Milk", "C Sữa"]]
+}

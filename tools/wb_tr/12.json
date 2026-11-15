@@ -1,0 +1,22 @@
+{
+"1": [["好天气。", "Good weather.", "Thời tiết đẹp."]],
+"2": [["下大雪。", "It's snowing heavily.", "Tuyết rơi dày."]],
+"3": [["太冷了。", "It's too cold.", "Lạnh quá."]],
+"4": [["今天天气怎么样？", "What's the weather like today?", "Hôm nay thời tiết thế nào?"], ["A 在吃药", "A taking medicine", "A đang uống thuốc"], ["B 有点儿", "B a little", "B hơi"], ["C 不太好", "C not very good", "C không tốt lắm"]],
+"5": [["外边热吗？", "Is it hot outside?", "Bên ngoài có nóng không?"], ["A 下雪了", "A it's snowing", "A tuyết rơi rồi"], ["B 太热了", "B too hot", "B nóng quá"], ["C 不喝水", "C not drinking water", "C không uống nước"]],
+"6": [["医生，我的病怎么样？", "Doctor, how is my illness?", "Bác sĩ, bệnh của tôi thế nào?"], ["没大问题，回家喝些热水吧。", "Nothing serious. Go home and drink some hot water.", "Không có vấn đề gì lớn, về nhà uống chút nước nóng đi."]],
+"7": [["下雨了？", "Is it raining?", "Mưa rồi à?"], ["对，雨还很大。", "Yes, and it's raining hard.", "Đúng, mưa còn rất to."]],
+"8": [["太冷了，你不觉得冷吗？", "It's so cold, don't you feel cold?", "Lạnh quá, bạn không thấy lạnh à?"], ["我不冷，你穿的衣服太少了。", "I'm not cold; you're wearing too little.", "Tôi không lạnh, bạn mặc ít quá."]],
+"9": [["妈妈没在家，今天去医院看医生了。", "Mom isn't home; she went to the hospital to see a doctor today.", "Mẹ không có nhà, hôm nay đi bệnh viện khám bác sĩ rồi."], ["★说话人的妈妈今天去医院做什么了？", "★What did the speaker's mom go to the hospital for today?", "★Hôm nay mẹ của người nói đến bệnh viện làm gì?"], ["A 看医生", "A see a doctor", "A khám bác sĩ"], ["B 看朋友", "B visit a friend", "B thăm bạn"], ["C 看病人", "C visit a patient", "C thăm người bệnh"]],
+"10": [["我昨天非常忙，今天白天不忙，在家休息了。", "I was very busy yesterday; today during the day I wasn't busy and rested at home.", "Hôm qua tôi rất bận, ban ngày hôm nay không bận, ở nhà nghỉ ngơi."], ["★说话人今天白天做什么了？", "★What did the speaker do today during the day?", "★Ban ngày hôm nay người nói đã làm gì?"], ["A 工作", "A work", "A làm việc"], ["B 休息", "B rest", "B nghỉ ngơi"], ["C 读书", "C study", "C đọc sách"]],
+"11": [["我女儿生病了。", "My daughter is sick.", "Con gái tôi bị ốm."]],
+"12": [["今天天不太好，下雪了。", "The weather isn't great today; it's snowing.", "Hôm nay trời không đẹp lắm, tuyết rơi rồi."]],
+"13": [["12:00了，你们怎么还在看电视？", "It's 12 o'clock, why are you still watching TV?", "12 giờ rồi, sao các con vẫn còn xem tivi?"]],
+"14": [["你怎么了？", "What's wrong with you?", "Bạn sao vậy?"], ["A 热水。", "A Hot water.", "A Nước nóng."], ["B 我病了。", "B I'm sick.", "B Tôi bị ốm."], ["C 对。", "C Yes.", "C Đúng."], ["D 好的，谢谢！", "D OK, thanks!", "D Được, cảm ơn!"]],
+"15": [["你想喝点儿什么？", "What would you like to drink?", "Bạn muốn uống gì?"], ["A 热水。", "A Hot water.", "A Nước nóng."], ["B 我病了。", "B I'm sick.", "B Tôi bị ốm."], ["C 对。", "C Yes.", "C Đúng."], ["D 好的，谢谢！", "D OK, thanks!", "D Được, cảm ơn!"]],
+"16": [["你开车了？", "Did you drive?", "Bạn lái xe đến à?"], ["A 热水。", "A Hot water.", "A Nước nóng."], ["B 我病了。", "B I'm sick.", "B Tôi bị ốm."], ["C 对。", "C Yes.", "C Đúng."], ["D 好的，谢谢！", "D OK, thanks!", "D Được, cảm ơn!"]],
+"17": [["他生病了，没来上班。", "He got sick and didn't come to work.", "Anh ấy bị ốm, không đi làm."], ["A 冷", "A cold", "A lạnh"], ["B 生病", "B get sick", "B bị ốm"], ["C 名字", "C name", "C tên"]],
+"18": [["男：外边雨大吗？", "M: Is it raining hard outside?", "Nam: Bên ngoài mưa to không?"], ["女：很大，我觉得有点儿冷。", "F: Very hard. I feel a bit cold.", "Nữ: Rất to, tôi thấy hơi lạnh."], ["A 冷", "A cold", "A lạnh"], ["B 生病", "B get sick", "B bị ốm"], ["C 名字", "C name", "C tên"]],
+"19": [["昨天的天气很好，我和朋友们去外边玩了。", "The weather was great yesterday; my friends and I went out to play.", "Hôm qua thời tiết rất đẹp, tôi và các bạn đã ra ngoài chơi."], ["★说话人觉得昨天：", "★The speaker thinks yesterday:", "★Người nói thấy hôm qua:"], ["A 天气好", "A the weather was good", "A thời tiết đẹp"], ["B 雨不大", "B the rain wasn't heavy", "B mưa không to"], ["C 有点儿冷", "C it was a bit cold", "C hơi lạnh"]],
+"20": [["老张去看病，医生说他要吃三天药。", "Lao Zhang went to see a doctor; the doctor said he must take medicine for three days.", "Lão Trương đi khám bệnh, bác sĩ nói ông ấy phải uống thuốc ba ngày."], ["★医生说老张：", "★The doctor says Lao Zhang:", "★Bác sĩ nói lão Trương:"], ["A 要吃药", "A must take medicine", "A phải uống thuốc"], ["B 要多睡觉", "B must sleep more", "B phải ngủ nhiều"], ["C 要多喝水", "C must drink more water", "C phải uống nhiều nước"]]
+}
