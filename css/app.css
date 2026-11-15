@@ -418,6 +418,7 @@ body.typing .card .speak { position: absolute; top: 8px; right: 8px; }
   position: fixed; top: calc(env(safe-area-inset-top) + 10px); left: 50%; translate: -50% 0; z-index: 50;
   width: max-content; max-width: calc(100% - 32px); margin: 0; pointer-events: none;
   font-size: 14px; line-height: 18px; opacity: 0;
+  padding: 4px 12px; background: var(--accent-soft); border-radius: 14px; /* soft pink backing, no border */
 }
 .wb-toast.show { animation: wb-toast 5s var(--ease) forwards; }
 @keyframes wb-toast { 0% { opacity: 0; } 6%, 92% { opacity: 1; } 100% { opacity: 0; } }
