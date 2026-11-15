@@ -145,7 +145,7 @@ function home() {
       <button class="menu-item" data-action="write" data-mode="sentence">${icon('text-align-left')}<span><b>Luyện viết câu</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="write" data-mode="vocab">${icon('translate')}<span><b>${T.vocab[0]}</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="listen">${icon('headphones')}<span><b>Nghe cả bài</b></span>${icon('caret-right')}</button>
-      <button class="menu-item" data-action="wb">${icon('exam')}<span><b>Bài tập HSK1</b></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="wb">${icon('exam')}<span><b>Bài tập</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Tra cứu</b></span>${icon('caret-right')}</button>
       ${addItem()}
     </nav>
@@ -766,10 +766,10 @@ let wbData;
 const wbAudio = new Audio();
 let wbStop = 0;
 wbAudio.addEventListener('timeupdate', () => { if (wbStop && wbAudio.currentTime >= wbStop) wbAudio.pause(); });
-async function openWorkbook(id) {
+async function openWorkbook(id, lvl) {
   try { wbData ??= await (await fetch('data/workbook.json', { cache: 'no-cache' })).json(); } catch { return alert('Không tải được bài tập.'); }
   wbAudio.pause();
-  view = id ? { name: 'wb', id: +id, picks: {}, done: false } : { name: 'wb' };
+  view = id ? { name: 'wb', id: +id, lvl: 1, picks: {}, done: false } : { name: 'wb', lvl: +lvl || 0 };
   render();
   scrollTo(0, 0);
 }
@@ -782,9 +782,15 @@ function wbPlay(n) {
 }
 const zhPy = (zh, py) => `<span class="wb-zh"><span class="han">${esc(zh)}</span>${py ? `<small>${esc(py)}</small>` : ''}</span>`;
 function workbook() {
-  const back = (to) => `<button class="icon-btn" data-action="${to}" aria-label="Quay lại">${icon('arrow-left')}</button>`;
+  const back = (to, lvl = '') => `<button class="icon-btn" data-action="${to}" data-lvl="${lvl}" aria-label="Quay lại">${icon('arrow-left')}</button>`;
+  // ponytail: workbook.json is all HSK1; HSK2–9 are empty shells until data arrives (then add a level field per lesson).
+  if (!view.lvl) {
+    return `<main class="page"><header class="list-head">${back('home')}<h1>Bài tập</h1></header><nav class="menu">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) =>
+      `<button class="menu-item" data-action="wb" data-lvl="${n}">${icon('notebook')}<span><b>HSK${n}</b>${n === 1 ? '' : '<small>Chưa có bài tập</small>'}</span>${icon('caret-right')}</button>`).join('')}</nav></main>`;
+  }
+  if (view.lvl > 1) return `<main class="page"><header class="list-head">${back('wb')}<h1>HSK${view.lvl}</h1></header><p class="muted">Chưa có bài tập.</p><p class="tomie">HSK${view.lvl} á? Chị qua HSK1 trước đi đã, Hưng đợi chị đó, ufufu.</p></main>`;
   if (!view.id) {
-    return `<main class="page"><header class="list-head">${back('home')}<h1>Bài tập HSK1</h1></header><nav class="menu">${wbData.lessons.map((l) =>
+    return `<main class="page"><header class="list-head">${back('wb')}<h1>HSK1</h1></header><nav class="menu">${wbData.lessons.map((l) =>
       `<button class="menu-item" data-action="wb" data-id="${l.id}" ${l.parts ? '' : 'disabled'}>${icon(l.id === 16 ? 'exam' : 'notebook')}<span><b>${esc(l.title)}</b>${l.parts ? '' : '<small>Chưa có audio</small>'}</span>${icon('caret-right')}</button>`).join('')}</nav></main>`;
   }
   const l = wbData.lessons.find((x) => x.id === view.id);
@@ -806,7 +812,7 @@ function workbook() {
       }).join('')}</section>`;
   }).join('');
   const answered = Object.keys(view.picks).length;
-  return `<main class="page"><header class="list-head">${back('wb')}<h1>${esc(l.title)}</h1><span class="counter">${view.done ? `${score}/${all.length}` : `${answered}/${all.length}`}</span></header>
+  return `<main class="page"><header class="list-head">${back('wb', 1)}<h1>${esc(l.title)}</h1><span class="counter">${view.done ? `${score}/${all.length}` : `${answered}/${all.length}`}</span></header>
     ${view.done ? `<p class="wb-score">Đúng ${score}/${all.length} câu</p>${tomie(score * 2 >= all.length ? 'done' : 'bad')}` : ''}
     ${parts}
     <div class="footer">${view.done ? '<button class="btn primary block" data-action="wb-retry">Làm lại</button>' : `<button class="btn primary block" data-action="wb-submit" ${answered ? '' : 'disabled'}>Nộp bài</button>`}</div>
@@ -929,7 +935,7 @@ root.addEventListener('click', (e) => {
   const el = e.target.closest('[data-action]');
   if (!el || el.tagName === 'FORM') return;
   const act = el.dataset.action;
-  if (act === 'wb') openWorkbook(el.dataset.id);
+  if (act === 'wb') openWorkbook(el.dataset.id, el.dataset.lvl);
   else if (act === 'wb-play') wbPlay(el.dataset.n);
   else if (act === 'wb-pick') { if (!view.done) { view.picks[el.dataset.n] = el.dataset.k; render(); } }
   else if (act === 'wb-submit') { view.done = true; wbAudio.pause(); render(); scrollTo(0, 0); }
