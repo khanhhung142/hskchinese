@@ -143,6 +143,21 @@ function home() {
       <p class="count">${fresh.length} từ mới</p>
       <button class="btn primary block" data-action="start" data-mode="latest">Học bài mới</button>
     </section>` : ''}
+    <nav class="menu">
+      <button class="menu-item" data-action="practice">${icon('pencil-simple-line')}<span><b>Luyện tập</b></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="tb">${icon('book-open-text')}<span><b>Giáo trình</b></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="wb">${icon('exam')}<span><b>Bài tập</b></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="rad">${icon('tree-structure')}<span><b>Bộ thủ</b></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Tra cứu</b></span>${icon('caret-right')}</button>
+    </nav>
+    ${tomie('home')}
+  </main>`;
+}
+
+/** "Luyện tập": lesson picker + the practice modes that use it. */
+function practice() {
+  return `<main class="page">
+    <header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Luyện tập</h1></header>
     ${lessonPicker()}
     <nav class="menu">
       ${FULL ? `<button class="menu-item" data-action="start" data-mode="all">${icon('shuffle')}<span><b>${pickedLesson ? `Ôn ${esc(pickedName())}` : 'Ôn tất cả'}</b></span>${icon('caret-right')}</button>` : ''}
@@ -150,12 +165,7 @@ function home() {
       <button class="menu-item" data-action="write" data-mode="sentence">${icon('text-align-left')}<span><b>Luyện viết câu</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="write" data-mode="vocab">${icon('translate')}<span><b>${T.vocab[0]}</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="listen">${icon('headphones')}<span><b>Nghe cả bài</b></span>${icon('caret-right')}</button>
-      <button class="menu-item" data-action="tb">${icon('book-open-text')}<span><b>Giáo trình</b></span>${icon('caret-right')}</button>
-      <button class="menu-item" data-action="wb">${icon('exam')}<span><b>Bài tập</b></span>${icon('caret-right')}</button>
-      <button class="menu-item" data-action="rad">${icon('tree-structure')}<span><b>Bộ thủ</b></span>${icon('caret-right')}</button>
-      <button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Tra cứu</b></span>${icon('caret-right')}</button>
     </nav>
-    ${tomie('home')}
   </main>`;
 }
 
@@ -450,7 +460,7 @@ function write() {
   const status = state.done ? `<p class="write-status ok">${icon('check-circle', true)} Đúng rồi</p>`
     : state.wrong ? `<p class="write-status bad">${icon('x-circle', true)} Chưa đúng, thử lại</p>` : '';
   return `<main class="page">
-    <header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>${WRITE_TITLES[mode]}</h1></header>
+    <header class="list-head"><button class="icon-btn" data-action="practice" aria-label="Quay lại">${icon('arrow-left')}</button><h1>${WRITE_TITLES[mode]}</h1></header>
     <div class="stage">
       <div class="card center">
         ${shown ? c.zh : ''}
@@ -488,7 +498,7 @@ function listen() {
   const x = items[i];
   const c = writeCard(x.tokens ? 'sentence' : 'write', x);
   return `<main class="page">
-    <header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Nghe ${esc(pickedLesson ? pickedName() : 'tất cả')}</h1><span class="counter">${i + 1}/${items.length}</span></header>
+    <header class="list-head"><button class="icon-btn" data-action="practice" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Nghe ${esc(pickedLesson ? pickedName() : 'tất cả')}</h1><span class="counter">${i + 1}/${items.length}</span></header>
     <div class="stage"><div class="card center">${c.zh}<p class="meaning">${esc(c.en)}</p><p class="vi muted">${esc(c.vi)}</p></div></div>
     <div class="footer listen-ctl">
       <button class="btn" data-action="listen-move" data-d="-1" aria-label="Trước">${icon('skip-back', true)}</button>
@@ -825,9 +835,9 @@ const KEYBOARD_ON_OPEN = matchMedia('(pointer: fine)').matches;
 let wasTyping = false;
 
 function render() {
-  const views = { home, radicals, words: wordList, quiz, summary, write, listen, wb: workbook, tb: textbook };
+  const views = { home, practice, radicals, words: wordList, quiz, summary, write, listen, wb: workbook, tb: textbook };
   wasTyping = document.activeElement?.matches?.('#hz-in, #py') ?? false;
-  if (view.name !== 'home') lessonPickerOpen = false; // picker reopens closed next time
+  if (view.name !== 'practice') lessonPickerOpen = false; // picker reopens closed next time
   root.innerHTML = views[view.name]();
   if (view.name === 'quiz') onQuestionShown();
   if (view.name === 'write') {
@@ -958,6 +968,7 @@ root.addEventListener('click', (e) => {
   else if (act === 'wb-pick') { if (!view.done) { view.picks[el.dataset.n] = el.dataset.k; render(); } }
   else if (act === 'wb-submit') { view.done = true; wbAudio.pause(); render(); scrollTo(0, 0); }
   else if (act === 'wb-retry') openWorkbook(view.id);
+  else if (act === 'practice') { player.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); view = { name: 'practice' }; render(); mediaState(); }
   else if (act === 'home') { player.pause(); wbAudio.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); view = { name: 'home' }; render(); mediaState(); }
   else if (act === 'listen') {
     const items = [...practiceWords().filter(inLesson), ...data.sentences.filter(inLesson)];

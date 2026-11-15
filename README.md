@@ -16,7 +16,7 @@ How the app and data pipeline work inside: [docs/architecture.md](docs/architect
 Open the URL on a phone and add it to the home screen.
 The UI is in Vietnamese; every word and sentence shows a Vietnamese and an English translation.
 
-The home screen shows the practice modes below.
+The home screen's **Luyện tập** item opens the lesson picker plus Luyện viết chữ, Luyện viết câu, Luyện từ vựng and Nghe cả bài; their back buttons return there.
 The older quizzes (**Học bài mới**, **Ôn tất cả**) are hidden there and appear only at <https://khanhhung142.github.io/hskchinese/full/>.
 
 - **Luyện viết chữ** is typing practice, separate from the quizzes and not counted in progress.
