@@ -3,10 +3,10 @@
 Personal Chinese vocab trainer for Vietnamese speakers.
 It is a static PWA (vanilla JS, no build step, no backend) served by GitHub Pages at <https://khanhhung142.github.io/hskchinese/>.
 
-New words arrive from class photos: Hung sends a photo of the lesson's word table to Hermes (a Telegram bot on a Raspberry Pi), Hermes writes the words and example sentences into `data/vocab.json` and pushes, and the app picks them up on next load.
+Practice data comes only from the books: `tools/book_vocab.py` rebuilds `data/vocab.json` from **Giáo trình** (`data/textbook.json`: each lesson's 生词/专有名词, dialogue lines, grammar examples) and **Bài tập** (`data/workbook.json` listening transcripts), filed by the book's lesson. English glosses live in `data/book_en.json`. When either book file changes, `tools/publish.sh` regenerates everything.
 
 ```text
-photo -> Telegram -> Hermes -> data/vocab.json -> tools/publish.sh -> git push -> GitHub Pages -> app
+textbook.json + workbook.json (+ book_en.json) -> tools/book_vocab.py -> data/vocab.json -> tools/check.mjs -> git push -> GitHub Pages -> app
 ```
 
 How the app and data pipeline work inside: [docs/architecture.md](docs/architecture.md).
@@ -35,9 +35,8 @@ The older quizzes (**Học bài mới**, **Ôn tất cả**) are hidden there an
 - **Bài tập HSK1** (Chinese only): the 模拟测练 test of each lesson of the SBT HSK1 (3.0) workbook, plus the mock exam. 20 questions per lesson: listening (speaker button plays that question's clip of the book audio) and reading; **Nộp bài** grades it. Data in `data/workbook.json`, scans and audio in `workbook/`. Lessons without audio yet are greyed out. After submitting, each question gets a **Transcript & dịch** toggle (Chinese, pinyin, English, Vietnamese; source `tools/wb_tr/<id>.json`, merged by `tools/workbook.py`).
 - **Bộ thủ** lists the Kangxi radicals (form, variants, Hán Việt name, meaning, pinyin, strokes, examples, memory tip) in two tabs: the 50 most common, or all 214. Data in `data/radicals.json`.
 - In **Luyện viết chữ** / **Luyện từ vựng**, a collapsed **Bộ thủ & mẹo nhớ** box under the shown word splits each character into components and gives a memory story, Hán Việt reading and stroke hint (`radicals.json` → `chars`; a test asserts every vocab character has one). Most entries come from the [Kai Hanzi HSK × Sino-Vietnamese dataset](https://github.com/binhbuithithanh/hanzi-sino-vietnamese) (CC BY 4.0; attribution shown in the box); characters it lacks keep hand-written tips.
-- **Tra cứu** has two tabs. **Tra cứu từ** lists every word by lesson; tap a row to move it to another lesson. **Tra cứu câu** lists every example sentence by lesson. The search box filters the open tab by hanzi, pinyin (tones and spaces optional: `nihao`), Vietnamese (accents optional) or English.
+- **Tra cứu** has two tabs. **Tra cứu từ** lists every word by book lesson. **Tra cứu câu** lists every example sentence by lesson. The search box filters the open tab by hanzi, pinyin (tones and spaces optional: `nihao`), Vietnamese (accents optional) or English.
 - **Học theo bài** (picker on the home screen) limits every practice mode and **Ôn** to the ticked lessons (one or several), or all lessons; saved as comma-separated ids in `localStorage` key `hsk-lesson`.
-- **Tra cứu** edits: open a word to move it, or any of its sentences, to another lesson ("Bài mới…" asks for a name); saved in `localStorage` key `hsk-moves`, this browser only. A lesson left with no words and no sentences disappears from every list. (The old **Thêm từ, mẫu câu** screen was removed; items it saved in `hsk-custom` still load.)
 
 A session has up to 5 words.
 Exercise types: listen and pick the hanzi, type the pinyin (tone numbers like `ni3` are fine), fill the blank, put words in order, pick the sentence meaning.

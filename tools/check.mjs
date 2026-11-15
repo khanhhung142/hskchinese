@@ -17,7 +17,6 @@ const CEDICT_GZ = path.join(ROOT, 'tools/.cache/cedict.txt.gz');
 const CEDICT_URL = 'https://www.mdbg.net/chinese/export/cedict/cedict_1_0_ts_utf-8_mdbg.txt.gz';
 const VOICE = 'zh-CN-XiaoxiaoNeural';
 const VOICE_EN = 'en-US-AriaNeural';
-export const SENTENCES_PER_WORD = 3;
 
 /** CC-CEDICT text -> Map(simplified -> Set(normalized pinyin)). */
 export function parseCedict(text) {
@@ -80,7 +79,6 @@ export function validate(data, cedict) {
 
   const ids = new Set();
   const texts = new Set();
-  const focusCount = new Map();
   for (const s of data.sentences ?? []) {
     const at = `sentence ${s.id}`;
     if (typeof s.id !== 'string' || ids.has(s.id)) err(at, 'id must be a unique string');
@@ -105,12 +103,7 @@ export function validate(data, cedict) {
     else {
       if (!s.tokens.some((t) => parseToken(t).h === s.focus)) err(at, `focus "${s.focus}" must appear as a token`);
       if (!Number.isInteger(s.sense) || s.sense < 0 || s.sense >= focus.meanings.length) err(at, `sense must index ${s.focus}.meanings (0..${focus.meanings.length - 1})`);
-      focusCount.set(s.focus, (focusCount.get(s.focus) ?? 0) + 1);
     }
-  }
-  for (const w of words.values()) {
-    const n = focusCount.get(w.hanzi) ?? 0;
-    if (w.lesson > 0 && n < SENTENCES_PER_WORD) err(`word ${w.hanzi}`, `needs at least ${SENTENCES_PER_WORD} sentences with focus "${w.hanzi}", has ${n}`);
   }
   return errors;
 }

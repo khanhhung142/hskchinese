@@ -58,9 +58,6 @@ test('validate catches the mistakes an LLM makes', () => {
   assert.match(errs, /token "你" is not in the word list/);
   assert.match(errs, /sense must index/);
   assert.match(errs, /reading must be one of/);
-  const few = mini();
-  few.sentences.pop();
-  assert.match(validate(few, CEDICT).join(), /word 谁: needs at least 3 sentences/);
 });
 
 test('seed data formats canonically', () => {
@@ -84,8 +81,11 @@ test('buildSession: new words get a flashcard then an exercise, seen words get v
 
   const progress = {};
   data.words.forEach((w) => record(progress, w.hanzi, true));
+  // Book words that no book sentence uses (e.g. 它们) can only get listen/pinyin; leave them out here.
+  const used = new Set(data.sentences.flatMap((s) => s.tokens.map((t) => parseToken(t).h)));
+  const withSents = { ...data, words: data.words.filter((w) => used.has(w.hanzi)) };
   for (let i = 0; i < 50; i++) {
-    const session = buildSession(data, progress, 'all', { rand });
+    const session = buildSession(withSents, progress, 'all', { rand });
     assert.equal(new Set(session.map((q) => q.type)).size, 5, 'every session mixes all five exercise types');
     for (const q of session) {
       if (q.options && q.type !== 'meaning') assert.ok(q.options.includes(q.word) && new Set(q.options).size === q.options.length);

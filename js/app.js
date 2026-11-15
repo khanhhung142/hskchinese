@@ -3,19 +3,12 @@ import { buildSession, sentenceText, parseToken, tokenPinyin, isPunct, latestLes
 
 const root = document.getElementById('app');
 const PROGRESS_KEY = 'hsk-progress';
-const CUSTOM_KEY = 'hsk-custom'; // words, sentences and lessons added in the app (this device only)
 const LESSON_KEY = 'hsk-lesson'; // lesson picked for practice, '' = all
 let data, wordMap;
 let progress = loadProgress();
-let custom = loadJSON(CUSTOM_KEY) ?? { lessons: [], words: [], sentences: [] };
 let pickedLesson = localStorage.getItem(LESSON_KEY) ?? ''; // comma-separated lesson ids, '' = all
 const picked = () => pickedLesson.split(',').filter(Boolean).map(Number);
 const pickedName = () => { const p = picked(); return p.length === 1 ? lessonTitle(p[0]) : `${p.length} bài`; };
-const MOVES_KEY = 'hsk-moves'; // edits made in the word list: { w: {hanzi: id}, s: {sentenceId: id}, t: {lessonId: title} }
-let moves = loadJSON(MOVES_KEY) ?? { w: {}, s: {} };
-moves.t ??= {};
-moves.d ??= {}; // deleted words: {hanzi: lesson it was in}
-moves.x ??= {}; // deleted sentences: {sentenceId: lesson it was in}
 let view = { name: 'home' };
 
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
@@ -169,7 +162,7 @@ function practice() {
   </main>`;
 }
 
-const lessonTitle = (id) => (data.lessons.find((l) => l.id === id) ?? custom.lessons.find((l) => l.id === id))?.title ?? `Bài ${id}`;
+const lessonTitle = (id) => data.lessons.find((l) => l.id === id)?.title ?? `Bài ${id}`;
 /** Practice applies to the ticked lessons, or all when none is ticked; lessons listed are the ones that have words. */
 const inLesson = (x) => pickedLesson === '' || picked().includes(x.lesson);
 let lessonPickerOpen = false;
@@ -205,7 +198,7 @@ function wordList() {
 /** One example sentence in "Tra cứu câu"; searchable by text, pinyin, Vietnamese, English. */
 function sentRow(s) {
   const q = fold([sentenceText(s), s.tokens.map((t) => tokenPinyin(t, wordMap)).join(''), s.vi, s.en].join(' '));
-  return `<div class="sent-row" data-q="${esc(q)}">${speakSentence(sentenceText(s), sentenceHz(s), s.vi, s.en)}${moveSelect('s', s.id, s.lesson, 'Câu thuộc')}</div>`;
+  return `<div class="sent-row" data-q="${esc(q)}">${speakSentence(sentenceText(s), sentenceHz(s), s.vi, s.en)}</div>`;
 }
 
 /** Lowercase, no accents/tones, đ→d, no spaces: "Nǐ hǎo" and "nihao" both match "ni hao". */
@@ -219,53 +212,9 @@ function searchWords(q) {
 }
 
 function wordRow(w) {
-  return `<details class="word" data-q="${esc(fold([w.hanzi, ...w.pinyin, ...w.meanings, w.en].join(' ')))}">
-    <summary>${wordHz(w, true)}<span><p>${esc(w.meanings.join('; '))}</p><p class="en">${esc(w.en)}</p></span>${icon('caret-right')}</summary>
-    <div class="body">
-      ${moveSelect('w', w.hanzi, w.lesson, 'Từ thuộc')}
-    </div>
-  </details>`;
-}
-
-/** Lesson picker for one word or sentence; "Bài mới…" asks for a number. */
-function moveSelect(k, key, current, label) {
-  const opt = (l) => `<option value="${l.id}"${l.id === current ? ' selected' : ''}>${esc(l.title)}</option>`;
-  return `<label class="move"><span>${label}</span><select data-move="${k}" data-key="${esc(key)}">${data.lessons.map(opt).join('')}<option value="new">Bài mới…</option></select></label>`;
-}
-
-function moveItem(sel) {
-  let id = sel.value;
-  if (id === 'new') {
-    id = lessonByName(prompt('Tên bài:') ?? '');
-    if (id == null) return render();
-    saveCustom();
-  }
-  moves[sel.dataset.move][sel.dataset.key] = +id;
-  saveMoves();
-  const open = sel.closest('details')?.querySelector('summary .han')?.textContent;
-  mergeData();
-  render();
-  // Keep the word that was edited open.
-  [...root.querySelectorAll('details.word')].find((d) => d.querySelector('summary .han')?.textContent === open)?.setAttribute('open', '');
-}
-
-/**
- * Lesson typed as free text: an existing title (case ignored) or number picks that lesson,
- * anything else creates a lesson with that title under the next free id. Ids stay integers inside.
- */
-function lessonByName(name) {
-  const t = name.trim();
-  if (!t) return null;
-  const hit = data.lessons.find((l) => l.id > 0 && (l.title.toLowerCase() === t.toLowerCase() || String(l.id) === t));
-  if (hit) return hit.id;
-  const id = Math.max(0, ...data.lessons.map((l) => l.id), ...custom.lessons.map((l) => l.id)) + 1;
-  custom.lessons.push({ id, date: new Date().toISOString().slice(0, 10), title: t });
-  data.lessons.push(custom.lessons.at(-1)); // visible before the next mergeData
-  return id;
-}
-
-function saveMoves() {
-  try { localStorage.setItem(MOVES_KEY, JSON.stringify(moves)); } catch { alert('Không lưu được (bộ nhớ trình duyệt bị chặn).'); }
+  return `<div class="word" data-q="${esc(fold([w.hanzi, ...w.pinyin, ...w.meanings, w.en].join(' ')))}">
+    <div class="word-sum">${wordHz(w, true)}<span><p>${esc(w.meanings.join('; '))}</p><p class="en">${esc(w.en)}</p></span></div>
+  </div>`;
 }
 
 /** Play button + Chinese (already rendered with pinyin) + translations. */
@@ -630,28 +579,10 @@ function clearInk() {
   recognize();
 }
 
-function saveCustom() {
-  try { localStorage.setItem(CUSTOM_KEY, JSON.stringify(custom)); } catch { alert('Không lưu được (bộ nhớ trình duyệt bị chặn).'); }
-}
-
 let base;
-/** data = vocab.json + what was added in the app; a word in vocab.json wins over a custom duplicate. */
+/** data = vocab.json, generated from the textbook + workbook (tools/book_vocab.py). */
 function mergeData() {
-  const has = new Set(base.words.map((w) => w.hanzi));
-  const lessonIds = new Set(base.lessons.map((l) => l.id));
-  const norm = (x) => sentenceText(x).replace(/[\p{P}\s]/gu, '').toLowerCase(); // same rule as sameHanzi
-  const baseTexts = new Set(base.sentences.map(norm));
-  data = {
-    lessons: [...base.lessons, ...custom.lessons.filter((l) => !lessonIds.has(l.id))].map((l) => (l.id in moves.t ? { ...l, title: moves.t[l.id] } : l)).sort((a, b) => a.id - b.id),
-    words: [...base.words, ...custom.words.filter((w) => !has.has(w.hanzi))].filter((w) => !(w.hanzi in moves.d)).map((w) => (w.hanzi in moves.w ? { ...w, lesson: moves.w[w.hanzi] } : w)),
-    // A deleted word takes its example sentences with it.
-    // Once Hermes applies an export, the same sentence is in vocab.json under a new id: base wins, like words.
-    sentences: [...base.sentences, ...custom.sentences.filter((c) => !baseTexts.has(norm(c)))].filter((s) => !(s.focus in moves.d) && !(s.id in moves.x)).map((s) => (s.id in moves.s ? { ...s, lesson: moves.s[s.id] } : s)),
-  };
-  // A lesson left with no words and no sentences is hidden everywhere (and left out of exports).
-  // ponytail: an empty custom lesson stays in hsk-custom; harmless, ids skip it.
-  const used = new Set([...data.words, ...data.sentences].map((x) => x.lesson));
-  data.lessons = data.lessons.filter((l) => used.has(l.id));
+  data = base;
   wordMap = new Map(data.words.map((w) => [w.hanzi, w]));
 }
 
@@ -984,7 +915,6 @@ root.addEventListener('input', (e) => {
   if (e.target.id === 'tb-search') { const f = fold(e.target.value); root.querySelectorAll('.tb-word[data-q]').forEach((r) => { r.hidden = !r.dataset.q.includes(f); }); }
 });
 root.addEventListener('change', (e) => {
-  if (e.target.dataset.move) return moveItem(e.target);
   if (!e.target.classList.contains('lesson-pick')) return;
   // "Tất cả" clears the ticks; ticking a lesson unticks "Tất cả".
   pickedLesson = e.target.value === '' ? '' : [...root.querySelectorAll('.lesson-pick:checked')].map((b) => b.value).filter(Boolean).join(',');
