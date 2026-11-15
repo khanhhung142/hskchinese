@@ -1,21 +1,17 @@
 import { toMarks, normalize } from './pinyin.js';
-import { buildSession, sentenceText, parseToken, tokenPinyin, isPunct, latestLesson, record, sameHanzi, tokenize, enTokens, fromEnglish, sameWord } from './quiz.js';
+import { buildSession, sentenceText, parseToken, tokenPinyin, isPunct, latestLesson, record, sameHanzi, tokenize } from './quiz.js';
 
 const root = document.getElementById('app');
-// Two subjects share every screen: Chinese (vocab.json) and English (english.json). Each keeps its own storage keys.
-const EN = localStorage.getItem('hsk-lang') === 'en';
-document.documentElement.classList.toggle('lang-en', EN);
-const key = (k) => (EN ? k.replace('hsk-', 'eng-') : k);
-const PROGRESS_KEY = key('hsk-progress');
-const CUSTOM_KEY = key('hsk-custom'); // words, sentences and lessons added in the app (this device only)
-const LESSON_KEY = key('hsk-lesson'); // lesson picked for practice, '' = all
+const PROGRESS_KEY = 'hsk-progress';
+const CUSTOM_KEY = 'hsk-custom'; // words, sentences and lessons added in the app (this device only)
+const LESSON_KEY = 'hsk-lesson'; // lesson picked for practice, '' = all
 let data, wordMap;
 let progress = loadProgress();
 let custom = loadJSON(CUSTOM_KEY) ?? { lessons: [], words: [], sentences: [] };
 let pickedLesson = localStorage.getItem(LESSON_KEY) ?? ''; // comma-separated lesson ids, '' = all
 const picked = () => pickedLesson.split(',').filter(Boolean).map(Number);
 const pickedName = () => { const p = picked(); return p.length === 1 ? lessonTitle(p[0]) : `${p.length} bài`; };
-const MOVES_KEY = key('hsk-moves'); // edits made in the word list: { w: {hanzi: id}, s: {sentenceId: id}, t: {lessonId: title} }
+const MOVES_KEY = 'hsk-moves'; // edits made in the word list: { w: {hanzi: id}, s: {sentenceId: id}, t: {lessonId: title} }
 let moves = loadJSON(MOVES_KEY) ?? { w: {}, s: {} };
 moves.t ??= {};
 moves.d ??= {}; // deleted words: {hanzi: lesson it was in}
@@ -39,7 +35,6 @@ const player = new Audio();
 /** Play Chinese `text`, then optionally `next()` when it finishes. */
 function say(text, next) {
   if ('speechSynthesis' in window) speechSynthesis.cancel();
-  if (EN) return play(`audio/en/${encodeURIComponent(text)}.mp3`, text, 'en-US', next);
   play(`audio/${encodeURIComponent(text)}.mp3`, text, 'zh-CN', next);
 }
 const sayEn = (text) => text && play(`audio/en/${encodeURIComponent(text)}.mp3`, text, 'en-US');
@@ -66,11 +61,9 @@ const FULL = /\/full\/?$/.test(location.pathname);
 /** Chinese is always shown with its pinyin underneath, word by word. */
 const hz = (h, p) => `<span class="hz"><span class="han">${esc(h)}</span>${p ? `<span class="py">${esc(p)}</span>` : ''}</span>`;
 const wordHz = (w, all) => hz(w.hanzi, all ? w.pinyin.join(' / ') : w.pinyin[0]);
-const tokenHz = (t) => hz(parseToken(t).h, EN ? '' : tokenPinyin(t, wordMap));
+const tokenHz = (t) => hz(parseToken(t).h, tokenPinyin(t, wordMap));
 /** A sentence as a row of words with pinyin; `blank` hides one token (cloze). */
-const sentenceHz = (s, blank = -1) => EN
-  ? `<span class="ens">${s.tokens.map((t, i) => `${i && !isPunct(t) ? ' ' : ''}${i === blank ? '<span class="blank">____</span>' : esc(t)}`).join('')}</span>`
-  : `<span class="hzs">${s.tokens.map((t, i) => {
+const sentenceHz = (s, blank = -1) => `<span class="hzs">${s.tokens.map((t, i) => {
   if (i === blank) return '<span class="hz blank"><span class="han">&nbsp;</span><span class="py">&nbsp;</span></span>';
   return isPunct(parseToken(t).h) ? `<span class="hz punct"><span class="han">${esc(t)}</span></span>` : tokenHz(t);
 }).join('')}</span>`;
@@ -78,20 +71,13 @@ const sentenceHz = (s, blank = -1) => EN
 const speakBtn = (text, sm) => `<button class="speak${sm ? ' sm' : ''}" data-say="${esc(text)}" aria-label="Nghe">${icon('speaker-high', true)}</button>`;
 
 /** Labels that differ between the two subjects. */
-const T = EN ? {
-  titles: [["I wish I could hate you, but I can't stop loving you.", "Ước gì em có thể ghét anh, nhưng em không thể thôi yêu anh."], ["We were almost something, and that is the saddest part.", "Chúng ta suýt nữa đã là gì đó, và đó là điều buồn nhất."], ["You were my favorite hello and my hardest goodbye.", "Anh là lời chào em thích nhất và lời tạm biệt khó khăn nhất."], ["Some people are meant to fall in love, but not meant to be together.", "Có những người sinh ra để yêu nhau, nhưng không để ở bên nhau."], ["I loved you in a way you will never understand.", "Em đã yêu anh theo cách anh sẽ không bao giờ hiểu."], ["Missing you comes in waves, and tonight I'm drowning.", "Nỗi nhớ anh đến từng đợt sóng, và đêm nay em đang chết đuối."], ["It hurts to let go, but it hurts more to hold on.", "Buông tay thì đau, nhưng níu giữ còn đau hơn."], ["You promised forever, but forever ended yesterday.", "Anh hứa mãi mãi, nhưng mãi mãi đã kết thúc hôm qua."], ["I still look for you in every crowd.", "Em vẫn tìm anh trong mọi đám đông."], ["Even now, after all this time, I would still choose you.", "Ngay cả bây giờ, sau ngần ấy thời gian, em vẫn chọn anh."], ["The person who gave me the best memories gave me the worst pain.", "Người cho em những kỷ niệm đẹp nhất cũng cho em nỗi đau tệ nhất."], ["We are strangers who know each other's secrets.", "Chúng ta là những người xa lạ biết bí mật của nhau."], ["I was never your choice, only your option.", "Em chưa bao giờ là lựa chọn của anh, chỉ là một phương án."], ["Some goodbyes are never said out loud.", "Có những lời tạm biệt không bao giờ được nói thành lời."], ["You moved on, and I'm still here, holding our memories.", "Anh đã bước tiếp, còn em vẫn ở đây ôm những kỷ niệm của chúng ta."], ["I miss who we were before we became nothing.", "Em nhớ chúng ta của ngày trước, khi chưa trở thành con số không."], ["In another life, I hope we get it right.", "Ở một kiếp khác, mong rằng chúng ta sẽ đúng."], ["I'm not crying because of you; I'm crying because of us.", "Em không khóc vì anh; em khóc vì chúng ta."]], empty: 'Chưa có từ nào.<br>Gửi từ mới cho Hermes, hoặc tự thêm.',
-  write: ['Luyện viết từ', 'Nghe, xem và gõ lại từ'], vocab: ['Luyện từ vựng', 'Xem nghĩa, gõ từ tiếng Anh'], add: 'Chỉ cần gõ tiếng Anh',
-  inWrite: 'Gõ lại từ ở trên', inVocab: 'Gõ từ tiếng Anh có nghĩa này', inSentence: 'Gõ lại cả câu ở trên',
-  addField: 'Tiếng Anh, mỗi dòng một mục (nghĩa tự điền; muốn tự ghi nghĩa: teacher = giáo viên)', script: 'chỉ nhận chữ cái tiếng Anh', file: 'eng',
-} : {
+const T = {
   titles: [["我们终究没有走到最后。", "Rốt cuộc chúng ta vẫn không đi đến cuối cùng."], ["你是我年少的欢喜，也是我余生的遗憾。", "Anh là niềm vui thời niên thiếu, cũng là tiếc nuối cả quãng đời còn lại của em."], ["我等你，等到花都谢了，你也没有来。", "Em đợi anh, đợi đến khi hoa tàn hết, anh vẫn không đến."], ["最遗憾的不是错过，而是我们曾经那么靠近。", "Tiếc nuối nhất không phải lỡ nhau, mà là chúng ta từng gần nhau đến thế."], ["你说过会陪我到老，后来你却先放了手。", "Anh từng nói sẽ cùng em đến già, rồi anh lại buông tay trước."], ["原来我只是你生命中的过客。", "Hóa ra em chỉ là khách qua đường trong đời anh."], ["我把你弄丢了，再也找不回来了。", "Em làm lạc mất anh rồi, không bao giờ tìm lại được nữa."], ["你走以后，我的世界下了一场永远不停的雨。", "Từ khi anh đi, thế giới của em đổ một cơn mưa không bao giờ tạnh."], ["我们之间，只差一句我爱你，却隔了一辈子。", "Giữa chúng ta chỉ thiếu một câu anh yêu em, mà cách nhau cả một đời."], ["我还在原地，你却已经走远。", "Em vẫn ở chỗ cũ, còn anh đã đi xa rồi."]], empty: 'Chưa có từ nào.<br>Gửi ảnh từ mới cho Hermes trên Telegram.',
   write: ['Luyện viết chữ', 'Nghe, xem và gõ lại chữ Hán'], vocab: ['Luyện từ vựng', 'Xem nghĩa, nhập chữ Hán'], add: 'Chỉ cần gõ tiếng Trung',
   inWrite: 'Gõ hoặc viết lại chữ Hán ở trên', inVocab: 'Gõ hoặc viết chữ Hán của từ này', inSentence: 'Gõ hoặc viết lại cả câu ở trên',
   addField: 'Tiếng Trung, mỗi dòng một mục (nghĩa tự điền; muốn tự ghi nghĩa: 老师 = giáo viên)', script: 'chỉ nhận chữ Hán', file: 'hsk',
 };
 const TITLE = T.titles[Math.floor(Math.random() * T.titles.length)]; // one per page load
-const langSwitch = () => `<div class="seg lang" role="group" aria-label="Môn học">${[['zh', 'Tiếng Trung'], ['en', 'Tiếng Anh']].map(([v, t]) =>
-  `<button class="${(v === 'en') === EN ? 'on' : ''}" data-action="lang" data-lang="${v}" aria-pressed="${(v === 'en') === EN}">${t}</button>`).join('')}</div>`;
 const addItem = () => `<button class="menu-item" data-action="add">${icon('plus')}<span><b>Thêm từ, mẫu câu</b></span>${icon('caret-right')}</button>`;
 
 // ---------- Views ----------
@@ -142,11 +128,10 @@ function home() {
   const fresh = data.words.filter((w) => w.lesson === latest);
   const learned = data.words.filter((w) => progress[w.hanzi]?.r).length;
   if (!fresh.length) {
-    return `<main class="page">${langSwitch()}<div class="empty">${icon('camera')}<p>${T.empty}</p></div><nav class="menu">${addItem()}</nav></main>`;
+    return `<main class="page"><div class="empty">${icon('camera')}<p>${T.empty}</p></div><nav class="menu">${addItem()}</nav></main>`;
   }
   return `<main class="page">
-    ${langSwitch()}
-    <header class="home-head"><h1><span class="${EN ? '' : 'han'}">${esc(TITLE[0])}</span><small>${esc(TITLE[1])}</small></h1>${FULL ? `<span class="muted">${learned}/${data.words.length} từ đã thuộc</span>` : ''}</header>
+    <header class="home-head"><h1><span class="han">${esc(TITLE[0])}</span><small>${esc(TITLE[1])}</small></h1>${FULL ? `<span class="muted">${learned}/${data.words.length} từ đã thuộc</span>` : ''}</header>
     ${FULL ? `<section class="lesson">
       <h2>${esc(lesson.title)}${lesson.date ? `, ${esc(formatDate(lesson.date))}` : ''}</h2>
       <p class="strip">${fresh.map((w) => wordHz(w)).join('')}</p>
@@ -160,7 +145,7 @@ function home() {
       <button class="menu-item" data-action="write" data-mode="sentence">${icon('text-align-left')}<span><b>Luyện viết câu</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="write" data-mode="vocab">${icon('translate')}<span><b>${T.vocab[0]}</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="listen">${icon('headphones')}<span><b>Nghe cả bài</b></span>${icon('caret-right')}</button>
-      ${EN ? '' : `<button class="menu-item" data-action="wb">${icon('exam')}<span><b>Bài tập HSK1</b></span>${icon('caret-right')}</button>`}
+      <button class="menu-item" data-action="wb">${icon('exam')}<span><b>Bài tập HSK1</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Tra cứu</b></span>${icon('caret-right')}</button>
       ${addItem()}
     </nav>
@@ -203,7 +188,7 @@ function wordList() {
 
 /** One example sentence in "Tra cứu câu"; searchable by text, pinyin, Vietnamese, English. */
 function sentRow(s) {
-  const q = fold([sentenceText(s), EN ? '' : s.tokens.map((t) => tokenPinyin(t, wordMap)).join(''), s.vi, s.en].join(' '));
+  const q = fold([sentenceText(s), s.tokens.map((t) => tokenPinyin(t, wordMap)).join(''), s.vi, s.en].join(' '));
   return `<div class="sent-row" data-q="${esc(q)}">${speakSentence(sentenceText(s), sentenceHz(s), s.vi, s.en)}${moveSelect('s', s.id, s.lesson, 'Câu thuộc')}</div>`;
 }
 
@@ -305,7 +290,7 @@ const gloss = (vi, en) => `<p class="vi">${esc(vi)}</p><p class="en">${esc(en ??
 const PROMPTS = {
   flash: 'Từ mới',
   listen: 'Nghe và chọn chữ đúng',
-  pinyin: EN ? 'Nghe và gõ lại từ' : 'Gõ pinyin của từ này',
+  pinyin: 'Gõ pinyin của từ này',
   cloze: 'Chọn từ điền vào chỗ trống',
   order: 'Sắp xếp thành câu',
   meaning: 'Câu này nghĩa là gì?',
@@ -361,16 +346,6 @@ const QUESTION = {
     </div>`;
   },
   pinyin(q, state) {
-    if (EN) {
-      return `<form class="stage" data-action="submit-pinyin">
-      <div class="center">${speakBtn(q.word.hanzi)}<p class="meaning">${esc(q.word.meanings.join('; '))}</p></div>
-      <div class="field">
-        <label for="py">Từ tiếng Anh</label>
-        <input id="py" name="py" lang="en" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" value="${esc(state.typed ?? '')}" ${state.done ? 'disabled' : ''}>
-      </div>
-      ${state.done ? '' : '<div class="footer"><button class="btn primary block" id="py-check" disabled>Kiểm tra</button></div>'}
-    </form>`;
-    }
     return `<form class="stage" data-action="submit-pinyin">
       <p class="big-han han">${esc(q.word.hanzi)}</p>
       <div class="field">
@@ -456,11 +431,7 @@ function pickWriteItem(mode, prev) {
 }
 
 /** What the practice card shows and checks, for a word or a sentence. */
-// English: the headline is the Vietnamese meaning (`en` would repeat the answer).
-const writeCard = (mode, x) => (EN ? (mode === 'sentence'
-  ? { text: x.text, zh: `<p class="sentence">${sentenceHz(x)}</p>`, en: x.vi, vi: '' }
-  : { text: x.hanzi, zh: `<p class="big-han">${esc(x.hanzi)}</p>${x.pinyin[0] ? `<p class="py-big">${esc(x.pinyin[0])}</p>` : ''}`, en: x.meanings.join('; '), vi: '' })
-  : mode === 'sentence'
+const writeCard = (mode, x) => (mode === 'sentence'
   ? { text: sentenceText(x), zh: `<p class="sentence">${sentenceHz(x)}</p>`, en: x.en, vi: x.vi }
   : { text: x.hanzi, zh: `<p class="big-han han">${esc(x.hanzi)}</p><p class="py-big">${esc(x.pinyin.join(' / '))}</p>`, en: x.en, vi: x.meanings.join('; ') });
 const WRITE_TITLES = { write: T.write[0], vocab: T.vocab[0], sentence: 'Luyện viết câu' };
@@ -479,13 +450,13 @@ function write() {
         ${shown ? c.zh : ''}
         <p class="meaning${shown ? '' : ' big-meaning'}">${esc(c.en)}</p>
         <p class="vi muted">${esc(c.vi)}</p>
-        ${shown ? speakBtn(c.text) : EN ? '' : `<button class="speak" data-say-en="${esc(c.en)}" aria-label="Nghe tiếng Anh">${icon('speaker-high', true)}</button>`}
+        ${shown ? speakBtn(c.text) : `<button class="speak" data-say-en="${esc(c.en)}" aria-label="Nghe tiếng Anh">${icon('speaker-high', true)}</button>`}
       </div>
       <form class="field" data-action="submit-write">
         <label for="hz-in">${{ write: T.inWrite, vocab: T.inVocab, sentence: T.inSentence }[mode]}</label>
         <div class="input-row">
-          <input id="hz-in" name="hz" lang="${EN ? 'en' : 'zh-CN'}" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" value="${esc(state.typed ?? '')}" ${state.done ? 'disabled' : ''}>
-          ${state.done || EN ? '' : `<button type="button" class="icon-btn${state.hand ? ' on' : ''}" data-action="hand-toggle" aria-label="Viết tay" aria-pressed="${!!state.hand}">${icon('pencil-simple-line')}</button>`}
+          <input id="hz-in" name="hz" lang="zh-CN" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" value="${esc(state.typed ?? '')}" ${state.done ? 'disabled' : ''}>
+          ${state.done ? '' : `<button type="button" class="icon-btn${state.hand ? ' on' : ''}" data-action="hand-toggle" aria-label="Viết tay" aria-pressed="${!!state.hand}">${icon('pencil-simple-line')}</button>`}
         </div>
         ${status}
       </form>
@@ -533,8 +504,7 @@ function listenStep() {
     if (st.i < st.items.length - 1) { st.i++; listenStep(); } else { st.on = false; render(); mediaState(); }
   });
   mediaState(c.text, c.en);
-  if (EN) say(c.text, after);
-  else say(c.text, () => (live() ? play(`audio/en/${encodeURIComponent(c.en)}.mp3`, c.en, 'en-US', after) : null));
+  say(c.text, () => (live() ? play(`audio/en/${encodeURIComponent(c.en)}.mp3`, c.en, 'en-US', after) : null));
 }
 
 /** Lock-screen / notification controls for "Nghe cả bài". */
@@ -569,7 +539,7 @@ function startWrite(mode) {
   document.activeElement?.blur(); // new item: let the word show before the keyboard
   render();
   const c = writeCard(mode, view.item);
-  if (EN) { if (mode !== 'vocab') say(c.text); } else mode === 'vocab' ? sayEn(c.en) : say(c.text, () => sayEn(c.en));
+  mode === 'vocab' ? sayEn(c.en) : say(c.text, () => sayEn(c.en));
 }
 
 function checkWrite() {
@@ -691,7 +661,7 @@ function addView() {
         <datalist id="lesson-ids">${ids.map((id) => `<option value="${esc(lessonTitle(id))}"></option>`).join('')}</datalist>
       </label>
       <label class="field"><span>${T.addField}</span>
-        <textarea name="zh" lang="${EN ? 'en' : 'zh-CN'}" rows="4" required autocomplete="off" spellcheck="false"></textarea>
+        <textarea name="zh" lang="zh-CN" rows="4" required autocomplete="off" spellcheck="false"></textarea>
       </label>
       <button class="btn primary block" ${busy ? 'disabled' : ''}>${busy ? 'Đang thêm…' : 'Thêm'}</button>
       ${log.length ? `<ul class="add-log">${log.map((l, i) => `<li class="${l.ok ? 'ok' : 'bad'}">${esc(l.text)}${l.dup ? `<span class="dup-pick"><button type="button" class="btn" data-action="dup-keep" data-i="${i}">Giữ ở ${esc(lessonTitle(l.dup.from))}</button><button type="button" class="btn primary" data-action="dup-move" data-i="${i}">Chuyển sang ${esc(lessonTitle(+lesson))}</button></span>` : ''}</li>`).join('')}</ul>` : ''}
@@ -709,7 +679,7 @@ async function toPinyin(text) {
   return pinyin(text, { type: 'array', toneSandhi: false }).join('');
 }
 async function translate(text, lang) {
-  const res = await fetch(`https://api.mymemory.translated.net/get?langpair=${EN ? 'en' : 'zh-CN'}|${lang}&q=${encodeURIComponent(text)}`);
+  const res = await fetch(`https://api.mymemory.translated.net/get?langpair=zh-CN|${lang}&q=${encodeURIComponent(text)}`);
   const t = (await res.json())?.responseData?.translatedText?.trim();
   if (!t) throw new Error('dịch lỗi');
   return t.replace(/\//g, ', '); // `en` names audio files; no slashes
@@ -725,7 +695,6 @@ function dup(k, key, from, to) {
 }
 
 async function addOne(kind, line, lesson) {
-  if (EN) return addOneEn(kind, line, lesson);
   const [zh, viGiven] = line.split('=').map((s) => s.trim());
   const han = zh.replace(/[\s\p{P}]/gu, '');
   if (!/^\p{Script=Han}+$/u.test(han)) throw new Error('chỉ nhận chữ Hán');
@@ -747,27 +716,6 @@ async function addOne(kind, line, lesson) {
   const s = { id: `${lesson}-u${Date.now().toString(36)}`, tokens, vi, en, focus, sense: 0, lesson };
   custom.sentences.push(s);
   return `${sentenceText(s)} ${vi}`;
-}
-
-async function addOneEn(kind, line, lesson) {
-  const [text, viGiven] = line.split('=').map((s) => s.trim());
-  if (!/^[A-Za-z][A-Za-z\s'’,.?!-]*$/.test(text)) throw new Error(T.script);
-  const vi = viGiven || await translate(text, 'vi');
-  if (kind === 'word') {
-    const word = text.replace(/[,.?!]/g, '').replace(/\s+/g, ' ');
-    const had = [...wordMap.keys()].find((k) => sameWord(k, word));
-    if (had) throw dup('w', had, wordMap.get(had).lesson, lesson);
-    custom.words.push({ hanzi: word, pinyin: [], meanings: [vi], en: '', lesson });
-    return `${word} ${vi}`;
-  }
-  const old = data.sentences.find((s) => sameHanzi(sentenceText(s), text));
-  if (old) throw dup('s', old.id, old.lesson, lesson);
-  const full = /[.?!]$/.test(text) ? text : `${text}.`;
-  const tokens = enTokens(full, new Set([...wordMap.keys()].map((k) => k.toLowerCase())));
-  const known = [...wordMap.values()].filter((w) => tokens.some((t) => sameWord(t, w.hanzi))).sort((x, y) => y.hanzi.length - x.hanzi.length);
-  const focus = (known.find((w) => w.lesson === lesson) ?? known[0])?.hanzi ?? tokens[0];
-  custom.sentences.push({ id: `${lesson}-u${Date.now().toString(36)}`, text: full, tokens, vi, en: '', focus, sense: 0, lesson });
-  return `${full} ${vi}`;
 }
 
 async function submitAdd(form) {
@@ -927,7 +875,7 @@ function startSession(mode) {
 
 function autoplay() {
   const q = view.qs[view.i];
-  if (q.type === 'listen' || q.type === 'flash' || (EN && q.type === 'pinyin')) say(q.word.hanzi);
+  if (q.type === 'listen' || q.type === 'flash') say(q.word.hanzi);
   if (q.type === 'meaning') say(sentenceText(q.sentence));
 }
 
@@ -1009,7 +957,6 @@ root.addEventListener('click', (e) => {
     render();
   }
   else if (act === 'tab') { view = { name: 'words', tab: el.dataset.tab }; render(); }
-  else if (act === 'lang') { try { localStorage.setItem('hsk-lang', el.dataset.lang); } catch { /* private mode */ } location.reload(); }
   else if (act === 'rename') renameLesson(+el.dataset.id);
   else if (act === 'export') exportData(el.dataset.id === undefined ? undefined : +el.dataset.id);
   else if (act === 'add') { view = { name: 'add', state: {} }; render(); }
@@ -1062,15 +1009,14 @@ root.addEventListener('submit', (e) => {
   const q = view.qs[view.i];
   const typed = view.state.typed ?? '';
   if (!typed.trim()) return;
-  answer(EN ? sameHanzi(typed, q.word.hanzi) : q.word.pinyin.some((p) => normalize(p) === normalize(typed)));
+  answer(q.word.pinyin.some((p) => normalize(p) === normalize(typed)));
 });
 
 async function boot() {
   try {
-    const res = await fetch(EN ? 'data/english.json' : 'data/vocab.json', { cache: 'no-cache' });
+    const res = await fetch('data/vocab.json', { cache: 'no-cache' });
     if (!res.ok) throw new Error(res.status);
     base = await res.json();
-    if (EN) base = fromEnglish(base);
     mergeData();
     render();
   } catch (err) {
