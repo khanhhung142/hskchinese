@@ -449,3 +449,4 @@ body.typing .tips { display: none; }
 .tb-gram summary .han { font-weight: 400; }
 #tb-search { margin-bottom: 12px; }
 .tb-next { margin: 24px 0 8px; }
+.pager { position: static; background: none; margin-top: 16px; }

@@ -606,6 +606,12 @@ function wbPlay(n) {
   wbStop = q.t[1];
   wbAudio.play();
 }
+/** Prev/next lesson buttons: ids in order, labels by id. */
+const pager = (act, ids, cur, label) => {
+  const i = ids.indexOf(cur);
+  const b = (id, d) => id == null ? '<span></span>' : `<button class="btn" data-action="${act}" data-id="${id}">${d < 0 ? icon('caret-left') : ''}${esc(label(id))}${d > 0 ? icon('caret-right') : ''}</button>`;
+  return `<nav class="footer two pager">${b(ids[i - 1], -1)}${b(ids[i + 1], 1)}</nav>`;
+};
 const zhPy = (zh, py) => `<span class="wb-zh"><span class="han">${esc(zh)}</span>${py ? `<small>${esc(py)}</small>` : ''}</span>`;
 function workbook() {
   const back = (to, lvl = '') => `<button class="icon-btn" data-action="${to}" data-lvl="${lvl}" aria-label="Quay lại">${icon('arrow-left')}</button>`;
@@ -643,6 +649,7 @@ function workbook() {
   return `<main class="page"><header class="list-head">${back('wb', 1)}<h1>${esc(l.title)}</h1><span class="counter">${view.done ? `${score}/${all.length}` : `${answered}/${all.length}`}</span></header>
     ${view.done ? `<p class="wb-score">Đúng ${score}/${all.length} câu</p>${tomie(score * 2 >= all.length ? 'done' : 'bad')}` : ''}
     ${parts}
+    ${pager('wb', wbData.lessons.filter((x) => x.parts).map((x) => x.id), l.id, (id) => id === 16 ? 'Đề thi' : `Bài ${id}`)}
     <div class="footer">${view.done ? '<button class="btn primary block" data-action="wb-retry">Làm lại</button>' : `<button class="btn primary block" data-action="wb-submit" ${answered ? '' : 'disabled'}>Nộp bài</button>`}</div>
   </main>`;
 }
@@ -727,7 +734,7 @@ function textbook() {
     <h2 class="tb-title">${zhPy(l.title, l.py)}<small>${esc(l.vi)}</small></h2>
     ${l.goals?.length ? `<details class="wb-tr"><summary>Mục tiêu</summary>${l.goals.map((g) => `<p>${esc(g.vi)}</p>`).join('')}</details>` : ''}
     ${blocks}
-    <div class="tb-next">${l.id < tbData.lessons.length ? `<button class="btn primary block" data-action="tb" data-id="${l.id + 1}">Bài ${l.id + 1}</button>` : ''}</div>
+    <div class="tb-next">${pager('tb', tbData.lessons.map((x) => x.id), l.id, (id) => `Bài ${id}`)}</div>
   </main>`;
 }
 
