@@ -794,7 +794,7 @@ function workbook() {
     const done = loadJSON(WB_DONE_KEY) ?? {};
     return `<main class="page"><header class="list-head">${back('wb')}<h1>HSK1</h1><span class="counter">${icon('heart', true)} ${Object.keys(done).length}/${wbData.lessons.length}</span></header><nav class="menu">${wbData.lessons.map((l) =>
       `<div class="wb-row"><button class="menu-item" data-action="wb" data-id="${l.id}" ${l.parts ? '' : 'disabled'}>${icon(l.id === 16 ? 'exam' : 'notebook')}<span><b>${esc(l.title)}</b>${l.parts ? '' : '<small>Chưa có audio</small>'}</span>${icon('caret-right')}</button>
-      <button class="wb-tick${done[l.id] ? ' on' : ''}" data-action="wb-tick" data-id="${l.id}" aria-pressed="${!!done[l.id]}" aria-label="Đánh dấu đã làm ${esc(l.title)}"><img src="img/wb-${done[l.id] ? 'done' : 'todo'}.jpg" alt=""></button></div>`).join('')}</nav></main>`;
+      <button class="wb-tick${done[l.id] ? ' on' : ''}" data-action="wb-tick" data-id="${l.id}" aria-pressed="${!!done[l.id]}" aria-label="Đánh dấu đã làm ${esc(l.title)}"><img src="img/wb-${done[l.id] ? 'done' : 'todo'}.png" alt=""></button></div>`).join('')}</nav></main>`;
   }
   const l = wbData.lessons.find((x) => x.id === view.id);
   const all = l.parts.flatMap((p) => p.qs);
