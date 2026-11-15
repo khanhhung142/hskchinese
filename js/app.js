@@ -75,7 +75,7 @@ const T = {
   titles: [["我们终究没有走到最后。", "Rốt cuộc chúng ta vẫn không đi đến cuối cùng."], ["你是我年少的欢喜，也是我余生的遗憾。", "Anh là niềm vui thời niên thiếu, cũng là tiếc nuối cả quãng đời còn lại của em."], ["我等你，等到花都谢了，你也没有来。", "Em đợi anh, đợi đến khi hoa tàn hết, anh vẫn không đến."], ["最遗憾的不是错过，而是我们曾经那么靠近。", "Tiếc nuối nhất không phải lỡ nhau, mà là chúng ta từng gần nhau đến thế."], ["你说过会陪我到老，后来你却先放了手。", "Anh từng nói sẽ cùng em đến già, rồi anh lại buông tay trước."], ["原来我只是你生命中的过客。", "Hóa ra em chỉ là khách qua đường trong đời anh."], ["我把你弄丢了，再也找不回来了。", "Em làm lạc mất anh rồi, không bao giờ tìm lại được nữa."], ["你走以后，我的世界下了一场永远不停的雨。", "Từ khi anh đi, thế giới của em đổ một cơn mưa không bao giờ tạnh."], ["我们之间，只差一句我爱你，却隔了一辈子。", "Giữa chúng ta chỉ thiếu một câu anh yêu em, mà cách nhau cả một đời."], ["我还在原地，你却已经走远。", "Em vẫn ở chỗ cũ, còn anh đã đi xa rồi."]], empty: 'Chưa có từ nào.<br>Gửi ảnh từ mới cho Hermes trên Telegram.',
   write: ['Luyện viết chữ', 'Nghe, xem và gõ lại chữ Hán'], vocab: ['Luyện từ vựng', 'Xem nghĩa, nhập chữ Hán'], add: 'Chỉ cần gõ tiếng Trung',
   inWrite: 'Gõ hoặc viết lại chữ Hán ở trên', inVocab: 'Gõ hoặc viết chữ Hán của từ này', inSentence: 'Gõ hoặc viết lại cả câu ở trên',
-  script: 'chỉ nhận chữ Hán', file: 'hsk',
+  script: 'chỉ nhận chữ Hán',
 };
 const TITLE = T.titles[Math.floor(Math.random() * T.titles.length)]; // one per page load
 
@@ -190,11 +190,11 @@ function wordList() {
   const groups = [...data.lessons].sort((a, b) => b.id - a.id).map((l) => {
     const items = sentTab ? data.sentences.filter((s) => s.lesson === l.id) : data.words.filter((w) => w.lesson === l.id);
     if (!items.length) return '';
-    return `<section class="group"><h2>${esc(l.title)}<button class="icon-btn" data-action="rename" data-id="${l.id}" aria-label="Đổi tên bài">${icon('pencil-simple-line')}</button><button class="icon-btn" data-action="export" data-id="${l.id}" aria-label="Tải bài này">${icon('download-simple')}</button></h2><div class="words">${items.map(sentTab ? sentRow : wordRow).join('')}</div></section>`;
+    return `<section class="group"><h2>${esc(l.title)}</h2><div class="words">${items.map(sentTab ? sentRow : wordRow).join('')}</div></section>`;
   });
   const tab = (v, t) => `<button class="${(v === 's') === sentTab ? 'on' : ''}" data-action="tab" data-tab="${v}" aria-pressed="${(v === 's') === sentTab}">${t}</button>`;
   return `<main class="page">
-    <header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Tra cứu</h1><button class="icon-btn" data-action="export" aria-label="Xuất dữ liệu">${icon('download-simple')}</button></header>
+    <header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Tra cứu</h1></header>
     <div class="seg lang" role="group" aria-label="Tra cứu">${tab('w', 'Tra cứu từ')}${tab('s', 'Tra cứu câu')}</div>
     <input id="word-search" class="search" type="search" placeholder="${sentTab ? 'Tra câu: chữ, phiên âm hoặc nghĩa' : 'Tra từ: chữ, phiên âm hoặc nghĩa'}" aria-label="${sentTab ? 'Tra câu đã lưu' : 'Tra từ đã lưu'}" autocomplete="off">
     <p class="empty-search muted" hidden>${sentTab ? 'Không tìm thấy câu nào.' : 'Không tìm thấy từ nào.'}</p>
@@ -266,34 +266,6 @@ function lessonByName(name) {
 
 function saveMoves() {
   try { localStorage.setItem(MOVES_KEY, JSON.stringify(moves)); } catch { alert('Không lưu được (bộ nhớ trình duyệt bị chặn).'); }
-}
-
-/** Everything as shown (vocab.json format) plus the raw in-app edits, as a file to send to Hermes. */
-/** One lesson (id) or all (no id); edits are cut to items that now sit in the exported lessons. */
-async function exportData(id) {
-  const keep = (x) => id === undefined || x.lesson === id;
-  const pick = (o) => Object.fromEntries(Object.entries(o).filter(([, v]) => id === undefined || v === id));
-  const edits = {
-    custom: { lessons: custom.lessons.filter((l) => (id === undefined || l.id === id) && data.lessons.some((x) => x.id === l.id)), words: custom.words.filter(keep), sentences: custom.sentences.filter(keep) },
-    moves: { w: pick(moves.w), s: pick(moves.s), t: Object.fromEntries(Object.entries(moves.t).filter(([k]) => id === undefined || +k === id)), d: pick(moves.d), x: pick(moves.x) },
-  };
-  const body = JSON.stringify({ exported: new Date().toISOString(), lessons: data.lessons.filter((l) => id === undefined || l.id === id), words: data.words.filter(keep), sentences: data.sentences.filter(keep), edits }, null, 1);
-  const file = new File([body], `${T.file}-export-${id === undefined ? 'all' : `bai-${id}`}-${new Date().toISOString().slice(0, 10)}.json`, { type: 'application/json' });
-  // Phones (home-screen app) share straight to Telegram; desktop browsers download.
-  if (navigator.canShare?.({ files: [file] })) {
-    try { return await navigator.share({ files: [file] }); } catch (e) { if (e.name === 'AbortError') return; }
-  }
-  const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(file), download: file.name });
-  a.click();
-  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-}
-
-/** Empty name restores the original title. */
-function renameLesson(id) {
-  const name = prompt('Tên bài:', lessonTitle(id));
-  if (name === null) return;
-  if (name.trim()) moves.t[id] = name.trim(); else delete moves.t[id];
-  saveMoves(); mergeData(); render();
 }
 
 /** Play button + Chinese (already rendered with pinyin) + translations. */
@@ -984,8 +956,6 @@ root.addEventListener('click', (e) => {
     view = { name: 'radicals', tab: el.dataset.tab ?? view.tab ?? 'top' }; render(); scrollTo(0, 0);
   }
   else if (act === 'tab') { view = { name: 'words', tab: el.dataset.tab }; render(); }
-  else if (act === 'rename') renameLesson(+el.dataset.id);
-  else if (act === 'export') exportData(el.dataset.id === undefined ? undefined : +el.dataset.id);
   else if (act === 'write') startWrite(el.dataset.mode);
   else if (act === 'write-next') startWrite(view.mode);
   else if (act === 'reveal') { view.state = { ...view.state, typed: root.querySelector('#hz-in').value, revealed: true }; render(); say(view.item.hanzi); }
