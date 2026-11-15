@@ -838,8 +838,8 @@ function charTips(word) {
   if (!cs.length) return '';
   return `<details class="wb-tr tips"><summary>Bộ thủ &amp; mẹo nhớ</summary>${cs.map((c) => {
     const t = rad.chars[c];
-    return `<p><span class="tip-head"><b class="han">${esc(c)}</b>${t.p.map(([k, v]) => `<span class="chip-sm"><span class="han">${esc(k)}</span> ${esc(v)}</span>`).join('')}</span><small>${esc(t.m)}</small></p>`;
-  }).join('')}</details>`;
+    return `<p><span class="tip-head"><b class="han">${esc(c)}</b>${t.hv ? `<b>${esc(t.hv)}</b>` : ''}${t.p.map(([k, v]) => `<span class="chip-sm"><span class="han">${esc(k)}</span> ${esc(v)}</span>`).join('')}</span><small>${esc(t.m)}</small>${t.w ? `<small class="muted">✍ ${esc(t.w)}</small>` : ''}</p>`;
+  }).join('')}<small class="muted">Mẹo nhớ phần lớn từ <a href="https://kaihanzi.com/chu" target="_blank" rel="noopener">Kai Hanzi</a>, CC BY 4.0.</small></details>`;
 }
 function radicals() {
   const all = view.tab === 'all';
