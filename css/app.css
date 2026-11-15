@@ -399,14 +399,14 @@ body.typing .card .speak { position: absolute; top: 8px; right: 8px; }
 .menu-item:disabled { opacity: .55; }
 
 /* Workbook: done-tick heart next to each lesson */
-.wb-row { display: grid; grid-template-columns: 1fr 56px; gap: 8px; }
+.wb-row { display: grid; grid-template-columns: 1fr 42px; gap: 6px; }
 .wb-tick {
   display: grid; place-items: center; padding: 0;
   background: none; border: 0;
   transition: transform .2s var(--ease);
 }
-.wb-tick img { width: 56px; height: 56px; object-fit: contain; }
-.wb-tick.on img { width: 46px; height: 46px; animation: wb-pop .35s var(--ease); }
+.wb-tick img { width: 42px; height: auto; } /* equal area: todo is wide (1.73:1), done tall (0.82:1) */
+.wb-tick.on img { width: 29px; animation: wb-pop .35s var(--ease); }
 .wb-tick:active { transform: scale(.9); }
 @keyframes wb-pop { 50% { transform: scale(1.18) rotate(-8deg); } }
-@media (prefers-reduced-motion: reduce) { .wb-tick.on img { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .wb-tick.on img { width: 29px; animation: none; } }
