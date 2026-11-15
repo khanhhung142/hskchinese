@@ -506,7 +506,9 @@ function checkWrite() {
   let gone = false;
   const go = () => { if (!gone && view.name === 'write' && view.item === item) { gone = true; startWrite(view.mode); } };
   say(text, go);
-  setTimeout(go, 4000); // audio never ends (blocked or failed): move on anyway
+  // Audio blocked or failed: move on anyway, but never cut off a long sentence still playing.
+  const wait = () => { if (gone) return; if (!player.paused || window.speechSynthesis?.speaking) setTimeout(wait, 1000); else go(); };
+  setTimeout(wait, 4000);
 }
 
 // Handwriting pad. Recognition: Google Input Tools (no key, CORS open); strokes go to Google.
