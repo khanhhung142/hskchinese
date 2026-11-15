@@ -158,7 +158,7 @@ function practice() {
       <button class="menu-item" data-action="write" data-mode="write">${icon('pencil-simple-line')}<span><b>${T.write[0]}</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="write" data-mode="sentence">${icon('text-align-left')}<span><b>Luyện viết câu</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="write" data-mode="vocab">${icon('translate')}<span><b>${T.vocab[0]}</b></span>${icon('caret-right')}</button>
-      <button class="menu-item" data-action="listen">${icon('headphones')}<span><b>Nghe cả bài</b></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="listen">${icon('headphones')}<span><b>Luyện nghe</b></span>${icon('caret-right')}</button>
     </nav>
   </main>`;
 }
@@ -426,7 +426,7 @@ function write() {
   </main>`;
 }
 
-/** "Nghe cả bài": every word, then every sentence, of the picked lessons, read one after another. */
+/** "Luyện nghe": every word, then every sentence, of the picked lessons, read one after another. */
 function listen() {
   const { items, i, on } = view.state;
   const x = items[i];
@@ -458,13 +458,13 @@ function listenStep() {
   say(c.text, () => (live() ? play(`audio/en/${encodeURIComponent(c.en)}.mp3`, c.en, 'en-US', after) : null));
 }
 
-/** Lock-screen / notification controls for "Nghe cả bài". */
+/** Lock-screen / notification controls for "Luyện nghe". */
 function mediaState(title, artist) {
   const ms = navigator.mediaSession;
   if (!ms) return;
   const on = view.name === 'listen' && view.state.on;
   ms.playbackState = on ? 'playing' : view.name === 'listen' ? 'paused' : 'none';
-  if (title) ms.metadata = new MediaMetadata({ title, artist, album: 'Nghe cả bài', artwork: [{ src: 'icon-512.png', sizes: '512x512', type: 'image/png' }] });
+  if (title) ms.metadata = new MediaMetadata({ title, artist, album: 'Luyện nghe', artwork: [{ src: 'icon-512.png', sizes: '512x512', type: 'image/png' }] });
 }
 function listenToggle(want) {
   const st = view.state;

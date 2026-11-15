@@ -16,7 +16,7 @@ How the app and data pipeline work inside: [docs/architecture.md](docs/architect
 Open the URL on a phone and add it to the home screen.
 The UI is in Vietnamese; every word and sentence shows a Vietnamese and an English translation.
 
-The home screen's **Luyện tập** item opens the lesson picker plus Luyện viết chữ, Luyện viết câu, Luyện từ vựng and Nghe cả bài; their back buttons return there.
+The home screen's **Luyện tập** item opens the lesson picker plus Luyện viết chữ, Luyện viết câu, Luyện từ vựng and Luyện nghe; their back buttons return there.
 The older quizzes (**Học bài mới**, **Ôn tất cả**) are hidden there and appear only at <https://khanhhung142.github.io/hskchinese/full/>.
 
 - **Luyện viết chữ** is typing practice, separate from the quizzes and not counted in progress.
@@ -24,7 +24,7 @@ The older quizzes (**Học bài mới**, **Ôn tất cả**) are hidden there an
   Type the word with a Chinese keyboard; the answer must match the hanzi exactly (spaces and punctuation ignored).
   The pencil button opens a handwriting pad; strokes are recognized by Google Input Tools (needs network) and tapping a candidate appends it to the input.
 - A correct **Kiểm tra** plays the answer and moves to the next item by itself; **Bỏ qua** skips at once.
-- **Nghe cả bài** reads every word, then every sentence, of the picked lessons one after another (Chinese, then English), with pause and previous/next. It keeps playing with the screen off and shows play/pause/previous/next on the lock screen (Media Session; gaps are a silent `silence.mp3`, since timers stall in the background).
+- **Luyện nghe** reads every word, then every sentence, of the picked lessons one after another (Chinese, then English), with pause and previous/next. It keeps playing with the screen off and shows play/pause/previous/next on the lock screen (Media Session; gaps are a silent `silence.mp3`, since timers stall in the background).
 - **Luyện viết câu** is the same, with a whole example sentence (pinyin, English, Vietnamese) instead of one word.
 - **Luyện từ vựng** is the same input, but shows only the English and Vietnamese meaning and plays the English.
   **Xem đáp án** reveals the hanzi and plays it.
