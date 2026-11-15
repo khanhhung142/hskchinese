@@ -3,6 +3,7 @@ import { buildSession, sentenceText, parseToken, tokenPinyin, isPunct, latestLes
 
 const root = document.getElementById('app');
 const PROGRESS_KEY = 'hsk-progress';
+const LISTEN_KEY = 'hsk-listen'; // {lessonPick: index reached in Luyện nghe}
 const BAG_KEY = 'hsk-bag'; // {'mode|lessons': [ids not shown yet this round]}
 const LESSON_KEY = 'hsk-lesson'; // lesson picked for practice, '' = all
 let data, wordMap;
@@ -434,17 +435,27 @@ function listen() {
   return `<main class="page">
     <header class="list-head"><button class="icon-btn" data-action="practice" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Nghe ${esc(pickedLesson ? pickedName() : 'tất cả')}</h1><span class="counter">${i + 1}/${items.length}</span></header>
     <div class="stage"><div class="card center">${c.zh}<p class="meaning">${esc(c.en)}</p><p class="vi muted">${esc(c.vi)}</p></div></div>
-    <div class="footer listen-ctl">
+    ${view.state.ask ? `<div class="footer two">
+      <button class="btn" data-action="listen-restart">${icon('arrow-counter-clockwise')} Nghe lại từ đầu</button>
+      <button class="btn primary" data-action="listen-toggle">${icon('play', true)} Nghe tiếp</button>
+    </div>` : `<div class="footer listen-ctl">
       <button class="btn" data-action="listen-move" data-d="-1" aria-label="Trước">${icon('skip-back', true)}</button>
       <button class="btn primary" data-action="listen-toggle">${on ? `${icon('pause', true)} Dừng` : `${icon('play', true)} Nghe`}</button>
       <button class="btn" data-action="listen-move" data-d="1" aria-label="Sau">${icon('skip-forward', true)}</button>
-    </div>
+    </div>`}
   </main>`;
 }
 
+function saveListen(i) {
+  const pos = loadJSON(LISTEN_KEY) ?? {};
+  pos[pickedLesson] = i;
+  try { localStorage.setItem(LISTEN_KEY, JSON.stringify(pos)); } catch { /* private mode */ }
+}
 function listenStep() {
   const st = view.state;
   const tok = st.tok = (st.tok ?? 0) + 1;
+  st.ask = false;
+  saveListen(st.i);
   render();
   const x = st.items[st.i];
   const c = writeCard(x.tokens ? 'sentence' : 'write', x);
@@ -452,7 +463,7 @@ function listenStep() {
   // Gap = a silent mp3 on the same element, not setTimeout: timers stall with the screen off, audio keeps running.
   const after = () => live() && play('silence.mp3', '', '', () => {
     if (!live()) return;
-    if (st.i < st.items.length - 1) { st.i++; listenStep(); } else { st.on = false; render(); mediaState(); }
+    if (st.i < st.items.length - 1) { st.i++; listenStep(); } else { st.on = false; st.i = 0; saveListen(0); render(); mediaState(); }
   });
   mediaState(c.text, c.en);
   say(c.text, () => (live() ? play(`audio/en/${encodeURIComponent(c.en)}.mp3`, c.en, 'en-US', after) : null));
@@ -476,6 +487,7 @@ function listenMove(d) {
   if (view.name !== 'listen') return;
   const st = view.state;
   st.i = Math.min(st.items.length - 1, Math.max(0, st.i + d));
+  saveListen(st.i);
   if (st.on) listenStep(); else render();
 }
 if (navigator.mediaSession) {
@@ -905,9 +917,12 @@ root.addEventListener('click', (e) => {
   else if (act === 'listen') {
     const items = [...practiceWords().filter(inLesson), ...data.sentences.filter(inLesson)];
     if (!items.length) return alert(`${pickedName()} chưa có từ nào.`);
-    view = { name: 'listen', state: { items, i: 0, on: true } };
-    listenStep();
+    // Left off mid-way last time: stop there and offer Nghe tiếp / Nghe lại từ đầu.
+    const at = (loadJSON(LISTEN_KEY) ?? {})[pickedLesson];
+    if (at > 0 && at < items.length) { view = { name: 'listen', state: { items, i: at, on: false, ask: true } }; render(); }
+    else { view = { name: 'listen', state: { items, i: 0, on: true } }; listenStep(); }
   }
+  else if (act === 'listen-restart') { Object.assign(view.state, { i: 0, on: true }); listenStep(); }
   else if (act === 'listen-toggle') listenToggle();
   else if (act === 'listen-move') listenMove(+el.dataset.d);
   else if (act === 'words') { view = { name: 'words' }; render(); }
