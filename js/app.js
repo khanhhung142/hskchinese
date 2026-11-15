@@ -781,15 +781,19 @@ function textbook() {
 /** Touch screens: no auto-focus into inputs, the keyboard would cover the word. Keep it only while already typing. */
 const KEYBOARD_ON_OPEN = matchMedia('(pointer: fine)').matches;
 let wasTyping = false;
+let lastKey = 'home||', popping = false;
 
 function render() {
   const views = { home, practice, radicals, words: wordList, quiz, summary, write, listen, wb: workbook, tb: textbook };
   wasTyping = document.activeElement?.matches?.('#hz-in, #py') ?? false;
   if (view.name !== 'practice') lessonPickerOpen = false; // picker reopens closed next time
   root.innerHTML = views[view.name]();
-  // Phone back button: one history entry while inside the app, so back steps out instead of closing it.
-  if (view.name !== 'home' && !history.state) history.pushState(1, '');
-  else if (view.name === 'home' && history.state) history.back();
+  // Phone back button: one history entry per screen opened by a tap (Chrome skips entries pushed without a tap,
+  // e.g. from popstate, and back then closes the app). Home drops them all; popstate walks back via the screen's arrow.
+  const key = [view.name, view.lvl, view.id].join('|'), d = history.state?.d ?? 0;
+  if (view.name === 'home') { if (d) history.go(-d); }
+  else if (key !== lastKey && !popping && !(view.id && lastKey.startsWith(`${view.name}|${view.lvl}|`) && !lastKey.endsWith('|'))) history.pushState({ d: d + 1 }, ''); // prev/next lesson replaces, not stacks
+  lastKey = key;
   if (view.name === 'quiz') onQuestionShown();
   if (view.name === 'write') {
     setupHand();
@@ -903,6 +907,8 @@ root.addEventListener('click', (e) => {
   }
   const el = e.target.closest('[data-action]');
   if (!el || el.tagName === 'FORM') return;
+  // In-app back arrow = phone back: pop the history entry, popstate then does the navigation.
+  if (!popping && history.state?.d && el.matches('.list-head .icon-btn, .quiz-top .icon-btn')) return history.back();
   const act = el.dataset.action;
   if (act === 'wb') openWorkbook(el.dataset.id, el.dataset.lvl);
   else if (act === 'wb-play') wbPlay(el.dataset.n);
@@ -1004,7 +1010,9 @@ async function boot() {
 }
 addEventListener('popstate', () => {
   if (view.name === 'home') return;
+  popping = true;
   const b = root.querySelector('.list-head .icon-btn, .quiz-top .icon-btn');
   if (b) b.click(); else { view = { name: 'home' }; render(); }
+  setTimeout(() => { popping = false; }, 600); // async screens (Giáo trình/Bài tập fetch) render after the click
 });
 boot();
