@@ -71,9 +71,13 @@ export function buildSession(data, progress, mode, { rand = Math.random, size = 
   const flashes = chosen.filter(isNew).map((word) => ({ type: 'flash', word }));
   // Deal exercise types from a shuffled deck so one session covers every type, not a random clump.
   let deck = [];
-  const questions = chosen.map((word) => {
+  // Fit sets are nested (listen/pinyin ⊂ +cloze/meaning ⊂ +order): most constrained word picks first.
+  const info = chosen.map((word) => {
     const sents = focusOf.get(word.hanzi) ?? usedIn.get(word.hanzi) ?? [];
     const orderable = sents.filter((s) => s.tokens.filter((t) => !isPunct(t)).length >= 3);
+    return { word, sents, orderable, rank: !sents.length ? 0 : orderable.length ? 2 : 1 };
+  }).sort((a, b) => a.rank - b.rank);
+  const questions = info.map(({ word, sents, orderable }) => {
     const fits = (type) => ['listen', 'pinyin'].includes(type) || (type === 'order' ? orderable.length : sents.length);
     if (!deck.some(fits)) deck = [...deck, ...shuffle(TYPES, rand)];
     const type = deck.splice(deck.findIndex(fits), 1)[0];
