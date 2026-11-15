@@ -113,11 +113,23 @@ const TOMIE = {
     'Hết bài rồi. Tomie đi ru Hưng ngủ đây.', 'Chị làm tốt. Tomie sẽ nhớ… và nhắc mãi.', 'Xong rồi. Đừng quên ai viết app này nhé.', 'Hẹn gặp lại. Tomie luôn ở đây, trong từng bài học.', 'Buổi học kết thúc. Tomie thì không bao giờ kết thúc.', 'Nghỉ đi chị. Hưng có Tomie lo rồi.',
     'Xong rồi! Chị giỏi quá, Tomie tự hào ghê.', 'Ufufu… học xong rồi, chị nghỉ ngơi cho xinh nhé.', 'Hết bài! Chị xứng đáng được Hưng thưởng một bữa ngon.', 'Chị chăm thế này, Tomie phải khen cả ngày.', 'Xong buổi. Chị tuyệt vời lắm đó.', 'Ufufu… hôm nay chị lại giỏi thêm một chút.', 'Học xong rồi, chị đi uống nước, nghỉ mắt nha.', 'Chị làm tốt lắm. Tomie cổ vũ chị mỗi ngày.', 'Hết bài! Chị vừa xinh vừa giỏi, Hưng có phúc thật.', 'Ufufu… mai chị lại tới nhé, Tomie nhớ đó.', 'Xong rồi. Chị là học sinh xuất sắc nhất của Tomie.', 'Chị cố gắng ghê, Tomie thương chị thêm rồi.', 'Hết bài. Chị nhớ đòi Hưng ôm một cái nhé.', 'Ufufu… chị học chăm thế này, Tomie hết đường ghen.', 'Xong buổi! Chị tự thưởng một ly trà sữa đi.', 'Chị giỏi lắm. Hưng chắc chắn tự hào về chị.', 'Hết bài rồi. Ngủ ngon nha chị đẹp.', 'Ufufu… chị tiến bộ nhanh thật, Tomie hơi sợ đó.', 'Xong rồi! Chị là niềm vui của app này.', 'Chị học xong rồi, giờ đi làm Hưng cười đi.', 'Hết bài. Tomie xin công nhận chị là cao thủ.', 'Ufufu… chị kiên trì thế này, chữ Hán phải đầu hàng.', 'Xong buổi học. Chị tuyệt vời từ đầu đến cuối.', 'Chị làm tốt quá, Tomie muốn tặng chị một bông hoa.', 'Hết bài rồi. Chị nghỉ đi, mai mình học tiếp nhé.', 'Ufufu… hẹn mai, chị dễ thương của Tomie.', 'Xong! Chị giỏi thế này, Hưng phải cố theo kịp.', 'Chị học xong rồi. Hôm nay chị lại xinh hơn chút nữa.',
   ],
-  tick: [
-    'Thêm một bài. Tomie ghi sổ rồi nha, ufufu.', 'Giỏi ghê. Tomie thưởng chị một cái nhìn… chằm chằm.', 'Xong bài này rồi. Bài sau Tomie đợi ở đó.',
-    'Chị tick nhanh vậy, có làm thật không đó? Tomie thấy hết.', 'Ufufu… chị chăm thế này Hưng phải khen thôi.', 'Một bài nữa. Tomie mọc thêm một sợi tóc vì vui.',
-    'Đánh dấu rồi. Tomie nhớ hết, không quên đâu.', 'Chị làm tốt lắm. Tomie hơi ghen với sự chăm chỉ đó.', 'Xong! Nghỉ một chút đi, Tomie trông bài cho.',
-    'Tick này dễ thương ghê. Giống Tomie.', 'Chị lên trình rồi đó. Tomie vẫn xinh hơn, nhưng chị giỏi hơn.', 'Bài này qua rồi. Tomie thì không bao giờ qua đâu.'
+  learnt: [ // Giáo trình: shown when a lesson is marked learnt (praise + Tomie teasing)
+    'Học xong một bài rồi à? Ufufu… vẫn chưa bằng một nửa Tomie đâu.',
+    'Giỏi đó. Nhưng đừng tưởng học giỏi là Hưng hết nhìn Tomie nhé.',
+    'Thêm một bài. Chị chăm thế này, Tomie suýt thì khen thật lòng.',
+    'Xong bài rồi. Chữ Hán chị nhớ, còn Tomie thì Hưng nhớ. Công bằng mà.',
+    'Ufufu… học nhanh vậy, có đọc hết không đó? Tomie thấy hết đấy.',
+    'Chị tiến bộ rồi. Tomie cho phép chị tự hào… 5 giây thôi.',
+    'Một bài nữa. Tomie không ghen đâu. Chỉ hơi hơi… thôi được, ghen thật.',
+    'Giỏi lắm. Phần thưởng: Tomie nhìn chị chằm chằm thêm một lúc, ufufu.',
+    'Học xong thì khoe Hưng đi. Nhớ nói là Tomie dạy.',
+    'Bài này chị qua rồi. Còn Tomie thì chị không qua mặt được đâu.',
+    'Ufufu… chị càng giỏi, Tomie càng phải đẹp hơn. Mệt ghê.',
+    'Xong bài. Chị học bằng đầu, Tomie học bằng nhan sắc. Mỗi người một kiểu.',
+    'Đã học xong! Chị đáng yêu thật… gần bằng Tomie rồi đó.',
+    'Thêm một viền hồng. Màu của Tomie đó, chị dùng thì nhớ trả phí nha.',
+    'Chị chăm vậy làm Tomie lo. Lỡ chị giỏi hơn Tomie thì sao, ufufu.',
+    'Xong bài rồi, nghỉ chút đi chị. Tomie trông sách cho, không xé trang nào đâu.',
   ],
 };
 /** Tomie comment in the fixed .wb-toast slot: swap text + restart the fade, never insert nodes (no layout jump). */
@@ -917,7 +929,7 @@ root.addEventListener('click', (e) => {
     const done = loadJSON(TB_DONE_KEY) ?? {}, fresh = !done[view.id];
     done[view.id] = 1;
     try { localStorage.setItem(TB_DONE_KEY, JSON.stringify(done)); } catch { /* private mode */ }
-    (act === 'tb' ? openTextbook(el.dataset.id) : Promise.resolve(render())).then(() => fresh && toast(TOMIE.tick));
+    (act === 'tb' ? openTextbook(el.dataset.id) : Promise.resolve(render())).then(() => fresh && toast(TOMIE.learnt));
   }
   else if (act === 'tb') openTextbook(el.dataset.id, el.dataset.lvl);
   else if (act === 'wb-pick') { if (!view.done) { view.picks[el.dataset.n] = el.dataset.k; render(); } }
