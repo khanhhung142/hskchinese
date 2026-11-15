@@ -92,7 +92,7 @@ The one exception is the `pinyin` exercise, where it would give the answer away.
 
 ## Items added in the app
 
-`addView` in `js/app.js` stores words, sentences and new lessons in `localStorage["hsk-custom"]`; `mergeData()` appends them to `vocab.json` at boot (a `vocab.json` word wins over a custom duplicate).
+The add screen (`addView`) was removed; words, sentences and lessons it saved earlier in `localStorage["hsk-custom"]` still load: `mergeData()` appends them to `vocab.json` at boot (a `vocab.json` word wins over a custom duplicate).
 Sentences are cut by `tokenize` (`js/quiz.js`): longest known word first, unknown runs via `Intl.Segmenter`, and unknown tokens carry their reading (`北京|běijīng`), so the exercise code needs no change.
 Custom sentences use the lesson's word as `focus` if present, else the longest known word. No audio file exists for them, so playback falls back to speech synthesis.
 Lesson moves from the word list live in `localStorage["hsk-moves"]` (`{w: {hanzi: lesson}, s: {sentenceId: lesson}, t: {lessonId: title}, d: {deletedHanzi: lesson}, x: {deletedSentenceId: lesson}}`) and are applied by `mergeData()` on top of both sources; `latestLesson` is therefore the highest lesson that still has words.

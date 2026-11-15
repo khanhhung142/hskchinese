@@ -1,5 +1,5 @@
 import { toMarks, normalize } from './pinyin.js';
-import { buildSession, sentenceText, parseToken, tokenPinyin, isPunct, latestLesson, record, sameHanzi, tokenize } from './quiz.js';
+import { buildSession, sentenceText, parseToken, tokenPinyin, isPunct, latestLesson, record, sameHanzi } from './quiz.js';
 
 const root = document.getElementById('app');
 const PROGRESS_KEY = 'hsk-progress';
@@ -75,10 +75,9 @@ const T = {
   titles: [["我们终究没有走到最后。", "Rốt cuộc chúng ta vẫn không đi đến cuối cùng."], ["你是我年少的欢喜，也是我余生的遗憾。", "Anh là niềm vui thời niên thiếu, cũng là tiếc nuối cả quãng đời còn lại của em."], ["我等你，等到花都谢了，你也没有来。", "Em đợi anh, đợi đến khi hoa tàn hết, anh vẫn không đến."], ["最遗憾的不是错过，而是我们曾经那么靠近。", "Tiếc nuối nhất không phải lỡ nhau, mà là chúng ta từng gần nhau đến thế."], ["你说过会陪我到老，后来你却先放了手。", "Anh từng nói sẽ cùng em đến già, rồi anh lại buông tay trước."], ["原来我只是你生命中的过客。", "Hóa ra em chỉ là khách qua đường trong đời anh."], ["我把你弄丢了，再也找不回来了。", "Em làm lạc mất anh rồi, không bao giờ tìm lại được nữa."], ["你走以后，我的世界下了一场永远不停的雨。", "Từ khi anh đi, thế giới của em đổ một cơn mưa không bao giờ tạnh."], ["我们之间，只差一句我爱你，却隔了一辈子。", "Giữa chúng ta chỉ thiếu một câu anh yêu em, mà cách nhau cả một đời."], ["我还在原地，你却已经走远。", "Em vẫn ở chỗ cũ, còn anh đã đi xa rồi."]], empty: 'Chưa có từ nào.<br>Gửi ảnh từ mới cho Hermes trên Telegram.',
   write: ['Luyện viết chữ', 'Nghe, xem và gõ lại chữ Hán'], vocab: ['Luyện từ vựng', 'Xem nghĩa, nhập chữ Hán'], add: 'Chỉ cần gõ tiếng Trung',
   inWrite: 'Gõ hoặc viết lại chữ Hán ở trên', inVocab: 'Gõ hoặc viết chữ Hán của từ này', inSentence: 'Gõ hoặc viết lại cả câu ở trên',
-  addField: 'Tiếng Trung, mỗi dòng một mục (nghĩa tự điền; muốn tự ghi nghĩa: 老师 = giáo viên)', script: 'chỉ nhận chữ Hán', file: 'hsk',
+  script: 'chỉ nhận chữ Hán', file: 'hsk',
 };
 const TITLE = T.titles[Math.floor(Math.random() * T.titles.length)]; // one per page load
-const addItem = () => `<button class="menu-item" data-action="add">${icon('plus')}<span><b>Thêm từ, mẫu câu</b></span>${icon('caret-right')}</button>`;
 
 // ---------- Views ----------
 
@@ -134,7 +133,7 @@ function home() {
   const fresh = data.words.filter((w) => w.lesson === latest);
   const learned = data.words.filter((w) => progress[w.hanzi]?.r).length;
   if (!fresh.length) {
-    return `<main class="page"><div class="empty">${icon('camera')}<p>${T.empty}</p></div><nav class="menu">${addItem()}</nav></main>`;
+    return `<main class="page"><div class="empty">${icon('camera')}<p>${T.empty}</p></div></main>`;
   }
   return `<main class="page">
     <header class="home-head"><h1><span class="han">${esc(TITLE[0])}</span><small>${esc(TITLE[1])}</small></h1>${FULL ? `<span class="muted">${learned}/${data.words.length} từ đã thuộc</span>` : ''}</header>
@@ -155,7 +154,6 @@ function home() {
       <button class="menu-item" data-action="wb">${icon('exam')}<span><b>Bài tập</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="rad">${icon('tree-structure')}<span><b>Bộ thủ</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Tra cứu</b></span>${icon('caret-right')}</button>
-      ${addItem()}
     </nav>
     ${tomie('home')}
   </main>`;
@@ -650,101 +648,6 @@ function clearInk() {
   recognize();
 }
 
-// Adding words and sentences in the app. Only the Chinese is typed; pinyin comes from pinyin-pro,
-// meanings from MyMemory (both loaded on demand). Saved in localStorage and merged into `data` at boot.
-// ponytail: this device only, not pushed to vocab.json; export or sync when it needs to reach other devices.
-function addView() {
-  const ids = [...new Set(data.lessons.map((l) => l.id))].filter((id) => id > 0).sort((a, b) => a - b);
-  const { busy, log = [], kind = 'word', lesson = picked()[0] || latestLesson(data) } = view.state;
-  const mine = [...custom.words.map((w) => ({ k: 'w', key: w.hanzi, lesson: w.lesson, html: wordHz(w), vi: w.meanings.join('; ') })),
-    ...custom.sentences.map((s) => ({ k: 's', key: s.id, lesson: s.lesson, html: sentenceHz(s), vi: s.vi }))].reverse();
-  return `<main class="page">
-    <header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Thêm từ, mẫu câu</h1></header>
-    <form class="stage" data-action="submit-add">
-      <div class="seg" role="radiogroup">
-        <label><input type="radio" name="kind" value="word"${kind === 'word' ? ' checked' : ''}> Từ vựng</label>
-        <label><input type="radio" name="kind" value="sentence"${kind === 'sentence' ? ' checked' : ''}> Mẫu câu</label>
-      </div>
-      <label class="field"><span>Thuộc bài (chọn bài có sẵn hoặc gõ tên bài mới)</span>
-        <input name="lesson" required autocomplete="off" value="${esc(lessonTitle(+lesson))}" list="lesson-ids">
-        <datalist id="lesson-ids">${ids.map((id) => `<option value="${esc(lessonTitle(id))}"></option>`).join('')}</datalist>
-      </label>
-      <label class="field"><span>${T.addField}</span>
-        <textarea name="zh" lang="zh-CN" rows="4" required autocomplete="off" spellcheck="false"></textarea>
-      </label>
-      <button class="btn primary block" ${busy ? 'disabled' : ''}>${busy ? 'Đang thêm…' : 'Thêm'}</button>
-      ${log.length ? `<ul class="add-log">${log.map((l, i) => `<li class="${l.ok ? 'ok' : 'bad'}">${esc(l.text)}${l.dup ? `<span class="dup-pick"><button type="button" class="btn" data-action="dup-keep" data-i="${i}">Giữ ở ${esc(lessonTitle(l.dup.from))}</button><button type="button" class="btn primary" data-action="dup-move" data-i="${i}">Chuyển sang ${esc(lessonTitle(+lesson))}</button></span>` : ''}</li>`).join('')}</ul>` : ''}
-    </form>
-    ${mine.length ? `<section class="group"><h2>Đã thêm trong app (${mine.length})</h2><div class="words">${mine.map((m) => `<div class="mine">
-      <span class="muted">${esc(lessonTitle(m.lesson))}</span><span>${m.html}<p class="vi">${esc(m.vi)}</p></span>
-      <button class="icon-btn" data-action="del-custom" data-k="${m.k}" data-key="${esc(m.key)}" aria-label="Xoá">${icon('trash')}</button></div>`).join('')}</div></section>` : ''}
-  </main>`;
-}
-
-let pinyinLib;
-async function toPinyin(text) {
-  pinyinLib ??= import('https://cdn.jsdelivr.net/npm/pinyin-pro@3.26.0/dist/index.mjs');
-  const { pinyin } = await pinyinLib;
-  return pinyin(text, { type: 'array', toneSandhi: false }).join('');
-}
-async function translate(text, lang) {
-  const res = await fetch(`https://api.mymemory.translated.net/get?langpair=zh-CN|${lang}&q=${encodeURIComponent(text)}`);
-  const t = (await res.json())?.responseData?.translatedText?.trim();
-  if (!t) throw new Error('dịch lỗi');
-  return t.replace(/\//g, ', '); // `en` names audio files; no slashes
-}
-const segmenter = 'Segmenter' in Intl ? new Intl.Segmenter('zh', { granularity: 'word' }) : null;
-const segment = (s) => (segmenter ? [...segmenter.segment(s)].map((x) => x.segment) : [...s]);
-
-/** Already in the app: in another lesson the log offers keep-or-move (a move goes to `hsk-moves`, like the word list). */
-function dup(k, key, from, to) {
-  const err = new Error(`${k === 'w' ? 'đã có' : 'câu đã có'} (${lessonTitle(from)})`);
-  if (from !== to) err.dup = { k, key, from };
-  return err;
-}
-
-async function addOne(kind, line, lesson) {
-  const [zh, viGiven] = line.split('=').map((s) => s.trim());
-  const han = zh.replace(/[\s\p{P}]/gu, '');
-  if (!/^\p{Script=Han}+$/u.test(han)) throw new Error('chỉ nhận chữ Hán');
-  if (kind === 'word' && wordMap.has(han)) throw dup('w', han, wordMap.get(han).lesson, lesson);
-  const old = kind !== 'word' && data.sentences.find((s) => sameHanzi(sentenceText(s), zh));
-  if (old) throw dup('s', old.id, old.lesson, lesson);
-  const [vi, en] = await Promise.all([viGiven || translate(zh, 'vi'), translate(zh, 'en')]);
-  if (kind === 'word') {
-    const w = { hanzi: han, pinyin: [await toPinyin(han)], meanings: [vi], en, lesson };
-    custom.words.push(w);
-    return `${han} ${w.pinyin[0]} ${vi}`;
-  }
-  // Unknown words carry their reading in the token ("北京|běijīng"), the same way polyphones do.
-  const tokens = await Promise.all(tokenize(zh, wordMap, segment).map(async (t) => (wordMap.has(t) || isPunct(t) ? t : `${t}|${await toPinyin(t)}`)));
-  if (!isPunct(tokens.at(-1))) tokens.push('。');
-  // Focus: a word of this lesson if the sentence has one, else its longest known word.
-  const known = tokens.map((t) => parseToken(t).h).filter((h) => wordMap.has(h)).sort((a, b) => b.length - a.length);
-  const focus = known.find((h) => wordMap.get(h).lesson === lesson) ?? known[0] ?? parseToken(tokens[0]).h;
-  const s = { id: `${lesson}-u${Date.now().toString(36)}`, tokens, vi, en, focus, sense: 0, lesson };
-  custom.sentences.push(s);
-  return `${sentenceText(s)} ${vi}`;
-}
-
-async function submitAdd(form) {
-  const kind = form.kind.value;
-  const lines = form.zh.value.split('\n').map((l) => l.trim()).filter(Boolean);
-  if (!form.lesson.value.trim() || !lines.length) return;
-  const lesson = lessonByName(form.lesson.value);
-  view.state = { kind, lesson, busy: true };
-  render();
-  const log = [];
-  for (const line of lines) {
-    try { log.push({ ok: true, text: `Đã thêm: ${await addOne(kind, line, lesson)}` }); }
-    catch (err) { log.push({ ok: false, text: `${line}: ${err.message}`, dup: err.dup }); }
-    saveCustom();
-    mergeData(); // a word added on line 1 is known to the sentence on line 2
-  }
-  view.state = { kind, lesson, log };
-  render();
-}
-
 function saveCustom() {
   try { localStorage.setItem(CUSTOM_KEY, JSON.stringify(custom)); } catch { alert('Không lưu được (bộ nhớ trình duyệt bị chặn).'); }
 }
@@ -764,7 +667,7 @@ function mergeData() {
     sentences: [...base.sentences, ...custom.sentences.filter((c) => !baseTexts.has(norm(c)))].filter((s) => !(s.focus in moves.d) && !(s.id in moves.x)).map((s) => (s.id in moves.s ? { ...s, lesson: moves.s[s.id] } : s)),
   };
   // A lesson left with no words and no sentences is hidden everywhere (and left out of exports).
-  // ponytail: an empty custom lesson stays in hsk-custom (submitAdd needs it between lines); harmless, ids skip it.
+  // ponytail: an empty custom lesson stays in hsk-custom; harmless, ids skip it.
   const used = new Set([...data.words, ...data.sentences].map((x) => x.lesson));
   data.lessons = data.lessons.filter((l) => used.has(l.id));
   wordMap = new Map(data.words.map((w) => [w.hanzi, w]));
@@ -922,7 +825,7 @@ const KEYBOARD_ON_OPEN = matchMedia('(pointer: fine)').matches;
 let wasTyping = false;
 
 function render() {
-  const views = { home, radicals, words: wordList, quiz, summary, write, add: addView, listen, wb: workbook, tb: textbook };
+  const views = { home, radicals, words: wordList, quiz, summary, write, listen, wb: workbook, tb: textbook };
   wasTyping = document.activeElement?.matches?.('#hz-in, #py') ?? false;
   if (view.name !== 'home') lessonPickerOpen = false; // picker reopens closed next time
   root.innerHTML = views[view.name]();
@@ -1069,30 +972,9 @@ root.addEventListener('click', (e) => {
     if (!rad) return alert('Chưa tải được bộ thủ.');
     view = { name: 'radicals', tab: el.dataset.tab ?? view.tab ?? 'top' }; render(); scrollTo(0, 0);
   }
-  else if (act === 'dup-keep' || act === 'dup-move') {
-    const l = view.state.log[+el.dataset.i];
-    if (act === 'dup-move') {
-      moves[l.dup.k][l.dup.key] = view.state.lesson;
-      saveMoves();
-      mergeData();
-      l.ok = true;
-      l.text = `Đã chuyển: ${l.text.split(':')[0]} → ${lessonTitle(view.state.lesson)}`;
-    } else l.text += ', giữ nguyên';
-    delete l.dup;
-    render();
-  }
   else if (act === 'tab') { view = { name: 'words', tab: el.dataset.tab }; render(); }
   else if (act === 'rename') renameLesson(+el.dataset.id);
   else if (act === 'export') exportData(el.dataset.id === undefined ? undefined : +el.dataset.id);
-  else if (act === 'add') { view = { name: 'add', state: {} }; render(); }
-  else if (act === 'del-custom') {
-    if (!confirm('Xoá mục này?')) return;
-    const key = el.dataset.key;
-    if (el.dataset.k === 'w') custom.words = custom.words.filter((w) => w.hanzi !== key);
-    else custom.sentences = custom.sentences.filter((s) => s.id !== key);
-    custom.lessons = custom.lessons.filter((l) => [...data.words, ...data.sentences].some((x) => x.lesson === l.id && x.hanzi !== key && x.id !== key));
-    saveCustom(); mergeData(); render();
-  }
   else if (act === 'write') startWrite(el.dataset.mode);
   else if (act === 'write-next') startWrite(view.mode);
   else if (act === 'reveal') { view.state = { ...view.state, typed: root.querySelector('#hz-in').value, revealed: true }; render(); say(view.item.hanzi); }
@@ -1133,7 +1015,6 @@ root.addEventListener('change', (e) => {
 root.addEventListener('submit', (e) => {
   e.preventDefault();
   if (view.name === 'write') return checkWrite();
-  if (view.name === 'add') return view.state.busy || submitAdd(e.target);
   const q = view.qs[view.i];
   const typed = view.state.typed ?? '';
   if (!typed.trim()) return;
