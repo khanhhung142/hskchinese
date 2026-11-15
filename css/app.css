@@ -414,9 +414,7 @@ body.typing .card .speak { position: absolute; top: 8px; right: 8px; }
 @keyframes wb-pop { 50% { transform: scale(1.18) rotate(-8deg); } }
 @media (prefers-reduced-motion: reduce) { .wb-tick.on img { animation: none; } }
 
-.wb-toast {
-  margin: 4px 0 0; padding: 8px 14px; background: var(--surface); border: 2.5px solid var(--accent); border-radius: var(--r-box);
-  font-size: 14px; animation: wb-toast 5s var(--ease) forwards;
-}
-@keyframes wb-toast { 0% { opacity: 0; transform: translateY(-6px); } 6%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .wb-toast { animation: none; } }
+.wb-toast { margin: 2px 0 0; height: 32px; font-size: 12px; line-height: 16px; overflow: hidden; opacity: 0; } /* reserved 2 lines: list never moves */
+.wb-toast.show { animation: wb-toast 5s var(--ease) forwards; }
+@keyframes wb-toast { 0% { opacity: 0; } 6%, 92% { opacity: 1; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .wb-toast.show { animation: none; opacity: 1; } }

@@ -798,7 +798,7 @@ function workbook() {
   if (view.lvl > 1) return `<main class="page"><header class="list-head">${back('wb')}<h1>HSK${view.lvl}</h1></header><p class="muted">Chưa có bài tập.</p><p class="tomie">HSK${view.lvl} á? Chị qua HSK1 trước đi đã, Hưng đợi chị đó, ufufu.</p></main>`;
   if (!view.id) {
     const done = loadJSON(WB_DONE_KEY) ?? {};
-    return `<main class="page"><header class="list-head">${back('wb')}<h1>HSK1</h1><span class="counter">${icon('heart', true)} ${Object.keys(done).length}/${wbData.lessons.length}</span></header><nav class="menu">${wbData.lessons.map((l) =>
+    return `<main class="page"><header class="list-head">${back('wb')}<h1>HSK1</h1><span class="counter">${icon('heart', true)} ${Object.keys(done).length}/${wbData.lessons.length}</span></header><p class="tomie wb-toast" role="status"></p><nav class="menu">${wbData.lessons.map((l) =>
       `<div class="wb-row"><button class="menu-item" data-action="wb" data-id="${l.id}" ${l.parts ? '' : 'disabled'}><span class="wb-slot"></span><span><b>${esc(l.title)}</b>${l.parts ? '' : '<small>Chưa có audio</small>'}</span>${icon('caret-right')}</button>
       <button class="wb-tick${done[l.id] ? ' on' : ''}" data-action="wb-tick" data-id="${l.id}" aria-pressed="${!!done[l.id]}" aria-label="Đánh dấu đã làm ${esc(l.title)}"><img src="img/wb-${done[l.id] ? 'done' : 'todo'}.png" alt=""></button></div>`).join('')}</nav></main>`;
   }
@@ -952,9 +952,10 @@ root.addEventListener('click', (e) => {
     try { localStorage.setItem(WB_DONE_KEY, JSON.stringify(done)); } catch { /* private mode */ }
     render();
     if (done[el.dataset.id]) {
-      document.querySelector('.wb-toast')?.remove();
-      document.querySelector('.list-head').insertAdjacentHTML('afterend', tomie('tick').replace('class="tomie"', 'class="tomie wb-toast" role="status"'));
-      setTimeout(() => document.querySelector('.wb-toast')?.remove(), 5000);
+      const msg = document.querySelector('.wb-toast'); // fixed-height slot under the title: no layout jump
+      msg.textContent = TOMIE.tick[Math.floor(Math.random() * TOMIE.tick.length)];
+      msg.classList.remove('show'); void msg.offsetWidth; msg.classList.add('show');
+      clearTimeout(msg.t); msg.t = setTimeout(() => msg.classList.remove('show'), 5000);
     }
   }
   else if (act === 'wb-pick') { if (!view.done) { view.picks[el.dataset.n] = el.dataset.k; render(); } }
