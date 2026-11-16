@@ -4,6 +4,7 @@ import { buildSession, sentenceText, parseToken, tokenPinyin, isPunct, latestLes
 const root = document.getElementById('app');
 const PROGRESS_KEY = 'hsk-progress';
 const LISTEN_KEY = 'hsk-listen'; // {lessonPick: index reached in Luyện nghe}
+const SEEN_KEY = 'hsk-seen'; // sessionStorage {mode: [ids done this session]}
 const BAG_KEY = 'hsk-bag'; // {'mode|lessons': [ids not shown yet this round]}
 const LESSON_KEY = 'hsk-lesson'; // lesson picked for practice, '' = all
 let data, wordMap;
@@ -388,9 +389,17 @@ function summary() {
 const practiceWords = () => data.words.filter((w) => w.lesson > 0 || picked().includes(0));
 
 function pickWriteItem(mode, prev) {
+  const id = (x) => x.id ?? x.hanzi;
   const all = (mode === 'sentence' ? data.sentences : practiceWords()).filter(inLesson);
-  return all.length ? drawFromBag(`${mode}|${pickedLesson}`, all, (x) => x.id ?? x.hanzi, prev) : undefined;
+  // Items done this session (any lesson pick) wait until the rest of the pick is done.
+  const seen = loadSeen();
+  let pool = all.filter((x) => !seen[mode]?.includes(id(x)));
+  if (!pool.length) { pool = all; seen[mode] = (seen[mode] ?? []).filter((i) => !all.some((x) => id(x) === i)); }
+  const item = pool.length ? drawFromBag(`${mode}|${pickedLesson}`, pool, id, prev) : undefined;
+  if (item) { (seen[mode] ??= []).push(id(item)); try { sessionStorage.setItem(SEEN_KEY, JSON.stringify(seen)); } catch { /* private mode */ } }
+  return item;
 }
+const loadSeen = () => { try { return JSON.parse(sessionStorage.getItem(SEEN_KEY)) ?? {}; } catch { return {}; } };
 /** Shuffled bag saved on the device per key: every item comes once before any repeats. */
 function drawFromBag(k, all, id, prev) {
   const byId = new Map(all.map((x) => [id(x), x]));

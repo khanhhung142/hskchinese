@@ -19,7 +19,7 @@ The UI is in Vietnamese; every word and sentence shows a Vietnamese and an Engli
 The home screen's **Luyện tập** item opens the lesson picker plus Luyện viết chữ, Luyện viết câu, Luyện từ vựng and Luyện nghe; their back buttons return there.
 The older quizzes (**Học bài mới**, **Ôn tất cả**) are hidden there and appear only at <https://khanhhung142.github.io/hskchinese/full/>.
 
-- **Luyện viết chữ** is typing practice, separate from the quizzes and not counted in progress.
+- **Luyện viết chữ** is typing practice, separate from the quizzes and not counted in progress. Words/sentences already done in this session (tab still open) are not shown again, even after changing the lesson pick, until the rest of the pick is done (`sessionStorage['hsk-seen']`).
   It shows one random word (hanzi, pinyin, English, Vietnamese) and on open plays it in Chinese, then in English.
   Type the word with a Chinese keyboard; the answer must match the hanzi exactly (spaces and punctuation ignored).
   The pencil button opens a handwriting pad; strokes are recognized by Google Input Tools (needs network) and tapping a candidate appends it to the input.
