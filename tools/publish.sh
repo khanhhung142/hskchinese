@@ -8,7 +8,7 @@ msg="${1:?usage: tools/publish.sh \"commit message\"}"
 
 python3 tools/book_vocab.py
 node tools/check.mjs
-git add data/vocab.json data/book_en.json data/radicals.json audio
+git add data/vocab.json data/book_en.json data/radicals.json data/english.json audio
 if git diff --cached --quiet; then echo "Published (nothing changed)"; exit 0; fi
 git commit -q -m "$msg"
 for attempt in 1 2 3; do

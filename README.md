@@ -45,6 +45,12 @@ Every Chinese word is shown with its pinyin underneath, except in the type-the-p
 Progress is stored only in the browser's `localStorage` (key `hsk-progress`).
 Clearing site data or switching devices starts from zero.
 
+## English
+
+[`/english/`](https://khanhhung142.github.io/hskchinese/english/) is the same app for English: same screens, same exercises, data from `data/english.json`.
+Pinyin becomes IPA (optional), handwriting is off, and "type the pinyin" becomes "listen and type the word".
+Progress, lesson pick, in-app additions and edits are kept apart (`eng-*` keys instead of `hsk-*`); exports are named `eng-export-*.json`.
+
 ## Adding or fixing words
 
 Normal path: send the photos to Hermes on Telegram.
