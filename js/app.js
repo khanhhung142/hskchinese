@@ -864,23 +864,24 @@ function toeicView() {
   if (sk === 'L' || sk === 'R') {
     const qs = Object.keys(t.items).map(Number).filter((n) => (sk === 'L' ? n <= 100 : n > 100));
     const score = qs.filter((n) => view.picks[n] === t.items[n].a).length, answered = qs.filter((n) => view.picks[n]).length;
-    const seen = new Set();
+    // One block per question: photo/graphic crop, question + options as text, passage text before its set; Nghĩa = Vietnamese, allowed during the test.
+    const doc = (n) => t.docs.find((x) => x.f === n);
     const qRow = (n) => {
-      const it = t.items[n], letters = 'ABCD'.slice(0, it.o.length === 3 ? 3 : 4);
-      const g = view.done && t.groups.find((x) => x.f === n);
-      const btn = (k) => {
+      const it = t.items[n], letters = 'ABCD'.slice(0, it.o.length), txt = n >= 32, d = doc(n), fig = t.figs[n];
+      const g = sk === 'L' && view.done && t.groups.find((x) => x.f === n);
+      const btn = (k, i) => {
         const cls = view.picks[n] === k ? (view.done ? (k === it.a ? 'right' : 'wrong') : 'on') : view.done && k === it.a ? 'right' : '';
-        return `<button class="opt wb-opt ${cls}" data-action="t-pick" data-n="${n}" data-k="${k}" ${view.done ? 'disabled' : ''}><b>${k}</b></button>`;
+        return `<button class="opt wb-opt ${cls}" data-action="t-pick" data-n="${n}" data-k="${k}" ${view.done ? 'disabled' : ''}><b>${k}</b>${txt ? `<span>${esc(it.o[i])}</span>` : ''}</button>`;
       };
-      return `${g ? `<details class="wb-tr"><summary>Câu ${g.f}–${g.t}: ${sk === 'L' ? 'transcript &amp; dịch' : 'dịch đoạn văn'}</summary>${g.sc ? `<p class="t-pre">${esc(g.sc)}</p>` : ''}<p class="t-pre muted">${esc(g.vi)}</p></details>` : ''}
-        <div class="wb-q"><div class="wb-qhead"><b>${n}.</b>${view.done && it.q ? `<span>${esc(it.q)}</span>` : ''}</div><div class="wb-opts">${letters.split('').map(btn).join('')}</div>
-        ${view.done ? `<details class="wb-tr"><summary>Giải thích</summary>${it.o.map((o, i) => `<p><b>${'ABCD'[i]}</b> ${esc(o)}</p>`).join('')}<p class="muted">${esc(it.vi)}</p>${it.ex ? `<p>${esc(it.ex)}</p>` : ''}</details>` : ''}</div>`;
+      const set = d ?? t.groups.find((x) => x.f === n);
+      return `${set && n > 31 ? `<h2 class="t-set">Câu ${set.f}–${set.t}</h2>` : ''}${fig ? `<img class="wb-img t-fig" src="${esc(fig)}" alt="Hình câu ${n}" loading="lazy">` : ''}
+        ${d ? `<div class="t-box t-pre t-doc">${esc(d.text)}</div><details class="wb-tr"><summary>Nghĩa đoạn văn</summary><p class="t-pre">${esc(d.vi)}</p></details>` : ''}
+        ${g ? `<details class="wb-tr"><summary>Câu ${g.f}–${g.t}: transcript &amp; dịch</summary>${g.sc ? `<p class="t-pre">${esc(g.sc)}</p>` : ''}<p class="t-pre muted">${esc(g.vi)}</p></details>` : ''}
+        <div class="wb-q"><div class="wb-qhead"><b>${n}.</b>${txt && it.q ? `<span>${esc(it.q)}</span>` : ''}</div><div class="wb-opts${txt ? ' list' : ''}">${letters.split('').map(btn).join('')}</div>
+        ${txt && it.v ? `<details class="wb-tr"><summary>Nghĩa</summary>${it.v.q ? `<p>${esc(it.v.q)}</p>` : ''}${it.v.o.map((o, i) => `<p><b>${'ABCD'[i]}</b> ${esc(o)}</p>`).join('')}</details>` : ''}
+        ${view.done ? `<details class="wb-tr"><summary>Giải thích</summary>${txt ? '' : it.o.map((o, i) => `<p><b>${'ABCD'[i]}</b> ${esc(o)}</p>`).join('')}<p class="muted">${esc(it.vi)}</p>${it.ex ? `<p>${esc(it.ex)}</p>` : ''}</details>` : ''}</div>`;
     };
-    const pages = t.pages.filter((p) => p.s === sk).map((p) => {
-      const mine = p.qs.filter((n) => qs.includes(n) && !seen.has(n));
-      mine.forEach((n) => seen.add(n));
-      return `<a href="${esc(p.src)}" target="_blank" rel="noopener"><img class="wb-img" src="${esc(p.src)}" alt="Trang đề" loading="lazy"></a>${mine.map(qRow).join('')}`;
-    }).join('');
+    const pages = qs.map(qRow).join('');
     return `<main class="page">${head(`${SKILLS[sk][0]} · Test ${t.id}`, back(sk), `<span class="counter">${view.done ? score : answered}/${qs.length}</span>`)}
       ${view.done ? `<p class="wb-score">Đúng ${score}/${qs.length} · ≈ ${toeicScale(score)}/495</p>${tomie(score * 2 >= qs.length ? 'done' : 'bad')}` : ''}
       ${sk === 'L' ? `<audio class="t-audio" controls preload="none" src="${esc(t.audio)}"></audio>` : ''}

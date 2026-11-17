@@ -475,3 +475,7 @@ body.typing .tips { display: none; }
 .t-write { width: 100%; box-sizing: border-box; font: inherit; font-size: 16px; padding: 10px 12px; border: 2.5px solid var(--line); border-radius: var(--r-ctl); background: var(--surface); color: var(--text); resize: vertical; margin-top: 8px; }
 .t-wc { display: block; text-align: right; }
 .t-mail small { display: block; color: var(--muted); margin-bottom: 6px; }
+.t-set { font-size: 16px; margin: 22px 0 8px; }
+.t-fig { max-height: 60vh; width: auto; max-width: 100%; margin-inline: auto; }
+.t-doc { font-size: 15px; line-height: 1.5; overflow-wrap: anywhere; }
+.wb-opts.list .wb-opt span { text-align: left; }
