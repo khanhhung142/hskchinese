@@ -1133,7 +1133,7 @@ root.addEventListener('click', (e) => {
   else if (act === 'write-next') startWrite(view.mode);
   else if (act === 'reveal') { view.state = { ...view.state, typed: root.querySelector('#hz-in').value, revealed: true }; render(); say(view.item.hanzi); }
   else if (act === 'check-write') checkWrite();
-  else if (act === 'hand-toggle') { view.state = { ...view.state, typed: root.querySelector('#hz-in').value, hand: !view.state.hand }; render(); root.querySelector('.hand')?.scrollIntoView({ block: 'end', behavior: 'smooth' }); }
+  else if (act === 'hand-toggle') { view.state = { ...view.state, typed: root.querySelector('#hz-in').value, hand: !view.state.hand }; render(); root.querySelector('.card')?.scrollIntoView({ block: 'start' }); }
   else if (act === 'hand-undo') { ink.pop(); redrawInk(); recognize(); }
   else if (act === 'hand-clear') clearInk();
   else if (act === 'hand-back') { const input = root.querySelector('#hz-in'); input.value = [...input.value].slice(0, -1).join(''); }

@@ -294,7 +294,7 @@ body.typing .footer { padding-top: 8px; }
 .input-row .icon-btn.on { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
 .hand { display: grid; gap: 10px; scroll-margin-bottom: 96px; }
 #hand-pad {
-  width: 100%; aspect-ratio: 3 / 2; touch-action: none; color: var(--text);
+  width: 100%; height: clamp(150px, 30dvh, 260px); touch-action: none; color: var(--text);
   border: 1.5px solid var(--line); border-radius: var(--r-box); background: var(--surface);
 }
 .cands { min-height: 48px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
@@ -479,3 +479,16 @@ body.typing .tips { display: none; }
 .t-fig { max-height: 60vh; width: auto; max-width: 100%; margin-inline: auto; }
 .t-doc { font-size: 15px; line-height: 1.5; overflow-wrap: anywhere; }
 .wb-opts.list .wb-opt span { text-align: left; }
+
+/* Handwriting on: compact card (like typing) so card + input + pad + buttons fit one screen. */
+.stage:has(.hand) { gap: 10px; }
+.stage:has(.hand) .card { gap: 2px; padding: 8px 52px 8px 12px; position: relative; }
+.stage:has(.hand) .big-han { font-size: 40px; margin: 0; }
+.stage:has(.hand) .sentence { font-size: 22px; }
+.stage:has(.hand) .card .py-big { font-size: 16px; margin: 0; }
+.stage:has(.hand) .card .meaning { font-size: 17px; margin: 0; }
+.stage:has(.hand) .card .big-meaning { font-size: 22px; }
+.stage:has(.hand) .card .vi { margin: 0; font-size: 14px; }
+.stage:has(.hand) .card .speak { position: absolute; top: 8px; right: 8px; width: 40px; height: 40px; font-size: 20px; }
+.stage:has(.hand) .tips { display: none; }
+.hand .cands { min-height: 40px; }
