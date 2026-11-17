@@ -426,6 +426,12 @@ function pickWriteItem(mode, prev) {
   if (item) { (seen[mode] ??= []).push(id(item)); try { sessionStorage.setItem(SEEN_KEY, JSON.stringify(seen)); } catch { /* private mode */ } }
   return item;
 }
+/** "k/n": items shown this session (current included) out of the picked set for this mode. */
+function writeCount(mode) {
+  const all = (mode === 'sentence' ? data.sentences : practiceWords()).filter(inLesson).map((x) => x.id ?? x.hanzi);
+  const seen = new Set(loadSeen()[mode]);
+  return `${all.filter((i) => seen.has(i)).length}/${all.length}`;
+}
 const loadSeen = () => { try { return JSON.parse(sessionStorage.getItem(SEEN_KEY)) ?? {}; } catch { return {}; } };
 /** Shuffled bag saved on the device per key: every item comes once before any repeats. */
 function drawFromBag(k, all, id, prev) {
@@ -459,7 +465,7 @@ function write() {
   const status = state.done ? `<p class="write-status ok">${icon('check-circle', true)} Đúng rồi</p>`
     : state.wrong ? `<p class="write-status bad">${icon('x-circle', true)} Chưa đúng, thử lại</p>` : '';
   return `<main class="page">
-    <header class="list-head"><button class="icon-btn" data-action="practice" aria-label="Quay lại">${icon('arrow-left')}</button><h1>${WRITE_TITLES[mode]}</h1></header>
+    <header class="list-head"><button class="icon-btn" data-action="practice" aria-label="Quay lại">${icon('arrow-left')}</button><h1>${WRITE_TITLES[mode]}</h1><span class="counter">${writeCount(mode)}</span></header>
     <div class="stage">
       <div class="card center">
         ${shown ? c.zh : ''}
