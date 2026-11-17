@@ -732,7 +732,7 @@ function workbook() {
           return `<button class="opt wb-opt ${cls}" data-action="wb-pick" data-n="${q.n}" data-k="${k}" ${view.done ? 'disabled' : ''}><b>${k}</b>${o ? zhPy(o.zh, o.py) : ''}</button>`;
         };
         return `<div class="wb-q"><div class="wb-qhead"><b>${q.n}.</b>${q.t ? `<button class="speak sm" data-action="wb-play" data-n="${q.n}" aria-label="Nghe câu ${q.n}">${icon('speaker-high', true)}</button>` : ''}${q.text ? zhPy(q.text, q.py) : ''}</div>
-          <div class="wb-opts${q.opts ? ' list' : ''}">${keys.map(btn).join('')}</div>${view.done && q.tr ? `<details class="wb-tr"><summary>Transcript &amp; dịch</summary>${q.tr.map((x) => `<p>${zhPy(x.zh, x.py)}<small>${esc(x.en)}</small><small>${esc(x.vi)}</small></p>`).join('')}</details>` : ''}</div>`;
+          <div class="wb-opts${q.opts ? ' list' : ''}">${keys.map(btn).join('')}</div>${view.done && q.tr ? `<details class="wb-tr"><summary>Nghĩa</summary>${q.tr.map((x) => `<p>${zhPy(x.zh, x.py)}<small>${esc(x.en)}</small><small>${esc(x.vi)}</small></p>`).join('')}</details>` : ''}</div>`;
       }).join('')}</section>`;
   }).join('');
   const answered = Object.keys(view.picks).length;
@@ -870,7 +870,9 @@ function toeicView() {
       const it = t.items[n], letters = 'ABCD'.slice(0, it.o.length), txt = n >= 32, d = doc(n), fig = t.figs[n];
       // Listening: own clip per question (Part 1-2) or per set (Part 3-4), script anytime behind a toggle.
       const g = sk === 'L' && n > 31 && t.groups.find((x) => x.f === n), clip = sk === 'L' && (n < 32 || g) && `toeic/t${String(t.id).padStart(2, '0')}/q/${n}.mp3`;
-      const sc = !clip ? '' : g ? `<p class="t-pre">${esc(g.sc)}</p><p class="t-pre muted">${esc(g.vi)}</p>` : `${it.q ? `<p>${esc(it.q)}</p>` : ''}${it.o.map((o, i) => `<p><b>${'ABCD'[i]}</b> ${esc(o)}</p>`).join('')}`;
+      // Nghĩa: each English sentence followed by its Vietnamese.
+      const vl = (en, vi) => `<p><span>${en}</span>${vi ? `<small class="muted">${esc(vi)}</small>` : ''}</p>`;
+      const sc = !clip ? '' : g ? (g.tr ?? [[g.sc, g.vi]]).map(([e, v]) => vl(esc(e), v)).join('') : `${it.q ? vl(esc(it.q), it.v?.q) : ''}${it.o.map((o, i) => vl(`<b>${'ABCD'[i]}</b> ${esc(o)}`, it.v?.o[i])).join('')}`;
       const btn = (k, i) => {
         const cls = view.picks[n] === k ? (view.done ? (k === it.a ? 'right' : 'wrong') : 'on') : view.done && k === it.a ? 'right' : '';
         return `<button class="opt wb-opt ${cls}" data-action="t-pick" data-n="${n}" data-k="${k}" ${view.done ? 'disabled' : ''}><b>${k}</b>${txt ? `<span>${esc(it.o[i])}</span>` : ''}</button>`;
@@ -878,7 +880,7 @@ function toeicView() {
       const set = d ?? t.groups.find((x) => x.f === n);
       return `${set && n > 31 ? `<h2 class="t-set">Câu ${set.f}–${set.t}</h2>` : ''}${fig ? `<img class="wb-img t-fig" src="${esc(fig)}" alt="Hình câu ${n}" loading="lazy">` : ''}
         ${d ? `<div class="t-box t-pre t-doc">${esc(d.text)}</div><details class="wb-tr"><summary>Nghĩa đoạn văn</summary><p class="t-pre">${esc(d.vi)}</p></details>` : ''}
-        ${clip ? `<audio class="t-clip" controls preload="none" src="${clip}"></audio><details class="wb-tr"><summary>Script</summary>${sc}</details>` : ''}
+        ${clip ? `<audio class="t-clip" controls preload="none" src="${clip}"></audio><details class="wb-tr"><summary>Nghĩa</summary>${sc}</details>` : ''}
         <div class="wb-q"><div class="wb-qhead"><b>${n}.</b>${txt && it.q ? `<span>${esc(it.q)}</span>` : ''}</div><div class="wb-opts${txt ? ' list' : ''}">${letters.split('').map(btn).join('')}</div>
         ${txt && it.v ? `<details class="wb-tr"><summary>Nghĩa</summary>${it.v.q ? `<p>${esc(it.v.q)}</p>` : ''}${it.v.o.map((o, i) => `<p><b>${'ABCD'[i]}</b> ${esc(o)}</p>`).join('')}</details>` : ''}
         ${view.done ? `<details class="wb-tr"><summary>Giải thích</summary>${txt ? '' : it.o.map((o, i) => `<p><b>${'ABCD'[i]}</b> ${esc(o)}</p>`).join('')}<p class="muted">${esc(it.vi)}</p>${it.ex ? `<p>${esc(it.ex)}</p>` : ''}</details>` : ''}</div>`;
