@@ -179,6 +179,7 @@ function home() {
       ${EN ? '' : `<button class="menu-item" data-action="tb">${icon('book-open-text')}<span><b>Giáo trình</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="wb">${icon('exam')}<span><b>Bài tập</b></span>${icon('caret-right')}</button>`}
       <button class="menu-item" data-action="practice">${icon('pencil-simple-line')}<span><b>Luyện tập</b></span>${icon('caret-right')}</button>
+      ${EN ? `<button class="menu-item" data-action="toeic">${icon('exam')}<span><b>Đề TOEIC</b></span>${icon('caret-right')}</button>` : ''}
       ${EN ? '' : `<button class="menu-item" data-action="rad">${icon('tree-structure')}<span><b>Bộ thủ</b></span>${icon('caret-right')}</button>`}
       <button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Tra cứu</b></span>${icon('caret-right')}</button>
     </nav>
@@ -828,6 +829,112 @@ function textbook() {
   </main>`;
 }
 
+// ---------- Đề TOEIC (/english/ only; data/toeic.json: 10 ETS 2026 LR tests as page scans + key, 5 Speaking + 5 Writing tests) ----------
+let toeic;
+const TOEIC_KEY = 'eng-toeic'; // {'L3': {s, n, d}} latest submitted score per skill+test
+const TOEIC_DRAFT = 'eng-toeic-draft'; // {'W2-6': text} Writing drafts
+const SKILLS = { L: ['Nghe', 'headphones'], R: ['Đọc', 'book-open'], S: ['Nói', 'microphone'], W: ['Viết', 'pencil-simple-line'] };
+async function openToeic(sk, id) {
+  try { toeic ??= await (await fetch('data/toeic.json', { cache: 'no-cache' })).json(); } catch { return alert('Không tải được đề TOEIC.'); }
+  stopRec();
+  view = { name: 'toeic', lvl: sk || '', id: id ? +id : undefined, picks: {}, done: false };
+  render();
+  scrollTo(0, 0);
+}
+// ponytail: raw x 5 clamped to 5–495 is a rough linear estimate; ETS uses a per-form conversion table.
+const toeicScale = (s) => Math.max(5, Math.min(495, s * 5));
+const sample = (title, text, au) => `<details class="wb-tr"><summary>${title}</summary>${au ? `<button class="speak sm" data-au="${esc(au)}" aria-label="Nghe">${icon('speaker-high', true)}</button>` : ''}<p class="t-pre">${esc(text)}</p></details>`;
+const recBtn = (k) => `<span class="t-rec"><button class="btn" data-action="t-rec" data-k="${k}">${icon('microphone')} Ghi âm</button><audio controls hidden data-rec="${k}"></audio></span>`;
+function toeicView() {
+  const back = (sk = '') => `<button class="icon-btn" data-action="${view.lvl ? 'toeic' : 'home'}" data-sk="${sk}" aria-label="Quay lại">${icon('arrow-left')}</button>`;
+  const head = (t, b, n = '') => `<header class="list-head">${b}<h1>${t}</h1>${n}</header>`;
+  const sk = view.lvl;
+  if (!sk) return `<main class="page">${head('Đề TOEIC', back())}<nav class="menu">${Object.entries(SKILLS).map(([k, [t, ic]]) =>
+    `<button class="menu-item" data-action="toeic" data-sk="${k}">${icon(ic)}<span><b>${t}</b><small>${k === 'L' || k === 'R' ? '10 đề ETS 2026' : '5 đề luyện'}</small></span>${icon('caret-right')}</button>`).join('')}</nav></main>`;
+  const list = sk === 'L' || sk === 'R' ? toeic.lr : sk === 'S' ? toeic.speak : toeic.write;
+  if (!view.id) {
+    const last = loadJSON(TOEIC_KEY) ?? {};
+    return `<main class="page">${head(SKILLS[sk][0], back())}<nav class="menu">${list.map((t) => {
+      const l = last[sk + t.id];
+      return `<button class="menu-item${l ? ' done' : ''}" data-action="toeic" data-sk="${sk}" data-id="${t.id}">${icon('exam')}<span><b>Test ${t.id}</b>${l ? `<small>Lần gần nhất: ${l.s}/${l.n} · ${l.d}</small>` : ''}</span>${icon('caret-right')}</button>`;
+    }).join('')}</nav></main>`;
+  }
+  const t = list.find((x) => x.id === view.id);
+  const pg = pager('toeic', list.map((x) => x.id), t.id, (id) => `Test ${id}`).replace(/data-action="toeic"/g, `data-action="toeic" data-sk="${sk}"`);
+  if (sk === 'L' || sk === 'R') {
+    const qs = Object.keys(t.items).map(Number).filter((n) => (sk === 'L' ? n <= 100 : n > 100));
+    const score = qs.filter((n) => view.picks[n] === t.items[n].a).length, answered = qs.filter((n) => view.picks[n]).length;
+    const seen = new Set();
+    const qRow = (n) => {
+      const it = t.items[n], letters = 'ABCD'.slice(0, it.o.length === 3 ? 3 : 4);
+      const g = view.done && t.groups.find((x) => x.f === n);
+      const btn = (k) => {
+        const cls = view.picks[n] === k ? (view.done ? (k === it.a ? 'right' : 'wrong') : 'on') : view.done && k === it.a ? 'right' : '';
+        return `<button class="opt wb-opt ${cls}" data-action="t-pick" data-n="${n}" data-k="${k}" ${view.done ? 'disabled' : ''}><b>${k}</b></button>`;
+      };
+      return `${g ? `<details class="wb-tr"><summary>Câu ${g.f}–${g.t}: ${sk === 'L' ? 'transcript &amp; dịch' : 'dịch đoạn văn'}</summary>${g.sc ? `<p class="t-pre">${esc(g.sc)}</p>` : ''}<p class="t-pre muted">${esc(g.vi)}</p></details>` : ''}
+        <div class="wb-q"><div class="wb-qhead"><b>${n}.</b>${view.done && it.q ? `<span>${esc(it.q)}</span>` : ''}</div><div class="wb-opts">${letters.split('').map(btn).join('')}</div>
+        ${view.done ? `<details class="wb-tr"><summary>Giải thích</summary>${it.o.map((o, i) => `<p><b>${'ABCD'[i]}</b> ${esc(o)}</p>`).join('')}<p class="muted">${esc(it.vi)}</p>${it.ex ? `<p>${esc(it.ex)}</p>` : ''}</details>` : ''}</div>`;
+    };
+    const pages = t.pages.filter((p) => p.s === sk).map((p) => {
+      const mine = p.qs.filter((n) => qs.includes(n) && !seen.has(n));
+      mine.forEach((n) => seen.add(n));
+      return `<a href="${esc(p.src)}" target="_blank" rel="noopener"><img class="wb-img" src="${esc(p.src)}" alt="Trang đề" loading="lazy"></a>${mine.map(qRow).join('')}`;
+    }).join('');
+    return `<main class="page">${head(`${SKILLS[sk][0]} · Test ${t.id}`, back(sk), `<span class="counter">${view.done ? score : answered}/${qs.length}</span>`)}
+      ${view.done ? `<p class="wb-score">Đúng ${score}/${qs.length} · ≈ ${toeicScale(score)}/495</p>${tomie(score * 2 >= qs.length ? 'done' : 'bad')}` : ''}
+      ${sk === 'L' ? `<audio class="t-audio" controls preload="none" src="${esc(t.audio)}"></audio>` : ''}
+      ${pages}${pg}
+      <div class="footer">${view.done ? '<button class="btn primary block" data-action="t-retry">Làm lại</button>' : `<button class="btn primary block" data-action="t-submit" ${answered ? '' : 'disabled'}>Nộp bài</button>`}</div></main>`;
+  }
+  if (sk === 'S') {
+    const task = (n, time, body) => `<section class="wb-part"><h2>Câu ${n}</h2><p class="muted">${time}</p>${body}</section>`;
+    const info = t.q810.info;
+    return `<main class="page">${head(`Nói · Test ${t.id}`, back(sk))}
+      ${t.read.map((r, i) => task(i + 1, 'Đọc to đoạn văn · chuẩn bị 45s, đọc 45s', `<p class="t-pre t-box">${esc(r.text)}</p>${recBtn(`r${i}`)}${sample('Nghe mẫu &amp; mẹo', t.tip, r.au)}`)).join('')}
+      ${t.pics.map((p, i) => task(i + 3, 'Mô tả bức tranh · chuẩn bị 45s, nói 30s', `<img class="wb-img" src="${esc(p.src)}" alt="Tranh" loading="lazy"><small class="muted">Ảnh: ${esc(p.by)}</small>${recBtn(`p${i}`)}${sample('Bài mẫu', p.sample, p.au)}`)).join('')}
+      <section class="wb-part"><h2>Câu 5–7</h2><p class="muted">Trả lời câu hỏi · chuẩn bị 3s, nói 15s / 15s / 30s</p><p class="t-box">${esc(t.q57.ctx)}</p>
+        ${t.q57.qs.map((q, i) => `<div class="wb-q"><div class="wb-qhead"><b>${i + 5}.</b><button class="speak sm" data-au="${esc(q.qa)}" aria-label="Nghe câu hỏi">${icon('speaker-high', true)}</button><span>${esc(q.q)}</span></div>${recBtn(`a${i}`)}${sample('Bài mẫu', q.sample, q.au)}</div>`).join('')}</section>
+      <section class="wb-part"><h2>Câu 8–10</h2><p class="muted">Trả lời dựa trên thông tin · đọc 45s, chuẩn bị 3s, nói 15s / 15s / 30s</p>
+        <div class="t-box"><b>${esc(info.title)}</b>${info.sub ? `<p class="t-pre muted">${esc(info.sub)}</p>` : ''}<table class="t-info">${info.rows.map((r) => `<tr>${r.map((c) => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</table></div>
+        <p><button class="speak sm" data-au="${esc(t.q810.ia)}" aria-label="Nghe">${icon('speaker-high', true)}</button> <i>${esc(t.q810.intro)}</i></p>
+        ${t.q810.qs.map((q, i) => `<div class="wb-q"><div class="wb-qhead"><b>${i + 8}.</b><button class="speak sm" data-au="${esc(q.qa)}" aria-label="Nghe câu hỏi">${icon('speaker-high', true)}</button></div>${recBtn(`b${i}`)}${sample('Câu hỏi &amp; bài mẫu', `${q.q}\n\n${q.sample}`, q.au)}</div>`).join('')}</section>
+      ${task(11, 'Nêu ý kiến · chuẩn bị 45s, nói 60s', `<p class="t-box">${esc(t.q11.q)}</p>${recBtn('o')}${sample('Bài mẫu', t.q11.sample, t.q11.au)}`)}
+      ${pg}</main>`;
+  }
+  const drafts = loadJSON(TOEIC_DRAFT) ?? {};
+  const area = (n, rows) => `<textarea class="t-write" data-draft="W${t.id}-${n}" rows="${rows}" spellcheck="false" placeholder="Viết bài của chị ở đây…">${esc(drafts[`W${t.id}-${n}`] ?? '')}</textarea><small class="muted t-wc" data-wc="W${t.id}-${n}">${words(drafts[`W${t.id}-${n}`])} từ</small>`;
+  return `<main class="page">${head(`Viết · Test ${t.id}`, back(sk))}
+    <section class="wb-part"><h2>Câu 1–5</h2><p class="muted">Viết MỘT câu về bức tranh, dùng đủ 2 từ cho sẵn · 8 phút cho cả 5 câu</p>
+      ${t.pics.map((p, i) => `<div class="wb-q"><b>${i + 1}.</b> <span class="chip-sm">${esc(p.w[0])}</span> / <span class="chip-sm">${esc(p.w[1])}</span><img class="wb-img" src="${esc(p.src)}" alt="Tranh" loading="lazy"><small class="muted">Ảnh: ${esc(p.by)}</small>${area(i + 1, 2)}${sample('Câu mẫu', p.sample)}</div>`).join('')}</section>
+    ${t.emails.map((m, i) => `<section class="wb-part"><h2>Câu ${i + 6}</h2><p class="muted">Trả lời e-mail · 10 phút</p>
+      <div class="t-box t-mail"><small>From: ${esc(m.from)}<br>To: ${esc(m.to)}<br>Subject: ${esc(m.subject)}<br>Sent: ${esc(m.sent)}</small><p class="t-pre">${esc(m.body)}</p></div>
+      <p><b>${esc(m.task)}</b></p>${area(i + 6, 8)}${sample('Bài mẫu', `${m.sample}\n\n💡 ${m.tip}`)}</section>`).join('')}
+    <section class="wb-part"><h2>Câu 8</h2><p class="muted">Viết bài luận nêu ý kiến · 30 phút, tối thiểu 300 từ</p><p class="t-box"><b>${esc(t.essay.q)}</b></p>
+      ${area(8, 14)}${sample('Dàn ý', t.essay.outline)}${sample('Bài mẫu', t.essay.sample)}</section>
+    ${pg}</main>`;
+}
+const words = (s) => (s ?? '').trim().split(/\s+/).filter(Boolean).length;
+// Speaking: record from the mic and play it back (device only, nothing uploaded).
+let rec;
+function stopRec() { if (rec?.state === 'recording') rec.stop(); }
+async function toggleRec(btn) {
+  if (rec?.state === 'recording') return stopRec();
+  let stream;
+  try { stream = await navigator.mediaDevices.getUserMedia({ audio: true }); } catch { return alert('Chưa cho phép dùng micro.'); }
+  const chunks = [], k = btn.dataset.k;
+  rec = new MediaRecorder(stream);
+  rec.ondataavailable = (e) => chunks.push(e.data);
+  rec.onstop = () => {
+    stream.getTracks().forEach((x) => x.stop());
+    btn.innerHTML = `${icon('microphone')} Ghi lại`; btn.classList.remove('on');
+    const a = root.querySelector(`[data-rec="${k}"]`);
+    if (a) { a.src = URL.createObjectURL(new Blob(chunks, { type: rec.mimeType })); a.hidden = false; }
+  };
+  rec.start();
+  btn.innerHTML = `${icon('stop', true)} Dừng`; btn.classList.add('on');
+}
+
 // ---------- Controller ----------
 
 /** Touch screens: no auto-focus into inputs, the keyboard would cover the word. Keep it only while already typing. */
@@ -836,7 +943,7 @@ let wasTyping = false;
 let lastKey = 'home||', popping = false;
 
 function render() {
-  const views = { home, practice, radicals, words: wordList, quiz, summary, write, listen, wb: workbook, tb: textbook };
+  const views = { home, practice, radicals, words: wordList, quiz, summary, write, listen, wb: workbook, tb: textbook, toeic: toeicView };
   wasTyping = document.activeElement?.matches?.('#hz-in, #py') ?? false;
   if (view.name !== 'practice') lessonPickerOpen = false; // picker reopens closed next time
   root.innerHTML = views[view.name]();
@@ -946,6 +1053,8 @@ root.addEventListener('click', (e) => {
     e.preventDefault();
     return play(`textbook/${encodeURIComponent(tbBtn.dataset.tbSay)}.mp3`, tbBtn.dataset.tbSay, 'zh-CN');
   }
+  const auBtn = e.target.closest('[data-au]');
+  if (auBtn) { e.preventDefault(); return play(auBtn.dataset.au, '', 'en-US'); }
   const sayBtn = e.target.closest('[data-say]');
   if (sayBtn) {
     e.preventDefault(); // keep <details> from toggling when tapping its play button
@@ -962,7 +1071,20 @@ root.addEventListener('click', (e) => {
   // In-app back arrow = phone back: pop the history entry, popstate then does the navigation.
   if (!popping && history.state?.d && el.matches('.list-head .icon-btn, .quiz-top .icon-btn')) return history.back();
   const act = el.dataset.action;
-  if (act === 'wb') openWorkbook(el.dataset.id, el.dataset.lvl);
+  if (act === 'toeic') openToeic(el.dataset.sk ?? (view.name === 'toeic' ? view.lvl : ''), el.dataset.id);
+  else if (act === 't-pick') { if (!view.done) { view.picks[el.dataset.n] = el.dataset.k; el.closest('.wb-opts').querySelectorAll('.opt').forEach((b) => b.classList.toggle('on', b === el)); root.querySelector('.counter').textContent = `${Object.keys(view.picks).length}/100`; root.querySelector('[data-action=t-submit]').disabled = false; } }
+  else if (act === 't-submit') {
+    if (!confirm('Nộp bài và xem đáp án?')) return;
+    view.done = true; root.querySelector('.t-audio')?.pause();
+    const t = toeic.lr.find((x) => x.id === view.id), qs = Object.keys(t.items).map(Number).filter((n) => (view.lvl === 'L' ? n <= 100 : n > 100));
+    const last = loadJSON(TOEIC_KEY) ?? {}, d = new Date();
+    last[view.lvl + view.id] = { s: qs.filter((n) => view.picks[n] === t.items[n].a).length, n: qs.length, d: `${d.getDate()}/${d.getMonth() + 1}` };
+    try { localStorage.setItem(TOEIC_KEY, JSON.stringify(last)); } catch { /* private mode */ }
+    render(); scrollTo(0, 0);
+  }
+  else if (act === 't-retry') { if (confirm('Làm lại từ đầu?')) openToeic(view.lvl, view.id); }
+  else if (act === 't-rec') toggleRec(el);
+  else if (act === 'wb') openWorkbook(el.dataset.id, el.dataset.lvl);
   else if (act === 'wb-play') wbPlay(el.dataset.n);
   else if (act === 'tb-learnt' || (act === 'tb' && view.name === 'tb' && +el.dataset.id === +view.id + 1)) {
     // Giáo trình: "Đã học" or going to the next lesson marks the current one done (no manual tick on the list)
@@ -985,7 +1107,7 @@ root.addEventListener('click', (e) => {
   }
   else if (act === 'wb-retry') openWorkbook(view.id);
   else if (act === 'practice') { player.pause(); keepAlive.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); view = { name: 'practice' }; render(); mediaState(); }
-  else if (act === 'home') { player.pause(); keepAlive.pause(); wbAudio.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); view = { name: 'home' }; render(); mediaState(); }
+  else if (act === 'home') { stopRec(); player.pause(); keepAlive.pause(); wbAudio.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); view = { name: 'home' }; render(); mediaState(); }
   else if (act === 'listen') {
     const items = [...practiceWords().filter(inLesson), ...data.sentences.filter(inLesson)];
     if (!items.length) return alert(`${pickedName()} chưa có từ nào.`);
@@ -1028,6 +1150,12 @@ root.addEventListener('click', (e) => {
 
 root.addEventListener('input', (e) => {
   if (e.target.id === 'word-search') searchWords(e.target.value);
+  if (e.target.dataset.draft) {
+    const k = e.target.dataset.draft, all = loadJSON(TOEIC_DRAFT) ?? {};
+    all[k] = e.target.value;
+    try { localStorage.setItem(TOEIC_DRAFT, JSON.stringify(all)); } catch { /* private mode */ }
+    root.querySelector(`[data-wc="${k}"]`).textContent = `${words(e.target.value)} từ`;
+  }
   if (e.target.id === 'tb-search') { const f = fold(e.target.value); root.querySelectorAll('.tb-word[data-q]').forEach((r) => { r.hidden = !r.dataset.q.includes(f); }); }
 });
 root.addEventListener('change', (e) => {

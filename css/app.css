@@ -461,3 +461,17 @@ body.typing .tips { display: none; }
 .tb-next { margin: 24px 0 8px; }
 .pager { position: static; background: none; margin-top: 16px; }
 .menu-item.done { border-color: var(--pink); } /* learnt lesson (Giáo trình / Bài tập): pink border only, the icon-square pink (her pick) */
+
+/* Đề TOEIC (/english/) */
+.t-audio { width: 100%; position: sticky; top: 0; z-index: 2; margin: 8px 0 12px; }
+.t-pre { white-space: pre-wrap; }
+.t-box { border: 2.5px solid var(--line); border-radius: var(--r-ctl); background: var(--surface); padding: 10px 12px; margin: 0 0 10px; }
+.t-info { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 6px; }
+.t-info td { border-top: 1px solid var(--line); padding: 4px 6px; vertical-align: top; }
+.t-info td:first-child { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.t-rec { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 6px 0; }
+.t-rec .btn.on { background: var(--pink); }
+.t-rec audio { flex: 1; min-width: 180px; height: 40px; }
+.t-write { width: 100%; box-sizing: border-box; font: inherit; font-size: 16px; padding: 10px 12px; border: 2.5px solid var(--line); border-radius: var(--r-ctl); background: var(--surface); color: var(--text); resize: vertical; margin-top: 8px; }
+.t-wc { display: block; text-align: right; }
+.t-mail small { display: block; color: var(--muted); margin-bottom: 6px; }
