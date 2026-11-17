@@ -41,13 +41,15 @@ function say(text, next) {
   if (EN) return play(`audio/en/${encodeURIComponent(text)}.mp3`, text, 'en-US', next);
   play(`audio/${encodeURIComponent(text)}.mp3`, text, 'zh-CN', next);
 }
-const sayEn = (text) => text && play(`audio/en/${encodeURIComponent(text)}.mp3`, text, 'en-US');
+const sayEn = (text, next) => (text ? play(`audio/en/${encodeURIComponent(text)}.mp3`, text, 'en-US', next) : next?.());
 /** Word in Chinese, then its English. */
 const sayWord = (w) => say(w.hanzi, () => sayEn(w.en));
 /** /english/: Vietnamese meaning mp3, named by the English text (see check.mjs). */
 const sayVi = (en, vi, next) => play(`audio/vi/${encodeURIComponent(en)}.mp3`, vi, 'vi-VN', next);
 /** /english/ practice: English, then its Vietnamese meaning. */
 const sayEnVi = (en, vi, next) => say(en, () => sayVi(en, vi, next));
+/** Chinese practice: English then Vietnamese meaning (audio/vi/<hanzi or sentence>.mp3). */
+const sayMean = (text, en, vi, next) => sayEn(en, () => sayVi(text, vi, next));
 function play(src, text, lang, next) {
   let fell = false;
   // Hidden page: Web Speech is silent and never fires onend, so skip the clip instead of stalling the playlist.
@@ -473,7 +475,7 @@ function write() {
         <p class="vi muted">${esc(c.vi)}</p>
         ${shown && mode !== 'sentence' && !EN ? charTips(view.item.hanzi) : ''}
         ${EN ? `<button class="speak" data-say-envi="${esc(c.text)}" data-vi="${esc(c.en)}" data-hide="${shown ? '' : 1}" aria-label="Nghe">${icon('speaker-high', true)}</button>`
-          : shown ? speakBtn(c.text) : `<button class="speak" data-say-en="${esc(c.en)}" aria-label="Nghe tiếng Anh">${icon('speaker-high', true)}</button>`}
+          : `<button class="speak" data-say-zh="${esc(c.text)}" data-en="${esc(c.en)}" data-vi="${esc(c.vi)}" data-hide="${shown ? '' : 1}" aria-label="Nghe">${icon('speaker-high', true)}</button>`}
       </div>
       <form class="field" data-action="submit-write">
         <label for="hz-in">${{ write: T.inWrite, vocab: T.inVocab, sentence: T.inSentence }[mode]}</label>
@@ -538,7 +540,7 @@ function listenStep() {
   });
   mediaState(c.text, c.en);
   if (EN) say(c.text, () => (live() ? play(`audio/vi/${encodeURIComponent(c.text)}.mp3`, c.en, 'vi-VN', after) : null));
-  else say(c.text, () => (live() ? play(`audio/en/${encodeURIComponent(c.en)}.mp3`, c.en, 'en-US', after) : null));
+  else say(c.text, () => (live() ? sayEn(c.en, () => (live() ? sayVi(c.text, c.vi, after) : null)) : null));
 }
 
 /** Lock-screen / notification controls for "Luyện nghe". */
@@ -574,13 +576,13 @@ function startWrite(mode) {
   document.activeElement?.blur(); // new item: let the word show before the keyboard
   render();
   const c = writeCard(mode, view.item);
-  if (EN) mode === 'vocab' ? sayVi(c.text, c.en) : sayEnVi(c.text, c.en); else mode === 'vocab' ? sayEn(c.en) : say(c.text, () => sayEn(c.en));
+  if (EN) mode === 'vocab' ? sayVi(c.text, c.en) : sayEnVi(c.text, c.en); else mode === 'vocab' ? sayMean(c.text, c.en, c.vi) : say(c.text, () => sayMean(c.text, c.en, c.vi));
 }
 
 function checkWrite() {
   const typed = root.querySelector('#hz-in').value;
   if (!typed.trim()) return;
-  const { text, en } = writeCard(view.mode, view.item);
+  const { text, en, vi } = writeCard(view.mode, view.item);
   const ok = sameHanzi(typed, text);
   view.state = { ...view.state, typed, done: ok, wrong: !ok };
   render();
@@ -589,7 +591,7 @@ function checkWrite() {
   const item = view.item;
   let gone = false;
   const go = () => { if (!gone && view.name === 'write' && view.item === item) { gone = true; startWrite(view.mode); } };
-  EN ? sayEnVi(text, en, go) : say(text, go);
+  EN ? sayEnVi(text, en, go) : say(text, () => sayVi(text, vi, go));
   // Audio blocked or failed: move on anyway, but never cut off a long sentence still playing.
   const wait = () => { if (gone) return; if (!player.paused || window.speechSynthesis?.speaking) setTimeout(wait, 1000); else go(); };
   setTimeout(wait, 4000);
@@ -1064,6 +1066,9 @@ root.addEventListener('click', (e) => {
   const ev = e.target.closest('[data-say-envi]');
   // Hidden answer (Luyện từ vựng): Vietnamese only, English would give it away.
   if (ev) return ev.dataset.hide ? sayVi(ev.dataset.sayEnvi, ev.dataset.vi) : sayEnVi(ev.dataset.sayEnvi, ev.dataset.vi);
+  const zh = e.target.closest('[data-say-zh]');
+  // Hidden answer (Luyện từ vựng): meanings only, the Chinese would give it away.
+  if (zh) { const { sayZh: t, en, vi, hide } = zh.dataset; return hide ? sayMean(t, en, vi) : say(t, () => sayMean(t, en, vi)); }
   const enBtn = e.target.closest('[data-say-en]');
   if (enBtn) return sayEn(enBtn.dataset.sayEn);
   const tbBtn = e.target.closest('[data-tb-say]');

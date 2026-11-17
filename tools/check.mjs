@@ -174,7 +174,9 @@ async function syncAudio(data, english) {
     // English Luyện nghe reads the Vietnamese meaning after the English: audio/vi/<english text>.mp3 (Vietnamese text has "/" and runs past 255 bytes).
     // ponytail: keyed by the English text, so an edited meaning keeps its old mp3 until that file is deleted.
     + await syncDir(path.join(AUDIO, 'vi'), [...english.words.map((w) => [w.word, w.meanings.join('; ')]),
-      ...english.sentences.map((s) => [s.text, s.vi])], VOICE_VI);
+      ...english.sentences.map((s) => [s.text, s.vi]),
+      // Chinese practice reads the Vietnamese meaning too: audio/vi/<hanzi or sentence>.mp3.
+      ...data.words.map((w) => [w.hanzi, w.meanings.join('; ')]), ...data.sentences.map((s) => [sentenceText(s), s.vi])], VOICE_VI);
 }
 
 /** Make `dir` hold exactly one `<text>.mp3` per text; a `[name, text]` pair speaks `text` into `<name>.mp3`. */
