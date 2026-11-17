@@ -850,7 +850,7 @@ function toeicView() {
   const head = (t, b, n = '') => `<header class="list-head">${b}<h1>${t}</h1>${n}</header>`;
   const sk = view.lvl;
   if (!sk) return `<main class="page">${head('Đề TOEIC', back())}<nav class="menu">${Object.entries(SKILLS).map(([k, [t, ic]]) =>
-    `<button class="menu-item" data-action="toeic" data-sk="${k}">${icon(ic)}<span><b>${t}</b><small>${k === 'L' || k === 'R' ? '10 đề ETS 2026' : '5 đề luyện'}</small></span>${icon('caret-right')}</button>`).join('')}</nav></main>`;
+    `<button class="menu-item" data-action="toeic" data-sk="${k}">${icon(ic)}<span><b>${t}</b><small>${k === 'L' || k === 'R' ? '10 đề ETS 2026' : `${(k === 'S' ? toeic.speak : toeic.write).length} đề luyện`}</small></span>${icon('caret-right')}</button>`).join('')}</nav></main>`;
   const list = sk === 'L' || sk === 'R' ? toeic.lr : sk === 'S' ? toeic.speak : toeic.write;
   if (!view.id) {
     const last = loadJSON(TOEIC_KEY) ?? {};
