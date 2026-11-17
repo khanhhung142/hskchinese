@@ -868,7 +868,9 @@ function toeicView() {
     const doc = (n) => t.docs.find((x) => x.f === n);
     const qRow = (n) => {
       const it = t.items[n], letters = 'ABCD'.slice(0, it.o.length), txt = n >= 32, d = doc(n), fig = t.figs[n];
-      const g = sk === 'L' && view.done && t.groups.find((x) => x.f === n);
+      // Listening: own clip per question (Part 1-2) or per set (Part 3-4), script anytime behind a toggle.
+      const g = sk === 'L' && n > 31 && t.groups.find((x) => x.f === n), clip = sk === 'L' && (n < 32 || g) && `toeic/t${String(t.id).padStart(2, '0')}/q/${n}.mp3`;
+      const sc = !clip ? '' : g ? `<p class="t-pre">${esc(g.sc)}</p><p class="t-pre muted">${esc(g.vi)}</p>` : `${it.q ? `<p>${esc(it.q)}</p>` : ''}${it.o.map((o, i) => `<p><b>${'ABCD'[i]}</b> ${esc(o)}</p>`).join('')}`;
       const btn = (k, i) => {
         const cls = view.picks[n] === k ? (view.done ? (k === it.a ? 'right' : 'wrong') : 'on') : view.done && k === it.a ? 'right' : '';
         return `<button class="opt wb-opt ${cls}" data-action="t-pick" data-n="${n}" data-k="${k}" ${view.done ? 'disabled' : ''}><b>${k}</b>${txt ? `<span>${esc(it.o[i])}</span>` : ''}</button>`;
@@ -876,7 +878,7 @@ function toeicView() {
       const set = d ?? t.groups.find((x) => x.f === n);
       return `${set && n > 31 ? `<h2 class="t-set">Câu ${set.f}–${set.t}</h2>` : ''}${fig ? `<img class="wb-img t-fig" src="${esc(fig)}" alt="Hình câu ${n}" loading="lazy">` : ''}
         ${d ? `<div class="t-box t-pre t-doc">${esc(d.text)}</div><details class="wb-tr"><summary>Nghĩa đoạn văn</summary><p class="t-pre">${esc(d.vi)}</p></details>` : ''}
-        ${g ? `<details class="wb-tr"><summary>Câu ${g.f}–${g.t}: transcript &amp; dịch</summary>${g.sc ? `<p class="t-pre">${esc(g.sc)}</p>` : ''}<p class="t-pre muted">${esc(g.vi)}</p></details>` : ''}
+        ${clip ? `<audio class="t-clip" controls preload="none" src="${clip}"></audio><details class="wb-tr"><summary>Script</summary>${sc}</details>` : ''}
         <div class="wb-q"><div class="wb-qhead"><b>${n}.</b>${txt && it.q ? `<span>${esc(it.q)}</span>` : ''}</div><div class="wb-opts${txt ? ' list' : ''}">${letters.split('').map(btn).join('')}</div>
         ${txt && it.v ? `<details class="wb-tr"><summary>Nghĩa</summary>${it.v.q ? `<p>${esc(it.v.q)}</p>` : ''}${it.v.o.map((o, i) => `<p><b>${'ABCD'[i]}</b> ${esc(o)}</p>`).join('')}</details>` : ''}
         ${view.done ? `<details class="wb-tr"><summary>Giải thích</summary>${txt ? '' : it.o.map((o, i) => `<p><b>${'ABCD'[i]}</b> ${esc(o)}</p>`).join('')}<p class="muted">${esc(it.vi)}</p>${it.ex ? `<p>${esc(it.ex)}</p>` : ''}</details>` : ''}</div>`;
@@ -884,7 +886,6 @@ function toeicView() {
     const pages = qs.map(qRow).join('');
     return `<main class="page">${head(`${SKILLS[sk][0]} · Test ${t.id}`, back(sk), `<span class="counter">${view.done ? score : answered}/${qs.length}</span>`)}
       ${view.done ? `<p class="wb-score">Đúng ${score}/${qs.length} · ≈ ${toeicScale(score)}/495</p>${tomie(score * 2 >= qs.length ? 'done' : 'bad')}` : ''}
-      ${sk === 'L' ? `<audio class="t-audio" controls preload="none" src="${esc(t.audio)}"></audio>` : ''}
       ${pages}${pg}
       <div class="footer">${view.done ? '<button class="btn primary block" data-action="t-retry">Làm lại</button>' : `<button class="btn primary block" data-action="t-submit" ${answered ? '' : 'disabled'}>Nộp bài</button>`}</div></main>`;
   }
@@ -1076,7 +1077,7 @@ root.addEventListener('click', (e) => {
   else if (act === 't-pick') { if (!view.done) { view.picks[el.dataset.n] = el.dataset.k; el.closest('.wb-opts').querySelectorAll('.opt').forEach((b) => b.classList.toggle('on', b === el)); root.querySelector('.counter').textContent = `${Object.keys(view.picks).length}/100`; root.querySelector('[data-action=t-submit]').disabled = false; } }
   else if (act === 't-submit') {
     if (!confirm('Nộp bài và xem đáp án?')) return;
-    view.done = true; root.querySelector('.t-audio')?.pause();
+    view.done = true; root.querySelectorAll('.t-clip').forEach((a) => a.pause());
     const t = toeic.lr.find((x) => x.id === view.id), qs = Object.keys(t.items).map(Number).filter((n) => (view.lvl === 'L' ? n <= 100 : n > 100));
     const last = loadJSON(TOEIC_KEY) ?? {}, d = new Date();
     last[view.lvl + view.id] = { s: qs.filter((n) => view.picks[n] === t.items[n].a).length, n: qs.length, d: `${d.getDate()}/${d.getMonth() + 1}` };
@@ -1149,6 +1150,8 @@ root.addEventListener('click', (e) => {
   }
 });
 
+// one TOEIC clip at a time
+root.addEventListener('play', (e) => root.querySelectorAll('.t-clip').forEach((a) => a !== e.target && a.pause()), true);
 root.addEventListener('input', (e) => {
   if (e.target.id === 'word-search') searchWords(e.target.value);
   if (e.target.dataset.draft) {
