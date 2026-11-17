@@ -18,6 +18,7 @@ const CEDICT_GZ = path.join(ROOT, 'tools/.cache/cedict.txt.gz');
 const CEDICT_URL = 'https://www.mdbg.net/chinese/export/cedict/cedict_1_0_ts_utf-8_mdbg.txt.gz';
 const VOICE = 'zh-CN-XiaoxiaoNeural';
 const VOICE_EN = 'en-US-AriaNeural';
+const VOICE_VI = 'vi-VN-HoaiMyNeural';
 
 /** CC-CEDICT text -> Map(simplified -> Set(normalized pinyin)). */
 export function parseCedict(text) {
@@ -169,13 +170,18 @@ async function loadCedict() {
 async function syncAudio(data, english) {
   return await syncDir(AUDIO, [...data.words.map((w) => w.hanzi), ...data.sentences.map(sentenceText)], VOICE)
     + await syncDir(path.join(AUDIO, 'en'), [...data.words.map((w) => w.en), ...data.sentences.map((s) => s.en),
-      ...english.words.map((w) => w.word), ...english.sentences.map((s) => s.text)], VOICE_EN);
+      ...english.words.map((w) => w.word), ...english.sentences.map((s) => s.text)], VOICE_EN)
+    // English Luyện nghe reads the Vietnamese meaning after the English: audio/vi/<english text>.mp3 (Vietnamese text has "/" and runs past 255 bytes).
+    // ponytail: keyed by the English text, so an edited meaning keeps its old mp3 until that file is deleted.
+    + await syncDir(path.join(AUDIO, 'vi'), [...english.words.map((w) => [w.word, w.meanings.join('; ')]),
+      ...english.sentences.map((s) => [s.text, s.vi])], VOICE_VI);
 }
 
-/** Make `dir` hold exactly one `<text>.mp3` per text. */
+/** Make `dir` hold exactly one `<text>.mp3` per text; a `[name, text]` pair speaks `text` into `<name>.mp3`. */
 async function syncDir(dir, texts, voice) {
   await mkdir(dir, { recursive: true });
-  const wanted = new Set(texts);
+  const say = new Map(texts.map((t) => (Array.isArray(t) ? t : [t, t])));
+  const wanted = new Set(say.keys());
   const existing = new Set((await readdir(dir)).filter((f) => f.endsWith('.mp3')).map((f) => f.slice(0, -4)));
   for (const f of existing) if (!wanted.has(f)) await unlink(path.join(dir, f + '.mp3'));
   const missing = [...wanted].filter((t) => !existing.has(t));
@@ -183,8 +189,14 @@ async function syncDir(dir, texts, voice) {
   const bin = process.env.EDGE_TTS ?? 'edge-tts';
   // ponytail: 4 parallel edge-tts processes; fine for a few dozen files per lesson.
   for (let i = 0; i < missing.length; i += 4) {
-    await Promise.all(missing.slice(i, i + 4).map((text) =>
-      run(bin, ['--voice', voice, '--rate=-10%', '--text', text, '--write-media', path.join(dir, text + '.mp3')])));
+    await Promise.all(missing.slice(i, i + 4).map(async (text) => {
+      // edge-tts drops requests now and then (NoAudioReceived): retry, and never leave an empty mp3 behind.
+      // The Vietnamese voice rejects some text+rate pairs outright, so each retry also nudges the rate.
+      for (let k = 0; ; k++) {
+        try { return await run(bin, ['--voice', voice, `--rate=-${10 + (k % 4) * 3}%`, '--text', say.get(text), '--write-media', path.join(dir, text + '.mp3')]); }
+        catch (e) { await unlink(path.join(dir, text + '.mp3')).catch(() => {}); if (k >= 15) throw e; await new Promise((r) => setTimeout(r, 1000 * (k + 1))); }
+      }
+    }));
   }
   return missing.length;
 }

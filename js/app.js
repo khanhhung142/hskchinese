@@ -526,7 +526,7 @@ function listenStep() {
     if (st.i < st.items.length - 1) { st.i++; listenStep(); } else { st.on = false; st.i = 0; saveListen(0); keepAlive.pause(); render(); mediaState(); }
   });
   mediaState(c.text, c.en);
-  if (EN) say(c.text, after);
+  if (EN) say(c.text, () => (live() ? play(`audio/vi/${encodeURIComponent(c.text)}.mp3`, c.en, 'vi-VN', after) : null));
   else say(c.text, () => (live() ? play(`audio/en/${encodeURIComponent(c.en)}.mp3`, c.en, 'en-US', after) : null));
 }
 
