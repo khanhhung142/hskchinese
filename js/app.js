@@ -54,9 +54,14 @@ function play(src, text, lang, next) {
   let fell = false;
   // Hidden page: Web Speech is silent and never fires onend, so skip the clip instead of stalling the playlist.
   const fallback = () => { if (!fell) { fell = true; document.hidden ? next?.() : speak(text, lang, next); } };
-  player.onended = () => next?.();
+  // Shorter pause between clips (her order): edge-tts mp3s carry ~0.2s lead + 0.6–1s tail silence.
+  // ponytail: fixed trim (#t skips lead, end 0.45s early; timeupdate ~4Hz); per-file trim if speech ever gets cut.
+  let done = false;
+  const end = () => { if (!done) { done = true; next?.(); } };
+  player.onended = end;
+  player.ontimeupdate = () => { if (player.duration - player.currentTime < 0.45) end(); };
   player.onerror = fallback;
-  player.src = src;
+  player.src = src.startsWith('audio/') ? `${src}#t=0.15` : src;
   player.play().catch((e) => { if (e.name !== 'AbortError') fallback(); });
 }
 function speak(text, lang, next) {
