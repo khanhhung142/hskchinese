@@ -54,6 +54,31 @@ for x in tb['vocab'] + tb['names']:
     if zh not in words:
         add_word(zh, x['py'], (oldw.get(zh) or {'meanings': ['']})['meanings'][0], x.get('lesson') or (x.get('lessons') or [1])[0])
 
+# Same word in several lessons repeats glosses ('cần, muốn' + 'cần, muốn, phải'): drop a meaning whose
+# parts all sit in another meaning, strip parts already listed earlier; senses follow the kept meaning.
+def dedup(w):
+    parts = [[p.strip() for p in m.split(', ')] for m in w['meanings']]
+    keep, idx = [], {}
+    for i, ps in enumerate(parts):
+        sup = next((j for j, q in enumerate(parts) if j != i and set(ps) <= set(q) and (set(ps) < set(q) or j < i)), None)
+        if sup is None: idx[i] = len(keep); keep.append(i)
+    for i in range(len(parts)):
+        if i not in idx:
+            j = next(j for j, q in enumerate(parts) if j != i and set(parts[i]) <= set(q) and j in idx)
+            idx[i] = idx[j]
+    seen, out = set(), []
+    for i in keep:
+        ps = [p for p in parts[i] if p not in seen] or parts[i]
+        seen.update(parts[i]); out.append(', '.join(ps))
+    w['meanings'] = out
+    w['senses'] = {k: idx[v] for k, v in w.get('senses', {}).items()}
+for w in words.values(): dedup(w)
+# Book glosses both 睡 and 睡觉 as 'ngủ': tell them apart in practice cards.
+VI_FIX = {'睡觉': ['đi ngủ'], '五': ['năm (số 5)'], '年': ['năm (thời gian)'], '分': ['phút (giờ phút)'], '分钟': ['phút (bao nhiêu phút)']}
+for k, v in VI_FIX.items(): words[k]['meanings'] = v
+assert words['要']['meanings'] == ['cần, muốn, phải', 'mất (thời gian)'], words['要']['meanings']
+assert words['菜']['meanings'] == ['thức ăn, món ăn, rau'], words['菜']['meanings']
+
 # Sentences
 PUNCT_KEEP = '，。？！'
 def clean(zh):
