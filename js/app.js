@@ -188,7 +188,8 @@ function home() {
     </section>` : ''}
     <nav class="menu">
       ${EN ? '' : `<button class="menu-item" data-action="tb">${icon('book-open-text')}<span><b>Giáo trình</b></span>${icon('caret-right')}</button>
-      <button class="menu-item" data-action="wb">${icon('exam')}<span><b>Bài tập</b></span>${icon('caret-right')}</button>`}
+      <button class="menu-item" data-action="wb">${icon('exam')}<span><b>Bài tập</b></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="cx">${icon('chalkboard-teacher')}<span><b>Chinext Education</b></span>${icon('caret-right')}</button>`}
       <button class="menu-item" data-action="practice">${icon('pencil-simple-line')}<span><b>Luyện tập</b></span>${icon('caret-right')}</button>
       ${EN ? `<button class="menu-item" data-action="toeic">${icon('exam')}<span><b>Đề TOEIC</b></span>${icon('caret-right')}</button>` : ''}
       ${EN ? '' : `<button class="menu-item" data-action="rad">${icon('tree-structure')}<span><b>Bộ thủ</b></span>${icon('caret-right')}</button>`}
@@ -422,20 +423,22 @@ function summary() {
 /** Lesson 0 words (glue words, old lessons) only when lesson 0 is ticked. */
 const practiceWords = () => data.words.filter((w) => w.lesson > 0 || picked().includes(0));
 
+/** Items a write mode draws from: the picked lessons, or the open Chinext session. */
+const writePool = (mode) => (mode === 'cx' ? cxLesson.items : (mode === 'sentence' ? data.sentences : practiceWords()).filter(inLesson));
 function pickWriteItem(mode, prev) {
   const id = (x) => x.id ?? x.hanzi;
-  const all = (mode === 'sentence' ? data.sentences : practiceWords()).filter(inLesson);
+  const all = writePool(mode);
   // Items done this session (any lesson pick) wait until the rest of the pick is done.
   const seen = loadSeen();
   let pool = all.filter((x) => !seen[mode]?.includes(id(x)));
   if (!pool.length) { pool = all; seen[mode] = (seen[mode] ?? []).filter((i) => !all.some((x) => id(x) === i)); }
-  const item = pool.length ? drawFromBag(`${mode}|${pickedLesson}`, pool, id, prev) : undefined;
+  const item = pool.length ? drawFromBag(`${mode}|${mode === 'cx' ? cxLesson.id : pickedLesson}`, pool, id, prev) : undefined;
   if (item) { (seen[mode] ??= []).push(id(item)); try { sessionStorage.setItem(SEEN_KEY, JSON.stringify(seen)); } catch { /* private mode */ } }
   return item;
 }
 /** "k/n": items shown this session (current included) out of the picked set for this mode. */
 function writeCount(mode) {
-  const all = (mode === 'sentence' ? data.sentences : practiceWords()).filter(inLesson).map((x) => x.id ?? x.hanzi);
+  const all = writePool(mode).map((x) => x.id ?? x.hanzi);
   const seen = new Set(loadSeen()[mode]);
   return `${all.filter((i) => seen.has(i)).length}/${all.length}`;
 }
@@ -456,34 +459,37 @@ function drawFromBag(k, all, id, prev) {
 
 /** What the practice card shows and checks, for a word or a sentence. */
 // English: the headline is the Vietnamese meaning (`en` would repeat the answer).
-const writeCard = (mode, x) => (EN ? (mode === 'sentence'
+const writeCard = (mode, x) => (mode === 'cx' ? { text: x.zh, zh: `<p class="sentence han">${esc(x.zh)}</p><p class="py-big">${esc(x.py)}</p>`, en: '', vi: x.vi } : EN ? (mode === 'sentence'
   ? { text: x.text, zh: `<p class="sentence">${sentenceHz(x)}</p>`, en: x.vi, vi: '' }
   : { text: x.hanzi, zh: `<p class="big-han">${esc(x.hanzi)}</p>${x.pinyin[0] ? `<p class="py-big">${esc(x.pinyin[0])}</p>` : ''}`, en: x.meanings.join('; '), vi: '' })
   : mode === 'sentence'
   ? { text: sentenceText(x), zh: `<p class="sentence">${sentenceHz(x)}</p>`, en: x.en, vi: x.vi }
   : { text: x.hanzi, zh: `<p class="big-han han">${esc(x.hanzi)}</p><p class="py-big">${esc(x.pinyin.join(' / '))}</p>`, en: x.en, vi: x.meanings.join('; ') });
-const WRITE_TITLES = { write: T.write[0], vocab: T.vocab[0], sentence: 'Luyện viết câu' };
+const WRITE_TITLES = { write: T.write[0], vocab: T.vocab[0], sentence: 'Luyện viết câu', cx: 'Luyện viết câu' };
+/** Modes that hide the Chinese until answered: vocab (meaning only), Chinext (translate the Vietnamese). */
+const HIDES = (mode) => mode === 'vocab' || mode === 'cx';
+/** Card meaning lines; Chinext items have only Vietnamese, shown as the headline. */
+const meaningHtml = (c, big) => `<p class="meaning${big ? ' big-meaning' : ''}">${esc(c.en || c.vi)}</p>${c.en ? `<p class="vi muted">${esc(c.vi)}</p>` : ''}`;
 
 function write() {
   const { state, mode } = view;
   const c = writeCard(mode, view.item);
   // Vocab mode hides the hanzi until answered or revealed.
-  const shown = mode !== 'vocab' || state.done || state.revealed;
+  const shown = !HIDES(mode) || state.done || state.revealed;
   const status = state.done ? `<p class="write-status ok">${icon('check-circle', true)} Đúng rồi</p>`
     : state.wrong ? `<p class="write-status bad">${icon('x-circle', true)} Chưa đúng, thử lại</p>` : '';
   return `<main class="page">
-    <header class="list-head"><button class="icon-btn" data-action="practice" aria-label="Quay lại">${icon('arrow-left')}</button><h1>${WRITE_TITLES[mode]}</h1><span class="counter">${writeCount(mode)}</span></header>
+    <header class="list-head"><button class="icon-btn" ${mode === 'cx' ? 'data-action="cx" data-m="write"' : 'data-action="practice"'} aria-label="Quay lại">${icon('arrow-left')}</button><h1>${WRITE_TITLES[mode]}</h1><span class="counter">${writeCount(mode)}</span></header>
     <div class="stage">
       <div class="card center">
         ${shown ? c.zh : ''}
-        <p class="meaning${shown ? '' : ' big-meaning'}">${esc(c.en)}</p>
-        <p class="vi muted">${esc(c.vi)}</p>
-        ${shown && mode !== 'sentence' && !EN ? charTips(view.item.hanzi) : ''}
+        ${meaningHtml(c, !shown)}
+        ${shown && view.item.hanzi && !EN ? charTips(view.item.hanzi) : ''}
         ${EN ? `<button class="speak" data-say-envi="${esc(c.text)}" data-vi="${esc(c.en)}" data-hide="${shown ? '' : 1}" aria-label="Nghe">${icon('speaker-high', true)}</button>`
           : `<button class="speak" data-say-zh="${esc(c.text)}" data-en="${esc(c.en)}" data-vi="${esc(c.vi)}" data-hide="${shown ? '' : 1}" aria-label="Nghe">${icon('speaker-high', true)}</button>`}
       </div>
       <form class="field" data-action="submit-write">
-        <label for="hz-in">${{ write: T.inWrite, vocab: T.inVocab, sentence: T.inSentence }[mode]}</label>
+        <label for="hz-in">${{ write: T.inWrite, vocab: T.inVocab, sentence: T.inSentence, cx: 'Viết câu tiếng Trung' }[mode]}</label>
         <div class="input-row">
           <input id="hz-in" name="hz" lang="${EN ? 'en' : 'zh-CN'}" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" value="${esc(state.typed ?? '')}" ${state.done ? 'disabled' : ''}>
           ${state.done || EN ? '' : `<button type="button" class="icon-btn${state.hand ? ' on' : ''}" data-action="hand-toggle" aria-label="Viết tay" aria-pressed="${!!state.hand}">${icon('pencil-simple-line')}</button>`}
@@ -501,18 +507,19 @@ function write() {
       </div>` : ''}
     </div>
     <div class="footer two">${state.done ? ''
-      : `${mode === 'vocab' && !state.revealed ? '<button class="btn" data-action="reveal">Xem đáp án</button>' : '<button class="btn" data-action="write-next">Bỏ qua</button>'}<button class="btn primary" data-action="check-write">Kiểm tra</button>`}</div>
+      : `${HIDES(mode) && !state.revealed ? '<button class="btn" data-action="reveal">Xem đáp án</button>' : '<button class="btn" data-action="write-next">Bỏ qua</button>'}<button class="btn primary" data-action="check-write">Kiểm tra</button>`}</div>
   </main>`;
 }
 
 /** "Luyện nghe": every word, then every sentence, of the picked lessons, read one after another. */
+const itemKind = (x) => (x.zh ? 'cx' : x.tokens ? 'sentence' : 'write');
 function listen() {
-  const { items, i, on } = view.state;
+  const { items, i, on, key } = view.state;
   const x = items[i];
-  const c = writeCard(x.tokens ? 'sentence' : 'write', x);
+  const c = writeCard(itemKind(x), x);
   return `<main class="page">
-    <header class="list-head"><button class="icon-btn" data-action="practice" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Nghe ${esc(pickedLesson ? pickedName() : 'tất cả')}</h1><span class="counter">${i + 1}/${items.length}</span></header>
-    <div class="stage"><div class="card center">${c.zh}<p class="meaning">${esc(c.en)}</p><p class="vi muted">${esc(c.vi)}</p></div></div>
+    <header class="list-head"><button class="icon-btn" ${key ? 'data-action="cx" data-m="listen"' : 'data-action="practice"'} aria-label="Quay lại">${icon('arrow-left')}</button><h1>${key ? esc(cxLesson.title) : `Nghe ${esc(pickedLesson ? pickedName() : 'tất cả')}`}</h1><span class="counter">${i + 1}/${items.length}</span></header>
+    <div class="stage"><div class="card center">${c.zh}${meaningHtml(c)}</div></div>
     ${view.state.ask ? `<div class="footer two">
       <button class="btn" data-action="listen-restart">${icon('arrow-counter-clockwise')} Nghe lại từ đầu</button>
       <button class="btn primary" data-action="listen-toggle">${icon('play', true)} Nghe tiếp</button>
@@ -526,7 +533,7 @@ function listen() {
 
 function saveListen(i) {
   const pos = loadJSON(LISTEN_KEY) ?? {};
-  pos[pickedLesson] = i;
+  pos[view.state.key ?? pickedLesson] = i; // key: Chinext session
   try { localStorage.setItem(LISTEN_KEY, JSON.stringify(pos)); } catch { /* private mode */ }
 }
 function listenStep() {
@@ -536,7 +543,7 @@ function listenStep() {
   saveListen(st.i);
   render();
   const x = st.items[st.i];
-  const c = writeCard(x.tokens ? 'sentence' : 'write', x);
+  const c = writeCard(itemKind(x), x);
   const live = () => view.name === 'listen' && view.state === st && st.on && st.tok === tok;
   // Gap = a silent mp3 on the same element, not setTimeout: timers stall with the screen off, audio keeps running.
   const after = () => live() && play('silence.mp3', '', '', () => {
@@ -582,14 +589,14 @@ function startWrite(mode) {
   document.activeElement?.blur(); // new item: let the word show before the keyboard
   render();
   const c = writeCard(mode, view.item);
-  if (EN) mode === 'vocab' ? sayVi(c.text, c.en) : sayEnVi(c.text, c.en); else mode === 'vocab' ? sayMean(c.text, c.en, c.vi) : say(c.text, () => sayMean(c.text, c.en, c.vi));
+  if (EN) mode === 'vocab' ? sayVi(c.text, c.en) : sayEnVi(c.text, c.en); else HIDES(mode) ? sayMean(c.text, c.en, c.vi) : say(c.text, () => sayMean(c.text, c.en, c.vi));
 }
 
 function checkWrite() {
   const typed = root.querySelector('#hz-in').value;
   if (!typed.trim()) return;
   const { text, en, vi } = writeCard(view.mode, view.item);
-  const ok = sameHanzi(typed, text);
+  const ok = [text, ...(view.item.alt ?? [])].some((t) => sameHanzi(typed, t)); // alt: other accepted wordings (Chinext)
   view.state = { ...view.state, typed, done: ok, wrong: !ok };
   render();
   if (!ok) return;
@@ -787,6 +794,21 @@ function radicals() {
       ${speakBtn(r.r, true)}</div>`).join('')}</div></main>`;
 }
 
+// ---------- Chinext Education (data/chinext.json: sentences from the class videos, one session per buổi) ----------
+let cxData, cxLesson;
+async function openCx(m) {
+  try { cxData ??= await (await fetch('data/chinext.json', { cache: 'no-cache' })).json(); } catch { return alert('Không tải được Chinext.'); }
+  player.pause(); keepAlive.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel();
+  view = { name: 'cx', lvl: m ?? '' };
+  render(); mediaState();
+}
+function cxView() {
+  const head = (t) => `<header class="list-head"><button class="icon-btn" data-action="${view.lvl ? 'cx' : 'home'}" aria-label="Quay lại">${icon('arrow-left')}</button><h1>${t}</h1></header>`;
+  const item = (act, ic, t, sub, attr) => `<button class="menu-item" data-action="${act}" ${attr}>${icon(ic)}<span><b>${esc(t)}</b>${sub ? `<small>${esc(sub)}</small>` : ''}</span>${icon('caret-right')}</button>`;
+  if (!view.lvl) return `<main class="page">${head('Chinext Education')}<nav class="menu">${item('cx', 'headphones', 'Luyện nghe', '', 'data-m="listen"')}${item('cx', 'text-align-left', 'Luyện viết câu', 'Xem nghĩa, viết câu tiếng Trung', 'data-m="write"')}</nav></main>`;
+  return `<main class="page">${head(view.lvl === 'listen' ? 'Luyện nghe' : 'Luyện viết câu')}<nav class="menu">${cxData.lessons.map((l) => item('cx-go', 'chalkboard-teacher', l.title, `${l.items.length} câu`, `data-id="${l.id}"`)).join('')}</nav></main>`;
+}
+
 // ---------- Giáo trình (data/textbook.json: 新HSK教程1 lessons 1–15 + appendix; mp3 per Chinese line in textbook/) ----------
 let tbData;
 const TB_DONE_KEY = 'hsk-tb-done'; // {lessonId: 1}
@@ -966,7 +988,7 @@ let wasTyping = false;
 let lastKey = 'home||', popping = false;
 
 function render() {
-  const views = { home, practice, radicals, words: wordList, quiz, summary, write, listen, wb: workbook, tb: textbook, toeic: toeicView };
+  const views = { home, practice, radicals, words: wordList, quiz, summary, write, listen, wb: workbook, tb: textbook, toeic: toeicView, cx: cxView };
   wasTyping = document.activeElement?.matches?.('#hz-in, #py') ?? false;
   if (view.name !== 'practice') lessonPickerOpen = false; // picker reopens closed next time
   root.innerHTML = views[view.name]();
@@ -1113,6 +1135,14 @@ root.addEventListener('click', (e) => {
   }
   else if (act === 't-retry') { if (confirm('Làm lại từ đầu?')) openToeic(view.lvl, view.id); }
   else if (act === 't-rec') toggleRec(el);
+  else if (act === 'cx') openCx(el.dataset.m);
+  else if (act === 'cx-go') {
+    cxLesson = cxData.lessons.find((l) => l.id === +el.dataset.id);
+    if (view.lvl === 'write') return startWrite('cx');
+    const items = cxLesson.items, key = `cx${cxLesson.id}`, at = (loadJSON(LISTEN_KEY) ?? {})[key];
+    if (at > 0 && at < items.length) { view = { name: 'listen', state: { items, i: at, on: false, ask: true, key } }; render(); }
+    else { view = { name: 'listen', state: { items, i: 0, on: true, key } }; keepAlive.play().catch(() => {}); listenStep(); }
+  }
   else if (act === 'wb') openWorkbook(el.dataset.id, el.dataset.lvl);
   else if (act === 'wb-play') wbPlay(el.dataset.n);
   else if (act === 'tb-learnt' || (act === 'tb' && view.name === 'tb' && +el.dataset.id === +view.id + 1)) {
@@ -1156,7 +1186,7 @@ root.addEventListener('click', (e) => {
   else if (act === 'tab') { view = { name: 'words', tab: el.dataset.tab }; render(); }
   else if (act === 'write') startWrite(el.dataset.mode);
   else if (act === 'write-next') startWrite(view.mode);
-  else if (act === 'reveal') { view.state = { ...view.state, typed: root.querySelector('#hz-in').value, revealed: true }; render(); say(view.item.hanzi); }
+  else if (act === 'reveal') { view.state = { ...view.state, typed: root.querySelector('#hz-in').value, revealed: true }; render(); say(writeCard(view.mode, view.item).text); }
   else if (act === 'check-write') checkWrite();
   else if (act === 'hand-toggle') { view.state = { ...view.state, typed: root.querySelector('#hz-in').value, hand: !view.state.hand }; render(); root.querySelector('.card')?.scrollIntoView({ block: 'start' }); }
   else if (act === 'hand-undo') { ink.pop(); redrawInk(); recognize(); }

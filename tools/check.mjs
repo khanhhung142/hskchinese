@@ -13,6 +13,7 @@ import { parseToken, isPunct, sentenceText, fromEnglish, sameWord } from '../js/
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DATA = path.join(ROOT, 'data/vocab.json');
 const ENGLISH = path.join(ROOT, 'data/english.json');
+const CHINEXT = path.join(ROOT, 'data/chinext.json');
 const AUDIO = path.join(ROOT, 'audio');
 const CEDICT_GZ = path.join(ROOT, 'tools/.cache/cedict.txt.gz');
 const CEDICT_URL = 'https://www.mdbg.net/chinese/export/cedict/cedict_1_0_ts_utf-8_mdbg.txt.gz';
@@ -167,8 +168,26 @@ async function loadCedict() {
   return parseCedict(gunzipSync(await readFile(CEDICT_GZ)).toString('utf8'));
 }
 
-async function syncAudio(data, english) {
-  return await syncDir(AUDIO, [...data.words.map((w) => w.hanzi), ...data.sentences.map(sentenceText)], VOICE)
+/** data/chinext.json (Chinext Education: class sentences, hand-written by Hermes): shape checks only. */
+export function validateChinext(cx) {
+  const errors = [], ids = new Set();
+  for (const l of cx.lessons ?? []) {
+    if (!Number.isInteger(l.id) || !l.title || !Array.isArray(l.items) || !l.items.length) errors.push(`chinext lesson ${l.id}: id, title, items required`);
+    for (const x of l.items ?? []) {
+      const at = `chinext ${x.id}`;
+      if (typeof x.id !== 'string' || ids.has(x.id)) errors.push(`${at}: id must be unique`);
+      ids.add(x.id);
+      if (!/^[\p{Script=Han}，。？！]+$/u.test(x.zh ?? '')) errors.push(`${at}: zh must be Han + ，。？！`);
+      if (!x.py || !x.vi) errors.push(`${at}: py and vi required`);
+      if (x.alt && (!Array.isArray(x.alt) || x.alt.some((a) => typeof a !== 'string' || !a))) errors.push(`${at}: alt must be strings`);
+    }
+  }
+  return errors;
+}
+
+async function syncAudio(data, english, cx) {
+  const cxItems = cx.lessons.flatMap((l) => l.items);
+  return await syncDir(AUDIO, [...data.words.map((w) => w.hanzi), ...data.sentences.map(sentenceText), ...cxItems.map((x) => x.zh)], VOICE)
     + await syncDir(path.join(AUDIO, 'en'), [...data.words.map((w) => w.en), ...data.sentences.map((s) => s.en),
       ...english.words.map((w) => w.word), ...english.sentences.map((s) => s.text)], VOICE_EN)
     // English Luyện nghe reads the Vietnamese meaning after the English: audio/vi/<english text>.mp3 (Vietnamese text has "/" and runs past 255 bytes).
@@ -176,7 +195,9 @@ async function syncAudio(data, english) {
     + await syncDir(path.join(AUDIO, 'vi'), [...english.words.map((w) => [w.word, w.meanings.join('; ')]),
       ...english.sentences.map((s) => [s.text, s.vi]),
       // Chinese practice reads the Vietnamese meaning too: audio/vi/<hanzi or sentence>.mp3.
-      ...data.words.map((w) => [w.hanzi, w.meanings.join('; ')]), ...data.sentences.map((s) => [sentenceText(s), s.vi])], VOICE_VI);
+      ...data.words.map((w) => [w.hanzi, w.meanings.join('; ')]), ...data.sentences.map((s) => [sentenceText(s), s.vi]),
+      // Chinext Education: audio/<zh>.mp3 + audio/vi/<zh>.mp3, played by the same say()/sayVi().
+      ...cxItems.map((x) => [x.zh, x.vi])], VOICE_VI);
 }
 
 /** Make `dir` hold exactly one `<text>.mp3` per text; a `[name, text]` pair speaks `text` into `<name>.mp3`. */
@@ -208,13 +229,14 @@ async function main() {
   await writeFile(DATA, format(data));
   const english = JSON.parse(await readFile(ENGLISH, 'utf8'));
   await writeFile(ENGLISH, format(english));
-  const errors = [...validate(data, await loadCedict()), ...validateEnglish(english)];
+  const cx = JSON.parse(await readFile(CHINEXT, 'utf8'));
+  const errors = [...validate(data, await loadCedict()), ...validateEnglish(english), ...validateChinext(cx)];
   if (errors.length) {
     console.error(`FAIL: ${errors.length} problem(s) in data/vocab.json, data/english.json\n- ` + errors.join('\n- '));
     process.exit(1);
   }
   console.log(`OK: ${data.words.length} words, ${data.sentences.length} sentences; English ${english.words.length} words, ${english.sentences.length} sentences`);
-  if (!process.argv.includes('--no-audio')) console.log(`Audio: ${await syncAudio(data, english)} file(s) generated`);
+  if (!process.argv.includes('--no-audio')) console.log(`Audio: ${await syncAudio(data, english, cx)} file(s) generated`);
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) await main();

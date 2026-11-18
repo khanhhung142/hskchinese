@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { toMarks, normalize } from '../js/pinyin.js';
 import { buildSession, tokenPinyin, parseToken, record, latestLesson, isPunct, sameHanzi, tokenize, enTokens, fromEnglish } from '../js/quiz.js';
-import { parseCedict, validate, validateEnglish, format } from '../tools/check.mjs';
+import { parseCedict, validate, validateEnglish, validateChinext, format } from '../tools/check.mjs';
 
 const data = JSON.parse(readFileSync(new URL('../data/vocab.json', import.meta.url), 'utf8'));
 
@@ -135,6 +135,13 @@ test('english: tokens keep multi-word entries, validation catches bad focus', ()
   const d = fromEnglish(raw);
   assert.equal(d.sentences[0].tokens[0], 'Hello');
   assert.ok(sameHanzi('hello lan', 'Hello, Lan!'));
+});
+
+test('chinext.json: valid, and the checker catches bad items', () => {
+  const cx = JSON.parse(readFileSync(new URL('../data/chinext.json', import.meta.url), 'utf8'));
+  assert.deepEqual(validateChinext(cx), []);
+  const bad = { lessons: [{ id: 1, title: 't', items: [{ id: 'a', zh: '我 3', py: 'x', vi: 'y' }, { id: 'a', zh: '我。', py: '', vi: 'y' }] }] };
+  assert.equal(validateChinext(bad).length, 3);
 });
 
 test('full/index.html is index.html plus a base tag', () => {
