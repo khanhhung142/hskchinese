@@ -190,7 +190,8 @@ function home() {
       ${EN ? '' : `<button class="menu-item" data-action="tb">${icon('book-open-text')}<span><b>Giáo trình</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="wb">${icon('exam')}<span><b>Bài tập</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="cx">${icon('chalkboard-teacher')}<span><b>Chinext Education</b></span>${icon('caret-right')}</button>
-      <button class="menu-item" data-action="rd">${icon('book-bookmark')}<span><b>Luyện đọc</b></span>${icon('caret-right')}</button>`}
+      <button class="menu-item" data-action="rd">${icon('book-bookmark')}<span><b>Luyện đọc</b></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="song">${icon('music-notes')}<span><b>Học hát</b></span>${icon('caret-right')}</button>`}
       <button class="menu-item" data-action="practice">${icon('pencil-simple-line')}<span><b>Luyện tập</b></span>${icon('caret-right')}</button>
       ${EN ? `<button class="menu-item" data-action="toeic">${icon('exam')}<span><b>Đề TOEIC</b></span>${icon('caret-right')}</button>` : ''}
       ${EN ? '' : `<button class="menu-item" data-action="rad">${icon('tree-structure')}<span><b>Bộ thủ</b></span>${icon('caret-right')}</button>`}
@@ -870,6 +871,47 @@ function rdSheet([w, py, vi]) {
   </div></div>`;
 }
 
+// ---------- Học hát (data/songs.json: synced lyrics + pinyin + Vietnamese; audio = YouTube embed) ----------
+let songData, ytPlayer, songTimer;
+async function openSongs(id) {
+  try { songData ??= await (await fetch('data/songs.json', { cache: 'no-cache' })).json(); } catch { return alert('Không tải được bài hát.'); }
+  stopSong();
+  view = { name: 'song', id: id || '', vi: view.name === 'song' ? view.vi : true };
+  render();
+  scrollTo(0, 0);
+  if (id) startSong(songData.songs.find((s) => s.id === id));
+}
+function songView() {
+  const back = `<button class="icon-btn" data-action="${view.id ? 'song' : 'home'}" aria-label="Quay lại">${icon('arrow-left')}</button>`;
+  const s = songData.songs.find((x) => x.id === view.id);
+  if (!s) {
+    return `<main class="page"><header class="list-head">${back}<h1>Học hát</h1></header><nav class="menu">${songData.songs.map((x) =>
+      `<button class="menu-item" data-action="song" data-id="${x.id}">${icon('music-notes')}<span><b><span class="han">${esc(x.title)}</span> · ${esc(x.vi)}</b><small>${esc(x.artist)}</small></span>${icon('caret-right')}</button>`).join('')}</nav></main>`;
+  }
+  const py = localStorage.getItem(RD_PY_KEY) !== '0'; // shares the Luyện đọc pinyin toggle, default on
+  return `<main class="page song${view.vi ? ' vi-on' : ''}${py ? '' : ' py-off'}"><header class="list-head">${back}<h1><span class="han">${esc(s.title)}</span></h1></header>
+    <p class="muted">${esc(s.vi)} · ${esc(s.artist)}</p>
+    <div class="song-yt"><div id="yt"></div></div>
+    <div class="seg lang"><button class="${py ? 'on' : ''}" data-action="song-py" aria-pressed="${py}">Pinyin</button><button class="${view.vi ? 'on' : ''}" data-action="song-vi" aria-pressed="${!!view.vi}">Dịch</button></div>
+    <p class="muted rd-hint">Chạm vào một câu để hát lại từ câu đó.</p>
+    <div class="song-lines">${s.lines.map((l, i) => `<button class="song-line" data-action="song-seek" data-i="${i}"><small class="song-py">${esc(l.py)}</small><span class="han">${esc(l.zh)}</span><small class="tb-vi rd-vi">${esc(l.vi)}</small></button>`).join('')}</div>
+  </main>`;
+}
+function startSong(s) {
+  const make = () => {
+    ytPlayer = new YT.Player('yt', { videoId: s.yt, playerVars: { playsinline: 1, rel: 0 } });
+    songTimer = setInterval(() => { // highlight the line being sung
+      const t = ytPlayer.getCurrentTime?.() ?? 0, rows = root.querySelectorAll('.song-line');
+      const i = s.lines.findLastIndex((l) => l.t <= t + 0.3), cur = root.querySelector('.song-line.on');
+      if (rows[i] && rows[i] !== cur) { cur?.classList.remove('on'); rows[i].classList.add('on'); if (ytPlayer.getPlayerState?.() === 1) rows[i].scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+    }, 300);
+  };
+  if (window.YT?.Player) return make();
+  window.onYouTubeIframeAPIReady = make;
+  if (!document.getElementById('yt-api')) document.head.append(Object.assign(document.createElement('script'), { id: 'yt-api', src: 'https://www.youtube.com/iframe_api' }));
+}
+function stopSong() { clearInterval(songTimer); ytPlayer?.destroy?.(); ytPlayer = null; }
+
 // ---------- Giáo trình (data/textbook.json: 新HSK教程1 lessons 1–15 + appendix; mp3 per Chinese line in textbook/) ----------
 let tbData;
 const TB_DONE_KEY = 'hsk-tb-done'; // {lessonId: 1}
@@ -1049,7 +1091,7 @@ let wasTyping = false;
 let lastKey = 'home||', popping = false;
 
 function render() {
-  const views = { home, practice, radicals, words: wordList, quiz, summary, write, listen, wb: workbook, tb: textbook, toeic: toeicView, cx: cxView, rd: readingView };
+  const views = { home, practice, radicals, words: wordList, quiz, summary, write, listen, wb: workbook, tb: textbook, toeic: toeicView, cx: cxView, rd: readingView, song: songView };
   wasTyping = document.activeElement?.matches?.('#hz-in, #py') ?? false;
   if (view.name !== 'practice') lessonPickerOpen = false; // picker reopens closed next time
   root.innerHTML = views[view.name]();
@@ -1214,6 +1256,14 @@ root.addEventListener('click', (e) => {
     (act === 'tb' ? openTextbook(el.dataset.id) : Promise.resolve(render())).then(() => fresh && toast(TOMIE.learnt));
   }
   else if (act === 'tb') openTextbook(el.dataset.id, el.dataset.lvl);
+  else if (act === 'song') openSongs(el.dataset.id);
+  else if (act === 'song-seek') { const t = songData.songs.find((x) => x.id === view.id).lines[+el.dataset.i].t; ytPlayer?.seekTo?.(Math.max(0, t - 0.3), true); ytPlayer?.playVideo?.(); }
+  else if (act === 'song-py' || act === 'song-vi') {
+    if (act === 'song-py') { try { localStorage.setItem(RD_PY_KEY, localStorage.getItem(RD_PY_KEY) === '0' ? '1' : '0'); } catch { /* private mode */ } } else view.vi = !view.vi;
+    const page = root.querySelector('.song'), py = localStorage.getItem(RD_PY_KEY) !== '0'; // toggle classes only: re-rendering would kill the video
+    page.classList.toggle('py-off', !py); page.classList.toggle('vi-on', !!view.vi);
+    root.querySelector('[data-action=song-py]').classList.toggle('on', py); root.querySelector('[data-action=song-vi]').classList.toggle('on', !!view.vi);
+  }
   else if (act === 'rd') openReading(el.dataset.lvl, el.dataset.id, el.dataset.ep);
   else if (act === 'rd-w') { view.w = [+el.dataset.l, +el.dataset.t]; const y = scrollY; render(); scrollTo(0, y); const w = el.querySelector('.han').textContent; play(`reading/w/${encodeURIComponent(w)}.mp3`, w, 'zh-CN'); }
   else if (act === 'rd-close') { view.w = null; const y = scrollY; render(); scrollTo(0, y); }
@@ -1244,7 +1294,7 @@ root.addEventListener('click', (e) => {
   }
   else if (act === 'wb-retry') openWorkbook(view.id);
   else if (act === 'practice') { player.pause(); keepAlive.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); view = { name: 'practice' }; render(); mediaState(); }
-  else if (act === 'home') { stopRec(); player.pause(); keepAlive.pause(); wbAudio.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); view = { name: 'home' }; render(); mediaState(); }
+  else if (act === 'home') { stopSong(); stopRec(); player.pause(); keepAlive.pause(); wbAudio.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); view = { name: 'home' }; render(); mediaState(); }
   else if (act === 'listen') {
     const items = [...practiceWords().filter(inLesson), ...data.sentences.filter(inLesson)];
     if (!items.length) return alert(`${pickedName()} chưa có từ nào.`);

@@ -1,0 +1,205 @@
+{
+"songs": [
+{
+"id": "yanwuxie",
+"title": "燕无歇",
+"vi": "Yến Vô Hiết",
+"artist": "蒋雪儿 (Tưởng Tuyết Nhi)",
+"yt": "lNCViM7R8N8",
+"lines": [
+{
+"t": 0.03,
+"zh": "只叹她 回眸秋水被隐去",
+"py": "zhǐ tàn tā huí móu qiū shuǐ bèi yǐn qù",
+"vi": "Chỉ tiếc nàng, ánh mắt thu thủy ngoảnh lại đã khuất xa"
+},
+{
+"t": 5.68,
+"zh": "只忆她 点破 去日苦多",
+"py": "zhǐ yì tā diǎn pò qù rì kǔ duō",
+"vi": "Chỉ nhớ nàng nói toạc ra: ngày đã qua lắm đắng cay"
+},
+{
+"t": 10.75,
+"zh": "借三两苦酒 方知离不可",
+"py": "jiè sān liǎng kǔ jiǔ fāng zhī lí bù kě",
+"vi": "Mượn vài chén rượu đắng, mới biết chẳng thể rời xa"
+},
+{
+"t": 16.73,
+"zh": "只叹她 将思念摇落",
+"py": "zhǐ tàn tā jiāng sī niàn yáo luò",
+"vi": "Chỉ tiếc nàng rũ rụng hết nỗi nhớ nhung"
+},
+{
+"t": 23.77,
+"zh": "心多憔悴 爱付与东流的水",
+"py": "xīn duō qiáo cuì ài fù yǔ dōng liú de shuǐ",
+"vi": "Lòng bao tiều tụy, tình trao theo dòng nước chảy về đông"
+},
+{
+"t": 28.67,
+"zh": "舍命奉陪 抵不过天公不作美",
+"py": "shě mìng fèng péi dǐ bù guò tiān gōng bù zuò měi",
+"vi": "Liều mạng bầu bạn, vẫn không lại ông trời chẳng chiều lòng"
+},
+{
+"t": 33.75,
+"zh": "往事回味 不过是弹指一挥",
+"py": "wǎng shì huí wèi bù guò shì tán zhǐ yì huī",
+"vi": "Ngẫm lại chuyện xưa, chẳng qua chỉ một cái búng tay"
+},
+{
+"t": 38.77,
+"zh": "日复日望穿秋水恕我愚昧",
+"py": "rì fù rì wàng chuān qiū shuǐ shù wǒ yú mèi",
+"vi": "Ngày qua ngày mỏi mắt mong chờ, thứ lỗi ta khờ dại"
+},
+{
+"t": 43.66,
+"zh": "你爱着谁 心徒留几道伤",
+"py": "nǐ ài zhe shuí xīn tú liú jǐ dào shāng",
+"vi": "Người đang yêu ai, lòng chỉ còn lại mấy vết thương"
+},
+{
+"t": 48.85,
+"zh": "我锁着眉 最是相思断人肠",
+"py": "wǒ suǒ zhe méi zuì shì xiāng sī duàn rén cháng",
+"vi": "Ta nhíu mày sầu, tương tư là thứ đứt ruột nhất"
+},
+{
+"t": 53.66,
+"zh": "劳燕分飞 寂寥的夜里泪两行",
+"py": "láo yàn fēn fēi jì liáo de yè lǐ lèi liǎng háng",
+"vi": "Chim lao chim yến chia lìa, đêm quạnh hiu hai hàng lệ"
+},
+{
+"t": 59.32,
+"zh": "烛短遗憾长故人自难忘",
+"py": "zhú duǎn yí hàn cháng gù rén zì nán wàng",
+"vi": "Nến ngắn, tiếc nuối dài, cố nhân sao quên được"
+},
+{
+"t": 63.89,
+"zh": "你爱着谁 心徒留几道伤",
+"py": "nǐ ài zhe shuí xīn tú liú jǐ dào shāng",
+"vi": "Người đang yêu ai, lòng chỉ còn lại mấy vết thương"
+},
+{
+"t": 68.83,
+"zh": "爱多可悲 恨彼此天涯各一方",
+"py": "ài duō kě bēi hèn bǐ cǐ tiān yá gè yì fāng",
+"vi": "Tình sao bi thương, hận đôi ta mỗi người một phương trời"
+},
+{
+"t": 73.85,
+"zh": "冷月空对 满腹愁无处话凄凉",
+"py": "lěng yuè kōng duì mǎn fù chóu wú chù huà qī liáng",
+"vi": "Lẻ loi đối trăng lạnh, đầy lòng sầu chẳng nơi kể thê lương"
+},
+{
+"t": 79.55,
+"zh": "我爱不悔可孤影难成双",
+"py": "wǒ ài bù huǐ kě gū yǐng nán chéng shuāng",
+"vi": "Ta yêu không hối hận, nhưng bóng lẻ khó thành đôi"
+},
+{
+"t": 104.48,
+"zh": "心多憔悴 爱付与东流的水",
+"py": "xīn duō qiáo cuì ài fù yǔ dōng liú de shuǐ",
+"vi": "Lòng bao tiều tụy, tình trao theo dòng nước chảy về đông"
+},
+{
+"t": 109.23,
+"zh": "舍命奉陪 抵不过天公不作美",
+"py": "shě mìng fèng péi dǐ bù guò tiān gōng bù zuò měi",
+"vi": "Liều mạng bầu bạn, vẫn không lại ông trời chẳng chiều lòng"
+},
+{
+"t": 114.42,
+"zh": "往事回味 不过是弹指一挥",
+"py": "wǎng shì huí wèi bù guò shì tán zhǐ yì huī",
+"vi": "Ngẫm lại chuyện xưa, chẳng qua chỉ một cái búng tay"
+},
+{
+"t": 119.44,
+"zh": "日复日望穿秋水恕我愚昧",
+"py": "rì fù rì wàng chuān qiū shuǐ shù wǒ yú mèi",
+"vi": "Ngày qua ngày mỏi mắt mong chờ, thứ lỗi ta khờ dại"
+},
+{
+"t": 124.4,
+"zh": "你爱着谁 心徒留几道伤",
+"py": "nǐ ài zhe shuí xīn tú liú jǐ dào shāng",
+"vi": "Người đang yêu ai, lòng chỉ còn lại mấy vết thương"
+},
+{
+"t": 129.48,
+"zh": "我锁着眉 最是相思断人肠",
+"py": "wǒ suǒ zhe méi zuì shì xiāng sī duàn rén cháng",
+"vi": "Ta nhíu mày sầu, tương tư là thứ đứt ruột nhất"
+},
+{
+"t": 134.87,
+"zh": "劳燕分飞 寂寥的夜里泪两行",
+"py": "láo yàn fēn fēi jì liáo de yè lǐ lèi liǎng háng",
+"vi": "Chim lao chim yến chia lìa, đêm quạnh hiu hai hàng lệ"
+},
+{
+"t": 139.92,
+"zh": "烛短遗憾长故人自难忘",
+"py": "zhú duǎn yí hàn cháng gù rén zì nán wàng",
+"vi": "Nến ngắn, tiếc nuối dài, cố nhân sao quên được"
+},
+{
+"t": 144.93,
+"zh": "你爱着谁 心徒留几道伤",
+"py": "nǐ ài zhe shuí xīn tú liú jǐ dào shāng",
+"vi": "Người đang yêu ai, lòng chỉ còn lại mấy vết thương"
+},
+{
+"t": 149.92,
+"zh": "爱多可悲 恨彼此天涯各一方",
+"py": "ài duō kě bēi hèn bǐ cǐ tiān yá gè yì fāng",
+"vi": "Tình sao bi thương, hận đôi ta mỗi người một phương trời"
+},
+{
+"t": 154.92,
+"zh": "冷月空对 满腹愁无处话凄凉",
+"py": "lěng yuè kōng duì mǎn fù chóu wú chù huà qī liáng",
+"vi": "Lẻ loi đối trăng lạnh, đầy lòng sầu chẳng nơi kể thê lương"
+},
+{
+"t": 160.29,
+"zh": "我爱不悔可孤影难成双",
+"py": "wǒ ài bù huǐ kě gū yǐng nán chéng shuāng",
+"vi": "Ta yêu không hối hận, nhưng bóng lẻ khó thành đôi"
+},
+{
+"t": 164.91,
+"zh": "你爱着谁 心徒留几道伤",
+"py": "nǐ ài zhe shuí xīn tú liú jǐ dào shāng",
+"vi": "Người đang yêu ai, lòng chỉ còn lại mấy vết thương"
+},
+{
+"t": 170.03,
+"zh": "我锁着眉 最是相思断人肠",
+"py": "wǒ suǒ zhe méi zuì shì xiāng sī duàn rén cháng",
+"vi": "Ta nhíu mày sầu, tương tư là thứ đứt ruột nhất"
+},
+{
+"t": 175.27,
+"zh": "劳燕分飞 寂寥的夜里泪两行",
+"py": "láo yàn fēn fēi jì liáo de yè lǐ lèi liǎng háng",
+"vi": "Chim lao chim yến chia lìa, đêm quạnh hiu hai hàng lệ"
+},
+{
+"t": 180.55,
+"zh": "烛短遗憾长故人自难忘",
+"py": "zhú duǎn yí hàn cháng gù rén zì nán wàng",
+"vi": "Nến ngắn, tiếc nuối dài, cố nhân sao quên được"
+}
+]
+}
+]
+}
