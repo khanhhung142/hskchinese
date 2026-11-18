@@ -492,3 +492,19 @@ body.typing .tips { display: none; }
 .stage:has(.hand) .card .speak { position: absolute; top: 8px; right: 8px; width: 40px; height: 40px; font-size: 20px; }
 .stage:has(.hand) .tips { display: none; }
 .hand .cands { min-height: 40px; }
+
+/* Luyện đọc */
+.rd-line { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 10px; align-items: start; margin: 0 0 12px; }
+.rd-line > span { display: grid; gap: 4px; min-width: 0; }
+.rd-zh { display: flex; flex-wrap: wrap; align-items: flex-end; font-size: 22px; line-height: 1.5; }
+.rd-w { display: inline-flex; flex-direction: column; align-items: center; padding: 0 1px; border-radius: 4px; font: inherit; color: inherit; background: none; border: 0; }
+.rd-w small { font-size: 11px; color: var(--muted); line-height: 1.1; }
+.rd-w:active, .rd-w:focus-visible { background: var(--accent-soft); }
+.rd-vi { display: none; }
+.vi-on .rd-vi { display: block; }
+.rd-hint { margin: 8px 0 12px; font-size: 13px; }
+.rd-sheet { max-height: 70dvh; overflow-y: auto; }
+.rd-sheet h3 { justify-content: flex-start; }
+.rd-big { font-size: 36px; }
+.rd-x { margin-left: auto; }
+.rd-sheet p { margin: 0; }

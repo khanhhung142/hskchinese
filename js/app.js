@@ -189,7 +189,8 @@ function home() {
     <nav class="menu">
       ${EN ? '' : `<button class="menu-item" data-action="tb">${icon('book-open-text')}<span><b>Giáo trình</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="wb">${icon('exam')}<span><b>Bài tập</b></span>${icon('caret-right')}</button>
-      <button class="menu-item" data-action="cx">${icon('chalkboard-teacher')}<span><b>Chinext Education</b></span>${icon('caret-right')}</button>`}
+      <button class="menu-item" data-action="cx">${icon('chalkboard-teacher')}<span><b>Chinext Education</b></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="rd">${icon('book-bookmark')}<span><b>Luyện đọc</b></span>${icon('caret-right')}</button>`}
       <button class="menu-item" data-action="practice">${icon('pencil-simple-line')}<span><b>Luyện tập</b></span>${icon('caret-right')}</button>
       ${EN ? `<button class="menu-item" data-action="toeic">${icon('exam')}<span><b>Đề TOEIC</b></span>${icon('caret-right')}</button>` : ''}
       ${EN ? '' : `<button class="menu-item" data-action="rad">${icon('tree-structure')}<span><b>Bộ thủ</b></span>${icon('caret-right')}</button>`}
@@ -809,6 +810,66 @@ function cxView() {
   return `<main class="page">${head(view.lvl === 'listen' ? 'Luyện nghe' : 'Luyện viết câu')}<nav class="menu">${cxData.lessons.map((l) => item('cx-go', 'chalkboard-teacher', l.title, `${l.items.length} câu`, `data-id="${l.id}"`)).join('')}</nav></main>`;
 }
 
+// ---------- Luyện đọc (data/reading.json: public-domain stories retold per HSK level, read one episode at a time) ----------
+let rdData;
+const RD_DONE_KEY = 'hsk-rd-done'; // {'storyId-ep': 1}
+const RD_PY_KEY = 'hsk-rd-py'; // '1' = pinyin shown over every word
+async function openReading(lvl, id, ep) {
+  try {
+    rdData ??= await (await fetch('data/reading.json', { cache: 'no-cache' })).json();
+    if (rad) for (const [c, t] of Object.entries(rdData.chars)) rad.chars[c] ??= t; // tips for story-only characters
+  } catch { return alert('Không tải được bài đọc.'); }
+  view = { name: 'rd', lvl: +lvl || 0, id: id || '', ep: +ep || 0 };
+  render();
+  scrollTo(0, 0);
+}
+const rdLvl = (n) => (n === 7 ? 'HSK7–9' : `HSK${n}`);
+function readingView() {
+  const back = (lvl = '', id = '') => `<button class="icon-btn" data-action="${view.lvl ? 'rd' : 'home'}" data-lvl="${lvl}" data-id="${id}" aria-label="Quay lại">${icon('arrow-left')}</button>`;
+  const done = loadJSON(RD_DONE_KEY) ?? {};
+  const read = (s) => s.eps.filter((_, i) => done[`${s.id}-${i + 1}`]).length;
+  if (!view.lvl) {
+    return `<main class="page"><header class="list-head">${back()}<h1>Luyện đọc</h1></header><nav class="menu">${[1, 2, 3, 4, 5, 6, 7].map((n) => {
+      const ss = rdData.stories.filter((s) => s.lvl === n);
+      return `<button class="menu-item" data-action="rd" data-lvl="${n}">${icon('book-bookmark')}<span><b>${rdLvl(n)}</b><small>${ss.length ? `${ss.length} truyện · ${ss.reduce((a, s) => a + s.eps.length, 0)} tập` : 'Chưa có truyện'}</small></span>${icon('caret-right')}</button>`;
+    }).join('')}</nav></main>`;
+  }
+  const s = rdData.stories.find((x) => x.id === view.id);
+  if (!s) {
+    const ss = rdData.stories.filter((x) => x.lvl === view.lvl);
+    return `<main class="page"><header class="list-head">${back()}<h1>${rdLvl(view.lvl)}</h1></header><nav class="menu">${ss.map((x) =>
+      `<button class="menu-item${read(x) === x.eps.length ? ' done' : ''}" data-action="rd" data-lvl="${x.lvl}" data-id="${x.id}">${icon('book-open')}<span><b><span class="han">${esc(x.title)}</span> · ${esc(x.vi)}</b><small>${x.eps.length > 1 ? `${read(x)}/${x.eps.length} tập · ` : ''}${esc(x.src)}</small></span>${icon('caret-right')}</button>`).join('') || '<p class="muted">Chưa có truyện.</p>'}</nav></main>`;
+  }
+  if (!view.ep && s.eps.length === 1) view.ep = 1;
+  if (!view.ep) {
+    return `<main class="page"><header class="list-head">${back(s.lvl)}<h1 class="han">${esc(s.title)}</h1><span class="counter">${icon('heart', true)} ${read(s)}/${s.eps.length}</span></header>
+      <p class="muted">${esc(s.vi)} · ${esc(s.src)}</p><nav class="menu">${s.eps.map((e, i) =>
+      `<button class="menu-item${done[`${s.id}-${i + 1}`] ? ' done' : ''}" data-action="rd" data-lvl="${s.lvl}" data-id="${s.id}" data-ep="${i + 1}">${icon(done[`${s.id}-${i + 1}`] ? 'check-circle' : 'circle')}<span><b>Tập ${i + 1}: <span class="han">${esc(e.title)}</span></b><small>${esc(e.vi)}</small></span>${icon('caret-right')}</button>`).join('')}</nav></main>`;
+  }
+  const e = s.eps[view.ep - 1], py = localStorage.getItem(RD_PY_KEY) === '1', key = `${s.id}-${view.ep}`;
+  const lines = e.lines.map((ln, li) => `<p class="rd-line"><button class="speak sm" data-au="reading/${key}-${li + 1}.mp3" data-zh="${esc(ln.t.map((t) => t[0]).join(''))}" aria-label="Nghe">${icon('speaker-high', true)}</button><span><span class="rd-zh">${ln.t.map((t, ti) => (t[1]
+    ? `<button class="rd-w" data-action="rd-w" data-l="${li}" data-t="${ti}">${py ? `<small>${esc(t[1])}</small>` : ''}<span class="han">${esc(t[0])}</span></button>`
+    : `<span class="han rd-p">${esc(t[0])}</span>`)).join('')}</span><small class="tb-vi rd-vi">${esc(ln.vi)}</small></span></p>`).join('');
+  return `<main class="page rd${view.vi ? ' vi-on' : ''}"><header class="list-head">${back(s.lvl, s.eps.length > 1 ? s.id : '')}<h1>${s.eps.length > 1 ? `Tập ${view.ep}` : esc(s.vi)}</h1></header><p class="tomie wb-toast" role="status"></p>
+    <h2 class="tb-title">${zhPy(e.title)}<small>${esc(e.vi)}</small></h2>
+    <div class="seg lang"><button class="${py ? 'on' : ''}" data-action="rd-py" aria-pressed="${py}">Pinyin</button><button class="${view.vi ? 'on' : ''}" data-action="rd-vi" aria-pressed="${!!view.vi}">Dịch</button></div>
+    <p class="muted rd-hint">Chạm vào một từ để xem nghĩa.</p>
+    <div class="rd-text">${lines}</div>
+    <div class="tb-next"><button class="btn primary block" data-action="rd-learnt" ${done[key] ? 'disabled' : ''}>${done[key] ? 'Đã đọc xong' : 'Đã đọc'}</button>${s.eps.length > 1 ? pager('rd-ep', s.eps.map((_, i) => i + 1), view.ep, (n) => `Tập ${n}`) : ''}</div>
+    ${view.w ? rdSheet(e.lines[view.w[0]].t[view.w[1]]) : ''}
+  </main>`;
+}
+/** Tapped word: pinyin, meaning in this sentence, HSK level, components + memory tip, like the vocab cards. */
+function rdSheet([w, py, vi]) {
+  const known = wordMap.get(w), lv = rdData.lv[w];
+  return `<div class="sheet rd-sheet"><div>
+    <h3><span class="han rd-big">${esc(w)}</span><button class="speak" data-au="reading/w/${esc(w)}.mp3" data-zh="${esc(w)}" aria-label="Nghe">${icon('speaker-high', true)}</button><button class="icon-btn rd-x" data-action="rd-close" aria-label="Đóng">${icon('x')}</button></h3>
+    <p><b>${esc(py)}</b> · ${esc(vi)}${lv ? ` <span class="chip-sm">${rdLvl(Math.min(lv, 7))}</span>` : ''}</p>
+    ${known ? `<p class="muted">Trong app: ${esc(known.pinyin.join(' / '))} · ${esc(known.meanings.join('; '))}</p>` : ''}
+    ${charTips(w).replace('<details', '<details open')}
+  </div></div>`;
+}
+
 // ---------- Giáo trình (data/textbook.json: 新HSK教程1 lessons 1–15 + appendix; mp3 per Chinese line in textbook/) ----------
 let tbData;
 const TB_DONE_KEY = 'hsk-tb-done'; // {lessonId: 1}
@@ -988,15 +1049,15 @@ let wasTyping = false;
 let lastKey = 'home||', popping = false;
 
 function render() {
-  const views = { home, practice, radicals, words: wordList, quiz, summary, write, listen, wb: workbook, tb: textbook, toeic: toeicView, cx: cxView };
+  const views = { home, practice, radicals, words: wordList, quiz, summary, write, listen, wb: workbook, tb: textbook, toeic: toeicView, cx: cxView, rd: readingView };
   wasTyping = document.activeElement?.matches?.('#hz-in, #py') ?? false;
   if (view.name !== 'practice') lessonPickerOpen = false; // picker reopens closed next time
   root.innerHTML = views[view.name]();
   // Phone back button: one history entry per screen opened by a tap (Chrome skips entries pushed without a tap,
   // e.g. from popstate, and back then closes the app). Home drops them all; popstate walks back via the screen's arrow.
-  const key = [view.name, view.lvl, view.id].join('|'), d = history.state?.d ?? 0;
+  const key = [view.name, view.lvl, view.ep ? `${view.id}#${view.ep}` : view.id].join('|'), d = history.state?.d ?? 0; // Luyện đọc: story#episode
   if (view.name === 'home') { if (d) history.go(-d); }
-  else if (key !== lastKey && !popping && !(view.id && lastKey.startsWith(`${view.name}|${view.lvl}|`) && !lastKey.endsWith('|'))) history.pushState({ d: d + 1 }, ''); // prev/next lesson replaces, not stacks
+  else if (key !== lastKey && !popping && !(view.id && lastKey.startsWith(`${view.name}|${view.lvl}|`) && !lastKey.endsWith('|') && !view.ep === !lastKey.includes('#'))) history.pushState({ d: d + 1 }, ''); // prev/next lesson replaces, not stacks
   lastKey = key;
   if (view.name === 'quiz') onQuestionShown();
   if (view.name === 'write') {
@@ -1105,7 +1166,7 @@ root.addEventListener('click', (e) => {
     return play(`textbook/${encodeURIComponent(tbBtn.dataset.tbSay)}.mp3`, tbBtn.dataset.tbSay, 'zh-CN');
   }
   const auBtn = e.target.closest('[data-au]');
-  if (auBtn) { e.preventDefault(); return play(auBtn.dataset.au, '', 'en-US'); }
+  if (auBtn) { e.preventDefault(); return play(auBtn.dataset.au, auBtn.dataset.zh ?? '', auBtn.dataset.zh ? 'zh-CN' : 'en-US'); }
   const sayBtn = e.target.closest('[data-say]');
   if (sayBtn) {
     e.preventDefault(); // keep <details> from toggling when tapping its play button
@@ -1153,6 +1214,23 @@ root.addEventListener('click', (e) => {
     (act === 'tb' ? openTextbook(el.dataset.id) : Promise.resolve(render())).then(() => fresh && toast(TOMIE.learnt));
   }
   else if (act === 'tb') openTextbook(el.dataset.id, el.dataset.lvl);
+  else if (act === 'rd') openReading(el.dataset.lvl, el.dataset.id, el.dataset.ep);
+  else if (act === 'rd-w') { view.w = [+el.dataset.l, +el.dataset.t]; const y = scrollY; render(); scrollTo(0, y); const w = el.querySelector('.han').textContent; play(`reading/w/${encodeURIComponent(w)}.mp3`, w, 'zh-CN'); }
+  else if (act === 'rd-close') { view.w = null; const y = scrollY; render(); scrollTo(0, y); }
+  else if (act === 'rd-py' || act === 'rd-vi') {
+    if (act === 'rd-py') { try { localStorage.setItem(RD_PY_KEY, localStorage.getItem(RD_PY_KEY) === '1' ? '' : '1'); } catch { /* private mode */ } } else view.vi = !view.vi;
+    const y = scrollY; render(); scrollTo(0, y);
+  }
+  else if (act === 'rd-learnt' || (act === 'rd-ep' && +el.dataset.id === view.ep + 1)) {
+    // like Giáo trình: "Đã đọc" or going on to the next episode marks this one read
+    const done = loadJSON(RD_DONE_KEY) ?? {}, k = `${view.id}-${view.ep}`, fresh = !done[k];
+    done[k] = 1;
+    try { localStorage.setItem(RD_DONE_KEY, JSON.stringify(done)); } catch { /* private mode */ }
+    if (act === 'rd-ep') view = { ...view, ep: +el.dataset.id, w: null };
+    render(); if (act === 'rd-ep') scrollTo(0, 0);
+    if (fresh) toast(TOMIE.learnt);
+  }
+  else if (act === 'rd-ep') { view = { ...view, ep: +el.dataset.id, w: null }; render(); scrollTo(0, 0); }
   else if (act === 'wb-pick') { if (!view.done) { view.picks[el.dataset.n] = el.dataset.k; render(); } }
   else if (act === 'wb-submit') {
     view.done = true; wbAudio.pause();
