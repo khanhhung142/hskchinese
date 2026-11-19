@@ -142,6 +142,7 @@ test('chinext.json: valid, and the checker catches bad items', () => {
   assert.deepEqual(validateChinext(cx), []);
   const bad = { lessons: [{ id: 1, title: 't', items: [{ id: 'a', zh: '我 3', py: 'x', vi: 'y' }, { id: 'a', zh: '我。', py: '', vi: 'y' }] }] };
   assert.equal(validateChinext(bad).length, 3);
+  assert.equal(validateChinext({ lessons: [{ id: 1, title: 't', yt: 'bad', items: [{ id: 'b', zh: '我。', py: 'x', vi: 'y', t: -1 }] }] }).length, 2);
 });
 
 test('full/index.html is index.html plus a base tag', () => {

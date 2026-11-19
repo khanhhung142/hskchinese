@@ -172,6 +172,7 @@ async function loadCedict() {
 export function validateChinext(cx) {
   const errors = [], ids = new Set();
   for (const l of cx.lessons ?? []) {
+    if (l.yt && !/^[\w-]{11}$/.test(l.yt)) errors.push(`chinext lesson ${l.id}: yt = YouTube video id`);
     if (!Number.isInteger(l.id) || !l.title || !Array.isArray(l.items) || !l.items.length) errors.push(`chinext lesson ${l.id}: id, title, items required`);
     for (const x of l.items ?? []) {
       const at = `chinext ${x.id}`;
@@ -179,6 +180,8 @@ export function validateChinext(cx) {
       ids.add(x.id);
       if (!/^[\p{Script=Han}，。？！]+$/u.test(x.zh ?? '')) errors.push(`${at}: zh must be Han + ，。？！`);
       if (!x.py || !x.vi) errors.push(`${at}: py and vi required`);
+      if (x.t != null && (!Number.isInteger(x.t) || x.t < 0)) errors.push(`${at}: t = seconds into the video`);
+      if (x.t != null && !l.yt) errors.push(`${at}: t needs the lesson yt`);
       if (x.alt && (!Array.isArray(x.alt) || x.alt.some((a) => typeof a !== 'string' || !a))) errors.push(`${at}: alt must be strings`);
     }
   }

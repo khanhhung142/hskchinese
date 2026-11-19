@@ -518,3 +518,13 @@ body.typing .tips { display: none; }
 .song-py { font-size: 13px; color: var(--muted); }
 .py-off .song-py { display: none; }
 .song-line.on { border-color: var(--pink); background: var(--accent-soft); }
+
+/* Chinext Học theo video: writing box opened by Dừng lại luyện viết, sits between video and list */
+.cxv-pad { display: grid; gap: 6px; margin-bottom: 10px; padding: 12px; border: 2.5px solid var(--line); border-radius: 8px; background: var(--surface); }
+.cxv-pad[hidden] { display: none; }
+.cxv-pad p { margin: 0; }
+.cxv-vi { font-weight: 700; }
+.cxv-ans { font-size: 20px; }
+.cxv-pad .footer.static { position: static; padding: 0; background: none; }
+.cxv-stop { width: 100%; margin-bottom: 4px; }
+.cxv-pad .input-row { grid-template-columns: minmax(0, 1fr); }
