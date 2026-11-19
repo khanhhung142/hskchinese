@@ -804,8 +804,11 @@ async function openCx(m) {
   view = { name: 'cx', lvl: m ?? '' };
   render(); mediaState();
 }
+const CX_AT_KEY = 'hsk-cx-at'; // {lessonId: {t: video seconds, d: 'd/m'}}: where each buổi was left
+const mmss = (t) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
 function cxView() {
-  const item = (l) => `<button class="menu-item" data-action="cx-go" data-id="${l.id}">${icon('chalkboard-teacher')}<span><b>${esc(l.title)}</b><small>${l.items.length} câu</small></span>${icon('caret-right')}</button>`;
+  const at = loadJSON(CX_AT_KEY) ?? {};
+  const item = (l) => `<button class="menu-item" data-action="cx-go" data-id="${l.id}">${icon('chalkboard-teacher')}<span><b>${esc(l.title)}</b><small>${l.items.length} câu${at[l.id] ? ` · Đang học ${mmss(at[l.id].t)} · ${at[l.id].d}` : ''}</small></span>${icon('caret-right')}</button>`;
   return `<main class="page"><header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Chinext Education</h1></header><nav class="menu">${cxData.lessons.filter((l) => l.yt).map(item).join('')}</nav></main>`;
 }
 
@@ -832,9 +835,11 @@ let cxvAt = 0; // row index being practised
 function startCxVideo() {
   const rows = cxRows();
   const make = () => {
-    ytPlayer = new YT.Player('yt', { videoId: cxLesson.yt, playerVars: { playsinline: 1, rel: 0 } });
+    const id = cxLesson.id, start = Math.floor((loadJSON(CX_AT_KEY) ?? {})[id]?.t ?? 0);
+    ytPlayer = new YT.Player('yt', { videoId: cxLesson.yt, playerVars: { playsinline: 1, rel: 0, start } });
     songTimer = setInterval(() => { // highlight the sentence being taught
       const t = ytPlayer.getCurrentTime?.() ?? 0, els = root.querySelectorAll('.song-line');
+      if (t > 0 && ytPlayer.getPlayerState?.() === 1) { const at = loadJSON(CX_AT_KEY) ?? {}, n = new Date(); at[id] = { t: Math.floor(t), d: `${n.getDate()}/${n.getMonth() + 1}` }; localStorage.setItem(CX_AT_KEY, JSON.stringify(at)); }
       const i = rows.findLastIndex((x) => x.t <= t + 0.5), cur = root.querySelector('.song-line.on');
       if (els[i] && els[i] !== cur) { cur?.classList.remove('on'); els[i].classList.add('on'); if (ytPlayer.getPlayerState?.() === 1) els[i].scrollIntoView({ block: 'center', behavior: 'smooth' }); }
     }, 500);
