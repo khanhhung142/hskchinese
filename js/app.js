@@ -811,7 +811,7 @@ function radWrite() {
   const forms = [r.r, ...(r.v || '').split(/\s+/).filter(Boolean)];
   return `<main class="page"><header class="list-head"><button class="icon-btn" data-action="rad" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Luyện viết</h1><span class="counter">${r.s} nét</span></header>
     <p class="tomie wb-toast" role="status"></p>
-    <p><b>${r.n}. ${esc(r.hv)}</b> · ${esc(r.vi)} <span class="muted">${esc(r.py)}</span></p>
+    <p><b>${r.n}. ${esc(r.hv)}</b> · ${esc(r.vi)} <span class="muted">${esc(r.py)}</span> ${speakBtn(r.r, true)}</p>
     ${forms.length > 1 ? `<div class="seg lang">${forms.map((c) => `<button class="han${c === view.c ? ' on' : ''}" data-action="radw-c" data-c="${esc(c)}" aria-pressed="${c === view.c}">${esc(c)}</button>`).join('')}</div>` : ''}
     <div id="hw-box" class="hw-box" aria-label="Ô viết ${esc(view.c)}"></div>
     <p id="hw-msg" class="muted hw-msg">Viết theo nét mờ, đúng thứ tự nét.</p>
@@ -819,7 +819,9 @@ function radWrite() {
     ${pager('radw', radList().map((x) => x.n), r.n, (n) => rad.radicals.find((x) => x.n === n).r)}
   </main>`;
 }
+const radSay = () => say(rad.radicals.find((x) => x.n === view.id).r); // variants read like the main form
 async function setupRadWrite() {
+  radSay();
   const box = root.querySelector('#hw-box'), msg = root.querySelector('#hw-msg');
   hwLoad ??= new Promise((ok, no) => { const sc = document.createElement('script'); sc.src = 'https://cdn.jsdelivr.net/npm/hanzi-writer@3.7/dist/hanzi-writer.min.js'; sc.onload = ok; sc.onerror = () => { hwLoad = null; no(); }; document.head.append(sc); });
   try { await hwLoad; } catch { msg.textContent = 'Không tải được (cần mạng).'; return; }
@@ -839,7 +841,7 @@ function radQuiz() {
   hw?.quiz({
     onMistake: (d) => { msg.textContent = `Sai nét ${d.strokeNum + 1}. ${d.mistakesOnStroke >= 3 ? 'Nét đúng đang nháy hồng.' : 'Thử lại.'}`; },
     onCorrectStroke: (d) => { msg.textContent = d.strokesRemaining ? `Đúng! Còn ${d.strokesRemaining} nét.` : 'Đúng!'; },
-    onComplete: (d) => { msg.textContent = `Xong! ${d.totalMistakes ? `Sai ${d.totalMistakes} lần.` : 'Không sai nét nào.'}`; toast(TOMIE[d.totalMistakes ? 'stroke' : 'ok']); },
+    onComplete: (d) => { msg.textContent = `Xong! ${d.totalMistakes ? `Sai ${d.totalMistakes} lần.` : 'Không sai nét nào.'}`; toast(TOMIE[d.totalMistakes ? 'stroke' : 'ok']); radSay(); },
   });
 }
 
@@ -1424,7 +1426,7 @@ root.addEventListener('click', (e) => {
   }
   else if (act === 'radw') { const n = +el.dataset.id; view = { name: 'radw', tab: view.tab, id: n, c: rad.radicals.find((x) => x.n === n).r }; render(); scrollTo(0, 0); }
   else if (act === 'radw-c') { view = { ...view, c: el.dataset.c }; render(); }
-  else if (act === 'radw-demo') { const msg = root.querySelector('#hw-msg'); msg.textContent = 'Xem thứ tự nét…'; hw?.cancelQuiz(); hw?.showCharacter(); hw?.animateCharacter({ onComplete: () => { hw.hideCharacter(); msg.textContent = 'Giờ chị tự viết nhé.'; radQuiz(); } }); }
+  else if (act === 'radw-demo') { const msg = root.querySelector('#hw-msg'); msg.textContent = 'Xem thứ tự nét…'; hw?.cancelQuiz(); radSay(); hw?.showCharacter(); hw?.animateCharacter({ onComplete: () => { hw.hideCharacter(); msg.textContent = 'Giờ chị tự viết nhé.'; radQuiz(); } }); }
   else if (act === 'radw-quiz') { root.querySelector('#hw-msg').textContent = 'Viết theo nét mờ, đúng thứ tự nét.'; radQuiz(); }
   else if (act === 'tab') { view = { name: 'words', tab: el.dataset.tab }; render(); }
   else if (act === 'write') startWrite(el.dataset.mode);
