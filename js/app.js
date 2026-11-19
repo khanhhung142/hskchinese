@@ -821,7 +821,6 @@ function radWrite() {
 }
 const radSay = () => say(rad.radicals.find((x) => x.n === view.id).r); // variants read like the main form
 async function setupRadWrite() {
-  radSay();
   const box = root.querySelector('#hw-box'), msg = root.querySelector('#hw-msg');
   hwLoad ??= new Promise((ok, no) => { const sc = document.createElement('script'); sc.src = 'https://cdn.jsdelivr.net/npm/hanzi-writer@3.7/dist/hanzi-writer.min.js'; sc.onload = ok; sc.onerror = () => { hwLoad = null; no(); }; document.head.append(sc); });
   try { await hwLoad; } catch { msg.textContent = 'Không tải được (cần mạng).'; return; }
@@ -830,11 +829,17 @@ async function setupRadWrite() {
   const css = getComputedStyle(document.documentElement);
   hw = HanziWriter.create(box, view.c, {
     width: size, height: size, padding: 12, showOutline: true, showCharacter: false,
-    strokeColor: css.getPropertyValue('--text').trim() || '#333', outlineColor: '#d8d4ea', drawingColor: css.getPropertyValue('--line').trim() || '#333',
+    strokeColor: css.getPropertyValue('--accent').trim() || '#c2357a', outlineColor: '#d8d4ea', drawingColor: css.getPropertyValue('--line').trim() || '#333',
     highlightColor: '#f7a8ca', drawingWidth: 14, strokeAnimationSpeed: 1.2, delayBetweenStrokes: 250,
     onLoadCharDataError: () => { msg.textContent = 'Chưa có dữ liệu nét cho dạng này, chọn dạng khác nhé.'; },
   });
-  radQuiz();
+  radDemo();
+}
+/** Stroke-order demo (auto on open, her order), then tracing. */
+function radDemo() {
+  const msg = root.querySelector('#hw-msg');
+  msg.textContent = 'Xem thứ tự nét…'; hw?.cancelQuiz(); radSay(); hw?.showCharacter();
+  hw?.animateCharacter({ onComplete: () => { if (!root.contains(msg)) return; hw.hideCharacter(); msg.textContent = 'Giờ chị tự viết nhé.'; radQuiz(); } });
 }
 function radQuiz() {
   const msg = root.querySelector('#hw-msg');
@@ -1426,7 +1431,7 @@ root.addEventListener('click', (e) => {
   }
   else if (act === 'radw') { const n = +el.dataset.id; view = { name: 'radw', tab: view.tab, id: n, c: rad.radicals.find((x) => x.n === n).r }; render(); scrollTo(0, 0); }
   else if (act === 'radw-c') { view = { ...view, c: el.dataset.c }; render(); }
-  else if (act === 'radw-demo') { const msg = root.querySelector('#hw-msg'); msg.textContent = 'Xem thứ tự nét…'; hw?.cancelQuiz(); radSay(); hw?.showCharacter(); hw?.animateCharacter({ onComplete: () => { hw.hideCharacter(); msg.textContent = 'Giờ chị tự viết nhé.'; radQuiz(); } }); }
+  else if (act === 'radw-demo') radDemo();
   else if (act === 'radw-quiz') { root.querySelector('#hw-msg').textContent = 'Viết theo nét mờ, đúng thứ tự nét.'; radQuiz(); }
   else if (act === 'tab') { view = { name: 'words', tab: el.dataset.tab }; render(); }
   else if (act === 'write') startWrite(el.dataset.mode);
