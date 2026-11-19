@@ -302,7 +302,7 @@
 {"id": "cx15-013", "g": "Việt → Trung", "zh": "这家饭店的服务员很帅。", "py": "zhè jiā fàn diàn de fú wù yuán hěn shuài.", "vi": "Phục vụ của nhà hàng này rất đẹp trai.", "alt": ["这家饭店的服务员好帅。", "这个饭店的服务员很帅。"], "t": 1246},
 {"id": "cx15-014", "g": "Việt → Trung", "zh": "我不知道他是哪国人。", "py": "wǒ bù zhī dao tā shì nǎ guó rén.", "vi": "Tôi không biết anh ấy là người nước nào.", "t": 1288},
 {"id": "cx15-015", "g": "Việt → Trung", "zh": "我不知道什么时候能回家。", "py": "wǒ bù zhī dao shén me shí hou néng huí jiā.", "vi": "Tôi không biết khi nào có thể về nhà.", "t": 1327},
-{"id": "cx15-016", "g": "Việt → Trung", "zh": "我不知道他什么时候来。", "py": "wǒ bù zhī dao tā shén me shí hou lái.", "vi": "Tôi không biết khi nào anh ấy tới.", "t": 1343},
+{"id": "cx15-016", "g": "Việt → Trung", "zh": "我不知道他什么时候来。", "py": "wǒ bù zhī dao tā shén me shí hou lái.", "vi": "Tôi không biết khi nào anh ấy tới.", "t": 1339},
 {"id": "cx15-017", "g": "Việt → Trung", "zh": "我不知道他星期天喜欢做什么。", "py": "wǒ bù zhī dao tā Xīngqītiān xǐ huan zuò shén me.", "vi": "Tôi không biết chủ nhật anh ấy thích làm gì.", "t": 1362},
 {"id": "cx15-018", "g": "Đang: 在/正在…呢", "zh": "我在学汉语呢。", "py": "wǒ zài xué Hànyǔ ne.", "vi": "Tôi đang học tiếng Trung.", "alt": ["我正在学汉语。", "我在学汉语。", "我正在学汉语呢。", "我学汉语呢。", "我在学中文呢。", "我正在学中文。"], "t": 1434},
 {"id": "cx15-019", "g": "Đang: 在/正在…呢", "zh": "我的猫正在房间里睡觉。", "py": "wǒ de māo zhèng zài fáng jiān li shuì jiào.", "vi": "Mèo của tôi đang ngủ ở trong phòng.", "alt": ["我的猫在房间里睡觉呢。", "我的猫正在房间里睡觉呢。", "我的猫在房间里睡觉。"], "t": 1450},
