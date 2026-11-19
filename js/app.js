@@ -817,14 +817,16 @@ function cxVideoView() {
   return `<main class="page song cxv"><header class="list-head"><button class="icon-btn" data-action="cx" data-m="video" aria-label="Quay lại">${icon('arrow-left')}</button><h1>${esc(l.title)}</h1></header>
     <div class="song-yt"><div id="yt"></div></div>
     <div class="cxv-pad field" hidden>
-      <p class="muted">Viết câu tiếng Trung</p><p class="cxv-vi"></p><p class="cxv-ans han" hidden></p>
-      <form class="input-row"><input id="cxv-in" lang="zh-CN" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done"></form>
+      <form class="input-row"><input id="cxv-in" lang="zh-CN" placeholder="Gõ hoặc viết câu vào ô dưới" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done"></form>
+      <div class="hand"><canvas id="hand-pad" aria-label="Ô viết tay"></canvas>
+        <div class="cands" id="hand-cands"><span class="muted">Viết chữ vào ô trên</span></div>
+        <div class="hand-tools"><button type="button" class="btn" data-action="hand-undo">${icon('arrow-counter-clockwise')} Lùi nét</button><button type="button" class="btn" data-action="hand-clear">${icon('eraser')} Xoá ô</button><button type="button" class="btn" data-action="hand-back" aria-label="Xoá chữ cuối">${icon('backspace')}</button></div>
+      </div>
       <p class="write-status" role="status"></p>
-      <div class="footer two static"><button class="btn" data-action="cxv-ans">Xem đáp án</button><button class="btn primary" data-action="cxv-check">Kiểm tra</button></div>
+      <button class="btn primary" data-action="cxv-check">Kiểm tra</button>
     </div>
-    <button class="btn primary cxv-stop" data-action="cxv-stop">${icon('pencil-simple-line')} Dừng lại luyện viết</button>
-    <p class="muted rd-hint">Chạm vào một câu để tua video tới đoạn cô giảng câu đó.</p>
-    <div class="song-lines">${rows.map((x, i) => `<button class="song-line" data-action="cxv-seek" data-i="${i}"><small class="song-py">${esc(x.py)}</small><span class="han">${esc(x.zh)}</span><small class="tb-vi">${esc(x.vi)}</small></button>`).join('')}</div>
+    <p class="muted rd-hint">Chạm vào câu để tua video tới đoạn cô giảng. Bấm Luyện viết để dừng video và viết câu đó.</p>
+    <div class="song-lines">${rows.map((x, i) => `<div class="cxv-row"><button class="song-line" data-action="cxv-seek" data-i="${i}"><small class="song-py">${esc(x.py)}</small><span class="han">${esc(x.zh)}</span><small class="tb-vi">${esc(x.vi)}</small></button><button class="cxv-open" data-action="cxv-open" data-i="${i}" aria-expanded="false">${icon('pencil-simple-line')} Luyện viết</button></div>`).join('')}</div>
   </main>`;
 }
 const cxRows = () => cxLesson.items.filter((x) => x.t != null).sort((a, b) => a.t - b.t);
@@ -843,28 +845,28 @@ function startCxVideo() {
   window.onYouTubeIframeAPIReady = make;
   if (!document.getElementById('yt-api')) document.head.append(Object.assign(document.createElement('script'), { id: 'yt-api', src: 'https://www.youtube.com/iframe_api' }));
 }
-/** Pause the video and open the writing box for row i (default: the highlighted one). Toggle classes only: re-rendering would kill the video. */
+/** Expand the writing box under row i (pauses the video); same row again = close + resume. Moves one DOM node: re-rendering would kill the video. */
 function cxvPad(i) {
-  const rows = cxRows(), on = [...root.querySelectorAll('.song-line')].findIndex((e) => e.classList.contains('on'));
-  cxvAt = i ?? Math.max(0, on);
+  const pad = root.querySelector('.cxv-pad'), btns = root.querySelectorAll('.cxv-open');
+  const close = !pad.hidden && cxvAt === i;
+  btns.forEach((b) => b.setAttribute('aria-expanded', 'false'));
+  if (close) { pad.hidden = true; ytPlayer?.playVideo?.(); return; }
+  cxvAt = i;
   ytPlayer?.pauseVideo?.();
-  const pad = root.querySelector('.cxv-pad'), x = rows[cxvAt];
+  btns[i].setAttribute('aria-expanded', 'true');
+  btns[i].after(pad);
   pad.hidden = false;
-  pad.querySelector('.cxv-vi').textContent = x.vi;
-  Object.assign(pad.querySelector('.cxv-ans'), { hidden: true, textContent: `${x.zh} ${x.py}` });
   Object.assign(pad.querySelector('.write-status'), { textContent: '', className: 'write-status' });
-  const input = pad.querySelector('#cxv-in');
-  input.value = '';
-  root.querySelector('.cxv-stop').innerHTML = `${icon('play', true)} Xem tiếp video`;
-  root.querySelector('.cxv-stop').dataset.action = 'cxv-go';
-  pad.scrollIntoView({ block: 'nearest' });
+  pad.querySelector('#cxv-in').value = '';
+  if (!pad.dataset.ready) { pad.dataset.ready = 1; setupHand(); } else clearInk();
+  btns[i].closest('.cxv-row').scrollIntoView({ block: 'start', behavior: 'smooth' });
 }
 function cxvCheck() {
   const x = cxRows()[cxvAt], pad = root.querySelector('.cxv-pad'), typed = pad.querySelector('#cxv-in').value;
   if (!typed.trim()) return;
   const ok = [x.zh, ...(x.alt ?? [])].some((t) => sameHanzi(typed, t));
   Object.assign(pad.querySelector('.write-status'), { textContent: ok ? 'Đúng rồi' : 'Chưa đúng, thử lại', className: `write-status ${ok ? 'ok' : 'bad'}` });
-  if (ok) { pad.querySelector('.cxv-ans').hidden = false; say(x.zh); }
+  if (ok) say(x.zh);
 }
 
 // ---------- Luyện đọc (data/reading.json: public-domain stories retold per HSK level, read one episode at a time) ----------
@@ -966,7 +968,6 @@ function startSong(s) {
   window.onYouTubeIframeAPIReady = make;
   if (!document.getElementById('yt-api')) document.head.append(Object.assign(document.createElement('script'), { id: 'yt-api', src: 'https://www.youtube.com/iframe_api' }));
 }
-const resetCxvBtn = () => { const b = root.querySelector('.cxv-stop'); b.dataset.action = 'cxv-stop'; b.innerHTML = `${icon('pencil-simple-line')} Dừng lại luyện viết`; };
 function stopSong() { clearInterval(songTimer); ytPlayer?.destroy?.(); ytPlayer = null; }
 
 // ---------- Giáo trình (data/textbook.json: 新HSK教程1 lessons 1–15 + appendix; mp3 per Chinese line in textbook/) ----------
@@ -1296,11 +1297,9 @@ root.addEventListener('click', (e) => {
   else if (act === 't-retry') { if (confirm('Làm lại từ đầu?')) openToeic(view.lvl, view.id); }
   else if (act === 't-rec') toggleRec(el);
   else if (act === 'cx') { stopSong(); openCx(el.dataset.m); }
-  else if (act === 'cxv-seek') { ytPlayer?.seekTo?.(cxRows()[+el.dataset.i].t, true); ytPlayer?.playVideo?.(); root.querySelector('.cxv-pad').hidden = true; resetCxvBtn(); }
-  else if (act === 'cxv-stop') cxvPad();
-  else if (act === 'cxv-go') { root.querySelector('.cxv-pad').hidden = true; resetCxvBtn(); ytPlayer?.playVideo?.(); }
+  else if (act === 'cxv-seek') { ytPlayer?.seekTo?.(cxRows()[+el.dataset.i].t, true); ytPlayer?.playVideo?.(); }
+  else if (act === 'cxv-open') cxvPad(+el.dataset.i);
   else if (act === 'cxv-check') cxvCheck();
-  else if (act === 'cxv-ans') { const x = cxRows()[cxvAt]; root.querySelector('.cxv-ans').hidden = false; say(x.zh); }
   else if (act === 'cx-go') {
     cxLesson = cxData.lessons.find((l) => l.id === +el.dataset.id);
     if (view.lvl === 'write') return startWrite('cx');
@@ -1382,8 +1381,8 @@ root.addEventListener('click', (e) => {
   else if (act === 'hand-toggle') { view.state = { ...view.state, typed: root.querySelector('#hz-in').value, hand: !view.state.hand }; render(); root.querySelector('.card')?.scrollIntoView({ block: 'start' }); }
   else if (act === 'hand-undo') { ink.pop(); redrawInk(); recognize(); }
   else if (act === 'hand-clear') clearInk();
-  else if (act === 'hand-back') { const input = root.querySelector('#hz-in'); input.value = [...input.value].slice(0, -1).join(''); }
-  else if (act === 'hand-pick') { root.querySelector('#hz-in').value += el.dataset.c; clearInk(); }
+  else if (act === 'hand-back') { const input = root.querySelector('#hz-in, #cxv-in'); input.value = [...input.value].slice(0, -1).join(''); }
+  else if (act === 'hand-pick') { root.querySelector('#hz-in, #cxv-in').value += el.dataset.c; clearInk(); }
   else if (act === 'start') startSession(el.dataset.mode);
   else if (act === 'flip') { view.state.flipped = true; render(); }
   else if (act === 'grade') { grade(el.dataset.ok === '1'); next(); }

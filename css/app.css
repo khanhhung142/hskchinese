@@ -520,11 +520,12 @@ body.typing .tips { display: none; }
 .song-line.on { border-color: var(--pink); background: var(--accent-soft); }
 
 /* Chinext Học theo video: writing box opened by Dừng lại luyện viết, sits between video and list */
-.cxv-pad { display: grid; gap: 6px; margin-bottom: 10px; padding: 12px; border: 2.5px solid var(--line); border-radius: 8px; background: var(--surface); }
+.cxv-pad { display: grid; gap: 8px; margin-top: 6px; padding: 12px; border: 2.5px solid var(--line); border-radius: 8px; background: var(--surface); }
+/* Học theo video: video stays pinned on top while the list scrolls; each sentence has its own expandable writing box. */
+.cxv .song-yt { position: sticky; top: 0; z-index: 2; margin-top: 0; }
+.cxv-row { display: grid; scroll-margin-top: calc(min(100vw, 520px) * .5625); }
+.cxv-open { justify-self: start; display: inline-flex; align-items: center; gap: 6px; margin: 2px 10px 4px; padding: 4px 10px; border: 1.5px solid var(--line); border-radius: 8px; background: var(--surface); font: inherit; font-size: 13px; color: inherit; }
+.cxv-open[aria-expanded="true"] { border-color: var(--pink); background: var(--accent-soft); }
 .cxv-pad[hidden] { display: none; }
 .cxv-pad p { margin: 0; }
-.cxv-vi { font-weight: 700; }
-.cxv-ans { font-size: 20px; }
-.cxv-pad .footer.static { position: static; padding: 0; background: none; }
-.cxv-stop { width: 100%; margin-bottom: 4px; }
 .cxv-pad .input-row { grid-template-columns: minmax(0, 1fr); }
