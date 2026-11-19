@@ -859,7 +859,9 @@ function cxvPad(i) {
   Object.assign(pad.querySelector('.write-status'), { textContent: '', className: 'write-status' });
   pad.querySelector('#cxv-in').value = '';
   if (!pad.dataset.ready) { pad.dataset.ready = 1; setupHand(); } else clearInk();
-  btns[i].closest('.cxv-row').scrollIntoView({ block: 'start', behavior: 'smooth' });
+  // Scroll so the whole pad sits above the screen bottom, but never under the sticky video.
+  const v = root.querySelector('.song-yt').getBoundingClientRect().bottom, r = pad.getBoundingClientRect();
+  scrollBy({ top: Math.min(r.bottom - innerHeight + 8, r.top - v - 8), behavior: 'smooth' });
 }
 function cxvCheck() {
   const x = cxRows()[cxvAt], pad = root.querySelector('.cxv-pad'), typed = pad.querySelector('#cxv-in').value;
