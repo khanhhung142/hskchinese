@@ -187,12 +187,12 @@ function home() {
       <button class="btn primary block" data-action="start" data-mode="latest">Học bài mới</button>
     </section>` : ''}
     <nav class="menu">
+      <button class="menu-item" data-action="practice">${icon('pencil-simple-line')}<span><b>Luyện tập</b></span>${icon('caret-right')}</button>
       ${EN ? '' : `<button class="menu-item" data-action="tb">${icon('book-open-text')}<span><b>Giáo trình</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="wb">${icon('exam')}<span><b>Bài tập</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="cx">${icon('chalkboard-teacher')}<span><b>Chinext Education</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="rd">${icon('book-bookmark')}<span><b>Luyện đọc</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="song">${icon('music-notes')}<span><b>Học hát</b></span>${icon('caret-right')}</button>`}
-      <button class="menu-item" data-action="practice">${icon('pencil-simple-line')}<span><b>Luyện tập</b></span>${icon('caret-right')}</button>
       ${EN ? `<button class="menu-item" data-action="toeic">${icon('exam')}<span><b>Đề TOEIC</b></span>${icon('caret-right')}</button>` : ''}
       ${EN ? '' : `<button class="menu-item" data-action="rad">${icon('tree-structure')}<span><b>Bộ thủ</b></span>${icon('caret-right')}</button>`}
       <button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Tra cứu</b></span>${icon('caret-right')}</button>
