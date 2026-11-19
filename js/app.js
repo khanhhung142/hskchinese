@@ -805,16 +805,14 @@ async function openCx(m) {
   render(); mediaState();
 }
 function cxView() {
-  const head = (t) => `<header class="list-head"><button class="icon-btn" data-action="${view.lvl ? 'cx' : 'home'}" aria-label="Quay lại">${icon('arrow-left')}</button><h1>${t}</h1></header>`;
-  const item = (act, ic, t, sub, attr) => `<button class="menu-item" data-action="${act}" ${attr}>${icon(ic)}<span><b>${esc(t)}</b>${sub ? `<small>${esc(sub)}</small>` : ''}</span>${icon('caret-right')}</button>`;
-  if (!view.lvl) return `<main class="page">${head('Chinext Education')}<nav class="menu">${item('cx', 'headphones', 'Luyện nghe', '', 'data-m="listen"')}${item('cx', 'text-align-left', 'Luyện viết câu', 'Xem nghĩa, viết câu tiếng Trung', 'data-m="write"')}${item('cx', 'video', 'Học theo video', 'Video buổi học, chạm câu để tua tới', 'data-m="video"')}</nav></main>`;
-  return `<main class="page">${head({ listen: 'Luyện nghe', write: 'Luyện viết câu', video: 'Học theo video' }[view.lvl])}<nav class="menu">${cxData.lessons.filter((l) => view.lvl !== 'video' || l.yt).map((l) => item('cx-go', 'chalkboard-teacher', l.title, `${l.items.length} câu`, `data-id="${l.id}"`)).join('')}</nav></main>`;
+  const item = (l) => `<button class="menu-item" data-action="cx-go" data-id="${l.id}">${icon('chalkboard-teacher')}<span><b>${esc(l.title)}</b><small>${l.items.length} câu</small></span>${icon('caret-right')}</button>`;
+  return `<main class="page"><header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Chinext Education</h1></header><nav class="menu">${cxData.lessons.filter((l) => l.yt).map(item).join('')}</nav></main>`;
 }
 
 /** Học theo video: class video on top, the buổi's sentences in video order; tap = seek, Dừng = pause and write the current one. */
 function cxVideoView() {
   const l = cxLesson, rows = cxRows();
-  return `<main class="page song cxv"><header class="list-head"><button class="icon-btn" data-action="cx" data-m="video" aria-label="Quay lại">${icon('arrow-left')}</button><h1>${esc(l.title)}</h1></header>
+  return `<main class="page song cxv"><header class="list-head"><button class="icon-btn" data-action="cx" aria-label="Quay lại">${icon('arrow-left')}</button><h1>${esc(l.title)}</h1></header>
     <div class="song-yt"><div id="yt"></div></div>
     <div class="cxv-pad field" hidden>
       <form class="input-row"><input id="cxv-in" lang="zh-CN" placeholder="Gõ hoặc viết câu vào ô dưới" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done"></form>
@@ -1304,11 +1302,7 @@ root.addEventListener('click', (e) => {
   else if (act === 'cxv-check') cxvCheck();
   else if (act === 'cx-go') {
     cxLesson = cxData.lessons.find((l) => l.id === +el.dataset.id);
-    if (view.lvl === 'write') return startWrite('cx');
-    if (view.lvl === 'video') { stopSong(); view = { name: 'cxv', id: cxLesson.id }; render(); scrollTo(0, 0); return startCxVideo(); }
-    const items = cxLesson.items, key = `cx${cxLesson.id}`, at = (loadJSON(LISTEN_KEY) ?? {})[key];
-    if (at > 0 && at < items.length) { view = { name: 'listen', state: { items, i: at, on: false, ask: true, key } }; render(); }
-    else { view = { name: 'listen', state: { items, i: 0, on: true, key } }; keepAlive.play().catch(() => {}); listenStep(); }
+    stopSong(); view = { name: 'cxv', id: cxLesson.id }; render(); scrollTo(0, 0); startCxVideo();
   }
   else if (act === 'wb') openWorkbook(el.dataset.id, el.dataset.lvl);
   else if (act === 'wb-play') wbPlay(el.dataset.n);
