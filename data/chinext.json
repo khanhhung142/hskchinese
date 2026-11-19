@@ -293,7 +293,7 @@
 {"id": "cx15-004", "g": "Việt → Trung", "zh": "吃饭的时候我家喜欢看电视。", "py": "chī fàn de shí hou wǒ jiā xǐ huan kàn diàn shì.", "vi": "Lúc ăn cơm nhà tôi thích xem tivi.", "t": 986},
 {"id": "cx15-005", "g": "Việt → Trung", "zh": "上班的时候我常常带手机。", "py": "shàng bān de shí hou wǒ cháng cháng dài shǒu jī.", "vi": "Lúc đi làm tôi thường mang theo điện thoại.", "alt": ["我上班的时候常常带手机。", "上班的时候我常带手机。"], "t": 1008},
 {"id": "cx15-006", "g": "Việt → Trung", "zh": "你什么时候回家？", "py": "nǐ shén me shí hou huí jiā?", "vi": "Bạn khi nào về nhà?", "t": 1048},
-{"id": "cx15-007", "g": "Trung → Việt", "zh": "你什么时候学习？", "py": "nǐ shén me shí hou xué xí?", "vi": "Bạn khi nào học?", "t": 1077},
+{"id": "cx15-007", "g": "Trung → Việt", "zh": "你什么时候下课？", "py": "nǐ shén me shí hou xià kè?", "vi": "Bạn khi nào tan học?", "t": 1077},
 {"id": "cx15-008", "g": "Trung → Việt", "zh": "你什么时候来北京？", "py": "nǐ shén me shí hou lái Běijīng?", "vi": "Bạn khi nào đến Bắc Kinh?", "t": 1091},
 {"id": "cx15-009", "g": "Việt → Trung", "zh": "水果店", "py": "shuǐ guǒ diàn", "vi": "Tiệm hoa quả", "t": 1136},
 {"id": "cx15-010", "g": "Việt → Trung", "zh": "衣服店", "py": "yī fu diàn", "vi": "Tiệm quần áo", "t": 1152},
