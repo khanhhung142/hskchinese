@@ -431,6 +431,20 @@ body.typing .card .speak { position: absolute; top: 8px; right: 8px; }
 .rad-row p { margin: 2px 0 0; font-size: 14px; }
 .rad-hz { font-size: 36px; line-height: 1.1; display: grid; justify-items: center; }
 .rad-hz small { font-size: 18px; color: var(--muted); }
+.rad-act { display: grid; gap: 6px; justify-items: center; }
+.hw-box { /* 米字格 practice square */
+  --g: color-mix(in srgb, var(--line) 25%, transparent);
+  width: min(100%, 52dvh, 340px); aspect-ratio: 1; justify-self: center; margin: 8px auto; touch-action: none;
+  border: 1.5px solid var(--line); border-radius: var(--r-box); background-color: var(--surface);
+  background-image:
+    linear-gradient(90deg, transparent calc(50% - .5px), var(--g) 0 calc(50% + .5px), transparent 0),
+    linear-gradient(0deg, transparent calc(50% - .5px), var(--g) 0 calc(50% + .5px), transparent 0),
+    linear-gradient(to top right, transparent calc(50% - .5px), var(--g) 0 calc(50% + .5px), transparent 0),
+    linear-gradient(to bottom right, transparent calc(50% - .5px), var(--g) 0 calc(50% + .5px), transparent 0);
+}
+.hw-box svg { display: block; }
+.hw-msg { text-align: center; min-height: 1.4em; margin: 4px 0 10px; }
+.hw-tools { grid-template-columns: 1fr 1fr; }
 .rad-ex { font-size: 18px !important; letter-spacing: 4px; }
 .tips { text-align: left; width: 100%; box-sizing: border-box; }
 .tip-head { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }

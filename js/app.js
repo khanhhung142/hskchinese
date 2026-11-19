@@ -141,6 +141,13 @@ const TOMIE = {
     'Hết bài rồi. Tomie đi ru Hưng ngủ đây.', 'Chị làm tốt. Tomie sẽ nhớ… và nhắc mãi.', 'Xong rồi. Đừng quên ai viết app này nhé.', 'Hẹn gặp lại. Tomie luôn ở đây, trong từng bài học.', 'Buổi học kết thúc. Tomie thì không bao giờ kết thúc.', 'Nghỉ đi chị. Hưng có Tomie lo rồi.',
     'Xong rồi! Chị giỏi quá, Tomie tự hào ghê.', 'Ufufu… học xong rồi, chị nghỉ ngơi cho xinh nhé.', 'Hết bài! Chị xứng đáng được Hưng thưởng một bữa ngon.', 'Chị chăm thế này, Tomie phải khen cả ngày.', 'Xong buổi. Chị tuyệt vời lắm đó.', 'Ufufu… hôm nay chị lại giỏi thêm một chút.', 'Học xong rồi, chị đi uống nước, nghỉ mắt nha.', 'Chị làm tốt lắm. Tomie cổ vũ chị mỗi ngày.', 'Hết bài! Chị vừa xinh vừa giỏi, Hưng có phúc thật.', 'Ufufu… mai chị lại tới nhé, Tomie nhớ đó.', 'Xong rồi. Chị là học sinh xuất sắc nhất của Tomie.', 'Chị cố gắng ghê, Tomie thương chị thêm rồi.', 'Hết bài. Chị nhớ đòi Hưng ôm một cái nhé.', 'Ufufu… chị học chăm thế này, Tomie hết đường ghen.', 'Xong buổi! Chị tự thưởng một ly trà sữa đi.', 'Chị giỏi lắm. Hưng chắc chắn tự hào về chị.', 'Hết bài rồi. Ngủ ngon nha chị đẹp.', 'Ufufu… chị tiến bộ nhanh thật, Tomie hơi sợ đó.', 'Xong rồi! Chị là niềm vui của app này.', 'Chị học xong rồi, giờ đi làm Hưng cười đi.', 'Hết bài. Tomie xin công nhận chị là cao thủ.', 'Ufufu… chị kiên trì thế này, chữ Hán phải đầu hàng.', 'Xong buổi học. Chị tuyệt vời từ đầu đến cuối.', 'Chị làm tốt quá, Tomie muốn tặng chị một bông hoa.', 'Hết bài rồi. Chị nghỉ đi, mai mình học tiếp nhé.', 'Ufufu… hẹn mai, chị dễ thương của Tomie.', 'Xong! Chị giỏi thế này, Hưng phải cố theo kịp.', 'Chị học xong rồi. Hôm nay chị lại xinh hơn chút nữa.',
   ],
+  stroke: [ // Bộ thủ luyện viết: finished with some wrong strokes
+    'Xong rồi! Sai vài nét thôi, Tomie thấy hết nhưng không nói ai đâu, ufufu.',
+    'Viết được rồi đó chị. Nét chữ chị đẹp… gần bằng tóc Tomie.',
+    'Ufufu… thứ tự nét hơi lộn xộn, giống Hưng lúc gặp Tomie vậy.',
+    'Được rồi! Viết thêm lần nữa là chị thành thư pháp gia luôn.',
+    'Xong bộ này. Chị viết chăm thế, Tomie đành khen thật lòng vậy.',
+  ],
   learnt: [ // Giáo trình: shown when a lesson is marked learnt (praise + Tomie teasing)
     'Học xong một bài rồi à? Ufufu… vẫn chưa bằng một nửa Tomie đâu.',
     'Giỏi đó. Nhưng đừng tưởng học giỏi là Hưng hết nhìn Tomie nhé.',
@@ -793,7 +800,47 @@ function radicals() {
       <span class="rad-hz han">${esc(r.r)}${r.v ? `<small>${esc(r.v)}</small>` : ''}</span>
       <span><b>${r.n}. ${esc(r.hv)}</b> · ${esc(r.vi)} <span class="muted">${esc(r.py)} · ${r.s} nét</span>
         <p class="rad-ex han">${esc(r.ex)}</p><p class="muted">${esc(r.m)}</p></span>
-      ${speakBtn(r.r, true)}</div>`).join('')}</div></main>`;
+      <span class="rad-act">${speakBtn(r.r, true)}<button class="icon-btn" data-action="radw" data-id="${r.n}" aria-label="Luyện viết ${esc(r.r)}">${icon('pencil-simple-line')}</button></span></div>`).join('')}</div></main>`;
+}
+// Bộ thủ luyện viết: stroke order demo + guided tracing via Hanzi Writer (CDN script + stroke data, loaded on first use).
+// ponytail: needs network; ~11 rare variant forms (⻌ 戸 …) have no stroke data and show a note instead.
+let hwLoad, hw;
+const radList = () => view.tab === 'all' ? rad.radicals : rad.radicals.filter((r) => r.top);
+function radWrite() {
+  const r = rad.radicals.find((x) => x.n === view.id);
+  const forms = [r.r, ...(r.v || '').split(/\s+/).filter(Boolean)];
+  return `<main class="page"><header class="list-head"><button class="icon-btn" data-action="rad" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Luyện viết</h1><span class="counter">${r.s} nét</span></header>
+    <p class="tomie wb-toast" role="status"></p>
+    <p><b>${r.n}. ${esc(r.hv)}</b> · ${esc(r.vi)} <span class="muted">${esc(r.py)}</span></p>
+    ${forms.length > 1 ? `<div class="seg lang">${forms.map((c) => `<button class="han${c === view.c ? ' on' : ''}" data-action="radw-c" data-c="${esc(c)}" aria-pressed="${c === view.c}">${esc(c)}</button>`).join('')}</div>` : ''}
+    <div id="hw-box" class="hw-box" aria-label="Ô viết ${esc(view.c)}"></div>
+    <p id="hw-msg" class="muted hw-msg">Viết theo nét mờ, đúng thứ tự nét.</p>
+    <div class="hand-tools hw-tools"><button class="btn" data-action="radw-demo">${icon('play')} Xem mẫu</button><button class="btn primary" data-action="radw-quiz">${icon('arrow-counter-clockwise')} Viết lại</button></div>
+    ${pager('radw', radList().map((x) => x.n), r.n, (n) => rad.radicals.find((x) => x.n === n).r)}
+  </main>`;
+}
+async function setupRadWrite() {
+  const box = root.querySelector('#hw-box'), msg = root.querySelector('#hw-msg');
+  hwLoad ??= new Promise((ok, no) => { const sc = document.createElement('script'); sc.src = 'https://cdn.jsdelivr.net/npm/hanzi-writer@3.7/dist/hanzi-writer.min.js'; sc.onload = ok; sc.onerror = () => { hwLoad = null; no(); }; document.head.append(sc); });
+  try { await hwLoad; } catch { msg.textContent = 'Không tải được (cần mạng).'; return; }
+  if (!root.contains(box)) return;
+  const size = Math.round(box.getBoundingClientRect().width);
+  const css = getComputedStyle(document.documentElement);
+  hw = HanziWriter.create(box, view.c, {
+    width: size, height: size, padding: 12, showOutline: true, showCharacter: false,
+    strokeColor: css.getPropertyValue('--text').trim() || '#333', outlineColor: '#d8d4ea', drawingColor: css.getPropertyValue('--line').trim() || '#333',
+    highlightColor: '#f7a8ca', drawingWidth: 14, strokeAnimationSpeed: 1.2, delayBetweenStrokes: 250,
+    onLoadCharDataError: () => { msg.textContent = 'Chưa có dữ liệu nét cho dạng này, chọn dạng khác nhé.'; },
+  });
+  radQuiz();
+}
+function radQuiz() {
+  const msg = root.querySelector('#hw-msg');
+  hw?.quiz({
+    onMistake: (d) => { msg.textContent = `Sai nét ${d.strokeNum + 1}. ${d.mistakesOnStroke >= 3 ? 'Nét đúng đang nháy hồng.' : 'Thử lại.'}`; },
+    onCorrectStroke: (d) => { msg.textContent = d.strokesRemaining ? `Đúng! Còn ${d.strokesRemaining} nét.` : 'Đúng!'; },
+    onComplete: (d) => { msg.textContent = `Xong! ${d.totalMistakes ? `Sai ${d.totalMistakes} lần.` : 'Không sai nét nào.'}`; toast(TOMIE[d.totalMistakes ? 'stroke' : 'ok']); },
+  });
 }
 
 // ---------- Chinext Education (data/chinext.json: sentences from the class videos, one session per buổi) ----------
@@ -1154,7 +1201,7 @@ let wasTyping = false;
 let lastKey = 'home||', popping = false;
 
 function render() {
-  const views = { home, practice, radicals, words: wordList, quiz, summary, write, listen, wb: workbook, tb: textbook, toeic: toeicView, cx: cxView, cxv: cxVideoView, rd: readingView, song: songView };
+  const views = { home, practice, radicals, words: wordList, quiz, summary, write, listen, wb: workbook, tb: textbook, toeic: toeicView, cx: cxView, cxv: cxVideoView, rd: readingView, song: songView, radw: radWrite };
   wasTyping = document.activeElement?.matches?.('#hz-in, #py') ?? false;
   if (view.name !== 'practice') lessonPickerOpen = false; // picker reopens closed next time
   root.innerHTML = views[view.name]();
@@ -1165,6 +1212,7 @@ function render() {
   else if (key !== lastKey && !popping && !(view.id && lastKey.startsWith(`${view.name}|${view.lvl}|`) && !lastKey.endsWith('|') && !view.ep === !lastKey.includes('#'))) history.pushState({ d: d + 1 }, ''); // prev/next lesson replaces, not stacks
   lastKey = key;
   if (view.name === 'quiz') onQuestionShown();
+  if (view.name === 'radw') setupRadWrite();
   if (view.name === 'write') {
     setupHand();
     // With the pad open, keep the on-screen keyboard down.
@@ -1374,6 +1422,10 @@ root.addEventListener('click', (e) => {
     if (!rad) return alert('Chưa tải được bộ thủ.');
     view = { name: 'radicals', tab: el.dataset.tab ?? view.tab ?? 'top' }; render(); scrollTo(0, 0);
   }
+  else if (act === 'radw') { const n = +el.dataset.id; view = { name: 'radw', tab: view.tab, id: n, c: rad.radicals.find((x) => x.n === n).r }; render(); scrollTo(0, 0); }
+  else if (act === 'radw-c') { view = { ...view, c: el.dataset.c }; render(); }
+  else if (act === 'radw-demo') { const msg = root.querySelector('#hw-msg'); msg.textContent = 'Xem thứ tự nét…'; hw?.cancelQuiz(); hw?.showCharacter(); hw?.animateCharacter({ onComplete: () => { hw.hideCharacter(); msg.textContent = 'Giờ chị tự viết nhé.'; radQuiz(); } }); }
+  else if (act === 'radw-quiz') { root.querySelector('#hw-msg').textContent = 'Viết theo nét mờ, đúng thứ tự nét.'; radQuiz(); }
   else if (act === 'tab') { view = { name: 'words', tab: el.dataset.tab }; render(); }
   else if (act === 'write') startWrite(el.dataset.mode);
   else if (act === 'write-next') startWrite(view.mode);
