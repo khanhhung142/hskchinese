@@ -1217,7 +1217,7 @@
 {"id": "cx15-078", "g": "Việt → Trung", "zh": "我很喜欢和小朋友玩。", "py": "wǒ hěn xǐ huan hé xiǎo péng you wán.", "vi": "Tôi rất thích chơi với các bạn nhỏ.", "t": 4144},
 {"id": "cx15-079", "g": "Việt → Trung", "zh": "我妈妈对小朋友很好。", "py": "wǒ mā ma duì xiǎo péng you hěn hǎo.", "vi": "Mẹ tôi đối với trẻ con rất tốt.", "t": 4172},
 {"id": "cx15-080", "g": "Bài khóa", "zh": "喂，李文，你什么时候能到饭店？", "py": "wèi, Lǐ Wén, nǐ shén me shí hou néng dào fàn diàn?", "vi": "A lô, Lý Văn à, khi nào em có thể đến nhà hàng?", "t": 4387},
-{"id": "cx15-081", "g": "Bài khóa", "zh": "还不知道，正在找呢。它是不是在超市后边？", "py": "hái bù zhī dao, zhèng zài zhǎo ne. tā shì bu shì zài chāo shì hòu bian?", "vi": "Cũng không biết ạ, em đang tìm đây. Nó có phải ở phía sau siêu thị không?", "t": 4422},
+{"id": "cx15-081", "g": "Bài khóa", "zh": "还不知道，正在找呢。它是不是在超市后边？", "py": "hái bù zhī dao, zhèng zài zhǎo ne. tā shì bu shì zài chāo shì hòu bian?", "vi": "Cũng không biết ạ, em đang tìm đây. Nó có phải ở phía sau siêu thị không?", "t": 4426, "e": 4466},
 {"id": "cx15-082", "g": "Bài khóa", "zh": "是的。你开车没开车？", "py": "shì de. nǐ kāi chē méi kāi chē?", "vi": "Đúng rồi. Em có lái xe không?", "t": 4537},
 {"id": "cx15-083", "g": "Bài khóa", "zh": "我没开车，坐车呢。", "py": "wǒ méi kāi chē, zuò chē ne.", "vi": "Em không lái xe, đang đi taxi đây.", "t": 4557},
 {"id": "cx15-084", "g": "Bài khóa", "zh": "你还在读大学吗？", "py": "nǐ hái zài dú dà xué ma?", "vi": "Em vẫn đang học đại học à?", "t": 4896},

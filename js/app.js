@@ -934,7 +934,7 @@ function cxvPad(i) {
   btns.forEach((b) => b.setAttribute('aria-expanded', 'false'));
   if (close) { pad.hidden = true; cxvLoop = null; return; }
   cxvAt = i;
-  const rows = cxRows(), t0 = rows[i].t, t1 = Math.max(rows.find((x) => x.t > t0)?.t ?? 0, t0 + 8); // ponytail: segment = until next row's t, at least 8s
+  const rows = cxRows(), t0 = rows[i].t, t1 = rows[i].e ?? Math.max(rows.find((x) => x.t > t0)?.t ?? 0, t0 + 8); // e = explicit end; else until next row's t, at least 8s
   cxvLoop = [t0, t1];
   ytPlayer?.seekTo?.(t0, true); ytPlayer?.playVideo?.();
   btns[i].setAttribute('aria-expanded', 'true');

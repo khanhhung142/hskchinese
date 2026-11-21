@@ -182,6 +182,7 @@ export function validateChinext(cx) {
       if (!x.py || !x.vi) errors.push(`${at}: py and vi required`);
       if (x.t != null && (!Number.isInteger(x.t) || x.t < 0)) errors.push(`${at}: t = seconds into the video`);
       if (x.t != null && !l.yt) errors.push(`${at}: t needs the lesson yt`);
+      if (x.e != null && !(Number.isInteger(x.e) && x.e > x.t)) errors.push(`${at}: e = end second, after t`);
       if (x.alt && (!Array.isArray(x.alt) || x.alt.some((a) => typeof a !== 'string' || !a))) errors.push(`${at}: alt must be strings`);
     }
   }
