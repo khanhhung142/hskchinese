@@ -886,30 +886,35 @@ function cxVideoView() {
 }
 const cxRows = () => cxLesson.items.filter((x) => x.t != null).sort((a, b) => a.t - b.t);
 let cxvAt = 0; // row index being practised
+let cxvLoop = null; // [start, end] sec: the practised sentence replays while the pad is open (her order: loop, not pause)
 function startCxVideo() {
   const rows = cxRows();
+  cxvLoop = null;
   const make = () => {
     const id = cxLesson.id, start = Math.floor((loadJSON(CX_AT_KEY) ?? {})[id]?.t ?? 0);
     ytPlayer = new YT.Player('yt', { videoId: cxLesson.yt, playerVars: { playsinline: 1, rel: 0, start } });
     songTimer = setInterval(() => { // highlight the sentence being taught
       const t = ytPlayer.getCurrentTime?.() ?? 0, els = root.querySelectorAll('.song-line');
+      if (cxvLoop && (t >= cxvLoop[1] || t < cxvLoop[0] - 1)) { ytPlayer.seekTo(cxvLoop[0], true); return; }
       if (t > 0 && ytPlayer.getPlayerState?.() === 1) { const at = loadJSON(CX_AT_KEY) ?? {}, n = new Date(); at[id] = { t: Math.floor(t), d: `${n.getDate()}/${n.getMonth() + 1}` }; localStorage.setItem(CX_AT_KEY, JSON.stringify(at)); }
       const i = rows.findLastIndex((x) => x.t <= t + 0.5), cur = root.querySelector('.song-line.on');
-      if (els[i] && els[i] !== cur) { cur?.classList.remove('on'); els[i].classList.add('on'); if (ytPlayer.getPlayerState?.() === 1) els[i].scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+      if (els[i] && els[i] !== cur) { cur?.classList.remove('on'); els[i].classList.add('on'); if (ytPlayer.getPlayerState?.() === 1 && !cxvLoop) els[i].scrollIntoView({ block: 'center', behavior: 'smooth' }); }
     }, 500);
   };
   if (window.YT?.Player) return make();
   window.onYouTubeIframeAPIReady = make;
   if (!document.getElementById('yt-api')) document.head.append(Object.assign(document.createElement('script'), { id: 'yt-api', src: 'https://www.youtube.com/iframe_api' }));
 }
-/** Expand the writing box under row i (pauses the video); same row again = close + resume. Moves one DOM node: re-rendering would kill the video. */
+/** Expand the writing box under row i (the video loops that sentence); same row again = close, video plays on. Moves one DOM node: re-rendering would kill the video. */
 function cxvPad(i) {
   const pad = root.querySelector('.cxv-pad'), btns = root.querySelectorAll('.cxv-open');
   const close = !pad.hidden && cxvAt === i;
   btns.forEach((b) => b.setAttribute('aria-expanded', 'false'));
-  if (close) { pad.hidden = true; ytPlayer?.playVideo?.(); return; }
+  if (close) { pad.hidden = true; cxvLoop = null; return; }
   cxvAt = i;
-  ytPlayer?.pauseVideo?.();
+  const rows = cxRows(), t0 = rows[i].t, t1 = Math.max(rows.find((x) => x.t > t0)?.t ?? 0, t0 + 8); // ponytail: segment = until next row's t, at least 8s
+  cxvLoop = [t0, t1];
+  ytPlayer?.seekTo?.(t0, true); ytPlayer?.playVideo?.();
   btns[i].setAttribute('aria-expanded', 'true');
   btns[i].after(pad);
   pad.hidden = false;
@@ -1357,7 +1362,7 @@ root.addEventListener('click', (e) => {
   else if (act === 't-retry') { if (confirm('Làm lại từ đầu?')) openToeic(view.lvl, view.id); }
   else if (act === 't-rec') toggleRec(el);
   else if (act === 'cx') { stopSong(); openCx(el.dataset.m); }
-  else if (act === 'cxv-seek') { ytPlayer?.seekTo?.(cxRows()[+el.dataset.i].t, true); ytPlayer?.playVideo?.(); }
+  else if (act === 'cxv-seek') { if (cxvLoop) { cxvLoop = null; root.querySelector('.cxv-pad').hidden = true; } ytPlayer?.seekTo?.(cxRows()[+el.dataset.i].t, true); ytPlayer?.playVideo?.(); }
   else if (act === 'cxv-open') cxvPad(+el.dataset.i);
   else if (act === 'cxv-check') cxvCheck();
   else if (act === 'cx-go') {
