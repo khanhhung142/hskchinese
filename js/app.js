@@ -851,9 +851,10 @@ function radQuiz() {
 }
 
 // ---------- Chinext Education (data/chinext.json: sentences from the class videos, one session per buổi) ----------
-let cxData, cxLesson;
+let cxData, cxLesson, cxDict = {}; // cxDict = data/cx_dict.json {word: [pinyin, vi]}: words in class sentences that vocab.json lacks
 async function openCx(m) {
   try { cxData ??= await (await fetch('data/chinext.json', { cache: 'no-cache' })).json(); } catch { return alert('Không tải được Chinext.'); }
+  fetch('data/cx_dict.json').then((r) => r.json()).then((d) => { cxDict = d; }).catch(() => {});
   player.pause(); keepAlive.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel();
   view = { name: 'cx', lvl: m ?? '' };
   render(); mediaState();
@@ -880,9 +881,30 @@ function cxVideoView() {
       <p class="write-status" role="status"></p>
       <button class="btn primary" data-action="cxv-check">Kiểm tra</button>
     </div>
-    <p class="muted rd-hint">Chạm vào câu để tua video tới đoạn cô giảng. Bấm Luyện viết để dừng video và viết câu đó.</p>
-    <div class="song-lines">${rows.map((x, i) => `<div class="cxv-row"><button class="song-line" data-action="cxv-seek" data-i="${i}"><small class="song-py">${esc(x.py)}</small><span class="han">${esc(x.zh)}</span><small class="tb-vi">${esc(x.vi)}</small></button><button class="cxv-open" data-action="cxv-open" data-i="${i}" aria-expanded="false">${icon('pencil-simple-line')} Luyện viết</button></div>`).join('')}</div>
+    <p class="muted rd-hint">Chạm vào câu để tua video tới đoạn cô giảng, chạm vào một chữ để xem nghĩa. Bấm Luyện viết để viết câu đó.</p>
+    <div class="sheet rd-sheet cxv-sheet" hidden></div>
+    <div class="song-lines">${rows.map((x, i) => `<div class="cxv-row"><button class="song-line" data-action="cxv-seek" data-i="${i}"><small class="song-py">${esc(x.py)}</small><span class="han">${cxWords(x.zh)}</span><small class="tb-vi">${esc(x.vi)}</small></button><button class="cxv-open" data-action="cxv-open" data-i="${i}" aria-expanded="false">${icon('pencil-simple-line')} Luyện viết</button></div>`).join('')}</div>
   </main>`;
+}
+/** Sentence split into tappable words: greedy longest match over vocab.json + cx_dict.json. */
+function cxWords(zh) {
+  const has = (w) => wordMap.has(w) || cxDict[w], out = [];
+  for (let i = 0; i < zh.length;) {
+    let n = Math.min(8, zh.length - i);
+    while (n > 1 && !has(zh.slice(i, i + n))) n--;
+    const w = zh.slice(i, i + n);
+    out.push('，。？！'.includes(w) ? esc(w) : `<span class="cxv-w" data-action="cxv-w" data-w="${esc(w)}">${esc(w)}</span>`);
+    i += n;
+  }
+  return out.join('');
+}
+/** Tapped word: fill the view's one sheet in place (re-rendering would kill the video). */
+function cxvWord(w) {
+  const k = wordMap.get(w), d = cxDict[w], sh = root.querySelector('.cxv-sheet');
+  const line = k ? `${k.pinyin.join(' / ')} · ${k.meanings.join('; ')}` : d ? `${d[0]} · ${d[1]}` : '';
+  sh.innerHTML = `<div><h3><span class="han rd-big">${esc(w)}</span><button class="speak" data-say="${esc(w)}" aria-label="Nghe">${icon('speaker-high', true)}</button><button class="icon-btn rd-x" data-action="cxv-wx" aria-label="Đóng">${icon('x')}</button></h3>
+    ${line ? `<p><b>${esc(line)}</b></p>` : ''}${charTips(w).replace('<details', '<details open')}</div>`;
+  sh.hidden = false;
 }
 const cxRows = () => cxLesson.items.filter((x) => x.t != null).sort((a, b) => a.t - b.t);
 let cxvAt = 0; // row index being practised
@@ -1364,6 +1386,8 @@ root.addEventListener('click', (e) => {
   else if (act === 'cx') { stopSong(); openCx(el.dataset.m); }
   else if (act === 'cxv-seek') { if (cxvLoop) { cxvLoop = null; root.querySelector('.cxv-pad').hidden = true; } ytPlayer?.seekTo?.(cxRows()[+el.dataset.i].t, true); ytPlayer?.playVideo?.(); }
   else if (act === 'cxv-open') cxvPad(+el.dataset.i);
+  else if (act === 'cxv-w') cxvWord(el.dataset.w);
+  else if (act === 'cxv-wx') root.querySelector('.cxv-sheet').hidden = true;
   else if (act === 'cxv-check') cxvCheck();
   else if (act === 'cx-go') {
     cxLesson = cxData.lessons.find((l) => l.id === +el.dataset.id);

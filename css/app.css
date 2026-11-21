@@ -551,3 +551,6 @@ body.typing .tips { display: none; }
 .cxv-pad .cands { min-height: 36px; }
 .cxv-pad .hand-tools .btn, .cxv-pad .btn.primary { min-height: 38px; }
 .cxv-pad .write-status:empty { display: none; }
+.cxv-w { border-radius: 4px; }
+.cxv-w:active { background: var(--accent-soft); }
+.cxv-sheet[hidden] { display: none; }
