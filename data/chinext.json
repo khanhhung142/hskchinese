@@ -1205,7 +1205,7 @@
 {"id": "cx15-066", "g": "Việt → Trung", "zh": "多读书对学中文很好。", "py": "duō dú shū duì xué Zhōngwén hěn hǎo.", "vi": "Đọc nhiều sách tốt cho việc học tiếng Trung.", "alt": ["多读书对学汉语很好。", "多看书对学中文很好。"], "t": 3599},
 {"id": "cx15-067", "g": "Việt → Trung", "zh": "晚睡觉对身体不好。", "py": "wǎn shuì jiào duì shēn tǐ bù hǎo.", "vi": "Ngủ muộn thì không tốt cho sức khỏe.", "alt": ["晚睡对身体不好。"], "t": 3639},
 {"id": "cx15-068", "g": "Việt → Trung", "zh": "多喝水对身体很好。", "py": "duō hē shuǐ duì shēn tǐ hěn hǎo.", "vi": "Uống nhiều nước tốt cho sức khỏe.", "t": 3666},
-{"id": "cx15-069", "g": "Việt → Trung", "zh": "他说话的时候，我听不懂他说什么。", "py": "tā shuō huà de shí hou, wǒ tīng bù dǒng tā shuō shén me.", "vi": "Lúc anh ta nói, tôi không hiểu anh ta nói gì.", "t": 3782},
+{"id": "cx15-069", "g": "Việt → Trung", "zh": "他说的时候，我不知道他在说什么。", "py": "tā shuō de shí hou, wǒ bù zhī dao tā zài shuō shén me.", "vi": "Lúc anh ta nói, tôi không biết anh ta đang nói gì.", "alt": ["他说话的时候，我不知道他在说什么。", "他说话的时候，我听不懂他说什么。"], "t": 3782},
 {"id": "cx15-070", "g": "Việt → Trung", "zh": "我每天都和妈妈说话。", "py": "wǒ měi tiān dōu hé mā ma shuō huà.", "vi": "Mỗi ngày tôi đều nói chuyện với mẹ.", "t": 3800},
 {"id": "cx15-071", "g": "Việt → Trung", "zh": "这件事你对他们说了吗？", "py": "zhè jiàn shì nǐ duì tā men shuō le ma?", "vi": "Việc này bạn đã nói cho họ biết chưa?", "alt": ["这件事你对他们说没说？"], "t": 3825},
 {"id": "cx15-072", "g": "Việt → Trung", "zh": "这件事我只对你说。", "py": "zhè jiàn shì wǒ zhǐ duì nǐ shuō.", "vi": "Việc này tôi chỉ nói với bạn.", "t": 3862},
