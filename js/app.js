@@ -952,7 +952,7 @@ function cxvCheck() {
   if (!typed.trim()) return;
   const ok = [x.zh, ...(x.alt ?? [])].some((t) => sameHanzi(typed, t));
   Object.assign(pad.querySelector('.write-status'), { textContent: ok ? 'Đúng rồi' : 'Chưa đúng, thử lại', className: `write-status ${ok ? 'ok' : 'bad'}` });
-  if (ok) say(x.zh);
+  if (ok) { ytPlayer?.pauseVideo?.(); say(x.zh); } // her order: video stops while the answer is read
 }
 
 // ---------- Luyện đọc (data/reading.json: public-domain stories retold per HSK level, read one episode at a time) ----------
