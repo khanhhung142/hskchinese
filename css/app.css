@@ -554,3 +554,5 @@ body.typing .tips { display: none; }
 .cxv-w { border-radius: 4px; }
 .cxv-w:active { background: var(--accent-soft); }
 .cxv-sheet[hidden] { display: none; }
+/* Luyện nghe: Pinyin / Nghĩa toggles */
+.card.py-off .py, .card.py-off .py-big, .card.vi-off .meaning, .card.vi-off .vi { display: none; }

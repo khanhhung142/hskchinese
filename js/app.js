@@ -8,6 +8,7 @@ document.documentElement.classList.toggle('lang-en', EN);
 const key = (k) => (EN ? k.replace('hsk-', 'eng-') : k);
 const PROGRESS_KEY = key('hsk-progress');
 const LISTEN_KEY = key('hsk-listen'); // {lessonPick: index reached in Luyện nghe}
+const LISTEN_HIDE = 'hsk-listen-hide'; // {py, vi}: Luyện nghe shows only the Chinese
 const SEEN_KEY = key('hsk-seen'); // sessionStorage {mode: [ids done this session]}
 const BAG_KEY = key('hsk-bag'); // {'mode|lessons': [ids not shown yet this round]}
 const LESSON_KEY = key('hsk-lesson'); // lesson picked for practice, '' = all
@@ -526,9 +527,11 @@ function listen() {
   const { items, i, on, key } = view.state;
   const x = items[i];
   const c = writeCard(itemKind(x), x);
+  const hide = loadJSON(LISTEN_HIDE) ?? {};
   return `<main class="page">
     <header class="list-head"><button class="icon-btn" ${key ? 'data-action="cx" data-m="listen"' : 'data-action="practice"'} aria-label="Quay lại">${icon('arrow-left')}</button><h1>${key ? esc(cxLesson.title) : `Nghe ${esc(pickedLesson ? pickedName() : 'tất cả')}`}</h1><span class="counter">${i + 1}/${items.length}</span></header>
-    <div class="stage"><div class="card center">${c.zh}${meaningHtml(c)}</div></div>
+    <div class="seg lang"><button class="${hide.py ? '' : 'on'}" data-action="listen-hide" data-k="py" aria-pressed="${!hide.py}">Pinyin</button><button class="${hide.vi ? '' : 'on'}" data-action="listen-hide" data-k="vi" aria-pressed="${!hide.vi}">Nghĩa</button></div>
+    <div class="stage"><div class="card center${hide.py ? ' py-off' : ''}${hide.vi ? ' vi-off' : ''}">${c.zh}${meaningHtml(c)}</div></div>
     ${view.state.ask ? `<div class="footer two">
       <button class="btn" data-action="listen-restart">${icon('arrow-counter-clockwise')} Nghe lại từ đầu</button>
       <button class="btn primary" data-action="listen-toggle">${icon('play', true)} Nghe tiếp</button>
@@ -1450,6 +1453,7 @@ root.addEventListener('click', (e) => {
     if (at > 0 && at < items.length) { view = { name: 'listen', state: { items, i: at, on: false, ask: true } }; render(); }
     else { view = { name: 'listen', state: { items, i: 0, on: true } }; keepAlive.play().catch(() => {}); listenStep(); }
   }
+  else if (act === 'listen-hide') { const h = loadJSON(LISTEN_HIDE) ?? {}; h[el.dataset.k] = !h[el.dataset.k]; try { localStorage.setItem(LISTEN_HIDE, JSON.stringify(h)); } catch { /* private mode */ } render(); }
   else if (act === 'listen-restart') { Object.assign(view.state, { i: 0, on: true }); keepAlive.play().catch(() => {}); listenStep(); }
   else if (act === 'listen-toggle') listenToggle();
   else if (act === 'listen-move') listenMove(+el.dataset.d);
