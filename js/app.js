@@ -543,9 +543,11 @@ function listen() {
   </main>`;
 }
 
+// Saved position per lesson pick; Chinext Luyện tập per its own pick.
+const listenKey = (st = view.state) => (st.key === 'cxp' ? `cxp${cxPick}` : st.key ?? pickedLesson);
 function saveListen(i) {
   const pos = loadJSON(LISTEN_KEY) ?? {};
-  pos[view.state.key ?? pickedLesson] = i; // key: Chinext session
+  pos[listenKey()] = i;
   try { localStorage.setItem(LISTEN_KEY, JSON.stringify(pos)); } catch { /* private mode */ }
 }
 function listenStep() {
@@ -557,11 +559,11 @@ function listenStep() {
   const x = st.items[st.i];
   const c = writeCard(itemKind(x), x);
   const live = () => view.name === 'listen' && view.state === st && st.on && st.tok === tok;
-  // Gap = a silent mp3 on the same element, not setTimeout: timers stall with the screen off, audio keeps running.
-  const after = () => live() && play('silence.mp3', '', '', () => {
+  // No gap between items (her order): next clip starts straight from `ended`, never setTimeout (stalls with screen off).
+  const after = () => {
     if (!live()) return;
     if (st.i < st.items.length - 1) { st.i++; listenStep(); } else { st.on = false; st.i = 0; saveListen(0); keepAlive.pause(); render(); mediaState(); }
-  });
+  };
   mediaState(c.text, c.en);
   // Vietnamese meaning first (her order), then the item itself.
   if (EN) play(`audio/vi/${encodeURIComponent(c.text)}.mp3`, c.en, 'vi-VN', () => (live() ? say(c.text, after) : null));
@@ -1408,7 +1410,9 @@ root.addEventListener('click', (e) => {
   else if (act === 'cx-listen') {
     const items = [...cxPool('cxw'), ...cxPool('cxs')];
     if (!items.length) return alert('Chưa có câu nào.');
-    view = { name: 'listen', state: { items, i: 0, on: true, key: 'cxp' } }; keepAlive.play().catch(() => {}); listenStep();
+    const at = (loadJSON(LISTEN_KEY) ?? {})[`cxp${cxPick}`];
+    if (at > 0 && at < items.length) { view = { name: 'listen', state: { items, i: at, on: false, ask: true, key: 'cxp' } }; render(); }
+    else { view = { name: 'listen', state: { items, i: 0, on: true, key: 'cxp' } }; keepAlive.play().catch(() => {}); listenStep(); }
   }
   else if (act === 'cxv-seek') { if (cxvLoop) { cxvLoop = null; root.querySelector('.cxv-pad').hidden = true; } ytPlayer?.seekTo?.(cxRows()[+el.dataset.i].t, true); ytPlayer?.playVideo?.(); }
   else if (act === 'cxv-open') cxvPad(+el.dataset.i);
