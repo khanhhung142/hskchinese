@@ -434,7 +434,7 @@ function summary() {
 const practiceWords = () => data.words.filter((w) => w.lesson > 0 || picked().includes(0));
 
 /** Items a write mode draws from: the picked lessons, or the open Chinext session. */
-const writePool = (mode) => (mode === 'cx' ? cxLesson.items : (mode === 'sentence' ? data.sentences : practiceWords()).filter(inLesson));
+const writePool = (mode) => (mode === 'cx' ? cxLesson.items : mode.startsWith('cx') ? cxPool(mode) : (mode === 'sentence' ? data.sentences : practiceWords()).filter(inLesson));
 function pickWriteItem(mode, prev) {
   const id = (x) => x.id ?? x.hanzi;
   const all = writePool(mode);
@@ -442,7 +442,7 @@ function pickWriteItem(mode, prev) {
   const seen = loadSeen();
   let pool = all.filter((x) => !seen[mode]?.includes(id(x)));
   if (!pool.length) { pool = all; seen[mode] = (seen[mode] ?? []).filter((i) => !all.some((x) => id(x) === i)); }
-  const item = pool.length ? drawFromBag(`${mode}|${mode === 'cx' ? cxLesson.id : pickedLesson}`, pool, id, prev) : undefined;
+  const item = pool.length ? drawFromBag(`${mode}|${mode === 'cx' ? cxLesson.id : mode.startsWith('cx') ? cxPick : pickedLesson}`, pool, id, prev) : undefined;
   if (item) { (seen[mode] ??= []).push(id(item)); try { sessionStorage.setItem(SEEN_KEY, JSON.stringify(seen)); } catch { /* private mode */ } }
   return item;
 }
@@ -469,15 +469,15 @@ function drawFromBag(k, all, id, prev) {
 
 /** What the practice card shows and checks, for a word or a sentence. */
 // English: the headline is the Vietnamese meaning (`en` would repeat the answer).
-const writeCard = (mode, x) => (mode === 'cx' ? { text: x.zh, zh: `<p class="sentence han">${esc(x.zh)}</p><p class="py-big">${esc(x.py)}</p>`, en: '', vi: x.vi } : EN ? (mode === 'sentence'
+const writeCard = (mode, x) => (mode === 'cxw' || mode === 'cxm' ? { text: x.zh, zh: `<p class="big-han han">${esc(x.zh)}</p><p class="py-big">${esc(x.py)}</p>`, en: '', vi: x.vi } : mode.startsWith('cx') ? { text: x.zh, zh: `<p class="sentence han">${esc(x.zh)}</p><p class="py-big">${esc(x.py)}</p>`, en: '', vi: x.vi } : EN ? (mode === 'sentence'
   ? { text: x.text, zh: `<p class="sentence">${sentenceHz(x)}</p>`, en: x.vi, vi: '' }
   : { text: x.hanzi, zh: `<p class="big-han">${esc(x.hanzi)}</p>${x.pinyin[0] ? `<p class="py-big">${esc(x.pinyin[0])}</p>` : ''}`, en: x.meanings.join('; '), vi: '' })
   : mode === 'sentence'
   ? { text: sentenceText(x), zh: `<p class="sentence">${sentenceHz(x)}</p>`, en: x.en, vi: x.vi }
   : { text: x.hanzi, zh: `<p class="big-han han">${esc(x.hanzi)}</p><p class="py-big">${esc(x.pinyin.join(' / '))}</p>`, en: x.en, vi: x.meanings.join('; ') });
-const WRITE_TITLES = { write: T.write[0], vocab: T.vocab[0], sentence: 'Luyện viết câu', cx: 'Luyện viết câu' };
+const WRITE_TITLES = { write: T.write[0], vocab: T.vocab[0], sentence: 'Luyện viết câu', cx: 'Luyện viết câu', cxs: 'Luyện viết câu', cxw: 'Luyện viết chữ', cxm: 'Luyện từ vựng' };
 /** Modes that hide the Chinese until answered: vocab (meaning only), Chinext (translate the Vietnamese). */
-const HIDES = (mode) => mode === 'vocab' || mode === 'cx';
+const HIDES = (mode) => mode === 'vocab' || mode === 'cx' || mode === 'cxm';
 /** Card meaning lines; Chinext items have only Vietnamese, shown as the headline. */
 const meaningHtml = (c, big) => `<p class="meaning${big ? ' big-meaning' : ''}">${esc(c.en || c.vi)}</p>${c.en ? `<p class="vi muted">${esc(c.vi)}</p>` : ''}`;
 
@@ -489,7 +489,7 @@ function write() {
   const status = state.done ? `<p class="write-status ok">${icon('check-circle', true)} Đúng rồi</p>`
     : state.wrong ? `<p class="write-status bad">${icon('x-circle', true)} Chưa đúng, thử lại</p>` : '';
   return `<main class="page">
-    <header class="list-head"><button class="icon-btn" ${mode === 'cx' ? 'data-action="cx" data-m="write"' : 'data-action="practice"'} aria-label="Quay lại">${icon('arrow-left')}</button><h1>${WRITE_TITLES[mode]}</h1><span class="counter">${writeCount(mode)}</span></header>
+    <header class="list-head"><button class="icon-btn" ${mode === 'cx' ? 'data-action="cx" data-m="write"' : mode.startsWith('cx') ? 'data-action="cxp"' : 'data-action="practice"'} aria-label="Quay lại">${icon('arrow-left')}</button><h1>${WRITE_TITLES[mode]}</h1><span class="counter">${writeCount(mode)}</span></header>
     <div class="stage">
       <div class="card center">
         ${shown ? c.zh : ''}
@@ -499,7 +499,7 @@ function write() {
           : `<button class="speak" data-say-zh="${esc(c.text)}" data-en="${esc(c.en)}" data-vi="${esc(c.vi)}" data-hide="${shown ? '' : 1}" aria-label="Nghe">${icon('speaker-high', true)}</button>`}
       </div>
       <form class="field" data-action="submit-write">
-        <label for="hz-in">${{ write: T.inWrite, vocab: T.inVocab, sentence: T.inSentence, cx: 'Viết câu tiếng Trung' }[mode]}</label>
+        <label for="hz-in">${{ write: T.inWrite, vocab: T.inVocab, sentence: T.inSentence, cx: 'Viết câu tiếng Trung', cxs: T.inSentence, cxw: T.inWrite, cxm: T.inVocab }[mode]}</label>
         <div class="input-row">
           <input id="hz-in" name="hz" lang="${EN ? 'en' : 'zh-CN'}" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" value="${esc(state.typed ?? '')}" ${state.done ? 'disabled' : ''}>
           ${state.done || EN ? '' : `<button type="button" class="icon-btn${state.hand ? ' on' : ''}" data-action="hand-toggle" aria-label="Viết tay" aria-pressed="${!!state.hand}">${icon('pencil-simple-line')}</button>`}
@@ -529,7 +529,7 @@ function listen() {
   const c = writeCard(itemKind(x), x);
   const hide = loadJSON(LISTEN_HIDE) ?? {};
   return `<main class="page">
-    <header class="list-head"><button class="icon-btn" ${key ? 'data-action="cx" data-m="listen"' : 'data-action="practice"'} aria-label="Quay lại">${icon('arrow-left')}</button><h1>${key ? esc(cxLesson.title) : `Nghe ${esc(pickedLesson ? pickedName() : 'tất cả')}`}</h1><span class="counter">${i + 1}/${items.length}</span></header>
+    <header class="list-head"><button class="icon-btn" ${key === 'cxp' ? 'data-action="cxp"' : key ? 'data-action="cx" data-m="listen"' : 'data-action="practice"'} aria-label="Quay lại">${icon('arrow-left')}</button><h1>${key === 'cxp' ? `Nghe ${esc(cxPickName())}` : key ? esc(cxLesson.title) : `Nghe ${esc(pickedLesson ? pickedName() : 'tất cả')}`}</h1><span class="counter">${i + 1}/${items.length}</span></header>
     <div class="seg lang"><button class="${hide.py ? '' : 'on'}" data-action="listen-hide" data-k="py" aria-pressed="${!hide.py}">Pinyin</button><button class="${hide.vi ? '' : 'on'}" data-action="listen-hide" data-k="vi" aria-pressed="${!hide.vi}">Nghĩa</button></div>
     <div class="stage"><div class="card center${hide.py ? ' py-off' : ''}${hide.vi ? ' vi-off' : ''}">${c.zh}${meaningHtml(c)}</div></div>
     ${view.state.ask ? `<div class="footer two">
@@ -867,7 +867,23 @@ const mmss = (t) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart
 function cxView() {
   const at = loadJSON(CX_AT_KEY) ?? {};
   const item = (l) => `<button class="menu-item" data-action="cx-go" data-id="${l.id}">${icon('chalkboard-teacher')}<span><b>${esc(l.title)}</b><small>${l.items.length} câu${at[l.id] ? ` · Đang học ${mmss(at[l.id].t)} · ${at[l.id].d}` : ''}</small></span>${icon('caret-right')}</button>`;
-  return `<main class="page"><header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Chinext Education</h1></header><nav class="menu">${cxData.lessons.filter((l) => l.yt).map(item).join('')}</nav></main>`;
+  return `<main class="page"><header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Chinext Education</h1></header><nav class="menu"><button class="menu-item" data-action="cxp">${icon('pencil-simple-line')}<span><b>Luyện tập</b><small>Từ vựng, mẫu câu theo tiết / bài</small></span>${icon('caret-right')}</button>${cxData.lessons.filter((l) => l.yt).map(item).join('')}</nav></main>`;
+}
+
+// Chinext Luyện tập: lessons without a video (from the class slides: words g 'Từ vựng' + sentences), same modes as Luyện tập.
+const CX_PICK = key('hsk-cx-pick'); // ticked practice lesson ids, '' = all
+let cxPick = localStorage.getItem(CX_PICK) ?? '';
+const cxPicked = () => { const p = cxPick.split(',').filter(Boolean).map(Number), ls = cxData.lessons.filter((l) => !l.yt); return ls.filter((l) => !p.length || p.includes(l.id)); };
+const cxPickName = () => (cxPick ? (cxPicked().length === 1 ? cxPicked()[0].title : `${cxPicked().length} bài`) : 'tất cả');
+const cxPool = (mode) => cxPicked().flatMap((l) => l.items).filter((x) => (mode === 'cxs') !== (x.g === 'Từ vựng'));
+function cxPracticeView() {
+  const p = cxPick.split(',').filter(Boolean).map(Number);
+  const box = (v, t, on) => `<label><input type="checkbox" class="cx-pick" value="${v}"${on ? ' checked' : ''}> ${esc(t)}</label>`;
+  const btn = (m, ic, t) => `<button class="menu-item" data-action="write" data-mode="${m}">${icon(ic)}<span><b>${t}</b></span>${icon('caret-right')}</button>`;
+  return `<main class="page"><header class="list-head"><button class="icon-btn" data-action="cx" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Luyện tập</h1></header>
+    <details class="field pick"${view.open ? ' open' : ''}><summary>${esc(cxPick ? cxPickName() : 'Tất cả các bài')}</summary><div class="pick-list">${box('', 'Tất cả các bài', !cxPick)}${cxData.lessons.filter((l) => !l.yt).map((l) => box(l.id, l.title, p.includes(l.id))).join('')}</div></details>
+    <nav class="menu">${btn('cxw', 'pencil-simple-line', 'Luyện viết chữ')}${btn('cxs', 'text-align-left', 'Luyện viết câu')}${btn('cxm', 'translate', 'Luyện từ vựng')}
+      <button class="menu-item" data-action="cx-listen">${icon('headphones')}<span><b>Luyện nghe</b></span>${icon('caret-right')}</button></nav></main>`;
 }
 
 /** Học theo video: class video on top, the buổi's sentences in video order; tap = seek, Dừng = pause and write the current one. */
@@ -1238,7 +1254,7 @@ let wasTyping = false;
 let lastKey = 'home||', popping = false;
 
 function render() {
-  const views = { home, practice, radicals, words: wordList, quiz, summary, write, listen, wb: workbook, tb: textbook, toeic: toeicView, cx: cxView, cxv: cxVideoView, rd: readingView, song: songView, radw: radWrite };
+  const views = { home, practice, radicals, words: wordList, quiz, summary, write, listen, wb: workbook, tb: textbook, toeic: toeicView, cx: cxView, cxp: cxPracticeView, cxv: cxVideoView, rd: readingView, song: songView, radw: radWrite };
   wasTyping = document.activeElement?.matches?.('#hz-in, #py') ?? false;
   if (view.name !== 'practice') lessonPickerOpen = false; // picker reopens closed next time
   root.innerHTML = views[view.name]();
@@ -1387,6 +1403,12 @@ root.addEventListener('click', (e) => {
   else if (act === 't-retry') { if (confirm('Làm lại từ đầu?')) openToeic(view.lvl, view.id); }
   else if (act === 't-rec') toggleRec(el);
   else if (act === 'cx') { stopSong(); openCx(el.dataset.m); }
+  else if (act === 'cxp') { player.pause(); keepAlive.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); view = { name: 'cxp' }; render(); mediaState(); }
+  else if (act === 'cx-listen') {
+    const items = [...cxPool('cxw'), ...cxPool('cxs')];
+    if (!items.length) return alert('Chưa có câu nào.');
+    view = { name: 'listen', state: { items, i: 0, on: true, key: 'cxp' } }; keepAlive.play().catch(() => {}); listenStep();
+  }
   else if (act === 'cxv-seek') { if (cxvLoop) { cxvLoop = null; root.querySelector('.cxv-pad').hidden = true; } ytPlayer?.seekTo?.(cxRows()[+el.dataset.i].t, true); ytPlayer?.playVideo?.(); }
   else if (act === 'cxv-open') cxvPad(+el.dataset.i);
   else if (act === 'cxv-w') cxvWord(el.dataset.w);
@@ -1503,6 +1525,11 @@ root.addEventListener('input', (e) => {
   if (e.target.id === 'tb-search') { const f = fold(e.target.value); root.querySelectorAll('.tb-word[data-q]').forEach((r) => { r.hidden = !r.dataset.q.includes(f); }); }
 });
 root.addEventListener('change', (e) => {
+  if (e.target.classList.contains('cx-pick')) {
+    cxPick = e.target.value === '' ? '' : [...root.querySelectorAll('.cx-pick:checked')].map((b) => b.value).filter(Boolean).join(',');
+    try { localStorage.setItem(CX_PICK, cxPick); } catch { /* private mode */ }
+    view = { name: 'cxp', open: true }; return render();
+  }
   if (!e.target.classList.contains('lesson-pick')) return;
   // "Tất cả" clears the ticks; ticking a lesson unticks "Tất cả".
   pickedLesson = e.target.value === '' ? '' : [...root.querySelectorAll('.lesson-pick:checked')].map((b) => b.value).filter(Boolean).join(',');
