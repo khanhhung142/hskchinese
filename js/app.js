@@ -65,13 +65,15 @@ function play(src, text, lang, next) {
   player.ontimeupdate = () => { if (player.duration - player.currentTime < 0.45) end(); };
   player.onerror = fallback;
   player.src = src.startsWith('audio/') ? `${src}#t=0.15` : src;
+  // Vietnamese reads at 1.25x (her order); src load resets playbackRate to the default, so set both.
+  player.defaultPlaybackRate = player.playbackRate = lang === 'vi-VN' ? 1.25 : 1;
   player.play().catch((e) => { if (e.name !== 'AbortError') fallback(); });
 }
 function speak(text, lang, next) {
   if (!('speechSynthesis' in window)) return next?.();
   const u = new SpeechSynthesisUtterance(text);
   u.lang = lang;
-  u.rate = 0.85;
+  u.rate = lang === 'vi-VN' ? 1.1 : 0.85;
   u.onend = () => next?.();
   speechSynthesis.speak(u);
 }
