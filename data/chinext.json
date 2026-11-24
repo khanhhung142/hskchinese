@@ -1,5 +1,5 @@
 {"lessons": [
-{"id": 1, "yt": "aWXWFkhcB4k", "title": "Buổi 1: Ngữ âm 1", "items": [
+{"id": 1, "title": "Buổi 1: Ngữ âm 1", "yt": "aWXWFkhcB4k", "items": [
 {"id": "cx1-001", "g": "Từ vựng (giống tiếng Việt)", "zh": "狗", "py": "gǒu", "vi": "Con chó", "t": 1078},
 {"id": "cx1-002", "g": "Từ vựng (giống tiếng Việt)", "zh": "爸爸", "py": "bà ba", "vi": "Bố, ba", "t": 1115},
 {"id": "cx1-003", "g": "Từ vựng (giống tiếng Việt)", "zh": "妈妈", "py": "mā ma", "vi": "Mẹ, má", "t": 1132},
@@ -19,7 +19,7 @@
 {"id": "cx1-017", "g": "Câu giao tiếp", "zh": "来了。", "py": "lái le.", "vi": "Tới rồi đây.", "alt": ["我来了。"], "t": 5879},
 {"id": "cx1-018", "g": "Câu giao tiếp", "zh": "准备好了吗？", "py": "zhǔn bèi hǎo le ma?", "vi": "Chuẩn bị xong chưa?", "t": 5888}
 ]},
-{"id": 2, "yt": "M1Ks8971fps", "title": "Buổi 2: Ngữ âm 2", "items": [
+{"id": 2, "title": "Buổi 2: Ngữ âm 2", "yt": "M1Ks8971fps", "items": [
 {"id": "cx2-001", "g": "Ôn buổi 1", "zh": "你好！", "py": "nǐ hǎo!", "vi": "Xin chào!", "alt": ["你好。"], "t": 2706},
 {"id": "cx2-002", "g": "Ôn buổi 1", "zh": "你们好！", "py": "nǐ men hǎo!", "vi": "Chào các bạn!", "alt": ["你们好。"], "t": 2712},
 {"id": "cx2-003", "g": "Ôn buổi 1", "zh": "开门。", "py": "kāi mén.", "vi": "Mở cửa.", "alt": ["开门！"], "t": 2735},
@@ -38,7 +38,7 @@
 {"id": "cx2-016", "g": "Câu giao tiếp", "zh": "大家好！", "py": "dà jiā hǎo!", "vi": "Chào mọi người!", "alt": ["大家好。"], "t": 6397},
 {"id": "cx2-017", "g": "Câu giao tiếp", "zh": "再见！", "py": "zài jiàn!", "vi": "Tạm biệt!", "alt": ["再见。"], "t": 6412}
 ]},
-{"id": 3, "yt": "FYUZwDqFUOM", "title": "Buổi 3: Ngữ âm 3", "items": [
+{"id": 3, "title": "Buổi 3: Ngữ âm 3", "yt": "FYUZwDqFUOM", "items": [
 {"id": "cx3-001", "g": "Ôn tập", "zh": "北方", "py": "běi fāng", "vi": "phương Bắc", "t": 1328},
 {"id": "cx3-002", "g": "Ôn tập", "zh": "开门", "py": "kāi mén", "vi": "mở cửa", "t": 1433},
 {"id": "cx3-003", "g": "Ôn tập", "zh": "航班", "py": "háng bān", "vi": "chuyến bay", "t": 1476},
@@ -78,7 +78,7 @@
 {"id": "cx3-037", "g": "Biến điệu 不 / 一", "zh": "一条", "py": "yì tiáo", "vi": "một con", "alt": ["một chiếc"], "t": 5428},
 {"id": "cx3-038", "g": "Biến điệu 不 / 一", "zh": "一本", "py": "yì běn", "vi": "một quyển", "alt": ["một cuốn"], "t": 5476}
 ]},
-{"id": 4, "yt": "gBOkGHIFb_w", "title": "Buổi 4: Bài 1", "items": [
+{"id": 4, "title": "Buổi 4: Bài 1", "yt": "gBOkGHIFb_w", "items": [
 {"id": "cx4-001", "g": "Chào hỏi: … 好", "zh": "你好！", "py": "nǐ hǎo!", "vi": "Xin chào.", "t": 4009},
 {"id": "cx4-002", "g": "Chào hỏi: … 好", "zh": "您好！", "py": "nín hǎo!", "vi": "Chào ngài.", "t": 4061},
 {"id": "cx4-003", "g": "Chào hỏi: … 好", "zh": "你们好！", "py": "nǐ men hǎo!", "vi": "Chào các bạn.", "t": 4097},
@@ -107,7 +107,7 @@
 {"id": "cx4-026", "g": "Bài khóa", "zh": "同学们，再见！", "py": "tóng xué men, zài jiàn!", "vi": "Tạm biệt các em!", "t": 5905},
 {"id": "cx4-027", "g": "Bài khóa", "zh": "老师，再见！", "py": "lǎo shī, zài jiàn!", "vi": "Tạm biệt cô ạ!", "t": 5905}
 ]},
-{"id": 5, "yt": "4xfjc9XJbVk", "title": "Buổi 5: Bài 2", "items": [
+{"id": 5, "title": "Buổi 5: Bài 2", "yt": "4xfjc9XJbVk", "items": [
 {"id": "cx5-001", "g": "Ôn Bài 1", "zh": "您好！", "py": "nín hǎo!", "vi": "Chào ngài!", "alt": ["你好！"], "t": 1020},
 {"id": "cx5-002", "g": "Ôn Bài 1", "zh": "再见！", "py": "zài jiàn!", "vi": "Tạm biệt!", "t": 1035},
 {"id": "cx5-003", "g": "Ôn Bài 1", "zh": "你姓什么？", "py": "nǐ xìng shén me?", "vi": "Bạn họ gì?", "alt": ["请问，你姓什么？"], "t": 1118},
@@ -177,7 +177,7 @@
 {"id": "cx5-067", "g": "Bài khóa", "zh": "很高兴认识你。", "py": "hěn gāo xìng rèn shi nǐ.", "vi": "Rất vui được làm quen với bạn.", "t": 4040},
 {"id": "cx5-068", "g": "Bài khóa", "zh": "认识你我也很高兴。", "py": "rèn shi nǐ wǒ yě hěn gāo xìng.", "vi": "Mình cũng rất vui được làm quen với bạn.", "t": 4040}
 ]},
-{"id": 6, "yt": "sQODTp3XElo", "title": "Buổi 6: Bài 3", "items": [
+{"id": 6, "title": "Buổi 6: Bài 3", "yt": "sQODTp3XElo", "items": [
 {"id": "cx6-001", "g": "Ôn Bài 2", "zh": "谢谢！", "py": "xiè xie!", "vi": "Cảm ơn!", "t": 719},
 {"id": "cx6-002", "g": "Ôn Bài 2", "zh": "不客气。", "py": "bú kè qi.", "vi": "Không có gì (đáp lại lời cảm ơn).", "alt": ["没关系。"], "t": 752},
 {"id": "cx6-003", "g": "Ôn Bài 2", "zh": "对不起。", "py": "duì bu qǐ.", "vi": "Xin lỗi.", "t": 761},
@@ -1320,5 +1320,98 @@
 {"id": "cx16-086", "g": "Bài khóa", "zh": "好的，吃一点儿药，今天休息半天吧。", "py": "hǎo de, chī yì diǎnr yào, jīn tiān xiū xi bàn tiān ba.", "vi": "Được rồi, uống một ít thuốc nhé, hôm nay nghỉ ngơi nửa ngày nhé.", "t": 4661},
 {"id": "cx16-087", "g": "Bài khóa", "zh": "好的。", "py": "hǎo de.", "vi": "Vâng.", "t": 4661},
 {"id": "cx16-088", "g": "Bài khóa", "zh": "回家后再喝些热水。", "py": "huí jiā hòu zài hē xiē rè shuǐ.", "vi": "Sau khi về nhà nhớ uống thêm ít nước ấm nhé.", "t": 4661}
+]},
+{"id": 17, "title": "Buổi 17: Bài 13", "yt": "p1tdtbi8o1s", "items": [
+{"id": "cx17-001", "g": "Ôn Bài 12", "zh": "我回来得有点儿晚。", "py": "wǒ huí lái de yǒu diǎnr wǎn.", "vi": "Tôi về hơi muộn.", "alt": ["我回来有点儿晚。", "我回家有点儿晚。"], "t": 610},
+{"id": "cx17-002", "g": "Ôn Bài 12", "zh": "我有一点儿东西想给你。", "py": "wǒ yǒu yì diǎnr dōng xi xiǎng gěi nǐ.", "vi": "Tôi có một chút đồ muốn đưa cho bạn.", "alt": ["我有一点儿东西要给你。"], "t": 617},
+{"id": "cx17-003", "g": "Ôn Bài 12", "zh": "今天车有点儿多，所以我来晚了一点儿。", "py": "jīn tiān chē yǒu diǎnr duō, suǒ yǐ wǒ lái wǎn le yì diǎnr.", "vi": "Hôm nay xe hơi nhiều nên tôi đến muộn một chút.", "alt": ["今天车有点儿多，我来晚了一点儿。"], "t": 659},
+{"id": "cx17-004", "g": "Ôn Bài 12", "zh": "昨天晚上我睡得有点儿晚。", "py": "zuó tiān wǎn shang wǒ shuì de yǒu diǎnr wǎn.", "vi": "Tối hôm qua tôi ngủ hơi muộn.", "alt": ["昨天晚上我睡觉有点儿晚。"], "t": 694},
+{"id": "cx17-005", "g": "Ngữ pháp: 可以 / 能 / 不可以", "zh": "我可以说一点儿汉语。", "py": "wǒ kě yǐ shuō yì diǎnr Hànyǔ.", "vi": "Tôi có thể nói một chút tiếng Trung.", "alt": ["我能说一点儿汉语。", "我可以说一点儿中文。", "我能说一点儿中文。"], "t": 837},
+{"id": "cx17-006", "g": "Trung → Việt", "zh": "我可以开车。", "py": "wǒ kě yǐ kāi chē.", "vi": "Tôi có thể lái xe.", "alt": ["我能开车。"], "t": 885},
+{"id": "cx17-007", "g": "Ngữ pháp: 可以 / 能 / 不可以", "zh": "一分钟我可以写三十个汉字。", "py": "yì fēn zhōng wǒ kě yǐ xiě sān shí gè hàn zì.", "vi": "1 phút tôi có thể viết được 30 chữ Hán.", "alt": ["我一分钟可以写三十个汉字。", "一分钟我能写三十个汉字。"], "t": 897},
+{"id": "cx17-008", "g": "Ngữ pháp: 可以 / 能 / 不可以", "zh": "你知道他在哪儿吗？我不能找到他。", "py": "nǐ zhī dao tā zài nǎr ma? wǒ bù néng zhǎo dào tā.", "vi": "Bạn biết anh ấy ở đâu không? Tôi không thể tìm ra anh ấy.", "alt": ["你知道他在哪儿吗？我找不到他。", "你知道他在哪里吗？我不能找到他。"], "t": 944},
+{"id": "cx17-009", "g": "Ngữ pháp: 可以 / 能 / 不可以", "zh": "这件事我不能告诉你。", "py": "zhè jiàn shì wǒ bù néng gào su nǐ.", "vi": "Việc này tôi không thể nói với bạn.", "alt": ["这件事我不能跟你说。", "这个事我不能告诉你。"], "t": 979},
+{"id": "cx17-010", "g": "Ngữ pháp: 可以 / 能 / 不可以", "zh": "喝酒了不可以开车。", "py": "hē jiǔ le bù kě yǐ kāi chē.", "vi": "Uống rượu thì không được lái xe.", "alt": ["喝酒不可以开车。", "喝了酒不可以开车。", "喝酒了不能开车。"], "t": 1008},
+{"id": "cx17-011", "g": "Ngữ pháp: 可以 / 能 / 不可以", "zh": "这儿不可以抽烟。", "py": "zhèr bù kě yǐ chōu yān.", "vi": "Ở đây không được hút thuốc.", "alt": ["这里不可以抽烟。", "这儿不能抽烟。"], "t": 1013},
+{"id": "cx17-012", "g": "Ngữ pháp: 可以 / 能 / 不可以", "zh": "你生病了，不可以工作。", "py": "nǐ shēng bìng le, bù kě yǐ gōng zuò.", "vi": "Bạn bị ốm rồi, không được làm việc.", "alt": ["你病了，不可以工作。", "你生病了，不能工作。"], "t": 1031},
+{"id": "cx17-013", "g": "Ngữ pháp: 可以 / 能 / 不可以", "zh": "困的时候不可以开车。", "py": "kùn de shí hou bù kě yǐ kāi chē.", "vi": "Khi buồn ngủ thì không được lái xe.", "alt": ["想睡觉的时候不可以开车。", "困了不可以开车。"], "t": 1053},
+{"id": "cx17-014", "g": "Ngữ pháp: 再 + động từ", "zh": "这个字你写得太难看了，再写一次吧。", "py": "zhè ge zì nǐ xiě de tài nán kàn le, zài xiě yí cì ba.", "vi": "Chữ này bạn viết xấu quá, viết lại đi.", "alt": ["这个字你写得太难看了，再写一下吧。", "这个字写得太难看了，你再写一次吧。"], "t": 1101},
+{"id": "cx17-015", "g": "Ngữ pháp: 再 + động từ", "zh": "这个问题我还不懂，你可以再说一次吗？", "py": "zhè ge wèn tí wǒ hái bù dǒng, nǐ kě yǐ zài shuō yí cì ma?", "vi": "Vấn đề này tôi chưa hiểu, bạn nói lại được không?", "alt": ["这个问题我还不懂，你可以再说一下吗？", "这个问题我还不明白，你可以再说一次吗？"], "t": 1141},
+{"id": "cx17-016", "g": "Ngữ pháp: 再 + động từ", "zh": "这本书很好看，我想再看一次。", "py": "zhè běn shū hěn hǎo kàn, wǒ xiǎng zài kàn yí cì.", "vi": "Quyển sách này rất hay, tôi muốn đọc lại.", "alt": ["这本书很好看，我想再看一遍。", "这本书很有意思，我想再看一次。"], "t": 1171},
+{"id": "cx17-017", "g": "Ngữ pháp: 再 + động từ", "zh": "这些菜都很好吃，你再吃一点儿吧。", "py": "zhè xiē cài dōu hěn hǎo chī, nǐ zài chī yì diǎnr ba.", "vi": "Những món này đều rất ngon, bạn ăn thêm đi.", "alt": ["这些菜都很好吃，你多吃一点儿吧。"], "t": 1207},
+{"id": "cx17-018", "g": "Việt → Trung", "zh": "这个问题我要再问一下王老师。", "py": "zhè ge wèn tí wǒ yào zài wèn yí xià Wáng lǎo shī.", "vi": "Vấn đề này tôi phải hỏi lại thầy Vương.", "alt": ["这个问题我要再问问王老师。", "这个问题我得再问一下王老师。"], "t": 1287},
+{"id": "cx17-019", "g": "Việt → Trung", "zh": "我还有很多问题不懂。", "py": "wǒ hái yǒu hěn duō wèn tí bù dǒng.", "vi": "Tôi vẫn còn rất nhiều vấn đề chưa hiểu.", "alt": ["我有很多问题还不懂。", "我还有很多问题不明白。"], "t": 1324},
+{"id": "cx17-020", "g": "Việt → Trung", "zh": "你是新来的吧？有问题可以问我。", "py": "nǐ shì xīn lái de ba? yǒu wèn tí kě yǐ wèn wǒ.", "vi": "Bạn mới tới đúng không? Có vấn đề gì thì có thể hỏi tôi.", "alt": ["你是新来的吗？有什么问题可以问我。", "你是新来的吧？有什么问题可以问我。"], "t": 1421},
+{"id": "cx17-021", "g": "Việt → Trung", "zh": "请问，这儿卖水果吗？", "py": "qǐng wèn, zhèr mài shuǐ guǒ ma?", "vi": "Xin hỏi, ở đây có bán hoa quả không?", "alt": ["请问，这里卖水果吗？", "请问，这儿有水果卖吗？"], "t": 1459},
+{"id": "cx17-022", "g": "Việt → Trung", "zh": "请问，苹果怎么卖？", "py": "qǐng wèn, píng guǒ zěn me mài?", "vi": "Xin hỏi, táo bán thế nào?", "t": 1493},
+{"id": "cx17-023", "g": "Việt → Trung", "zh": "我们的商店卖很多好看的衣服。", "py": "wǒ men de shāng diàn mài hěn duō hǎo kàn de yī fu.", "vi": "Cửa hàng của chúng tôi bán rất nhiều quần áo đẹp.", "alt": ["我们商店卖很多好看的衣服。", "我们的商店卖很多漂亮的衣服。"], "t": 1515},
+{"id": "cx17-024", "g": "Việt → Trung", "zh": "听说你想卖车，是吗？", "py": "tīng shuō nǐ xiǎng mài chē, shì ma?", "vi": "Nghe nói bạn muốn bán xe phải không?", "alt": ["听说你要卖车，是吗？", "听说你想卖车，是不是？"], "t": 1553},
+{"id": "cx17-025", "g": "Việt → Trung", "zh": "晚上我常常给爸爸妈妈打电话。", "py": "wǎn shang wǒ cháng cháng gěi bà ba mā ma dǎ diàn huà.", "vi": "Buổi tối tôi thường gọi điện về cho bố mẹ.", "alt": ["我晚上常常给爸爸妈妈打电话。", "晚上我常常给爸妈打电话。"], "t": 1601},
+{"id": "cx17-026", "g": "Việt → Trung", "zh": "她常常给男朋友打电话。", "py": "tā cháng cháng gěi nán péng you dǎ diàn huà.", "vi": "Cô ấy thường xuyên gọi điện thoại cho bạn trai.", "alt": ["她常常跟男朋友打电话。", "她经常给男朋友打电话。"], "t": 1622},
+{"id": "cx17-027", "g": "Việt → Trung", "zh": "我在打电话，你等一下吧。", "py": "wǒ zài dǎ diàn huà, nǐ děng yí xià ba.", "vi": "Tôi đang gọi điện, bạn chờ một lát nhé.", "alt": ["我正在打电话，你等一下吧。", "我在打电话呢，你等一下吧。", "我在打电话，请等一下。"], "t": 1667},
+{"id": "cx17-028", "g": "Ngữ pháp: động từ + 一下", "zh": "这是我们商店的衣服，你看一下吧。", "py": "zhè shì wǒ men shāng diàn de yī fu, nǐ kàn yí xià ba.", "vi": "Đây là quần áo của cửa hàng chúng tôi, bạn xem thử đi.", "alt": ["这是我们商店的衣服，你看看吧。"], "t": 1744},
+{"id": "cx17-029", "g": "Ngữ pháp: động từ + 一下", "zh": "你听一下，谁在说话？", "py": "nǐ tīng yí xià, shéi zài shuō huà?", "vi": "Bạn nghe thử xem ai đang nói chuyện?", "alt": ["你听一下，是谁在说话？", "你听听，谁在说话？"], "t": 1775},
+{"id": "cx17-030", "g": "Ngữ pháp: động từ + 一下", "zh": "你休息一下吧，到了我叫你。", "py": "nǐ xiū xi yí xià ba, dào le wǒ jiào nǐ.", "vi": "Bạn nghỉ một lát đi, tới nơi tôi sẽ gọi bạn.", "alt": ["你休息一下吧，到了我会叫你。", "你休息一会儿吧，到了我叫你。"], "t": 1832},
+{"id": "cx17-031", "g": "Ngữ pháp: động từ + 一下", "zh": "等一下，我马上来。", "py": "děng yí xià, wǒ mǎ shàng lái.", "vi": "Đợi một lát, tôi tới ngay.", "alt": ["等一下，我马上到。", "请等一下，我马上来。"], "t": 1883},
+{"id": "cx17-032", "g": "Việt → Trung", "zh": "我三十分钟后到。", "py": "wǒ sān shí fēn zhōng hòu dào.", "vi": "30 phút nữa tôi tới.", "alt": ["三十分钟后我到。", "我三十分钟以后到。"], "t": 1885},
+{"id": "cx17-033", "g": "Trung → Việt", "zh": "我是这个饭馆的服务员。", "py": "wǒ shì zhè ge fàn guǎn de fú wù yuán.", "vi": "Tôi là nhân viên phục vụ của quán ăn này.", "t": 1977},
+{"id": "cx17-034", "g": "Trung → Việt", "zh": "我想找一下这个饭馆的服务员。", "py": "wǒ xiǎng zhǎo yí xià zhè ge fàn guǎn de fú wù yuán.", "vi": "Tôi muốn tìm nhân viên phục vụ của quán ăn này.", "t": 2007},
+{"id": "cx17-035", "g": "Việt → Trung", "zh": "我很喜欢这个饭馆，因为服务员很热情。", "py": "wǒ hěn xǐ huan zhè ge fàn guǎn, yīn wèi fú wù yuán hěn rè qíng.", "vi": "Tôi rất thích quán ăn này vì nhân viên phục vụ rất nhiệt tình.", "alt": ["我很喜欢这个饭馆，因为这儿的服务员很热情。"], "t": 2115},
+{"id": "cx17-036", "g": "Việt → Trung", "zh": "这个饭馆的服务很好。", "py": "zhè ge fàn guǎn de fú wù hěn hǎo.", "vi": "Dịch vụ của nhà hàng này rất tốt.", "alt": ["这家饭馆的服务很好。"], "t": 2143},
+{"id": "cx17-037", "g": "Việt → Trung", "zh": "我们公司是服务公司。", "py": "wǒ men gōng sī shì fú wù gōng sī.", "vi": "Công ty chúng tôi là công ty dịch vụ.", "alt": ["我们的公司是服务公司。"], "t": 2173},
+{"id": "cx17-038", "g": "Việt → Trung", "zh": "王女士，请进，请坐，请喝茶。", "py": "Wáng nǚ shì, qǐng jìn, qǐng zuò, qǐng hē chá.", "vi": "Cô Vương, mời vào, mời ngồi, mời uống trà.", "t": 2246},
+{"id": "cx17-039", "g": "Việt → Trung", "zh": "我介绍一下，这是王女士，我们的大客户。", "py": "wǒ jiè shào yí xià, zhè shì Wáng nǚ shì, wǒ men de dà kè hù.", "vi": "Xin giới thiệu một chút, đây là cô Vương, khách hàng lớn của chúng ta.", "alt": ["我来介绍一下，这是王女士，我们的大客户。", "介绍一下，这是王女士，我们的大客户。"], "t": 2289},
+{"id": "cx17-040", "g": "Việt → Trung", "zh": "这是王女士的学生，他是我们的新老板。", "py": "zhè shì Wáng nǚ shì de xué sheng, tā shì wǒ men de xīn lǎo bǎn.", "vi": "Đây là học trò của cô Vương, anh ấy là sếp mới của chúng ta.", "t": 2371},
+{"id": "cx17-041", "g": "Việt → Trung", "zh": "谢谢你今天帮我，我请你吃饭。", "py": "xiè xie nǐ jīn tiān bāng wǒ, wǒ qǐng nǐ chī fàn.", "vi": "Cảm ơn bạn hôm nay đã giúp tôi, tôi mời bạn ăn cơm.", "alt": ["谢谢你今天帮了我，我请你吃饭。"], "t": 2454},
+{"id": "cx17-042", "g": "Việt → Trung", "zh": "谢谢你，今天我请客。", "py": "xiè xie nǐ, jīn tiān wǒ qǐng kè.", "vi": "Cảm ơn bạn, hôm nay tôi đãi.", "alt": ["谢谢你，今天我请。"], "t": 2459},
+{"id": "cx17-043", "g": "Việt → Trung", "zh": "昨天王老师请客，我们都喝了很多。", "py": "zuó tiān Wáng lǎo shī qǐng kè, wǒ men dōu hē le hěn duō.", "vi": "Hôm qua thầy Vương mời khách, chúng tôi đều uống rất nhiều.", "alt": ["昨天王老师请客，我们都喝得很多。"], "t": 2496},
+{"id": "cx17-044", "g": "Trung → Việt", "zh": "请给我一杯热水，谢谢。", "py": "qǐng gěi wǒ yì bēi rè shuǐ, xiè xie.", "vi": "Cho tôi xin một cốc nước nóng. Cảm ơn.", "t": 2545},
+{"id": "cx17-045", "g": "Việt → Trung", "zh": "妈妈给我一个新手机。", "py": "mā ma gěi wǒ yí gè xīn shǒu jī.", "vi": "Mẹ cho tôi một cái điện thoại mới.", "alt": ["妈妈给了我一个新手机。"], "t": 2588},
+{"id": "cx17-046", "g": "Việt → Trung", "zh": "哥哥给我很多好吃的东西。", "py": "gē ge gěi wǒ hěn duō hǎo chī de dōng xi.", "vi": "Anh trai cho tôi rất nhiều đồ ăn ngon.", "alt": ["哥哥给了我很多好吃的东西。", "哥哥给我很多好吃的。"], "t": 2619},
+{"id": "cx17-047", "g": "Việt → Trung", "zh": "服务员，请给我一杯咖啡。", "py": "fú wù yuán, qǐng gěi wǒ yì bēi kā fēi.", "vi": "Phục vụ ơi, cho tôi một cốc cà phê.", "alt": ["服务员，给我一杯咖啡。"], "t": 2655},
+{"id": "cx17-048", "g": "Việt → Trung", "zh": "太热了，给我一杯水吧。", "py": "tài rè le, gěi wǒ yì bēi shuǐ ba.", "vi": "Nóng quá, cho tôi một cốc nước đi.", "alt": ["太热了，请给我一杯水吧。"], "t": 2682},
+{"id": "cx17-049", "g": "Việt → Trung", "zh": "早上我常常喝一杯咖啡，然后吃早饭。", "py": "zǎo shang wǒ cháng cháng hē yì bēi kā fēi, rán hòu chī zǎo fàn.", "vi": "Buổi sáng tôi thường uống một cốc cà phê, sau đó ăn sáng.", "alt": ["我早上常常喝一杯咖啡，然后吃早饭。"], "t": 2721},
+{"id": "cx17-050", "g": "Việt → Trung", "zh": "你今天已经喝了两杯奶茶了，别再喝了。", "py": "nǐ jīn tiān yǐ jīng hē le liǎng bēi nǎi chá le, bié zài hē le.", "vi": "Hôm nay bạn đã uống hai cốc trà sữa rồi, đừng uống nữa.", "alt": ["你今天已经喝了两杯奶茶了，不要再喝了。", "你今天已经喝了两杯奶茶了，不可以再喝了。"], "t": 2773},
+{"id": "cx17-051", "g": "Việt → Trung", "zh": "我要一杯咖啡。", "py": "wǒ yào yì bēi kā fēi.", "vi": "Cho tôi một cốc cà phê.", "alt": ["请给我一杯咖啡。"], "t": 2848},
+{"id": "cx17-052", "g": "Việt → Trung", "zh": "我儿子要一个新手机。", "py": "wǒ ér zi yào yí gè xīn shǒu jī.", "vi": "Con trai tôi muốn một cái điện thoại mới.", "alt": ["我儿子想要一个新手机。"], "t": 2881},
+{"id": "cx17-053", "g": "Việt → Trung", "zh": "你要什么就跟我说。", "py": "nǐ yào shén me jiù gēn wǒ shuō.", "vi": "Bạn muốn cái gì cứ nói với tôi.", "alt": ["你要什么就告诉我。", "你想要什么就跟我说。"], "t": 2909},
+{"id": "cx17-054", "g": "Việt → Trung", "zh": "你做的面包真好吃。", "py": "nǐ zuò de miàn bāo zhēn hǎo chī.", "vi": "Bánh mì bạn làm thật là ngon.", "alt": ["你做的面包太好吃了。", "你做的面包很好吃。"], "t": 3003},
+{"id": "cx17-055", "g": "Việt → Trung", "zh": "明天早上我想吃面包，喝牛奶。", "py": "míng tiān zǎo shang wǒ xiǎng chī miàn bāo, hē niú nǎi.", "vi": "Sáng mai tôi muốn ăn bánh mì và uống sữa.", "alt": ["明天早上我要吃面包，喝牛奶。"], "t": 3035},
+{"id": "cx17-056", "g": "Trung → Việt", "zh": "我昨天在超市买了三斤鸡蛋。", "py": "wǒ zuó tiān zài chāo shì mǎi le sān jīn jī dàn.", "vi": "Hôm qua tôi mua ba cân trứng gà ở siêu thị.", "alt": ["昨天我在超市买了三斤鸡蛋。"], "t": 3102},
+{"id": "cx17-057", "g": "Trung → Việt", "zh": "我的早饭是一块面包和一个鸡蛋。", "py": "wǒ de zǎo fàn shì yí kuài miàn bāo hé yí gè jī dàn.", "vi": "Bữa sáng của tôi là một lát bánh mì và một quả trứng.", "t": 3167},
+{"id": "cx17-058", "g": "Việt → Trung", "zh": "吃太多鸡蛋对身体不好。", "py": "chī tài duō jī dàn duì shēn tǐ bù hǎo.", "vi": "Ăn quá nhiều trứng cũng không tốt cho sức khỏe.", "alt": ["鸡蛋吃太多对身体不好。", "吃太多鸡蛋对身体也不好。"], "t": 3221},
+{"id": "cx17-059", "g": "Việt → Trung", "zh": "一斤鸡蛋二十块，我要三斤。", "py": "yì jīn jī dàn èr shí kuài, wǒ yào sān jīn.", "vi": "Một cân trứng 20 tệ, tôi muốn 3 cân.", "alt": ["鸡蛋一斤二十块，我要三斤。"], "t": 3263},
+{"id": "cx17-060", "g": "Việt → Trung", "zh": "李先生今天没来公司，我给他打电话了。", "py": "Lǐ xiān sheng jīn tiān méi lái gōng sī, wǒ gěi tā dǎ diàn huà le.", "vi": "Ông Lý hôm nay không tới công ty, tôi đã gọi điện cho ông ấy.", "alt": ["李先生今天没来公司，我给他打了电话。"], "t": 3335},
+{"id": "cx17-061", "g": "Trung → Việt", "zh": "先生，您找谁？", "py": "xiān sheng, nín zhǎo shéi?", "vi": "Thưa ông, ông tìm ai?", "t": 3372},
+{"id": "cx17-062", "g": "Việt → Trung", "zh": "我介绍一下，这是李先生。李先生，这是我们的老板。", "py": "wǒ jiè shào yí xià, zhè shì Lǐ xiān sheng. Lǐ xiān sheng, zhè shì wǒ men de lǎo bǎn.", "vi": "Xin giới thiệu một chút, đây là ông Lý. Ông Lý, đây là sếp của chúng tôi.", "alt": ["我来介绍一下，这是李先生。李先生，这是我们的老板。"], "t": 3421},
+{"id": "cx17-063", "g": "Trung → Việt", "zh": "这个面包我吃了一半。", "py": "zhè ge miàn bāo wǒ chī le yí bàn.", "vi": "Cái bánh mì này tôi đã ăn một nửa.", "t": 3497},
+{"id": "cx17-064", "g": "Trung → Việt", "zh": "这个苹果我们一人一半。", "py": "zhè ge píng guǒ wǒ men yì rén yí bàn.", "vi": "Quả táo này chúng ta mỗi người một nửa.", "t": 3522},
+{"id": "cx17-065", "g": "Việt → Trung", "zh": "我们班一半的人会说汉语。", "py": "wǒ men bān yí bàn de rén huì shuō Hànyǔ.", "vi": "Lớp chúng tôi một nửa biết nói tiếng Trung.", "alt": ["我们班有一半的人会说汉语。", "我们班一半的人会说中文。"], "t": 3560},
+{"id": "cx17-066", "g": "Việt → Trung", "zh": "今天我一半的时间都在睡觉。", "py": "jīn tiān wǒ yí bàn de shí jiān dōu zài shuì jiào.", "vi": "Một nửa thời gian hôm nay tôi ngủ.", "alt": ["今天一半的时间我都在睡觉。", "今天我一半的时间在睡觉。"], "t": 3588},
+{"id": "cx17-067", "g": "Việt → Trung", "zh": "今天的工作我做了一半。", "py": "jīn tiān de gōng zuò wǒ zuò le yí bàn.", "vi": "Công việc hôm nay tôi đã làm một nửa.", "alt": ["今天的工作我做完了一半。"], "t": 3613},
+{"id": "cx17-068", "g": "Việt → Trung", "zh": "我们公司一半是外国人，都喜欢喝茶。", "py": "wǒ men gōng sī yí bàn shì wài guó rén, dōu xǐ huan hē chá.", "vi": "Công ty chúng tôi một nửa là người nước ngoài, đều thích uống trà.", "alt": ["我们公司一半的人是外国人，都喜欢喝茶。"], "t": 3762},
+{"id": "cx17-069", "g": "Việt → Trung", "zh": "晚上喝太多茶会睡不着。", "py": "wǎn shang hē tài duō chá huì shuì bu zháo.", "vi": "Buổi tối uống quá nhiều trà sẽ không ngủ được.", "alt": ["晚上喝太多茶就睡不着。", "喝太多茶晚上会睡不着。"], "t": 3794},
+{"id": "cx17-070", "g": "Việt → Trung", "zh": "早上我爸爸喜欢喝茶或者咖啡。", "py": "zǎo shang wǒ bà ba xǐ huan hē chá huò zhě kā fēi.", "vi": "Buổi sáng bố tôi thích uống trà hoặc cà phê.", "alt": ["早上我爸爸喜欢喝茶或者喝咖啡。", "我爸爸早上喜欢喝茶或者咖啡。"], "t": 3843},
+{"id": "cx17-071", "g": "Việt → Trung", "zh": "睡觉前别喝太多茶。", "py": "shuì jiào qián bié hē tài duō chá.", "vi": "Trước khi đi ngủ đừng uống quá nhiều trà.", "alt": ["睡觉以前别喝太多茶。", "睡觉前不要喝太多茶。"], "t": 3876},
+{"id": "cx17-072", "g": "Bài khóa", "zh": "王老师，我可以再问您一个问题吗？", "py": "Wáng lǎo shī, wǒ kě yǐ zài wèn nín yí gè wèn tí ma?", "vi": "Thưa cô Vương, em có thể hỏi thêm cô một câu nữa không ạ?", "t": 4227},
+{"id": "cx17-073", "g": "Bài khóa", "zh": "可以。你有什么问题？", "py": "kě yǐ. nǐ yǒu shén me wèn tí?", "vi": "Được chứ. Em có vấn đề gì nào?", "t": 4227},
+{"id": "cx17-074", "g": "Bài khóa", "zh": "那个小店卖不卖手机？", "py": "nà ge xiǎo diàn mài bu mài shǒu jī?", "vi": "Cửa hàng nhỏ kia có bán điện thoại di động không ạ?", "t": 4227},
+{"id": "cx17-075", "g": "Bài khóa", "zh": "我不知道。你可以打电话问一下。", "py": "wǒ bù zhī dao. nǐ kě yǐ dǎ diàn huà wèn yí xià.", "vi": "Cô không biết. Em có thể gọi điện thoại hỏi xem.", "t": 4227},
+{"id": "cx17-076", "g": "Ngữ pháp: Động từ năng nguyện “可以”", "zh": "我可以再问您一个问题吗？", "py": "wǒ kě yǐ zài wèn nín yí gè wèn tí ma?", "vi": "Em có thể hỏi thêm cô một câu nữa không ạ?", "t": 827},
+{"id": "cx17-077", "g": "Ngữ pháp: Động từ năng nguyện “可以”", "zh": "你们可以看这本书。", "py": "nǐ men kě yǐ kàn zhè běn shū.", "vi": "Các bạn có thể đọc cuốn sách này.", "t": 827},
+{"id": "cx17-078", "g": "Ngữ pháp: Động từ năng nguyện “可以”", "zh": "我可以坐吗？可以，请坐！", "py": "wǒ kě yǐ zuò ma? kě yǐ, qǐng zuò!", "vi": "Tôi có thể ngồi không? Được, mời ngồi!", "t": 827},
+{"id": "cx17-079", "g": "Ngữ pháp: Cấu trúc “động từ + 一下”", "zh": "你可以打电话问一下。", "py": "nǐ kě yǐ dǎ diàn huà wèn yí xià.", "vi": "Bạn có thể gọi điện thoại hỏi thử.", "t": 1711},
+{"id": "cx17-080", "g": "Ngữ pháp: Cấu trúc “động từ + 一下”", "zh": "请休息一下。", "py": "qǐng xiū xi yí xià.", "vi": "Mời nghỉ ngơi một chút.", "t": 1711},
+{"id": "cx17-081", "g": "Ngữ pháp: Cấu trúc “động từ + 一下”", "zh": "你看一下吧。", "py": "nǐ kàn yí xià ba.", "vi": "Bạn xem một chút đi.", "t": 1711},
+{"id": "cx17-082", "g": "Bài khóa", "zh": "女士，请坐！您喝什么？", "py": "nǚ shì, qǐng zuò! nín hē shén me?", "vi": "Mời cô ngồi! Cô uống gì ạ?", "t": 4537},
+{"id": "cx17-083", "g": "Bài khóa", "zh": "我看一下。请给我一杯牛奶。", "py": "wǒ kàn yí xià. qǐng gěi wǒ yì bēi niú nǎi.", "vi": "Để tôi xem một chút. Cho tôi một cốc sữa.", "t": 4537},
+{"id": "cx17-084", "g": "Bài khóa", "zh": "好的。您还要什么？", "py": "hǎo de. nín hái yào shén me?", "vi": "Vâng. Cô còn dùng thêm gì nữa không?", "t": 4537},
+{"id": "cx17-085", "g": "Bài khóa", "zh": "我还没吃早饭，再要这个面包和鸡蛋吧。", "py": "wǒ hái méi chī zǎo fàn, zài yào zhè ge miàn bāo hé jī dàn ba.", "vi": "Tôi vẫn chưa ăn sáng, cho tôi cái bánh mì này và trứng nhé.", "t": 4537},
+{"id": "cx17-086", "g": "Ngữ pháp: Câu có hai tân ngữ (1)", "zh": "请给我一杯牛奶。", "py": "qǐng gěi wǒ yì bēi niú nǎi.", "vi": "Cho tôi một cốc sữa.", "t": 2575},
+{"id": "cx17-087", "g": "Ngữ pháp: Câu có hai tân ngữ (1)", "zh": "白家月给安妮一个苹果。", "py": "Bái Jiāyuè gěi Ānnī yí gè píng guǒ.", "vi": "Bạch Gia Nguyệt đưa cho Annie một quả táo.", "t": 2575},
+{"id": "cx17-088", "g": "Ngữ pháp: Câu có hai tân ngữ (1)", "zh": "我问老师两个问题。", "py": "wǒ wèn lǎo shī liǎng gè wèn tí.", "vi": "Tôi hỏi thầy giáo hai câu hỏi.", "t": 2575},
+{"id": "cx17-089", "g": "Bài khóa", "zh": "先生，请坐！您要什么？", "py": "xiān sheng, qǐng zuò! nín yào shén me?", "vi": "Mời anh ngồi! Anh cần gì ạ?", "t": 5073},
+{"id": "cx17-090", "g": "Bài khóa", "zh": "我要一斤饺子。", "py": "wǒ yào yì jīn jiǎo zi.", "vi": "Cho tôi một cân sủi cảo.", "t": 5073},
+{"id": "cx17-091", "g": "Bài khóa", "zh": "请给我一杯茶吧。", "py": "qǐng gěi wǒ yì bēi chá ba.", "vi": "Cho tôi một cốc trà nhé.", "t": 5073}
 ]}
 ]}
