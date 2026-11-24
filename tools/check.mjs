@@ -200,8 +200,9 @@ async function syncAudio(data, english, cx) {
       ...english.sentences.map((s) => [s.text, s.vi]),
       // Chinese practice reads the Vietnamese meaning too: audio/vi/<hanzi or sentence>.mp3.
       ...data.words.map((w) => [w.hanzi, w.meanings.join('; ')]), ...data.sentences.map((s) => [sentenceText(s), s.vi]),
-      // Chinext Education: audio/<zh>.mp3 + audio/vi/<zh>.mp3, played by the same say()/sayVi().
-      ...cxItems.map((x) => [x.zh, x.vi])], VOICE_VI);
+    ], VOICE_VI)
+    // Chinext Education: own dir, its Vietnamese differs from the main app's for the same hanzi.
+    + await syncDir(path.join(AUDIO, 'vicx'), cxItems.map((x) => [x.zh, x.vi]), VOICE_VI);
 }
 
 /** Make `dir` hold exactly one `<text>.mp3` per text; a `[name, text]` pair speaks `text` into `<name>.mp3`. */
@@ -211,7 +212,11 @@ async function syncDir(dir, texts, voice) {
   const wanted = new Set(say.keys());
   const existing = new Set((await readdir(dir)).filter((f) => f.endsWith('.mp3')).map((f) => f.slice(0, -4)));
   for (const f of existing) if (!wanted.has(f)) await unlink(path.join(dir, f + '.mp3'));
-  const missing = [...wanted].filter((t) => !existing.has(t));
+  // .say.json {name: spoken text}: an edited text regenerates its mp3 (pairs only; plain names speak themselves).
+  const manPath = path.join(dir, '.say.json');
+  const man = JSON.parse(await readFile(manPath, 'utf8').catch(() => '{}'));
+  const pairs = texts.some(Array.isArray);
+  const missing = [...wanted].filter((t) => !existing.has(t) || (pairs && man[t] !== say.get(t)));
   const run = promisify(execFile);
   const bin = process.env.EDGE_TTS ?? 'edge-tts';
   // ponytail: 4 parallel edge-tts processes; fine for a few dozen files per lesson.
@@ -225,6 +230,7 @@ async function syncDir(dir, texts, voice) {
       }
     }));
   }
+  if (pairs) await writeFile(manPath, JSON.stringify(Object.fromEntries([...say].sort(([a], [b]) => (a < b ? -1 : 1))), null, 0).replace(/","/g, '",\n"'));
   return missing.length;
 }
 

@@ -46,7 +46,9 @@ const sayEn = (text, next) => (text ? play(`audio/en/${encodeURIComponent(text)}
 /** Word in Chinese, then its English. */
 const sayWord = (w) => say(w.hanzi, () => sayEn(w.en));
 /** /english/: Vietnamese meaning mp3, named by the English text (see check.mjs). */
-const sayVi = (en, vi, next) => play(`audio/vi/${encodeURIComponent(en)}.mp3`, vi, 'vi-VN', next);
+// Chinext items (write mode cx*, or a listen item with zh) read from audio/vicx/: their Vietnamese differs from the main app's.
+const cxNow = () => (view.name === 'write' ? view.mode.startsWith('cx') : view.name === 'listen' && !!view.state.items?.[view.state.i]?.zh);
+const sayVi = (en, vi, next) => play(`audio/${cxNow() ? 'vicx' : 'vi'}/${encodeURIComponent(en)}.mp3`, vi, 'vi-VN', next);
 /** /english/ practice: English, then its Vietnamese meaning. */
 const sayEnVi = (en, vi, next) => say(en, () => sayVi(en, vi, next));
 /** Chinese practice: English then Vietnamese meaning (audio/vi/<hanzi or sentence>.mp3). */

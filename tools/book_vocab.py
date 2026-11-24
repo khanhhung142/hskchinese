@@ -74,12 +74,24 @@ def dedup(w):
     w['senses'] = {k: idx[v] for k, v in w.get('senses', {}).items()}
 for w in words.values(): dedup(w)
 # Book glosses both 睡 and 睡觉 as 'ngủ': tell them apart in practice cards.
-VI_FIX = {'睡觉': ['đi ngủ'], '五': ['năm (số 5)'], '年': ['năm (thời gian)'], '分': ['phút (giờ phút)'], '分钟': ['phút (bao nhiêu phút)']}
-for k, v in VI_FIX.items(): words[k]['meanings'] = v
-assert words['要']['meanings'] == ['cần, muốn, phải', 'mất (thời gian)'], words['要']['meanings']
+VI_FIX = {'睡觉': ['đi ngủ'], '五': ['số năm'], '年': ['năm'], '分': ['phút'], '分钟': ['phút đồng hồ'],
+  # Translation only, no explanations (her order).
+  '们': ['các, những'], '您': ['ngài, ông, bà'], '你们': ['các bạn'], '不客气': ['đừng khách sáo'], '你': ['bạn'], '我': ['tôi'],
+  '的': ['của'], '中国': ['Trung Quốc'], '法国': ['Pháp'], '泰国': ['Thái Lan'], '吗': ['phải không'], '我们': ['chúng tôi, chúng ta'],
+  '个': ['cái, chiếc'], '呢': ['thì sao', 'đấy'], '家': ['gia đình, nhà', 'cái'], '口': ['người'], '多': ['bao nhiêu', 'nhiều'],
+  '大': ['lớn tuổi', 'lớn, to'], '电话': ['điện thoại'], '牛奶': ['sữa, sữa bò'], '包子': ['bánh bao'], '米饭': ['cơm, cơm trắng'],
+  '坐': ['ngồi, đi'], '吧': ['nhé, đi'], '只': ['con'], '下': ['dưới, bên dưới', 'rơi, xuống'], '上': ['trên', 'lên', 'đi, vào'],
+  '第': ['thứ'], '块': ['đồng, tệ'], '斤': ['cân'], '件': ['chiếc, cái, bộ'], '元': ['đồng, tệ'], '正在': ['đang'], '开车': ['lái xe'],
+  '要': ['cần, muốn, phải', 'mất'], '了': ['rồi', 'đã'], '再': ['rồi mới, sau đó', 'lại, thêm'], '可以': ['có thể, được'],
+  '一下': ['một chút, thử'], '开': ['lái, chạy, khởi hành'], '他': ['anh ấy, ông ấy'], '她': ['cô ấy, chị ấy'],
+  '他们': ['họ, các anh ấy'], '她们': ['họ, các chị ấy'], '它们': ['chúng'], '两': ['hai'], '零': ['không, số không'],
+  '有点儿': ['hơi, một chút'], '哪些': ['những cái nào']}
+for k, v in VI_FIX.items(): assert len(v) == len(words[k]['meanings']), k; words[k]['meanings'] = v
 assert words['菜']['meanings'] == ['thức ăn, món ăn, rau'], words['菜']['meanings']
 
 # Sentences
+S_VI = {'四口。': 'bốn người', '两个。': 'hai cái', '老师好。': 'Chào thầy cô.', '您儿子多大？': 'Con trai bác bao nhiêu tuổi?',
+        '王老师，再见。': 'Tạm biệt cô Vương.', '这是老师的新电脑。': 'Đây là máy tính mới của cô giáo.'}  # translation only, no slashes/notes
 PUNCT_KEEP = '，。？！'
 def clean(zh):
     zh = re.sub(r'^(男|女|问)[：:]', '', zh.strip()).lstrip('★').strip()
@@ -129,6 +141,7 @@ for lid, zh, vi, en in sorted(raw, key=lambda r: r[0]):  # oldest lesson keeps a
     focus_n[focus] = focus_n.get(focus, 0) + 1
     sense = words[focus].get('senses', {}).get(lid, 0)
     en = EN['s'].get(zh) or en
+    vi = S_VI.get(zh, vi)
     n = nums.get(lid, 0) + 1; nums[lid] = n
     sentences.append({'id': f'{lid}-{n:02d}', 'tokens': toks, 'vi': vi, 'en': en, 'focus': focus, 'sense': sense, 'lesson': lid})
 
