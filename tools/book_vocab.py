@@ -114,7 +114,7 @@ def walk(o, lid):
 for L in wb['lessons']: walk(L, L['id'])
 
 sentences, seen, skipped, nums, focus_n = [], set(), 0, {}, {}
-for lid, zh, vi, en in raw:
+for lid, zh, vi, en in sorted(raw, key=lambda r: r[0]):  # oldest lesson keeps a repeated line
     if re.search(r'[A-Za-z0-9/~…—_=+]', zh) or not vi: skipped += 1; continue
     if re.search(r'[：:]\s*$', zh) or vi.rstrip().endswith(':'): skipped += 1; continue  # workbook question stem ("Ngày mai là:"), not a sentence
     zh = clean(zh)
