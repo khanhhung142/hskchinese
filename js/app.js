@@ -889,7 +889,12 @@ const cxPractice = () => cxPL ??= (() => {
     const l = by.get(k), seen = new Set(l.items.map((x) => bare(x.zh)));
     for (const x of v.items) if (!seen.has(bare(x.zh))) { seen.add(bare(x.zh)); l.items.push({ ...x, g: x.g.startsWith('Từ vựng') ? 'Từ vựng' : x.g }); }
   }
-  return [...by.values()].sort((a, b) => a.id - b.id);
+  // Her order: a word/sentence repeated across lessons stays only in the oldest one (lowest id).
+  const seen = new Set();
+  return [...by.values()].sort((a, b) => a.id - b.id).map((l) => ({ ...l, items: l.items.filter((x) => {
+    const k = (x.g === 'Từ vựng' ? 'w' : 's') + bare(x.zh);
+    return !seen.has(k) && seen.add(k);
+  }) })).filter((l) => l.items.length);
 })();
 const cxPicked = () => { const p = cxPick.split(',').filter(Boolean).map(Number), ls = cxPractice(); return ls.filter((l) => !p.length || p.includes(l.id)); };
 const cxPickName = () => (cxPick ? (cxPicked().length === 1 ? cxPicked()[0].title : `${cxPicked().length} bài`) : 'tất cả');
