@@ -820,7 +820,7 @@ function radicals() {
       <span class="rad-hz han">${esc(r.r)}${r.v ? `<small>${esc(r.v)}</small>` : ''}</span>
       <span><b>${r.n}. ${esc(r.hv)}</b> · ${esc(r.vi)} <span class="muted">${esc(r.py)} · ${r.s} nét</span>
         <p class="rad-ex han">${esc(r.ex)}</p><p class="muted">${esc(r.m)}</p></span>
-      <span class="rad-act">${speakBtn(r.r, true)}<button class="icon-btn" data-action="radw" data-id="${r.n}" aria-label="Luyện viết ${esc(r.r)}">${icon('pencil-simple-line')}</button></span></div>`).join('')}</div></main>`;
+      <span class="rad-act">${radBtn(r)}<button class="icon-btn" data-action="radw" data-id="${r.n}" aria-label="Luyện viết ${esc(r.r)}">${icon('pencil-simple-line')}</button></span></div>`).join('')}</div></main>`;
 }
 // Bộ thủ luyện viết: stroke order demo + guided tracing via Hanzi Writer (CDN script + stroke data, loaded on first use).
 // ponytail: needs network; ~11 rare variant forms (⻌ 戸 …) have no stroke data and show a note instead.
@@ -828,10 +828,10 @@ let hwLoad, hw;
 const radList = () => view.tab === 'all' ? rad.radicals : rad.radicals.filter((r) => r.top);
 function radWrite() {
   const r = rad.radicals.find((x) => x.n === view.id);
-  const forms = [r.r, ...(r.v || '').split(/\s+/).filter(Boolean)];
+  const forms = radForms(r);
   return `<main class="page"><header class="list-head"><button class="icon-btn" data-action="rad" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Luyện viết</h1><span class="counter">${r.s} nét</span></header>
     <p class="tomie wb-toast" role="status"></p>
-    <p><b>${r.n}. ${esc(r.hv)}</b> · ${esc(r.vi)} <span class="muted">${esc(r.py)}</span> ${speakBtn(r.r, true)}</p>
+    <p><b>${r.n}. ${esc(r.hv)}</b> · ${esc(r.vi)} <span class="muted">${esc(r.py)}</span> ${radBtn(r)}</p>
     ${forms.length > 1 ? `<div class="seg lang">${forms.map((c) => `<button class="han${c === view.c ? ' on' : ''}" data-action="radw-c" data-c="${esc(c)}" aria-pressed="${c === view.c}">${esc(c)}</button>`).join('')}</div>` : ''}
     <div id="hw-box" class="hw-box" aria-label="Ô viết ${esc(view.c)}"></div>
     <p id="hw-msg" class="muted hw-msg">Viết theo nét mờ, đúng thứ tự nét.</p>
@@ -839,7 +839,11 @@ function radWrite() {
     ${pager('radw', radList().map((x) => x.n), r.n, (n) => rad.radicals.find((x) => x.n === n).r)}
   </main>`;
 }
-const radSay = () => say(rad.radicals.find((x) => x.n === view.id).r); // variants read like the main form
+// audio/rad/<n>-zh|vi|hv.mp3 (tools: scratch rt/gen.py): zh is read via a common homophone, edge-tts skips rare radical chars.
+const radAu = (n, k) => `audio/rad/${n}-${k}.mp3`;
+const radBtn = (r) => `<button class="speak sm" data-au="${radAu(r.n, 'zh')}" data-zh="${esc(r.r)}" aria-label="Nghe">${icon('speaker-high', true)}</button>`;
+const radSay = (next) => { const r = rad.radicals.find((x) => x.n === view.id); play(radAu(r.n, 'zh'), r.r, 'zh-CN', next); };
+const radForms = (r) => [r.r, ...(r.v || '').split(/\s+/).filter(Boolean)];
 async function setupRadWrite() {
   const box = root.querySelector('#hw-box'), msg = root.querySelector('#hw-msg');
   hwLoad ??= new Promise((ok, no) => { const sc = document.createElement('script'); sc.src = 'https://cdn.jsdelivr.net/npm/hanzi-writer@3.7/dist/hanzi-writer.min.js'; sc.onload = ok; sc.onerror = () => { hwLoad = null; no(); }; document.head.append(sc); });
@@ -858,12 +862,14 @@ async function setupRadWrite() {
 /** Stroke-order demo (auto on open, her order), then tracing. */
 function radDemo() {
   const msg = root.querySelector('#hw-msg');
-  msg.textContent = 'Xem thứ tự nét…'; hw?.cancelQuiz(); radSay(); hw?.showCharacter();
+  msg.textContent = 'Xem thứ tự nét…'; hw?.cancelQuiz(); if (!view.auto) radSay(); hw?.showCharacter();
   hw?.animateCharacter({ onComplete: () => { if (!root.contains(msg)) return; if (view.auto) return radNext(); hw.hideCharacter(); msg.textContent = 'Giờ chị tự viết nhé.'; radQuiz(); } });
 }
-/** Học tự động: after the stroke demo, read Hán Việt + meaning, then open the next radical of the tab; stops at the end. */
+/** Học tự động: demo every written form in turn, then read Chinese, Vietnamese, Hán Việt, then open the next radical of the tab; stops at the end. */
 function radNext() {
   const id = view.id, r = rad.radicals.find((x) => x.n === id), ids = radList().map((x) => x.n);
+  const forms = radForms(r), nf = forms[forms.indexOf(view.c) + 1];
+  if (nf) return setTimeout(() => { if (view.name === 'radw' && view.auto && view.id === id) { view = { ...view, c: nf }; render(); } }, 600);
   const nx = ids[ids.indexOf(id) + 1];
   let done = false;
   const go = () => {
@@ -872,8 +878,8 @@ function radNext() {
     if (nx == null) { view = { ...view, auto: false }; render(); root.querySelector('#hw-msg').textContent = 'Hết danh sách rồi.'; return; }
     setTimeout(() => { if (view.name === 'radw' && view.auto && view.id === id) { view = { ...view, id: nx, c: rad.radicals.find((x) => x.n === nx).r }; render(); } }, 800);
   };
-  const t = setTimeout(go, 8000); // ponytail: Vietnamese TTS may be missing on the phone; never stall the loop
-  speak(`${r.hv}. ${r.vi}`, 'vi-VN', go);
+  const t = setTimeout(go, 15000); // ponytail: a missing mp3 falls back to Web Speech, which may be silent; never stall the loop
+  radSay(() => play(radAu(id, 'vi'), r.vi, 'vi-VN', () => play(radAu(id, 'hv'), r.hv, 'vi-VN', go)));
 }
 function radQuiz() {
   const msg = root.querySelector('#hw-msg');
