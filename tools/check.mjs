@@ -179,7 +179,8 @@ export function validateChinext(cx) {
       if (typeof x.id !== 'string' || ids.has(x.id)) errors.push(`${at}: id must be unique`);
       ids.add(x.id);
       if (!/^[\p{Script=Han}，。？！]+$/u.test(x.zh ?? '')) errors.push(`${at}: zh must be Han + ，。？！`);
-      if (!x.py || !x.vi) errors.push(`${at}: py and vi required`);
+      if (!x.py || !x.vi || !x.en) errors.push(`${at}: py, vi and en required`);
+      if (/[\/()（）]/.test(x.en ?? '')) errors.push(`${at}: en = translation only, no / or brackets`);
       if (x.t != null && (!Number.isInteger(x.t) || x.t < 0)) errors.push(`${at}: t = seconds into the video`);
       if (x.t != null && !l.yt) errors.push(`${at}: t needs the lesson yt`);
       if (x.e != null && !(Number.isInteger(x.e) && x.e > x.t)) errors.push(`${at}: e = end second, after t`);
@@ -193,7 +194,7 @@ async function syncAudio(data, english, cx) {
   const cxItems = cx.lessons.flatMap((l) => l.items);
   return await syncDir(AUDIO, [...data.words.map((w) => w.hanzi), ...data.sentences.map(sentenceText), ...cxItems.map((x) => x.zh)], VOICE)
     + await syncDir(path.join(AUDIO, 'en'), [...data.words.map((w) => w.en), ...data.sentences.map((s) => s.en),
-      ...english.words.map((w) => w.word), ...english.sentences.map((s) => s.text)], VOICE_EN)
+      ...english.words.map((w) => w.word), ...english.sentences.map((s) => s.text), ...cxItems.map((x) => x.en)], VOICE_EN)
     // English Luyện nghe reads the Vietnamese meaning after the English: audio/vi/<english text>.mp3 (Vietnamese text has "/" and runs past 255 bytes).
     // ponytail: keyed by the English text, so an edited meaning keeps its old mp3 until that file is deleted.
     + await syncDir(path.join(AUDIO, 'vi'), [...english.words.map((w) => [w.word, w.meanings.join('; ')]),

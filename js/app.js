@@ -473,7 +473,7 @@ function drawFromBag(k, all, id, prev) {
 
 /** What the practice card shows and checks, for a word or a sentence. */
 // English: the headline is the Vietnamese meaning (`en` would repeat the answer).
-const writeCard = (mode, x) => (mode === 'cxw' || mode === 'cxm' ? { text: x.zh, zh: `<p class="big-han han">${esc(x.zh)}</p><p class="py-big">${esc(x.py)}</p>`, en: '', vi: x.vi } : mode.startsWith('cx') ? { text: x.zh, zh: `<p class="sentence han">${esc(x.zh)}</p><p class="py-big">${esc(x.py)}</p>`, en: '', vi: x.vi } : EN ? (mode === 'sentence'
+const writeCard = (mode, x) => (mode === 'cxw' || mode === 'cxm' ? { text: x.zh, zh: `<p class="big-han han">${esc(x.zh)}</p><p class="py-big">${esc(x.py)}</p>`, en: x.en ?? '', vi: x.vi } : mode.startsWith('cx') ? { text: x.zh, zh: `<p class="sentence han">${esc(x.zh)}</p><p class="py-big">${esc(x.py)}</p>`, en: x.en ?? '', vi: x.vi } : EN ? (mode === 'sentence'
   ? { text: x.text, zh: `<p class="sentence">${sentenceHz(x)}</p>`, en: x.vi, vi: '' }
   : { text: x.hanzi, zh: `<p class="big-han">${esc(x.hanzi)}</p>${x.pinyin[0] ? `<p class="py-big">${esc(x.pinyin[0])}</p>` : ''}`, en: x.meanings.join('; '), vi: '' })
   : mode === 'sentence'
@@ -482,7 +482,7 @@ const writeCard = (mode, x) => (mode === 'cxw' || mode === 'cxm' ? { text: x.zh,
 const WRITE_TITLES = { write: T.write[0], vocab: T.vocab[0], sentence: 'Luyện viết câu', cx: 'Luyện viết câu', cxs: 'Luyện viết câu', cxw: 'Luyện viết chữ', cxm: 'Luyện từ vựng' };
 /** Modes that hide the Chinese until answered: vocab (meaning only), Chinext (translate the Vietnamese). */
 const HIDES = (mode) => mode === 'vocab' || mode === 'cx' || mode === 'cxm';
-/** Card meaning lines; Chinext items have only Vietnamese, shown as the headline. */
+/** Card meaning lines: English headline + Vietnamese under it (Vietnamese alone when there is no English). */
 const meaningHtml = (c, big) => `<p class="meaning${big ? ' big-meaning' : ''}">${esc(c.en || c.vi)}</p>${c.en ? `<p class="vi muted">${esc(c.vi)}</p>` : ''}`;
 
 function write() {
