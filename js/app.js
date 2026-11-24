@@ -876,7 +876,22 @@ function cxView() {
 // Chinext Luyện tập: lessons without a video (from the class slides: words g 'Từ vựng' + sentences), same modes as Luyện tập.
 const CX_PICK = key('hsk-cx-pick'); // ticked practice lesson ids, '' = all
 let cxPick = localStorage.getItem(CX_PICK) ?? '';
-const cxPicked = () => { const p = cxPick.split(',').filter(Boolean).map(Number), ls = cxData.lessons.filter((l) => !l.yt); return ls.filter((l) => !p.length || p.includes(l.id)); };
+// Practice lessons = slide lessons (no yt) + every video buổi's items merged into the matching "Tiết K" (Ngữ âm K) / "Bài M" heading
+// (new heading when the slides have none), duplicates by text skipped. Runtime merge, so new buổi land here with no data step.
+const cxKey = (t) => { const m = t.match(/(?:Tiết|Ngữ âm) (\d+)|Bài (\d+)/); return m ? (m[1] ? 100 + +m[1] : 103 + +m[2]) : 0; };
+let cxPL;
+const cxPractice = () => cxPL ??= (() => {
+  const by = new Map(cxData.lessons.filter((l) => !l.yt).map((l) => [cxKey(l.title) || l.id, { ...l, items: [...l.items] }]));
+  const bare = (z) => z.replace(/[，。？！、\s]/g, '');
+  for (const v of cxData.lessons.filter((l) => l.yt)) {
+    const k = cxKey(v.title); if (!k) continue;
+    if (!by.has(k)) by.set(k, { id: k, title: k > 103 ? `Bài ${k - 103}` : `Tiết ${k - 100}`, items: [] });
+    const l = by.get(k), seen = new Set(l.items.map((x) => bare(x.zh)));
+    for (const x of v.items) if (!seen.has(bare(x.zh))) { seen.add(bare(x.zh)); l.items.push({ ...x, g: x.g.startsWith('Từ vựng') ? 'Từ vựng' : x.g }); }
+  }
+  return [...by.values()].sort((a, b) => a.id - b.id);
+})();
+const cxPicked = () => { const p = cxPick.split(',').filter(Boolean).map(Number), ls = cxPractice(); return ls.filter((l) => !p.length || p.includes(l.id)); };
 const cxPickName = () => (cxPick ? (cxPicked().length === 1 ? cxPicked()[0].title : `${cxPicked().length} bài`) : 'tất cả');
 const cxPool = (mode) => cxPicked().flatMap((l) => l.items).filter((x) => (mode === 'cxs') !== (x.g === 'Từ vựng'));
 function cxPracticeView() {
@@ -884,7 +899,7 @@ function cxPracticeView() {
   const box = (v, t, on) => `<label><input type="checkbox" class="cx-pick" value="${v}"${on ? ' checked' : ''}> ${esc(t)}</label>`;
   const btn = (m, ic, t) => `<button class="menu-item" data-action="write" data-mode="${m}">${icon(ic)}<span><b>${t}</b></span>${icon('caret-right')}</button>`;
   return `<main class="page"><header class="list-head"><button class="icon-btn" data-action="cx" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Luyện tập</h1></header>
-    <details class="field pick"${view.open ? ' open' : ''}><summary>${esc(cxPick ? cxPickName() : 'Tất cả các bài')}</summary><div class="pick-list">${box('', 'Tất cả các bài', !cxPick)}${cxData.lessons.filter((l) => !l.yt).map((l) => box(l.id, l.title, p.includes(l.id))).join('')}</div></details>
+    <details class="field pick"${view.open ? ' open' : ''}><summary>${esc(cxPick ? cxPickName() : 'Tất cả các bài')}</summary><div class="pick-list">${box('', 'Tất cả các bài', !cxPick)}${cxPractice().map((l) => box(l.id, l.title, p.includes(l.id))).join('')}</div></details>
     <nav class="menu">${btn('cxw', 'pencil-simple-line', 'Luyện viết chữ')}${btn('cxs', 'text-align-left', 'Luyện viết câu')}${btn('cxm', 'translate', 'Luyện từ vựng')}
       <button class="menu-item" data-action="cx-listen">${icon('headphones')}<span><b>Luyện nghe</b></span>${icon('caret-right')}</button></nav></main>`;
 }
