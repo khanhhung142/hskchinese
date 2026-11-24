@@ -867,7 +867,8 @@ const mmss = (t) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart
 function cxView() {
   const at = loadJSON(CX_AT_KEY) ?? {};
   const item = (l) => `<button class="menu-item" data-action="cx-go" data-id="${l.id}">${icon('chalkboard-teacher')}<span><b>${esc(l.title)}</b><small>${l.items.length} câu${at[l.id] ? ` · Đang học ${mmss(at[l.id].t)} · ${at[l.id].d}` : ''}</small></span>${icon('caret-right')}</button>`;
-  return `<main class="page"><header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Chinext Education</h1></header><nav class="menu"><button class="menu-item" data-action="cxp">${icon('pencil-simple-line')}<span><b>Luyện tập</b><small>Từ vựng, mẫu câu theo tiết / bài</small></span>${icon('caret-right')}</button>${cxData.lessons.filter((l) => l.yt).map(item).join('')}</nav></main>`;
+  const vids = cxData.lessons.filter((l) => l.yt);
+  return `<main class="page"><header class="list-head"><button class="icon-btn" ${view.lvl === 'rec' ? 'data-action="cx"' : 'data-action="home"'} aria-label="Quay lại">${icon('arrow-left')}</button><h1>${view.lvl === 'rec' ? 'Video record' : 'Chinext Education'}</h1></header><nav class="menu">${view.lvl === 'rec' ? vids.map(item).join('') : `<button class="menu-item" data-action="cxp">${icon('pencil-simple-line')}<span><b>Luyện tập</b><small>Từ vựng, mẫu câu theo tiết / bài</small></span>${icon('caret-right')}</button><button class="menu-item" data-action="cx" data-m="rec">${icon('video')}<span><b>Video record</b><small>${vids.length} buổi học</small></span>${icon('caret-right')}</button>`}</nav></main>`;
 }
 
 // Chinext Luyện tập: lessons without a video (from the class slides: words g 'Từ vựng' + sentences), same modes as Luyện tập.
@@ -889,7 +890,7 @@ function cxPracticeView() {
 /** Học theo video: class video on top, the buổi's sentences in video order; tap = seek, Dừng = pause and write the current one. */
 function cxVideoView() {
   const l = cxLesson, rows = cxRows();
-  return `<main class="page song cxv"><header class="list-head"><button class="icon-btn" data-action="cx" aria-label="Quay lại">${icon('arrow-left')}</button><h1>${esc(l.title)}</h1></header>
+  return `<main class="page song cxv"><header class="list-head"><button class="icon-btn" data-action="cx" data-m="rec" aria-label="Quay lại">${icon('arrow-left')}</button><h1>${esc(l.title)}</h1></header>
     <div class="song-yt"><div id="yt"></div></div>
     <div class="cxv-pad field" hidden>
       <form class="input-row"><input id="cxv-in" lang="zh-CN" placeholder="Gõ hoặc viết câu vào ô dưới" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done"></form>
