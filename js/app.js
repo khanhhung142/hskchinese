@@ -199,24 +199,34 @@ function home() {
       <button class="btn primary block" data-action="start" data-mode="latest">Học bài mới</button>
     </section>` : ''}
     <nav class="menu">
-      <button class="menu-item" data-action="practice">${icon('pencil-simple-line')}<span><b>Luyện tập</b></span>${icon('caret-right')}</button>
-      ${EN ? '' : `<button class="menu-item" data-action="tb">${icon('book-open-text')}<span><b>Giáo trình</b></span>${icon('caret-right')}</button>
-      <button class="menu-item" data-action="wb">${icon('exam')}<span><b>Bài tập</b></span>${icon('caret-right')}</button>
+      ${EN ? `<button class="menu-item" data-action="practice">${icon('pencil-simple-line')}<span><b>Luyện tập</b></span>${icon('caret-right')}</button>` : `<button class="menu-item" data-action="hsk">${icon('graduation-cap')}<span><b>HSK</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="cx">${icon('chalkboard-teacher')}<span><b>Chinext Education</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="rd">${icon('book-bookmark')}<span><b>Luyện đọc</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="song">${icon('music-notes')}<span><b>Học hát</b></span>${icon('caret-right')}</button>`}
       ${EN ? `<button class="menu-item" data-action="toeic">${icon('exam')}<span><b>Đề TOEIC</b></span>${icon('caret-right')}</button>` : ''}
       ${EN ? '' : `<button class="menu-item" data-action="rad">${icon('tree-structure')}<span><b>Bộ thủ</b></span>${icon('caret-right')}</button>`}
-      <button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Tra cứu</b></span>${icon('caret-right')}</button>
+      ${EN ? `<button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Tra cứu</b></span>${icon('caret-right')}</button>` : ''}
     </nav>
     ${tomie('home')}
   </main>`;
 }
 
+/** "HSK" hub (home, Chinese only): Luyện tập, Giáo trình, Bài tập, Tra cứu. */
+const HUB = EN ? 'home' : 'hsk';
+function hsk() {
+  return `<main class="page"><header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>HSK</h1></header>
+    <nav class="menu">
+      <button class="menu-item" data-action="practice">${icon('pencil-simple-line')}<span><b>Luyện tập</b></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="tb">${icon('book-open-text')}<span><b>Giáo trình</b></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="wb">${icon('exam')}<span><b>Bài tập</b></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Tra cứu</b></span>${icon('caret-right')}</button>
+    </nav></main>`;
+}
+
 /** "Luyện tập": lesson picker + the practice modes that use it. */
 function practice() {
   return `<main class="page">
-    <header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Luyện tập</h1></header>
+    <header class="list-head"><button class="icon-btn" data-action="${HUB}" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Luyện tập</h1></header>
     ${lessonPicker()}
     <nav class="menu">
       ${FULL ? `<button class="menu-item" data-action="start" data-mode="all">${icon('shuffle')}<span><b>${pickedLesson ? `Ôn ${esc(pickedName())}` : 'Ôn tất cả'}</b></span>${icon('caret-right')}</button>` : ''}
@@ -253,7 +263,7 @@ function wordList() {
   });
   const tab = (v, t) => `<button class="${(v === 's') === sentTab ? 'on' : ''}" data-action="tab" data-tab="${v}" aria-pressed="${(v === 's') === sentTab}">${t}</button>`;
   return `<main class="page">
-    <header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Tra cứu</h1></header>
+    <header class="list-head"><button class="icon-btn" data-action="${HUB}" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Tra cứu</h1></header>
     <div class="seg lang" role="group" aria-label="Tra cứu">${tab('w', 'Tra cứu từ')}${tab('s', 'Tra cứu câu')}</div>
     <input id="word-search" class="search" type="search" placeholder="${sentTab ? 'Tra câu: chữ, phiên âm hoặc nghĩa' : 'Tra từ: chữ, phiên âm hoặc nghĩa'}" aria-label="${sentTab ? 'Tra câu đã lưu' : 'Tra từ đã lưu'}" autocomplete="off">
     <p class="empty-search muted" hidden>${sentTab ? 'Không tìm thấy câu nào.' : 'Không tìm thấy từ nào.'}</p>
@@ -750,7 +760,7 @@ function workbook() {
   const back = (to, lvl = '') => `<button class="icon-btn" data-action="${to}" data-lvl="${lvl}" aria-label="Quay lại">${icon('arrow-left')}</button>`;
   // ponytail: workbook.json is all HSK1; HSK2–9 are empty shells until data arrives (then add a level field per lesson).
   if (!view.lvl) {
-    return `<main class="page"><header class="list-head">${back('home')}<h1>Bài tập</h1></header><nav class="menu">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) =>
+    return `<main class="page"><header class="list-head">${back(HUB)}<h1>Bài tập</h1></header><nav class="menu">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) =>
       `<button class="menu-item" data-action="wb" data-lvl="${n}">${icon('notebook')}<span><b>HSK${n}</b>${n === 1 ? '' : '<small>Chưa có bài tập</small>'}</span>${icon('caret-right')}</button>`).join('')}</nav></main>`;
   }
   if (view.lvl > 1) return `<main class="page"><header class="list-head">${back('wb')}<h1>HSK${view.lvl}</h1></header><p class="muted">Chưa có bài tập.</p><p class="tomie">HSK${view.lvl} á? Chị qua HSK1 trước đi đã, Hưng đợi chị đó, ufufu.</p></main>`;
@@ -1117,7 +1127,7 @@ const tbLine = (x, who) => `<div class="tb-line">${tbSay(x.zh)}<span>${who ? `<b
 const tbWord = (w) => `<div class="tb-word">${tbSay(w.zh)}<span class="han">${esc(w.zh)}</span><span><b>${esc(w.py)}</b> ${w.pos ? `<i class="muted">${esc(w.pos)}</i> ` : ''}${esc(w.vi)}</span></div>`;
 const tbWords = (ws, names) => `<div class="words">${ws.map(tbWord).join('')}${names?.length ? `<p class="tb-sub">Danh từ riêng</p>${names.map(tbWord).join('')}` : ''}</div>`;
 function textbook() {
-  const back = (lvl = '') => `<button class="icon-btn" data-action="${view.lvl ? 'tb' : 'home'}" data-lvl="${lvl}" aria-label="Quay lại">${icon('arrow-left')}</button>`;
+  const back = (lvl = '') => `<button class="icon-btn" data-action="${view.lvl ? 'tb' : HUB}" data-lvl="${lvl}" aria-label="Quay lại">${icon('arrow-left')}</button>`;
   if (!view.lvl) {
     return `<main class="page"><header class="list-head">${back()}<h1>Giáo trình</h1></header><nav class="menu">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) =>
       `<button class="menu-item" data-action="tb" data-lvl="${n}">${icon('book-open-text')}<span><b>HSK${n}</b>${n === 1 ? '' : '<small>Chưa có giáo trình</small>'}</span>${icon('caret-right')}</button>`).join('')}</nav></main>`;
@@ -1281,7 +1291,7 @@ let wasTyping = false;
 let lastKey = 'home||', popping = false;
 
 function render() {
-  const views = { home, practice, radicals, words: wordList, quiz, summary, write, listen, wb: workbook, tb: textbook, toeic: toeicView, cx: cxView, cxp: cxPracticeView, cxv: cxVideoView, rd: readingView, song: songView, radw: radWrite };
+  const views = { home, hsk, practice, radicals, words: wordList, quiz, summary, write, listen, wb: workbook, tb: textbook, toeic: toeicView, cx: cxView, cxp: cxPracticeView, cxv: cxVideoView, rd: readingView, song: songView, radw: radWrite };
   wasTyping = document.activeElement?.matches?.('#hz-in, #py') ?? false;
   if (view.name !== 'practice') lessonPickerOpen = false; // picker reopens closed next time
   root.innerHTML = views[view.name]();
@@ -1509,6 +1519,7 @@ root.addEventListener('click', (e) => {
   else if (act === 'listen-toggle') listenToggle();
   else if (act === 'listen-move') listenMove(+el.dataset.d);
   else if (act === 'words') { view = { name: 'words' }; render(); }
+  else if (act === 'hsk') { view = { name: 'hsk' }; render(); }
   else if (act === 'rad') {
     if (!rad) return alert('Chưa tải được bộ thủ.');
     view = { name: 'radicals', tab: el.dataset.tab ?? view.tab ?? 'top' }; render(); scrollTo(0, 0);
