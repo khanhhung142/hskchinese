@@ -199,12 +199,12 @@ function home() {
       <button class="btn primary block" data-action="start" data-mode="latest">Học bài mới</button>
     </section>` : ''}
     <nav class="menu">
+      ${EN ? '' : `<button class="menu-item" data-action="rad">${icon('tree-structure')}<span><b>Bộ thủ</b></span>${icon('caret-right')}</button>`}
       ${EN ? `<button class="menu-item" data-action="practice">${icon('pencil-simple-line')}<span><b>Luyện tập</b></span>${icon('caret-right')}</button>` : `<button class="menu-item" data-action="hsk">${icon('graduation-cap')}<span><b>HSK</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="cx">${icon('chalkboard-teacher')}<span><b>Chinext Education</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="rd">${icon('book-bookmark')}<span><b>Luyện đọc</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="song">${icon('music-notes')}<span><b>Học hát</b></span>${icon('caret-right')}</button>`}
       ${EN ? `<button class="menu-item" data-action="toeic">${icon('exam')}<span><b>Đề TOEIC</b></span>${icon('caret-right')}</button>` : ''}
-      ${EN ? '' : `<button class="menu-item" data-action="rad">${icon('tree-structure')}<span><b>Bộ thủ</b></span>${icon('caret-right')}</button>`}
       ${EN ? `<button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Tra cứu</b></span>${icon('caret-right')}</button>` : ''}
     </nav>
     ${tomie('home')}
@@ -815,6 +815,7 @@ function radicals() {
   const tab = (v, t) => `<button class="${(v === 'all') === all ? 'on' : ''}" data-action="rad" data-tab="${v}" aria-pressed="${(v === 'all') === all}">${t}</button>`;
   return `<main class="page"><header class="list-head"><button class="icon-btn" data-action="home" aria-label="Quay lại">${icon('arrow-left')}</button><h1>Bộ thủ</h1><span class="counter">${list.length}</span></header>
     <div class="seg lang">${tab('top', '50 bộ thường dùng')}${tab('all', `Đủ ${rad.radicals.length} bộ`)}</div>
+    <button class="btn primary block" data-action="radw" data-id="${list[0].n}" data-auto="1">${icon('play')} Học tự động</button>
     <div class="words">${list.map((r) => `<div class="rad-row">
       <span class="rad-hz han">${esc(r.r)}${r.v ? `<small>${esc(r.v)}</small>` : ''}</span>
       <span><b>${r.n}. ${esc(r.hv)}</b> · ${esc(r.vi)} <span class="muted">${esc(r.py)} · ${r.s} nét</span>
@@ -834,7 +835,7 @@ function radWrite() {
     ${forms.length > 1 ? `<div class="seg lang">${forms.map((c) => `<button class="han${c === view.c ? ' on' : ''}" data-action="radw-c" data-c="${esc(c)}" aria-pressed="${c === view.c}">${esc(c)}</button>`).join('')}</div>` : ''}
     <div id="hw-box" class="hw-box" aria-label="Ô viết ${esc(view.c)}"></div>
     <p id="hw-msg" class="muted hw-msg">Viết theo nét mờ, đúng thứ tự nét.</p>
-    <div class="hand-tools hw-tools"><button class="btn" data-action="radw-demo">${icon('play')} Xem mẫu</button><button class="btn primary" data-action="radw-quiz">${icon('arrow-counter-clockwise')} Viết lại</button></div>
+    ${view.auto ? `<div class="hand-tools hw-tools"><button class="btn primary" data-action="radw-stop">${icon('pause')} Dừng tự động</button></div>` : `<div class="hand-tools hw-tools"><button class="btn" data-action="radw-demo">${icon('play')} Xem mẫu</button><button class="btn primary" data-action="radw-quiz">${icon('arrow-counter-clockwise')} Viết lại</button><button class="btn" data-action="radw-auto">${icon('play')} Tự động</button></div>`}
     ${pager('radw', radList().map((x) => x.n), r.n, (n) => rad.radicals.find((x) => x.n === n).r)}
   </main>`;
 }
@@ -850,7 +851,7 @@ async function setupRadWrite() {
     width: size, height: size, padding: 12, showOutline: true, showCharacter: false,
     strokeColor: css.getPropertyValue('--accent').trim() || '#c2357a', outlineColor: '#d8d4ea', drawingColor: css.getPropertyValue('--line').trim() || '#333',
     highlightColor: '#f7a8ca', drawingWidth: 14, strokeAnimationSpeed: 1.2, delayBetweenStrokes: 250,
-    onLoadCharDataError: () => { msg.textContent = 'Chưa có dữ liệu nét cho dạng này, chọn dạng khác nhé.'; },
+    onLoadCharDataError: () => { msg.textContent = 'Chưa có dữ liệu nét cho dạng này, chọn dạng khác nhé.'; if (view.auto) radNext(); },
   });
   radDemo();
 }
@@ -858,7 +859,21 @@ async function setupRadWrite() {
 function radDemo() {
   const msg = root.querySelector('#hw-msg');
   msg.textContent = 'Xem thứ tự nét…'; hw?.cancelQuiz(); radSay(); hw?.showCharacter();
-  hw?.animateCharacter({ onComplete: () => { if (!root.contains(msg)) return; hw.hideCharacter(); msg.textContent = 'Giờ chị tự viết nhé.'; radQuiz(); } });
+  hw?.animateCharacter({ onComplete: () => { if (!root.contains(msg)) return; if (view.auto) return radNext(); hw.hideCharacter(); msg.textContent = 'Giờ chị tự viết nhé.'; radQuiz(); } });
+}
+/** Học tự động: after the stroke demo, read Hán Việt + meaning, then open the next radical of the tab; stops at the end. */
+function radNext() {
+  const id = view.id, r = rad.radicals.find((x) => x.n === id), ids = radList().map((x) => x.n);
+  const nx = ids[ids.indexOf(id) + 1];
+  let done = false;
+  const go = () => {
+    if (done) return; done = true; clearTimeout(t);
+    if (view.name !== 'radw' || !view.auto || view.id !== id) return; // user left or stopped
+    if (nx == null) { view = { ...view, auto: false }; render(); root.querySelector('#hw-msg').textContent = 'Hết danh sách rồi.'; return; }
+    setTimeout(() => { if (view.name === 'radw' && view.auto && view.id === id) { view = { ...view, id: nx, c: rad.radicals.find((x) => x.n === nx).r }; render(); } }, 800);
+  };
+  const t = setTimeout(go, 8000); // ponytail: Vietnamese TTS may be missing on the phone; never stall the loop
+  speak(`${r.hv}. ${r.vi}`, 'vi-VN', go);
 }
 function radQuiz() {
   const msg = root.querySelector('#hw-msg');
@@ -1524,7 +1539,9 @@ root.addEventListener('click', (e) => {
     if (!rad) return alert('Chưa tải được bộ thủ.');
     view = { name: 'radicals', tab: el.dataset.tab ?? view.tab ?? 'top' }; render(); scrollTo(0, 0);
   }
-  else if (act === 'radw') { const n = +el.dataset.id; view = { name: 'radw', tab: view.tab, id: n, c: rad.radicals.find((x) => x.n === n).r }; render(); scrollTo(0, 0); }
+  else if (act === 'radw') { const n = +el.dataset.id; view = { name: 'radw', tab: view.tab, id: n, c: rad.radicals.find((x) => x.n === n).r, auto: !!el.dataset.auto || (view.name === 'radw' && view.auto) }; render(); scrollTo(0, 0); }
+  else if (act === 'radw-auto') { view = { ...view, auto: true }; render(); }
+  else if (act === 'radw-stop') { view = { ...view, auto: false }; if ('speechSynthesis' in window) speechSynthesis.cancel(); render(); }
   else if (act === 'radw-c') { view = { ...view, c: el.dataset.c }; render(); }
   else if (act === 'radw-demo') radDemo();
   else if (act === 'radw-quiz') { root.querySelector('#hw-msg').textContent = 'Viết theo nét mờ, đúng thứ tự nét.'; radQuiz(); }
