@@ -1181,7 +1181,7 @@ function filmView() {
   }
   return `<main class="page song cxv film"><header class="list-head">${back}<h1>${esc(film.title)}</h1></header>
     <div class="song-yt"><div id="yt"></div></div>
-    <div class="film-sub"><p class="han film-zh"></p><small class="muted film-py"></small></div>
+    <div class="film-sub"><p class="han film-zh"></p><small class="muted film-py"></small><small class="film-vi"></small></div>
     <div class="seg lang">${modes}</div>
     <p class="muted rd-hint">Chạm vào một chữ trên phụ đề để xem nghĩa. Từ tô hồng là từ video sẽ dừng lại. Nguồn: ${esc(film.ch)} (YouTube).</p>
     <div class="sheet rd-sheet cxv-sheet" hidden></div>
@@ -1202,7 +1202,7 @@ function startFilm() {
         cur = i;
         const on = l && t <= l.e + 1, ws = on ? filmWords(l.zh) : [];
         root.querySelector('.film-zh').innerHTML = ws.map(({ w, hit }) => (/[\u4e00-\u9fff]/.test(w) ? `<span class="cxv-w${hit ? ' film-hit' : ''}" data-action="cxv-w" data-w="${esc(w)}">${esc(w)}</span>` : esc(w))).join('');
-        root.querySelector('.film-py').textContent = on ? l.py : '';
+        root.querySelector('.film-py').textContent = on ? l.py : ''; root.querySelector('.film-vi').textContent = on ? l.vi || '' : '';
       }
       // Stop at the END of the line (the sentence is heard whole), at most once per 15s, one new word per stop.
       const c = filmCfg();

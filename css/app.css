@@ -560,6 +560,7 @@ body.typing .tips { display: none; }
 .film .song-yt { margin-bottom: 0; }
 .film-sub { min-height: 64px; padding: 8px 10px; text-align: center; }
 .film-zh { margin: 0; font-size: 24px; line-height: 1.5; }
+.film-vi { display: block; margin-top: 2px; font-size: 15px; }
 .film-hit { color: var(--accent); border-bottom: 2px solid var(--pink); }
 .film .cxv-sheet .footer { position: static; }
 .film .seg.lang, .film-list .seg.lang { grid-template-columns: repeat(3, 1fr); }
