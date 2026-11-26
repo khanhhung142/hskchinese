@@ -515,7 +515,7 @@ function write() {
       <div class="card center">
         ${shown ? c.zh : ''}
         ${meaningHtml(c, !shown)}
-        ${shown && view.item.hanzi && !EN ? charTips(view.item.hanzi) : ''}
+        ${shown && !EN && (view.item.hanzi || mode === 'cxw' || mode === 'cxm') ? charTips(view.item.hanzi ?? view.item.zh) : ''}
         ${EN ? `<button class="speak" data-say-envi="${esc(c.text)}" data-vi="${esc(c.en)}" data-hide="${shown ? '' : 1}" aria-label="Nghe">${icon('speaker-high', true)}</button>`
           : `<button class="speak" data-say-zh="${esc(c.text)}" data-en="${esc(c.en)}" data-vi="${esc(c.vi)}" data-hide="${shown ? '' : 1}" aria-label="Nghe">${icon('speaker-high', true)}</button>`}
       </div>
