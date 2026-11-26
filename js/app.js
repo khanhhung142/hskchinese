@@ -171,6 +171,12 @@ const TOMIE = {
     'Chị chăm vậy làm Tomie lo. Lỡ chị giỏi hơn Tomie thì sao, ufufu.',
     'Xong bài rồi, nghỉ chút đi chị. Tomie trông sách cho, không xé trang nào đâu.',
   ],
+  film: [ // Học qua phim: word marked known
+    'Thuộc rồi hả? Tomie ghi sổ. Gặp lại mà quên là bị phạt đó, ufufu.',
+    'Giỏi. Nhưng diễn viên trong phim không đẹp bằng Tomie đâu nha.',
+    'Một từ nữa vào túi. Chị xem phim chăm vậy, Hưng biết chưa?',
+    'Ufufu… bấm Thuộc rồi nhanh thế, Tomie sẽ kiểm tra bất chợt đấy.',
+  ],
 };
 /** Tomie comment in the fixed .wb-toast slot: swap text + restart the fade, never insert nodes (no layout jump). */
 function toast(lines) {
@@ -203,7 +209,8 @@ function home() {
       ${EN ? `<button class="menu-item" data-action="practice">${icon('pencil-simple-line')}<span><b>Luyện tập</b></span>${icon('caret-right')}</button>` : `<button class="menu-item" data-action="hsk">${icon('graduation-cap')}<span><b>HSK</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="cx">${icon('chalkboard-teacher')}<span><b>Chinext Education</b></span>${icon('caret-right')}</button>
       <button class="menu-item" data-action="rd">${icon('book-bookmark')}<span><b>Luyện đọc</b></span>${icon('caret-right')}</button>
-      <button class="menu-item" data-action="song">${icon('music-notes')}<span><b>Học hát</b></span>${icon('caret-right')}</button>`}
+      <button class="menu-item" data-action="song">${icon('music-notes')}<span><b>Học hát</b></span>${icon('caret-right')}</button>
+      <button class="menu-item" data-action="film">${icon('film-strip')}<span><b>Học qua phim</b></span>${icon('caret-right')}</button>`}
       ${EN ? `<button class="menu-item" data-action="toeic">${icon('exam')}<span><b>Đề TOEIC</b></span>${icon('caret-right')}</button>` : ''}
       ${EN ? `<button class="menu-item" data-action="words">${icon('list-bullets')}<span><b>Tra cứu</b></span>${icon('caret-right')}</button>` : ''}
     </nav>
@@ -1131,7 +1138,98 @@ function startSong(s) {
   window.onYouTubeIframeAPIReady = make;
   if (!document.getElementById('yt-api')) document.head.append(Object.assign(document.createElement('script'), { id: 'yt-api', src: 'https://www.youtube.com/iframe_api' }));
 }
+root.addEventListener('change', (e) => { if (e.target.matches('[data-action=film-lv]')) filmSave((c) => { c.lv = +e.target.value; }); });
 function stopSong() { clearInterval(songTimer); ytPlayer?.destroy?.(); ytPlayer = null; }
+
+// ---------- Học qua phim (data/films.json: YouTube videos with Chinese subtitles; the video pauses on HSK words and reads their meaning) ----------
+let filmData, film, filmLast = -99, filmHold = false, filmBusy = false;
+const FILM_KEY = 'hsk-film'; // {mode: 'stop'|'show'|'off', lv: max lesson (0 = all), known: {hanzi: 1}, seen: {id: 1}, at: {id: sec}}
+const filmCfg = () => ({ mode: 'stop', lv: 0, known: {}, seen: {}, at: {}, ...loadJSON(FILM_KEY) });
+const filmSave = (f) => { const c = filmCfg(); f(c); try { localStorage.setItem(FILM_KEY, JSON.stringify(c)); } catch { /* private mode */ } };
+async function openFilm(id) {
+  try { filmData ??= await (await fetch('data/films.json', { cache: 'no-cache' })).json(); } catch { return alert('Không tải được phim.'); }
+  stopSong(); player.pause();
+  film = filmData.films.find((x) => x.id === id);
+  view = { name: 'film', id: id || '' };
+  render(); scrollTo(0, 0);
+  if (film) startFilm();
+}
+/** Words of a line, greedy longest match over the app's words; `hit` = a word the video stops on. */
+function filmWords(zh) {
+  const c = filmCfg(), out = [];
+  for (let i = 0; i < zh.length;) {
+    let n = Math.min(8, zh.length - i);
+    while (n > 1 && !wordMap.has(zh.slice(i, i + n))) n--;
+    const w = zh.slice(i, i + n), k = wordMap.get(w);
+    out.push({ w, hit: !!k && (!c.lv || k.lesson <= c.lv) && !c.known[w] });
+    i += n;
+  }
+  return out;
+}
+function filmView() {
+  const c = filmCfg(), back = `<button class="icon-btn" data-action="${view.id ? 'film' : 'home'}" aria-label="Quay lại">${icon('arrow-left')}</button>`;
+  const modes = [['stop', 'Dừng + đọc'], ['show', 'Chỉ hiện nghĩa'], ['off', 'Tắt']].map(([m, t]) => `<button class="${c.mode === m ? 'on' : ''}" data-action="film-mode" data-m="${m}">${t}</button>`).join('');
+  if (!film) {
+    const lvs = [...new Set(data.words.map((w) => w.lesson))].filter((x) => x > 0).sort((a, b) => a - b);
+    const mins = (x) => `${Math.round(x.dur / 60)} phút`;
+    return `<main class="page film-list"><header class="list-head">${back}<h1>Học qua phim</h1><span class="counter">${icon('heart', true)} ${Object.keys(c.seen).length}/${filmData.films.length}</span></header><p class="tomie wb-toast" role="status"></p>
+      <div class="seg lang">${modes}</div>
+      <label class="field"><span>Dừng ở từ</span><select data-action="film-lv">${['<option value="0">Tất cả từ trong app</option>', ...lvs.map((n) => `<option value="${n}"${c.lv === n ? ' selected' : ''}>Bài 1 → Bài ${n}</option>`)].join('')}</select></label>
+      <button class="btn primary block" data-action="film-rand">${icon('shuffle')} Phim ngẫu nhiên</button>
+      <p class="muted rd-hint">% = phần lời trong video là từ đã có trong app. Càng cao càng dễ. ${Object.keys(c.known).length ? `Đã đánh dấu thuộc ${Object.keys(c.known).length} từ.` : ''}</p>
+      <nav class="menu">${filmData.films.map((x) => `<button class="menu-item${c.seen[x.id] ? ' done' : ''}" data-action="film" data-id="${x.id}">${icon('film-strip')}<span><b>${esc(x.title)}</b><small>${esc(x.g)} · ${mins(x)} · ${x.cov}% từ đã học${c.at[x.id] ? ` · Đang xem ${Math.floor(c.at[x.id] / 60)}:${String(c.at[x.id] % 60).padStart(2, '0')}` : ''}</small></span>${icon('caret-right')}</button>`).join('')}</nav></main>`;
+  }
+  return `<main class="page song cxv film"><header class="list-head">${back}<h1>${esc(film.title)}</h1></header>
+    <div class="song-yt"><div id="yt"></div></div>
+    <div class="film-sub"><p class="han film-zh"></p><small class="muted film-py"></small></div>
+    <div class="seg lang">${modes}</div>
+    <p class="muted rd-hint">Chạm vào một chữ trên phụ đề để xem nghĩa. Từ tô hồng là từ video sẽ dừng lại. Nguồn: ${esc(film.ch)} (YouTube).</p>
+    <div class="sheet rd-sheet cxv-sheet" hidden></div>
+  </main>`;
+}
+function startFilm() {
+  filmLast = -99; filmHold = false; filmBusy = false;
+  const shown = new Set(), at = Math.floor(filmCfg().at[film.id] ?? 0), id = film.id;
+  let cur = -1;
+  const make = () => {
+    ytPlayer = new YT.Player('yt', { videoId: film.id, playerVars: { playsinline: 1, rel: 0, start: at, cc_load_policy: 0 } });
+    songTimer = setInterval(() => {
+      if (view.name !== 'film' || film?.id !== id) return;
+      const t = ytPlayer.getCurrentTime?.() ?? 0, playing = ytPlayer.getPlayerState?.() === 1;
+      const i = film.lines.findLastIndex((l) => l.t <= t + 0.2), l = film.lines[i];
+      if (playing && t > 0) filmSave((c) => { c.at[id] = Math.floor(t); if (t > (film.dur || 1e9) * 0.9) c.seen[id] = 1; });
+      if (i !== cur) {
+        cur = i;
+        const on = l && t <= l.e + 1, ws = on ? filmWords(l.zh) : [];
+        root.querySelector('.film-zh').innerHTML = ws.map(({ w, hit }) => (/[\u4e00-\u9fff]/.test(w) ? `<span class="cxv-w${hit ? ' film-hit' : ''}" data-action="cxv-w" data-w="${esc(w)}">${esc(w)}</span>` : esc(w))).join('');
+        root.querySelector('.film-py').textContent = on ? l.py : '';
+      }
+      // Stop at the END of the line (the sentence is heard whole), at most once per 15s, one new word per stop.
+      const c = filmCfg();
+      if (!playing || c.mode === 'off' || filmBusy || !l || t < l.e - 0.35 || t > l.e + 0.5 || t - filmLast < 15) return;
+      const w = filmWords(l.zh).find((x) => x.hit && !shown.has(x.w))?.w;
+      if (!w) return;
+      shown.add(w); filmLast = t;
+      filmStop(w, c.mode === 'stop');
+    }, 250);
+  };
+  if (window.YT?.Player) return make();
+  window.onYouTubeIframeAPIReady = make;
+  if (!document.getElementById('yt-api')) document.head.append(Object.assign(document.createElement('script'), { id: 'yt-api', src: 'https://www.youtube.com/iframe_api' }));
+}
+/** Show the word's meaning; mode stop = pause, read Chinese then Vietnamese, play on (unless held). */
+function filmStop(w, pause) {
+  const k = wordMap.get(w), sh = root.querySelector('.cxv-sheet');
+  sh.innerHTML = `<div><h3><span class="han rd-big">${esc(w)}</span><button class="speak" data-say="${esc(w)}" aria-label="Nghe">${icon('speaker-high', true)}</button><button class="icon-btn rd-x" data-action="film-go" aria-label="Đóng">${icon('x')}</button></h3>
+    <p><b>${esc(k.pinyin.join(' / '))} · ${esc(k.meanings.join('; '))}</b></p>
+    <div class="footer two"><button class="btn" data-action="film-known" data-w="${esc(w)}">${icon('check')} Thuộc rồi</button>${pause ? `<button class="btn" data-action="film-hold">${icon('pause')} Giữ lại</button>` : ''}</div></div>`;
+  sh.hidden = false; filmHold = false;
+  if (!pause) { filmBusy = true; return setTimeout(() => { filmBusy = false; if (!filmHold) sh.hidden = true; }, 4000); }
+  filmBusy = true; ytPlayer?.pauseVideo?.();
+  const go = () => setTimeout(() => { if (!filmHold && view.name === 'film') filmGo(); }, 600);
+  say(w, () => sayVi(w, k.meanings.join('; '), go));
+}
+function filmGo() { filmBusy = false; filmHold = false; const sh = root.querySelector('.cxv-sheet'); if (sh) sh.hidden = true; ytPlayer?.playVideo?.(); }
 
 // ---------- Giáo trình (data/textbook.json: 新HSK教程1 lessons 1–15 + appendix; mp3 per Chinese line in textbook/) ----------
 let tbData;
@@ -1312,7 +1410,7 @@ let wasTyping = false;
 let lastKey = 'home||', popping = false;
 
 function render() {
-  const views = { home, hsk, practice, radicals, words: wordList, quiz, summary, write, listen, wb: workbook, tb: textbook, toeic: toeicView, cx: cxView, cxp: cxPracticeView, cxv: cxVideoView, rd: readingView, song: songView, radw: radWrite };
+  const views = { home, hsk, practice, radicals, words: wordList, quiz, summary, write, listen, wb: workbook, tb: textbook, toeic: toeicView, cx: cxView, cxp: cxPracticeView, cxv: cxVideoView, rd: readingView, song: songView, radw: radWrite, film: filmView };
   wasTyping = document.activeElement?.matches?.('#hz-in, #py') ?? false;
   if (view.name !== 'practice') lessonPickerOpen = false; // picker reopens closed next time
   root.innerHTML = views[view.name]();
@@ -1489,6 +1587,16 @@ root.addEventListener('click', (e) => {
   }
   else if (act === 'tb') openTextbook(el.dataset.id, el.dataset.lvl);
   else if (act === 'song') openSongs(el.dataset.id);
+  else if (act === 'film') openFilm(el.dataset.id);
+  else if (act === 'film-rand') {
+    const c = filmCfg(), easy = (x) => x.cov >= (c.lv && c.lv < 8 ? 75 : 55);
+    const pool = [filmData.films.filter((x) => !c.seen[x.id] && easy(x)), filmData.films.filter((x) => !c.seen[x.id]), filmData.films].find((p) => p.length);
+    openFilm(pool[Math.floor(Math.random() * pool.length)].id);
+  }
+  else if (act === 'film-mode') { filmSave((c) => { c.mode = el.dataset.m; }); root.querySelectorAll('[data-action=film-mode]').forEach((b) => b.classList.toggle('on', b === el)); }
+  else if (act === 'film-known') { filmSave((c) => { c.known[el.dataset.w] = 1; }); toast(TOMIE.film); filmGo(); }
+  else if (act === 'film-hold') { filmHold = true; player.pause(); el.disabled = true; }
+  else if (act === 'film-go') filmGo();
   else if (act === 'song-seek') { const t = songData.songs.find((x) => x.id === view.id).lines[+el.dataset.i].t; ytPlayer?.seekTo?.(Math.max(0, t - 0.3), true); ytPlayer?.playVideo?.(); }
   else if (act === 'song-py' || act === 'song-vi') {
     if (act === 'song-py') { try { localStorage.setItem(RD_PY_KEY, localStorage.getItem(RD_PY_KEY) === '0' ? '1' : '0'); } catch { /* private mode */ } } else view.vi = !view.vi;
