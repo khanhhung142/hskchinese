@@ -984,7 +984,7 @@ function cxWords(zh) {
 }
 /** Tapped word: fill the view's one sheet in place (re-rendering would kill the video). */
 function cxvWord(w) {
-  const k = wordMap.get(w), d = cxDict[w], sh = root.querySelector('.cxv-sheet');
+  const k = wordMap.get(w) ?? filmCx.get(w), d = cxDict[w], sh = root.querySelector('.cxv-sheet');
   const line = k ? `${k.pinyin.join(' / ')} · ${k.meanings.join('; ')}` : d ? `${d[0]} · ${d[1]}` : '';
   sh.innerHTML = `<div><h3><span class="han rd-big">${esc(w)}</span><button class="speak" data-say="${esc(w)}" aria-label="Nghe">${icon('speaker-high', true)}</button><button class="icon-btn rd-x" data-action="cxv-wx" aria-label="Đóng">${icon('x')}</button></h3>
     ${line ? `<p><b>${esc(line)}</b></p>` : ''}${charTips(w).replace('<details', '<details open')}</div>`;
@@ -1138,43 +1138,43 @@ function startSong(s) {
   window.onYouTubeIframeAPIReady = make;
   if (!document.getElementById('yt-api')) document.head.append(Object.assign(document.createElement('script'), { id: 'yt-api', src: 'https://www.youtube.com/iframe_api' }));
 }
-root.addEventListener('change', (e) => { if (e.target.matches('[data-action=film-lv]')) filmSave((c) => { c.lv = +e.target.value; }); });
 function stopSong() { clearInterval(songTimer); ytPlayer?.destroy?.(); ytPlayer = null; }
 
 // ---------- Học qua phim (data/films.json: YouTube videos with Chinese subtitles; the video pauses on HSK words and reads their meaning) ----------
-let filmData, film, filmLast = -99, filmHold = false, filmBusy = false;
-const FILM_KEY = 'hsk-film'; // {mode: 'stop'|'show'|'off', lv: max lesson (0 = all), known: {hanzi: 1}, seen: {id: 1}, at: {id: sec}, hide: {py, vi} subtitle lines off}
-const filmCfg = () => ({ mode: 'stop', lv: 0, known: {}, seen: {}, at: {}, ...loadJSON(FILM_KEY) });
+let filmData, film, filmLast = -99, filmHold = false, filmBusy = false, filmCx = new Map(); // filmCx = Chinext Từ vựng words vocab.json lacks {pinyin, meanings, cx}
+const FILM_KEY = 'hsk-film'; // {mode: 'stop'|'show'|'off', known: {hanzi: 1}, seen: {id: 1}, at: {id: sec}, hide: {py, vi} subtitle lines off}
+const filmCfg = () => ({ mode: 'stop', known: {}, seen: {}, at: {}, ...loadJSON(FILM_KEY) });
 const filmSave = (f) => { const c = filmCfg(); f(c); try { localStorage.setItem(FILM_KEY, JSON.stringify(c)); } catch { /* private mode */ } };
 async function openFilm(id) {
   try { filmData ??= await (await fetch('data/films.json', { cache: 'no-cache' })).json(); } catch { return alert('Không tải được phim.'); }
+  try { cxData ??= await (await fetch('data/chinext.json', { cache: 'no-cache' })).json(); } catch { /* stops on vocab.json words only */ }
+  for (const x of (cxData?.lessons ?? []).flatMap((l) => l.items)) if (x.g.startsWith('Từ vựng') && !wordMap.has(x.zh) && !filmCx.has(x.zh)) filmCx.set(x.zh, { pinyin: [x.py], meanings: [x.vi], cx: 1 });
   stopSong(); player.pause();
   film = filmData.films.find((x) => x.id === id);
   view = { name: 'film', id: id || '' };
   render(); scrollTo(0, 0);
   if (film) startFilm();
 }
-/** Words of a line, greedy longest match over the app's words; `hit` = a word the video stops on. */
+/** Words of a line, greedy longest match over every saved word (HSK + Chinext Từ vựng); `hit` = not yet marked Thuộc rồi here. */
 function filmWords(zh) {
   const c = filmCfg(), out = [];
   for (let i = 0; i < zh.length;) {
     let n = Math.min(8, zh.length - i);
-    while (n > 1 && !wordMap.has(zh.slice(i, i + n))) n--;
-    const w = zh.slice(i, i + n), k = wordMap.get(w);
-    out.push({ w, hit: !!k && (!c.lv || k.lesson <= c.lv) && !c.known[w] });
+    while (n > 1 && !filmWord(zh.slice(i, i + n))) n--;
+    const w = zh.slice(i, i + n);
+    out.push({ w, hit: !!filmWord(w) && !c.known[w] });
     i += n;
   }
   return out;
 }
+const filmWord = (w) => wordMap.get(w) ?? filmCx.get(w);
 function filmView() {
   const c = filmCfg(), back = `<button class="icon-btn" data-action="${view.id ? 'film' : 'home'}" aria-label="Quay lại">${icon('arrow-left')}</button>`;
   const modes = [['stop', 'Dừng + đọc'], ['show', 'Chỉ hiện nghĩa'], ['off', 'Tắt']].map(([m, t]) => `<button class="${c.mode === m ? 'on' : ''}" data-action="film-mode" data-m="${m}">${t}</button>`).join('');
   if (!film) {
-    const lvs = [...new Set(data.words.map((w) => w.lesson))].filter((x) => x > 0).sort((a, b) => a - b);
     const mins = (x) => `${Math.round(x.dur / 60)} phút`;
     return `<main class="page film-list"><header class="list-head">${back}<h1>Học qua phim</h1><span class="counter">${icon('heart', true)} ${Object.keys(c.seen).length}/${filmData.films.length}</span></header><p class="tomie wb-toast" role="status"></p>
       <div class="seg lang">${modes}</div>
-      <label class="field"><span>Dừng ở từ</span><select data-action="film-lv">${['<option value="0">Tất cả từ trong app</option>', ...lvs.map((n) => `<option value="${n}"${c.lv === n ? ' selected' : ''}>Bài 1 → Bài ${n}</option>`)].join('')}</select></label>
       <button class="btn primary block" data-action="film-rand">${icon('shuffle')} Phim ngẫu nhiên</button>
       <p class="muted rd-hint">% = phần lời trong video là từ đã có trong app. Càng cao càng dễ. ${Object.keys(c.known).length ? `Đã đánh dấu thuộc ${Object.keys(c.known).length} từ.` : ''}</p>
       <nav class="menu">${filmData.films.map((x) => `<button class="menu-item${c.seen[x.id] ? ' done' : ''}" data-action="film" data-id="${x.id}">${icon('film-strip')}<span><b>${esc(x.title)}</b><small>${esc(x.g)} · ${mins(x)} · ${x.cov}% từ đã học${c.at[x.id] ? ` · Đang xem ${Math.floor(c.at[x.id] / 60)}:${String(c.at[x.id] % 60).padStart(2, '0')}` : ''}</small></span>${icon('caret-right')}</button>`).join('')}</nav></main>`;
@@ -1221,7 +1221,7 @@ function startFilm() {
 }
 /** Show the word's meaning; mode stop = pause, read Chinese then Vietnamese, play on (unless held). */
 function filmStop(w, pause) {
-  const k = wordMap.get(w), sh = root.querySelector('.cxv-sheet');
+  const k = filmWord(w), sh = root.querySelector('.cxv-sheet');
   sh.innerHTML = `<div><h3><span class="han rd-big">${esc(w)}</span><button class="speak" data-say="${esc(w)}" aria-label="Nghe">${icon('speaker-high', true)}</button><button class="icon-btn rd-x" data-action="film-go" aria-label="Đóng">${icon('x')}</button></h3>
     <p><b>${esc(k.pinyin.join(' / '))} · ${esc(k.meanings.join('; '))}</b></p>
     <div class="footer two"><button class="btn" data-action="film-known" data-w="${esc(w)}">${icon('check')} Thuộc rồi</button>${pause ? `<button class="btn" data-action="film-hold">${icon('pause')} Giữ lại</button>` : ''}</div></div>`;
@@ -1229,7 +1229,8 @@ function filmStop(w, pause) {
   if (!pause) { filmBusy = true; return setTimeout(() => { filmBusy = false; if (!filmHold) sh.hidden = true; }, 4000); }
   filmBusy = true; ytPlayer?.pauseVideo?.();
   const go = () => setTimeout(() => { if (!filmHold && view.name === 'film') filmGo(); }, 600);
-  say(w, () => sayVi(w, k.meanings.join('; '), go));
+  const vi = k.meanings.join('; ');
+  say(w, () => (k.cx ? play(`audio/vicx/${encodeURIComponent(w)}.mp3`, vi, 'vi-VN', go) : sayVi(w, vi, go)));
 }
 function filmGo() { filmBusy = false; filmHold = false; const sh = root.querySelector('.cxv-sheet'); if (sh) sh.hidden = true; ytPlayer?.playVideo?.(); }
 
@@ -1591,7 +1592,7 @@ root.addEventListener('click', (e) => {
   else if (act === 'song') openSongs(el.dataset.id);
   else if (act === 'film') openFilm(el.dataset.id);
   else if (act === 'film-rand') {
-    const c = filmCfg(), easy = (x) => x.cov >= (c.lv && c.lv < 8 ? 75 : 55), all = filmData.films.filter((x) => x.id !== film?.id); // never the one playing
+    const c = filmCfg(), easy = (x) => x.cov >= 55, all = filmData.films.filter((x) => x.id !== film?.id); // never the one playing
     const pool = [all.filter((x) => !c.seen[x.id] && easy(x)), all.filter((x) => !c.seen[x.id]), all].find((p) => p.length);
     openFilm(pool[Math.floor(Math.random() * pool.length)].id);
   }
