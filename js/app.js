@@ -1143,7 +1143,7 @@ function stopSong() { clearInterval(songTimer); ytPlayer?.destroy?.(); ytPlayer 
 
 // ---------- Học qua phim (data/films.json: YouTube videos with Chinese subtitles; the video pauses on HSK words and reads their meaning) ----------
 let filmData, film, filmLast = -99, filmHold = false, filmBusy = false;
-const FILM_KEY = 'hsk-film'; // {mode: 'stop'|'show'|'off', lv: max lesson (0 = all), known: {hanzi: 1}, seen: {id: 1}, at: {id: sec}}
+const FILM_KEY = 'hsk-film'; // {mode: 'stop'|'show'|'off', lv: max lesson (0 = all), known: {hanzi: 1}, seen: {id: 1}, at: {id: sec}, hide: {py, vi} subtitle lines off}
 const filmCfg = () => ({ mode: 'stop', lv: 0, known: {}, seen: {}, at: {}, ...loadJSON(FILM_KEY) });
 const filmSave = (f) => { const c = filmCfg(); f(c); try { localStorage.setItem(FILM_KEY, JSON.stringify(c)); } catch { /* private mode */ } };
 async function openFilm(id) {
@@ -1181,8 +1181,9 @@ function filmView() {
   }
   return `<main class="page song cxv film"><header class="list-head">${back}<h1>${esc(film.title)}</h1></header>
     <div class="song-yt"><div id="yt"></div></div>
-    <div class="film-sub"><p class="han film-zh"></p><small class="muted film-py"></small><small class="film-vi"></small></div>
+    <div class="film-sub${c.hide?.py ? ' py-off' : ''}${c.hide?.vi ? ' vi-off' : ''}"><p class="han film-zh"></p><small class="muted film-py"></small><small class="film-vi"></small></div>
     <div class="seg lang">${modes}</div>
+    <div class="seg lang film-hide">${[['py', 'Pinyin'], ['vi', 'Nghĩa']].map(([k, t]) => `<button class="${c.hide?.[k] ? '' : 'on'}" data-action="film-hide" data-k="${k}" aria-pressed="${!c.hide?.[k]}">${t}</button>`).join('')}</div>
     <button class="btn block film-next" data-action="film-rand">${icon('shuffle')} Xem video khác</button>
     <p class="muted rd-hint">Chạm vào một chữ trên phụ đề để xem nghĩa. Từ tô hồng là từ video sẽ dừng lại. Nguồn: ${esc(film.ch)} (YouTube).</p>
     <div class="sheet rd-sheet cxv-sheet" hidden></div>
@@ -1598,6 +1599,10 @@ root.addEventListener('click', (e) => {
   else if (act === 'film-known') { filmSave((c) => { c.known[el.dataset.w] = 1; }); toast(TOMIE.film); filmGo(); }
   else if (act === 'film-hold') { filmHold = true; player.pause(); el.disabled = true; }
   else if (act === 'film-go') filmGo();
+  else if (act === 'film-hide') { // toggle classes only: a re-render kills the video
+    const k = el.dataset.k; let off; filmSave((c) => { c.hide = { ...c.hide, [k]: !c.hide?.[k] }; off = c.hide[k]; });
+    el.classList.toggle('on', !off); el.setAttribute('aria-pressed', !off); root.querySelector('.film-sub')?.classList.toggle(`${k}-off`, off);
+  }
   else if (act === 'song-seek') { const t = songData.songs.find((x) => x.id === view.id).lines[+el.dataset.i].t; ytPlayer?.seekTo?.(Math.max(0, t - 0.3), true); ytPlayer?.playVideo?.(); }
   else if (act === 'song-py' || act === 'song-vi') {
     if (act === 'song-py') { try { localStorage.setItem(RD_PY_KEY, localStorage.getItem(RD_PY_KEY) === '0' ? '1' : '0'); } catch { /* private mode */ } } else view.vi = !view.vi;
