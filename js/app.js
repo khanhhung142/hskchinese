@@ -1183,6 +1183,7 @@ function filmView() {
     <div class="song-yt"><div id="yt"></div></div>
     <div class="film-sub"><p class="han film-zh"></p><small class="muted film-py"></small><small class="film-vi"></small></div>
     <div class="seg lang">${modes}</div>
+    <button class="btn block film-next" data-action="film-rand">${icon('shuffle')} Xem video khác</button>
     <p class="muted rd-hint">Chạm vào một chữ trên phụ đề để xem nghĩa. Từ tô hồng là từ video sẽ dừng lại. Nguồn: ${esc(film.ch)} (YouTube).</p>
     <div class="sheet rd-sheet cxv-sheet" hidden></div>
   </main>`;
@@ -1589,8 +1590,8 @@ root.addEventListener('click', (e) => {
   else if (act === 'song') openSongs(el.dataset.id);
   else if (act === 'film') openFilm(el.dataset.id);
   else if (act === 'film-rand') {
-    const c = filmCfg(), easy = (x) => x.cov >= (c.lv && c.lv < 8 ? 75 : 55);
-    const pool = [filmData.films.filter((x) => !c.seen[x.id] && easy(x)), filmData.films.filter((x) => !c.seen[x.id]), filmData.films].find((p) => p.length);
+    const c = filmCfg(), easy = (x) => x.cov >= (c.lv && c.lv < 8 ? 75 : 55), all = filmData.films.filter((x) => x.id !== film?.id); // never the one playing
+    const pool = [all.filter((x) => !c.seen[x.id] && easy(x)), all.filter((x) => !c.seen[x.id]), all].find((p) => p.length);
     openFilm(pool[Math.floor(Math.random() * pool.length)].id);
   }
   else if (act === 'film-mode') { filmSave((c) => { c.mode = el.dataset.m; }); root.querySelectorAll('[data-action=film-mode]').forEach((b) => b.classList.toggle('on', b === el)); }
